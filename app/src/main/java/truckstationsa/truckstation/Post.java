@@ -18,13 +18,14 @@ public class Post {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public Post (String Post , String  FID  ){
-   setFID(FID);
-   setPost(Post);
+   this.setFID(FID);
+   this.setPost(Post);
    dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
    LocalDateTime now = LocalDateTime.now();
-   System.out.println(dtf.format(now)); //2016/11/16 12:08:43
-   setTime(dtf.format(now).substring(dtf.format(now).indexOf(" ")));
-   setPDate(dtf.format(now).substring(0,dtf.format(now).indexOf(" ")));
+  // System.out.println(dtf.format(now)); //2016/11/16 12:08:43
+   this.setTime(dtf.format(now).substring(dtf.format(now).indexOf(" ")));
+   this.setPDate(dtf.format(now).substring(0,dtf.format(now).indexOf(" ")));
+   this.setPID(PID++);
     }
 
     public void setFID(String FID) {
@@ -41,6 +42,10 @@ public class Post {
 
     public void setPost(String post) {
         this.Post = post;
+    }
+
+    public  void setPID(int PID) {
+        this.PID = PID;
     }
 
     public String getFID() {
