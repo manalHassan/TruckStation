@@ -5,20 +5,20 @@ package truckstationsa.truckstation;
  */
 
 public class PreOrderItem {
-    private  int PreID  ;
-    private int ItemID , quantity ;
+    private  String PreID ,ItemID  ;
+    private int  quantity ;
 
-    public PreOrderItem (int PreID , int ItemID , int quantity ){
+    public PreOrderItem (String  PreID , String  ItemID , int quantity ){
         this.setItemID(ItemID);
         this.setPreID(PreID);
         this.setQuantity(quantity);
     }
 
-    public void setItemID(int itemID) {
+    public void setItemID(String  itemID) {
         ItemID = itemID;
     }
 
-    public void setPreID(int preID) {
+    public void setPreID(String preID) {
         PreID = preID;
     }
 
@@ -26,11 +26,11 @@ public class PreOrderItem {
         this.quantity = quantity;
     }
 
-    public  int getPreID() {
+    public  String  getPreID() {
         return PreID;
     }
 
-    public int getItemID() {
+    public String  getItemID() {
         return ItemID;
     }
 

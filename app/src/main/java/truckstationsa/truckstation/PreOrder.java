@@ -11,16 +11,16 @@ import java.time.format.DateTimeFormatter;
  */
 
 public class PreOrder {
-    private static int PreID = 0 ;
+    private String PreID ;
     private String CID , FID , Cart , PDate , PTime ;
     private double price ;
     private DateTimeFormatter dtf ;
 @RequiresApi(api = Build.VERSION_CODES.O)
-public PreOrder (String CID , String FID , String Cart , String PDate , String PTime , double price ){
+public PreOrder (String CID , String FID , String Cart , String PDate , String PTime , double price ,String PreID ){
     this.setCart(Cart);
     this.setCID(CID);
     this.setFID(FID);
-    this.setPreID(PreID++);
+    this.setPreID(PreID);
     this.setPrice(price);
     dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
     LocalDateTime now = LocalDateTime.now();
@@ -45,7 +45,7 @@ public PreOrder (String CID , String FID , String Cart , String PDate , String P
         Cart = cart;
     }
 
-    public void setPreID(int preID) {
+    public void setPreID(String preID) {
         PreID = preID;
     }
 
@@ -73,7 +73,7 @@ public PreOrder (String CID , String FID , String Cart , String PDate , String P
         return price;
     }
 
-    public static int getPreID() {
+    public String  getPreID() {
         return PreID;
     }
 

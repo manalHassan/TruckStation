@@ -11,13 +11,13 @@ import java.time.format.DateTimeFormatter;
  */
 
 public class Post {
-    private static int PID = 0 ;
+    private String PID  ;
     private String Post , FID ;
     private DateTimeFormatter dtf ;
     private String PDate , Time ;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public Post (String Post , String  FID  ){
+    public Post (String Post , String  FID  ,String PID ){
    this.setFID(FID);
    this.setPost(Post);
    dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
@@ -25,7 +25,7 @@ public class Post {
   // System.out.println(dtf.format(now)); //2016/11/16 12:08:43
    this.setTime(dtf.format(now).substring(dtf.format(now).indexOf(" ")));
    this.setPDate(dtf.format(now).substring(0,dtf.format(now).indexOf(" ")));
-   this.setPID(PID++);
+   this.setPID(PID);
     }
 
     public void setFID(String FID) {
@@ -44,7 +44,7 @@ public class Post {
         this.Post = post;
     }
 
-    public  void setPID(int PID) {
+    public  void setPID(String  PID) {
         this.PID = PID;
     }
 
@@ -64,6 +64,9 @@ public class Post {
         return Post;
     }
 
+    public String getPID() {
+        return PID;
+    }
 }
 
 

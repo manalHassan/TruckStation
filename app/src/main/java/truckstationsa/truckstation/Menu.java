@@ -5,25 +5,25 @@ package truckstationsa.truckstation;
  */
 
 public class Menu {
-    private static int MID = 0 ;
+    private String MID ;
     private String FID ;
-public Menu (String FID ){
+public Menu (String FID ,    String MID ){
     this.setFID(FID);
-    this.setMID(MID++);
+    this.setMID(MID);
 }
     public void setFID(String FID) {
         this.FID = FID;
     }
 
-    public void setMID(int MID) {
-        Menu.MID = MID;
+    public void setMID(String MID) {
+        this.MID = MID;
     }
 
     public String getFID() {
         return FID;
     }
 
-    public  int getMID() {
+    public  String getMID() {
         return MID;
     }
 }

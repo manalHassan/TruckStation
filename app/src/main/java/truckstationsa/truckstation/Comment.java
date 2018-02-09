@@ -14,19 +14,19 @@ import java.util.Date;
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class Comment {
     private String CID , FID , Comment ;
-    private static  int CoID = 0 ;
+    private String CoID  ;
     private   DateTimeFormatter dtf ;
     private  String CoDate ;
 
 
 ///System.out.println(dtf.format(localDate)); //2016/11/16
 
-   public Comment (String CID ,String FID ,String Comment ){
+   public Comment (String CID ,String FID ,String Comment ,String CoID  ){
        this.setCID(CID);
        dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
        LocalDate now = LocalDate.now();
        this.setCoDate(dtf.format(now));
-       this.setCoID(CoID++);
+       this.setCoID(CoID);
        this.setFID(FID);
        this.setComment(Comment);
    }
@@ -40,7 +40,7 @@ public class Comment {
         CoDate = coDate;
     }
 
-    public void setCoID(int coID) {
+    public void setCoID(String  coID) {
         CoID = coID;
     }
 
@@ -56,7 +56,7 @@ public class Comment {
         return CoDate;
     }
 
-    public int getCoID() {
+    public String  getCoID() {
         return CoID;
     }
 

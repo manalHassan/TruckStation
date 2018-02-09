@@ -5,21 +5,21 @@ package truckstationsa.truckstation;
  */
 
 public class Category {
-    private int MID ;
-    private static int CatID = 0 ;
+    private String MID ;
+    private String   CatID  ;
     private String CatName ;
 
-    public Category (String CatName , int MID){
-        this.setCatID(CatID++);
+    public Category (String CatName , String  MID , String   CatID){
+        this.setCatID(CatID);
         this.setCatName(CatName);
         this.setMID(MID);
     }
 
-    public void setMID(int MID) {
+    public void setMID(String  MID) {
         this.MID = MID;
     }
 
-    public  void setCatID(int catID) {
+    public  void setCatID(String  catID) {
         CatID = catID;
     }
 
@@ -27,11 +27,11 @@ public class Category {
         CatName = catName;
     }
 
-    public  int getCatID() {
+    public  String  getCatID() {
         return CatID;
     }
 
-    public int getMID() {
+    public String  getMID() {
         return MID;
     }
 

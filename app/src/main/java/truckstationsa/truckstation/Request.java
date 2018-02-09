@@ -12,18 +12,18 @@ import java.time.format.DateTimeFormatter;
  */
 
 public class Request {
-    private static int RID = 0;
+    private String  RID;
     private String CID , FID , RStatus , RDate ;
     private DateTimeFormatter dtf ;
      @RequiresApi(api = Build.VERSION_CODES.O)
-     public Request (String CID , String FID  ){
+     public Request (String CID , String FID  ,String  RID){
          dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
          LocalDateTime now = LocalDateTime.now();
         // System.out.println(dtf.format(now));
          this.setRDate(dtf.format(now));
          this.setCID(CID);
          this.setFID(FID);
-         this.setRID(RID++);
+         this.setRID(RID);
      }
 
 
@@ -39,11 +39,33 @@ public class Request {
         this.RDate = RDate;
     }
 
-    public void setRID(int RID) {
-        Request.RID = RID;
+    public void setRID(String  RID) {
+        this.RID = RID;
     }
 
     public void setRStatus(String RStatus) {
         this.RStatus = RStatus;
     }
+
+    public String getFID() {
+        return FID;
+    }
+
+    public String getCID() {
+        return CID;
+    }
+
+
+    public String getRDate() {
+        return RDate;
+    }
+
+    public String getRID() {
+        return RID;
+    }
+
+    public String getRStatus() {
+        return RStatus;
+    }
 }
+

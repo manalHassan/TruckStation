@@ -5,21 +5,21 @@ package truckstationsa.truckstation;
  */
 
 public class Item {
-    private static int ItemID =0;
-    private int CatID ;
+    private String  ItemID ;
+    private String  CatID ;
     private String  IName , IPicture , Idescription;
     private double IPrice ;
-public Item (String IName ,String IPicture ,String Idescription , double IPrice  ,int CatID ){
+public Item (String IName ,String IPicture ,String Idescription , double IPrice  ,String  CatID , String  ItemID ){
 
     this.setCatID(CatID);
     this.setIdescription(Idescription);
     this.setIName(IName);
     this.setIPicture(IPicture);
-    this.setItemID(ItemID++);
+    this.setItemID(ItemID);
     this.setIPrice(IPrice);
 
 }
-    public void setCatID(int catID) {
+    public void setCatID(String  catID) {
         CatID = catID;
     }
 
@@ -39,7 +39,7 @@ public Item (String IName ,String IPicture ,String Idescription , double IPrice 
         this.IPrice = IPrice;
     }
 
-    public  void setItemID(int itemID) {
+    public  void setItemID(String  itemID) {
         ItemID = itemID;
     }
 
@@ -47,11 +47,11 @@ public Item (String IName ,String IPicture ,String Idescription , double IPrice 
         return IPrice;
     }
 
-    public int getCatID() {
+    public String  getCatID() {
         return CatID;
     }
 
-    public  int getItemID() {
+    public  String  getItemID() {
         return ItemID;
     }
 
