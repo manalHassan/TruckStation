@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "139673947036",
+    "firebase_url": "https://truckstation-3c3eb.firebaseio.com",
+    "project_id": "truckstation-3c3eb",
+    "storage_bucket": "truckstation-3c3eb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:139673947036:android:09ae1bc6f9472ab0",
+        "android_client_info": {
+          "package_name": "truckstationsa.truckstation"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "139673947036-651foj31bvpdu1pgnso67ea6qp6ndlfd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "truckstationsa.truckstation",
+            "certificate_hash": "1e1ef3f4131990035ec544c2f4755c3c3ca3a863"
+          }
+        },
+        {
+          "client_id": "139673947036-4fmk85f0hlj8kg1cbcdo0d8qtgfgvg0r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB9wOPZRolu8Vv-bhJR2a8sUQqGXVcmJuw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "139673947036-4fmk85f0hlj8kg1cbcdo0d8qtgfgvg0r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
