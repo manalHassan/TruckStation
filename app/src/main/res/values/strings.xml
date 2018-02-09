@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Truck Station</string>
+    <string name="username">username</string>
+    <string name="password">.......</string>
+    <string name="todo">TODO</string>
+    <string name="sign_up">Sign up</string>
+    <string name="log_in">Log in</string>
+    <string name="title_activity_ownerprofile">ownerprofile</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
 </resources>
