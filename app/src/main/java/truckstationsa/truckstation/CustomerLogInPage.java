@@ -16,18 +16,18 @@ import android.widget.TextView;
 
 public class CustomerLogInPage extends AppCompatActivity {
 Button login  ;
-TextView rigister ;
+Button rigister ;
 EditText username ,password ;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
         super.onCreate(savedInstanceState, persistentState);
         setContentView(R.layout.customer_log_in_page);
-        rigister = (TextView) findViewById(R.id.rigister);
+        rigister = (Button) findViewById(R.id.rigister);
 
 
     }
     public void goTOCustomerRegisterPage (View view ){
-        Intent intent = new Intent(CustomerLogInPage.this , goTOCustomerRegisterPage.class );
+        Intent intent = new Intent(CustomerLogInPage.this , GoTOCustomerRegisterPage.class );
         startActivity(intent);
 
     }
