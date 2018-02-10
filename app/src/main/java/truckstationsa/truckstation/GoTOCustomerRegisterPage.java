@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -22,6 +23,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
@@ -41,7 +44,9 @@ public class GoTOCustomerRegisterPage  extends AppCompatActivity  {
     Context context;
     int PLACE_PICKER_REQUEST = 1;
     TextView location ;
-    EditText username , password , phone , email , Lname , Fname ;
+    EditText  password , phone , email , Lname , Fname ;
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
     Button rigister ;
     DatabaseReference fdb;
     double x =0 , y =0 ;
@@ -51,8 +56,8 @@ public class GoTOCustomerRegisterPage  extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.go_to_customer_register_page);
         context = this;
+        mAuth = FirebaseAuth.getInstance();
         location = (TextView) findViewById(R.id.location);
-        username = (EditText) findViewById(R.id.username);
         password = (EditText) findViewById(R.id.pass);
         phone = (EditText) findViewById(R.id.phone);
         email = (EditText) findViewById(R.id.email);
@@ -60,7 +65,7 @@ public class GoTOCustomerRegisterPage  extends AppCompatActivity  {
         Fname = (EditText) findViewById(R.id.firatname);
         rigister = (Button) findViewById(R.id.singup);
         mProgress = new ProgressDialog(this);
-        fdb = FirebaseDatabase.getInstance().getReference("Cusomer");
+        fdb = FirebaseDatabase.getInstance().getReference("Customer");
 
        location.setOnClickListener(new View.OnClickListener() {
            @Override
@@ -81,7 +86,17 @@ public class GoTOCustomerRegisterPage  extends AppCompatActivity  {
                 }
 
             }
-        }); }
+        });
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                if (firebaseAuth.getCurrentUser() != null) {
+                    Intent intent = new Intent(GoTOCustomerRegisterPage.this, CustomerLogInPage.class);
+                    startActivity(intent);
+                    finish();
+                }
+            }
+        };}
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == PLACE_PICKER_REQUEST) {
@@ -96,30 +111,46 @@ public class GoTOCustomerRegisterPage  extends AppCompatActivity  {
         }
     }
 public  void chickInfo(View view ){
-registerme();
-}
 
-public void registerme (){
-    final String  UserName =    username.getText().toString().trim();
     final String  pass =    password.getText().toString().trim();
     final String  phoneN =    phone.getText().toString().trim();
     final String  emailc =    email.getText().toString().trim();
     final String  fname =    Fname.getText().toString().trim();
     final String  lname =    Lname.getText().toString().trim();
 
-    if (!TextUtils.isEmpty(UserName) && !TextUtils.isEmpty(emailc) && !TextUtils.isEmpty(pass) && !TextUtils.isEmpty(phoneN)) {
 
+
+    if ( !TextUtils.isEmpty(emailc) && !TextUtils.isEmpty(pass) && !TextUtils.isEmpty(phoneN)) {
 
         mProgress.setMessage("Registering, please wait...");
         mProgress.show();
-        String id = fdb.push().getKey();
-        Customer customer = new Customer(UserName , pass ,emailc,fname,lname, Integer.parseInt(phoneN) , x , y);
-        fdb.child(id).setValue(customer);
-        mProgress.dismiss();
 
-    }else
-        Toast.makeText(this , "تاكد ان تملا جميع الفراغات" , Toast.LENGTH_LONG).show();
+        mAuth.createUserWithEmailAndPassword(emailc, pass)  // This method is inside firebaseauth class
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() { // to tell me if the method create.. is done
+                    // onComplete will be called when create method fineshed
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
 
+                        mProgress.dismiss();  //End showing msg
 
+                        if (task.isSuccessful()) { // If we registerd the user
+
+                            String id = fdb.push().getKey();
+                            Customer customer = new Customer(pass, emailc, fname, lname, Integer.parseInt(phoneN), x, y);
+                            fdb.child(id).setValue(customer);
+                            Toast.makeText(GoTOCustomerRegisterPage.this, "registration is successfull", Toast.LENGTH_SHORT).show();
+                            // Intent intent = new Intent(GoTOCustomerRegisterPage.this, .class);
+                            // startActivity(intent);
+                            finish();
+                        } else
+                            Toast.makeText(GoTOCustomerRegisterPage.this, "error registering user", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+
+    }
+
+                }
 }
-       }
+
+
