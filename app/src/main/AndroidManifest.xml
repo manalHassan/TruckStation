@@ -22,13 +22,19 @@
             </intent-filter>
         </activity>
         <activity android:name=".CustomerLogInPage"
-            android:label="Login"/>
-        <activity android:name=".PublicOwnerRegistration" />
-        <activity android:name=".privateOnerLogIn" />
-        <activity android:name=".publicOnerLogIn" />
-        <activity android:name=".PublicOrPrivat" />
+            android:label="تسجيل الدخول المستخدم"/>
+        <activity android:name=".PublicOwnerRegistration"
+            android:label="تسجيل الدخول صاحب عربه"/>
+        <activity android:name=".privateOnerLogIn"
+            android:label="انشاء حساب صاحب عربه"/>
+        <activity android:name=".publicOnerLogIn"
+            android:label="تسجيل الدخول صاحب عربه"/>
+        <activity android:name=".PublicOrPrivat"
+            android:label="TruckStation"/>
+        <activity android:name=".GoTOPrivatRegisterPage"
+            android:label="انشاء حساب صاحب عربه"/>
         <activity android:name=".GoTOCustomerRegisterPage"
-            android:label="Rigistration"/>
+            android:label="انشاء حساب مستخدم"/>
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyC_PwVA-gJQ24JZbhZYJINoK9XLC3KdGrg" />
