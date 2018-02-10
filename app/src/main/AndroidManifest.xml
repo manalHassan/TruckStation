@@ -23,6 +23,10 @@
         </activity>
         <activity android:name=".CustomerLogInPage"
             android:label="Login"/>
+        <activity android:name=".PublicOwnerRegistration" />
+        <activity android:name=".privateOnerLogIn" />
+        <activity android:name=".publicOnerLogIn" />
+        <activity android:name=".PublicOrPrivat" />
         <activity android:name=".GoTOCustomerRegisterPage"
             android:label="Rigistration"/>
         <meta-data

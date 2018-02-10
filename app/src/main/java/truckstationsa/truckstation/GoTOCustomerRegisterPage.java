@@ -122,7 +122,7 @@ public  void chickInfo(View view ){
 
     if ( !TextUtils.isEmpty(emailc) && !TextUtils.isEmpty(pass) && !TextUtils.isEmpty(phoneN)) {
 
-        mProgress.setMessage("Registering, please wait...");
+        mProgress.setMessage("انتضر من فضلك....");
         mProgress.show();
 
         mAuth.createUserWithEmailAndPassword(emailc, pass)  // This method is inside firebaseauth class
@@ -138,12 +138,12 @@ public  void chickInfo(View view ){
                             String id = fdb.push().getKey();
                             Customer customer = new Customer(pass, emailc, fname, lname, Integer.parseInt(phoneN), x, y);
                             fdb.child(id).setValue(customer);
-                            Toast.makeText(GoTOCustomerRegisterPage.this, "registration is successfull", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(GoTOCustomerRegisterPage.this, "تم التسجل بنجاح!!", Toast.LENGTH_SHORT).show();
                             // Intent intent = new Intent(GoTOCustomerRegisterPage.this, .class);
                             // startActivity(intent);
                             finish();
                         } else
-                            Toast.makeText(GoTOCustomerRegisterPage.this, "error registering user", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(GoTOCustomerRegisterPage.this, "البريد الالكتروني مستخدم مسبقا", Toast.LENGTH_SHORT).show();
 
                     }
                 });

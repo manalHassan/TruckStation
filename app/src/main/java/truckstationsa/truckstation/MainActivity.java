@@ -41,8 +41,8 @@ TextView viseter ;
 
     }
 
-   public void goToOwnerLogInPage (View view){
-        Intent intent = new Intent(MainActivity.this , goToOwnerLogInPage.class );
+   public void goToPublicOrPrivat (View view){
+        Intent intent = new Intent(MainActivity.this , PublicOrPrivat.class );
         startActivity(intent);
 
     }
