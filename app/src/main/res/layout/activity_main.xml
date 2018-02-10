@@ -25,38 +25,8 @@
                 android:layout_marginTop="48dp"
                 android:layout_marginBottom="10dp"
                 android:src="@drawable/truck5" android:contentDescription="@string/todo" />
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textEmailAddress"
-                android:ems="10"
-                android:background="@android:color/transparent"
-                android:drawablePadding="12dp"
-                android:padding="8dp"
-                android:hint="@string/username"
-                android:textColorHint="#fff"
-                android:maxLines="1"
-                android:drawableLeft="@drawable/ic_person_white_24dp"
-                android:layout_marginTop="40dp" android:drawableStart="@drawable/ic_person_white_24dp" />
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#fff"/>
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:ems="10"
-                android:background="@android:color/transparent"
-                android:drawablePadding="12dp"
-                android:padding="8dp"
-                android:hint="@string/password"
-                android:textStyle="bold"
-                android:textColorHint="#fff"
-                android:maxLines="1"
-                android:drawableLeft="@drawable/ic_lock_white_24dp"
-                android:layout_marginTop="4dp" tools:targetApi="jelly_bean_mr1"
-                android:drawableStart="@drawable/ic_lock_white_24dp" />
+
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -65,26 +35,41 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/background_login"
-                android:text="@string/log_in"
+                android:text="انا مستخدم"
                 android:textColor="#242423"
                 android:textAllCaps="false"
                 android:padding="16dp"
                 android:clickable="true"
                 style="@style/TextAppearance.AppCompat.Body1"
                 android:layout_marginTop="24dp"
-                android:focusable="true" />
+                android:focusable="true"
+                android:id="@+id/customer"
+                android:onClick="goToCustomerLogInPage"/>
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/background_signup"
-                android:text="@string/sign_up"
+                android:text="انا صاحب عربة طعام"
                 android:textColor="#fff"
                 android:textAllCaps="false"
                 android:padding="16dp"
                 android:clickable="true"
                 style="@style/TextAppearance.AppCompat.Body1"
                 android:layout_marginTop="16dp"
-                android:focusable="true" />
+                android:focusable="true"
+                android:id="@+id/owner"
+                android:onClick="goToOwnerLogInPage"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#000"
+                android:textAllCaps="false"
+                android:text="انا زائر"
+                android:layout_marginTop="16dp"
+                android:focusable="true"
+                android:gravity="center"
+            android:id="@+id/visitor"
+                android:onClick="goToVisitorHomePage"/>
         </LinearLayout>
     </ScrollView>
 

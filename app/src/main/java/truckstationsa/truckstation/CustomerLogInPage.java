@@ -19,10 +19,10 @@ Button login  ;
 Button rigister ;
 EditText username ,password ;
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
-        setContentView(R.layout.customer_log_in_page);
-        rigister = (Button) findViewById(R.id.rigister);
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.login);
+        rigister = (Button) findViewById(R.id.signup);
 
 
     }
