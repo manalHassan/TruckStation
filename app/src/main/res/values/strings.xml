@@ -1,10 +1,10 @@
 <resources>
     <string name="app_name">Truck Station</string>
-    <string name="username">username</string>
+    <string name="username">Email</string>
     <string name="password">.......</string>
     <string name="todo">TODO</string>
     <string name="sign_up">Sign up</string>
-    <string name="log_in">Log in</string>
+    <string name="log_in">تسجيل الدخول</string>
     <string name="Am_customer">انا مستخدم</string>
     <string name="Am_owner">انا صاحب عربة طعام</string>
     <string name="Am_vistor">انا زائر</string>
