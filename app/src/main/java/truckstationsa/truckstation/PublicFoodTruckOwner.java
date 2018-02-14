@@ -14,7 +14,7 @@ public class PublicFoodTruckOwner  {
     private  int FPoneNoumber ;
     private double XFLication;
     private double YFLocation;
-
+    public PublicFoodTruckOwner (){}
     public PublicFoodTruckOwner ( String FUsername  ,String FPassword ,String FEmail ,  int FPoneNoumber , double XFLication , double YFLocation ,String  qusins  ){
         this.setFEmail(FEmail);
 
