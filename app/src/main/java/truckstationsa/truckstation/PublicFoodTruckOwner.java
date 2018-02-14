@@ -10,12 +10,12 @@ import java.util.EmptyStackException;
 
 public class PublicFoodTruckOwner  {
 
-    private  String FUsername  , FPassword , FEmail  , FPreOrderStatuse , FWorkingHours , Fstatus , qusins;
+    private  String FUsername  , FPassword , FEmail  , FPreOrderStatuse , FWorkingHours , Fstatus , qusins , uid;
     private  int FPoneNoumber ;
     private double XFLication;
     private double YFLocation;
     public PublicFoodTruckOwner (){}
-    public PublicFoodTruckOwner ( String FUsername  ,String FPassword ,String FEmail ,  int FPoneNoumber , double XFLication , double YFLocation ,String  qusins  ){
+    public PublicFoodTruckOwner ( String FUsername  ,String FPassword ,String FEmail ,  int FPoneNoumber , double XFLication , double YFLocation ,String  qusins , String uid ){
         this.setFEmail(FEmail);
 
         this.setFPassword(FPassword);
@@ -30,7 +30,7 @@ public class PublicFoodTruckOwner  {
         this.setYFLocation(YFLocation);
 
         this.setQusins(qusins);
-
+        this.setUid(uid);
 
     }
 
@@ -75,6 +75,10 @@ public class PublicFoodTruckOwner  {
         this.YFLocation = YFLocation;
     }
 
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
     public double getXFLication() {
         return XFLication;
     }
@@ -114,5 +118,9 @@ public class PublicFoodTruckOwner  {
 
     public String getQusins() {
         return qusins;
+    }
+
+    public String getUid() {
+        return uid;
     }
 }

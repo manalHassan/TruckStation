@@ -6,11 +6,11 @@ package truckstationsa.truckstation;
 
 public class PrivateFoodTruckOwner  {
 
-    private  String FUsername  , FPassword , FEmail  , FWorkingHours , Fstatus , qusins;
+    private  String FUsername  , FPassword , FEmail  , FWorkingHours , Fstatus , qusins , uid;
     private  int FPoneNoumber ;
 
 
-    public PrivateFoodTruckOwner ( String FUsername  ,String FPassword ,String FEmail ,  int FPoneNoumber  ,String  qusins  ){
+    public PrivateFoodTruckOwner ( String FUsername  ,String FPassword ,String FEmail ,  int FPoneNoumber  ,String  qusins , String uid ){
         this.setFEmail(FEmail);
 
         this.setFPassword(FPassword);
@@ -21,6 +21,7 @@ public class PrivateFoodTruckOwner  {
 
         this.setQusins(qusins);
 
+        this.setUid(uid);
 
     }
 
@@ -54,6 +55,9 @@ public class PrivateFoodTruckOwner  {
         this.FWorkingHours = FWorkingHours;
     }
 
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
 
     public int getFPoneNoumber() {
         return FPoneNoumber;
@@ -83,5 +87,9 @@ public class PrivateFoodTruckOwner  {
 
     public String getQusins() {
         return qusins;
+    }
+
+    public String getUid() {
+        return uid;
     }
 }

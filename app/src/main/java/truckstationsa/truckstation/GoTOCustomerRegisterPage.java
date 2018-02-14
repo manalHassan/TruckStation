@@ -21,6 +21,7 @@ import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.auth.AuthResult;
@@ -134,9 +135,10 @@ public  void chickInfo(View view ){
                         mProgress.dismiss();  //End showing msg
 
                         if (task.isSuccessful()) { // If we registerd the user
-
+                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                            String uid = user.getUid();
                             String id = fdb.push().getKey();
-                            Customer customer = new Customer(pass, emailc, fname, lname, Integer.parseInt(phoneN), x, y);
+                            Customer customer = new Customer(pass, emailc, fname, lname, Integer.parseInt(phoneN), x, y  , uid);
                             fdb.child(id).setValue(customer);
                             Toast.makeText(GoTOCustomerRegisterPage.this, "تم التسجل بنجاح!!", Toast.LENGTH_SHORT).show();
                             // Intent intent = new Intent(GoTOCustomerRegisterPage.this, .class);

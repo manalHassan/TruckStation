@@ -4,10 +4,12 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.auth.FirebaseAuth;
@@ -38,26 +40,21 @@ public class VisitorHomePage extends FragmentActivity implements OnMapReadyCallb
             public void onDataChange(DataSnapshot snapshot) {
                 for (DataSnapshot postSnapshot : snapshot.getChildren()) {
                     PublicFoodTruckOwner pOwner ;
-
-                    //pOwner = (PublicFoodTruckOwner)postSnapshot.getValue(PublicFoodTruckOwner.class);
                    pOwner =  postSnapshot.getValue(PublicFoodTruckOwner.class);
                    if ( pOwner == null)
                        Toast.makeText(VisitorHomePage.this, "فاضي !!!!!!!!", Toast.LENGTH_SHORT).show();
                     try {
-                       // if (postSnapshot.child("xflication").getValue()!= null && postSnapshot.child("yflication").getValue()!= null) {
-                         //   x = Double.parseDouble(postSnapshot.child("xflication").getValue().toString());
-                           // y = Double.parseDouble(postSnapshot.child("yflication").getValue().toString());
                         if (pOwner != null){
                           x =   pOwner.getXFLication();
                           y = pOwner.getYFLocation();
                             Toast.makeText(VisitorHomePage.this, "يتم تحديد المواقع الان....", Toast.LENGTH_SHORT).show();
-                          //  updateMap();
-                            mMap.clear();
+                           // mMap.clear();
                             LatLng location = new LatLng(x,y);
-                            mMap.addMarker(new MarkerOptions().position(location));
-                          //  mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location,15));
-                        }else
-                        Toast.makeText(VisitorHomePage.this, "لا يتوفر عربات طعام في الوقت الحالي!!", Toast.LENGTH_SHORT).show();
+                            mMap.addMarker(new MarkerOptions()
+                                            .position(location)
+                                            .title(pOwner.getFUsername()));
+                                            //.icon(BitmapDescriptorFactory.fromBitmap(bmp))
+                        }
                     }
 
                     catch (Exception e){
@@ -79,14 +76,13 @@ public class VisitorHomePage extends FragmentActivity implements OnMapReadyCallb
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+       mMap.moveCamera(CameraUpdateFactory.newLatLngZoom( new LatLng(24.713, 46.675 ),5));
+       // mMap.moveCamera(CameraUpdateFactory.zoomTo(15));
+      //  CameraUpdate zoom = CameraUpdateFactory.zoomTo(15);
 
     }
 
-    private void updateMap() {
 
-
-
-    }
 
 
 
