@@ -19,7 +19,7 @@
             android:orientation="vertical">
 
             <EditText
-                android:id="@+id/firatname"
+                android:id="@+id/username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
@@ -28,26 +28,7 @@
                 android:drawablePadding="12dp"
                 android:drawableStart="@drawable/ic_person_white_24dp"
                 android:ems="10"
-                android:hint="اسمك الاول"
-                android:inputType="textEmailAddress"
-                android:maxLines="1"
-                android:padding="8dp"
-                android:textColorHint="#fff" />
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#fff"/>
-            <EditText
-                android:id="@+id/lastname"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                android:background="@android:color/transparent"
-                android:drawableLeft="@drawable/ic_person_white_24dp"
-                android:drawablePadding="12dp"
-                android:drawableStart="@drawable/ic_person_white_24dp"
-                android:ems="10"
-                android:hint="اسمك الاخير"
+                android:hint="اسم العربه"
                 android:inputType="textEmailAddress"
                 android:maxLines="1"
                 android:padding="8dp"
@@ -115,6 +96,28 @@
                 android:ems="10"
                 android:hint="البريد الالكتروني"
                 android:inputType="textEmailAddress"
+                android:maxLines="1"
+                android:padding="8dp"
+                android:textColorHint="#fff"
+                android:textStyle="bold"
+                tools:targetApi="jelly_bean_mr1" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#fff"/>
+            <EditText
+                android:id="@+id/qusin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:background="@android:color/transparent"
+                android:drawableLeft="@drawable/ic_lock_white_24dp"
+                android:drawablePadding="12dp"
+                android:drawableStart="@drawable/ic_lock_white_24dp"
+                android:ems="10"
+                android:gravity="right"
+                android:hint="الاطباق التي تقدمها"
+                android:inputType="text"
                 android:maxLines="1"
                 android:padding="8dp"
                 android:textColorHint="#fff"

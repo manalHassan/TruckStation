@@ -8,35 +8,34 @@ import java.util.EmptyStackException;
  * Created by manal on 2/8/2018.
  */
 
-public class FoodTruckOwner {
+public class PublicFoodTruckOwner  {
 
-    private  String FUsername  , FPassword , FEmail , Ftype , FPreOrderStatuse , FWorkingHours , Fstatus;
+    private  String FUsername  , FPassword , FEmail  , FPreOrderStatuse , FWorkingHours , Fstatus , qusins , uid;
     private  int FPoneNoumber ;
     private double XFLication;
     private double YFLocation;
+    public PublicFoodTruckOwner (){}
+    public PublicFoodTruckOwner ( String FUsername  ,String FPassword ,String FEmail ,  int FPoneNoumber , double XFLication , double YFLocation ,String  qusins , String uid ){
+        this.setFEmail(FEmail);
 
-    public FoodTruckOwner ( String FUsername  ,String FPassword ,String FEmail ,String Ftype ,String FPreOrderStatuse ,String FWorkingHours ,String Fstatus ,  int FPoneNoumber , double XFLication , double YFLocation  ){
-   this.setFEmail(FEmail);
+        this.setFPassword(FPassword);
 
-   this.setFPassword(FPassword);
+        this.setFPoneNoumber(FPoneNoumber);
 
-   this.setFPoneNoumber(FPoneNoumber);
-
-   this.setFPreOrderStatuse(FPreOrderStatuse);
-
-   this.setFstatus(Fstatus);
-
-   this.setFtype(Ftype);
-
-   this.setFUsername(FUsername);
-
-   this.setFWorkingHours(FWorkingHours);
-
-   this.setXFLication(XFLication);
-
-   this.setYFLocation(YFLocation);
+        this.setFUsername(FUsername);
 
 
+        this.setXFLication(XFLication);
+
+        this.setYFLocation(YFLocation);
+
+        this.setQusins(qusins);
+        this.setUid(uid);
+
+    }
+
+    public void setQusins(String qusins) {
+        this.qusins = qusins;
     }
 
     public void setFEmail(String FEmail) {
@@ -59,9 +58,6 @@ public class FoodTruckOwner {
         Fstatus = fstatus;
     }
 
-    public void setFtype(String ftype) {
-        Ftype = ftype;
-    }
 
     public void setFUsername(String FUsername) {
         this.FUsername = FUsername;
@@ -77,6 +73,10 @@ public class FoodTruckOwner {
 
     public void setYFLocation(double YFLocation) {
         this.YFLocation = YFLocation;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 
     public double getXFLication() {
@@ -107,9 +107,6 @@ public class FoodTruckOwner {
         return Fstatus;
     }
 
-    public String getFtype() {
-        return Ftype;
-    }
 
     public String getFUsername() {
         return FUsername;
@@ -119,5 +116,11 @@ public class FoodTruckOwner {
         return FWorkingHours;
     }
 
+    public String getQusins() {
+        return qusins;
+    }
 
+    public String getUid() {
+        return uid;
+    }
 }

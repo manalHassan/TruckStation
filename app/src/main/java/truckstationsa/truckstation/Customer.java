@@ -5,12 +5,12 @@ package truckstationsa.truckstation;
  */
 
 public class Customer  {
-    private  String CUsername  , CPassword , CEmail ,CFirstName, CLastName ;
+    private  String    CPassword , CEmail ,CFirstName, CLastName , uid;
     private  int CPoneNoumber ;
     private double XCLication;
     private double YCLocation;
 
-    public Customer (String CUsername  ,  String CPassword ,String  CEmail , String CFirstName,String  CLastName ,int CPoneNoumber ,double  XCLication,double  YCLocation){
+    public Customer (  String CPassword ,String  CEmail , String CFirstName,String  CLastName ,int CPoneNoumber ,double  XCLication,double  YCLocation , String uid){
         this.setCEmail( CEmail);
 
         this.setCFirstName( CFirstName);
@@ -21,11 +21,11 @@ public class Customer  {
 
         this.setCPoneNoumber( CPoneNoumber) ;
 
-        this.setCUsername( CUsername);
 
         this.setXCLication( XCLication);
 
         this.setYCLocation( YCLocation);
+        this.setUid (uid);
     }
 
     public void setCEmail(String CEmail) {
@@ -48,9 +48,6 @@ public class Customer  {
         this.CPoneNoumber = CPoneNoumber;
     }
 
-    public void setCUsername(String CUsername) {
-        this.CUsername = CUsername;
-    }
 
     public void setXCLication(double XLication) {
         this.XCLication = XLication;
@@ -58,6 +55,10 @@ public class Customer  {
 
     public void setYCLocation(double YLocation) {
         this.YCLocation = YLocation;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 
     public double getXCLication() {
@@ -88,8 +89,8 @@ public class Customer  {
         return CPassword;
     }
 
-    public String getCUsername() {
-        return CUsername;
+    public String getUid() {
+        return uid;
     }
 }
 

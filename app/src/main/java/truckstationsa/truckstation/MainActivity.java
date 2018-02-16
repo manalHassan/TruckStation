@@ -14,39 +14,38 @@ import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.ui.PlacePicker;
 
 public class MainActivity extends AppCompatActivity {
-    int PLACE_PICKER_REQUEST = 1;
-Button customer , owner ,  location;
+Button customer , owner ;
 TextView viseter ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-       // customer = (Button) findViewById(R.id.customer);
-       // owner =(Button) findViewById(R.id.owner);
-        //viseter = (TextView) findViewById(R.id.visitor);
+        customer = (Button) findViewById(R.id.customer);
+       owner =(Button) findViewById(R.id.owner);
+        viseter = (TextView) findViewById(R.id.visitor);
 
 
     }
 
-  /*  public void goToVisitorHomePage (View view){
+    public void goToVisitorHomePage (View view){
         Intent intent = new Intent(MainActivity.this , VisitorHomePage.class );
         startActivity(intent);
 
-    }*/
+    }
 
 
     public void goToCustomerLogInPage (View view){
-        Intent intent = new Intent(MainActivity.this , GoTOCustomerRegisterPage.class );
+        Intent intent = new Intent(MainActivity.this , CustomerLogInPage.class );
         startActivity(intent);
 
     }
 
-  /*  public void goToOwnerLogInPage (View view){
-        Intent intent = new Intent(MainActivity.this , goToOwnerLogInPage.class );
+   public void goToPublicOrPrivat (View view){
+        Intent intent = new Intent(MainActivity.this , PublicOrPrivat.class );
         startActivity(intent);
 
-    }*/
+    }
 
 
 }
