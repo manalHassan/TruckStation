@@ -10,6 +10,8 @@ public class Customer  {
     private double XCLication;
     private double YCLocation;
 
+    public Customer(){}
+
     public Customer (  String CPassword ,String  CEmail , String CFirstName,String  CLastName ,int CPoneNoumber ,double  XCLication,double  YCLocation , String uid){
         this.setCEmail( CEmail);
 

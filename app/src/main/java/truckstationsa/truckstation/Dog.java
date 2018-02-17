@@ -1,0 +1,30 @@
+package truckstationsa.truckstation;
+
+/**
+ * Created by amerah on 2/12/2018 AD.
+ */
+public class Dog {
+
+    private  String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public Dog() {
+    }
+
+    private  String url;
+}

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="truckstationsa.truckstation">
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -7,6 +8,9 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -32,13 +36,16 @@
         <activity android:name=".PublicOrPrivat"
             android:label="TruckStation"/>
         <activity android:name=".GoTOPrivatRegisterPage"
-            android:label="انشاء حساب صاحب عربه"/>
+        android:label="انشاء حساب صاحب عربه"/>
+        <activity android:name=".MyMain"
+        android:label="انشاء حساب صاحب عربه"
+            tools:ignore="DuplicateActivity" />
         <activity android:name=".GoTOCustomerRegisterPage"
             android:label="انشاء حساب مستخدم"/>
-        <activity android:name=".ownerprofile"
-            android:label="حساب صاحب عربه الطعام"/>
         <activity android:name=".resetpassword"
         android:label="اعاده تعيين كلمه المرور"/>
+        <activity android:name=".customer_profile"
+            android:label="الملف الشخصي"/>
         <activity android:name=".VisitorHomePage"
             android:label="عربات الطعام ع الخريطه"/>
         <meta-data

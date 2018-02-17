@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Created by manal on 2/9/2018.
@@ -23,7 +24,7 @@ EditText username ,password ;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
         rigister = (Button) findViewById(R.id.signup);
-
+        //login =(Button)findViewById(R.id.login);
 
     }
     public void goTOCustomerRegisterPage (View view ){
@@ -31,4 +32,16 @@ EditText username ,password ;
         startActivity(intent);
 
     }
+    public void goTOProfilePage (View view ){
+        try {
+            Intent intent = new Intent(CustomerLogInPage.this, customer_profile.class);
+            startActivity(intent);
+        }catch (Exception e){
+           Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+        }
+
+    }
+
+
+
 }

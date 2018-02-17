@@ -14,8 +14,21 @@ public class PublicFoodTruckOwner  {
     private  int FPoneNoumber ;
     private double XFLication;
     private double YFLocation;
+    private String url;
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
     public PublicFoodTruckOwner (){}
-    public PublicFoodTruckOwner ( String FUsername  ,String FPassword ,String FEmail ,  int FPoneNoumber , double XFLication , double YFLocation ,String  qusins , String uid ){
+
+    public PublicFoodTruckOwner (String url, String FUsername  ,String FPassword ,String FEmail ,  int FPoneNoumber , double XFLication , double YFLocation ,String  qusins , String uid ){
+        this.setUrl(url);
+
         this.setFEmail(FEmail);
 
         this.setFPassword(FPassword);
