@@ -27,7 +27,7 @@
                     android:src="@drawable/truck5" android:contentDescription="@string/todo" />
 
             <EditText
-                android:id="@+id/email"
+                android:id="@+id/CustomerEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
@@ -47,7 +47,7 @@
                 android:background="#fff"/>
 
             <EditText
-                android:id="@+id/password"
+                android:id="@+id/CustomerPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
@@ -69,7 +69,7 @@
                 android:background="#fff"/>
 
             <Button
-                android:id="@+id/btnLogin1"
+                android:id="@+id/CustomerBtnLogin"
                 style="@style/TextAppearance.AppCompat.Body1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -83,7 +83,7 @@
                 android:textColor="#242423" />
 
             <Button
-                android:id="@+id/signup"
+                android:id="@+id/CustomerSignup"
                 style="@style/TextAppearance.AppCompat.Body1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -91,11 +91,26 @@
                 android:background="@drawable/background_signup"
                 android:clickable="true"
                 android:focusable="true"
+                android:onClick="goTOCustomerRegisterPage"
                 android:padding="16dp"
                 android:text="انشاء حساب"
                 android:textAllCaps="false"
-                android:textColor="#fff"
-                android:onClick="goTOCustomerRegisterPage"/>
+                android:textColor="#fff" />
+
+            <Button
+                android:id="@+id/PublicBtnResetPassword"
+                style="@style/TextAppearance.AppCompat.Body1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/background_signup"
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="forgetPassword"
+                android:padding="16dp"
+                android:text="نسيت كلمة المرور"
+                android:textAllCaps="false"
+                android:textColor="#fff" />
         </LinearLayout>
     </ScrollView>
 
