@@ -22,6 +22,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -85,9 +86,10 @@ public class GoTOPrivatRegisterPage  extends AppCompatActivity {
                             mProgress.dismiss();  //End showing msg
 
                             if (task.isSuccessful()) { // If we registerd the user
-
+                                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                                String uid = user.getUid();
                                 String id = fdb.push().getKey();
-                                PrivateFoodTruckOwner owner = new PrivateFoodTruckOwner(username, pass, emailp,Integer.parseInt(phoneN) , qusin);
+                                PrivateFoodTruckOwner owner = new PrivateFoodTruckOwner(username, pass, emailp,Integer.parseInt(phoneN) , qusin , uid);
                                 fdb.child(id).setValue(owner);
                                 Toast.makeText(GoTOPrivatRegisterPage.this, "تم التسجل بنجاح!!", Toast.LENGTH_SHORT).show();
                                 // Intent intent = new Intent(GoTOCustomerRegisterPage.this, .class);

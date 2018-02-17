@@ -5,12 +5,14 @@ package truckstationsa.truckstation;
  */
 
 public class Customer  {
-    private  String    CPassword , CEmail ,CFirstName, CLastName ;
+    private  String    CPassword , CEmail ,CFirstName, CLastName , uid;
     private  int CPoneNoumber ;
     private double XCLication;
     private double YCLocation;
 
-    public Customer (  String CPassword ,String  CEmail , String CFirstName,String  CLastName ,int CPoneNoumber ,double  XCLication,double  YCLocation){
+    public Customer(){}
+
+    public Customer (  String CPassword ,String  CEmail , String CFirstName,String  CLastName ,int CPoneNoumber ,double  XCLication,double  YCLocation , String uid){
         this.setCEmail( CEmail);
 
         this.setCFirstName( CFirstName);
@@ -25,6 +27,7 @@ public class Customer  {
         this.setXCLication( XCLication);
 
         this.setYCLocation( YCLocation);
+        this.setUid (uid);
     }
 
     public void setCEmail(String CEmail) {
@@ -56,6 +59,10 @@ public class Customer  {
         this.YCLocation = YLocation;
     }
 
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
     public double getXCLication() {
         return XCLication;
     }
@@ -84,5 +91,8 @@ public class Customer  {
         return CPassword;
     }
 
+    public String getUid() {
+        return uid;
+    }
 }
 

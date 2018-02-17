@@ -150,9 +150,9 @@ btnResetPassword=(Button) findViewById(R.id.btnResetPassword);
                             if (task.isSuccessful()) {
                                 Toast.makeText(publicOnerLogIn.this, "تم تسجيل الدخول بنجاح", Toast.LENGTH_SHORT).show();
 
-                                Intent intent = new Intent(publicOnerLogIn.this, ownerprofile.class);
-                                startActivity(intent);
-
+                              //  Intent intent = new Intent(publicOnerLogIn.this, ownerprofile.class);
+                               // startActivity(intent);
+//نانتاتناتات
                             } // Singed in successfull
                             if (!task.isSuccessful()) {
                                 Toast.makeText(publicOnerLogIn.this, "خطأ في ادخال البريد الالكتروني أو كلمة المرور", Toast.LENGTH_LONG).show();

@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="truckstationsa.truckstation">
-
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
-
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -16,42 +18,39 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity" />
-        <activity
-            android:name=".CustomerLogInPage"
-            android:label="تسجيل الدخول المستخدم" />
-        <activity
-            android:name=".PublicOwnerRegistration"
-            android:label="تسجيل الدخول صاحب عربه" />
-        <activity
-            android:name=".privateOnerLogIn"
-            android:label="انشاء حساب صاحب عربه" />
-        <activity
-            android:name=".publicOnerLogIn"
-            android:label="تسجيل الدخول صاحب عربه">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".PublicOrPrivat"
-            android:label="TruckStation" />
-        <activity
-            android:name=".GoTOPrivatRegisterPage"
-            android:label="انشاء حساب صاحب عربه" />
-        <activity
-            android:name=".GoTOCustomerRegisterPage"
-            android:label="انشاء حساب مستخدم" />
-
+        <activity android:name=".CustomerLogInPage"
+            android:label="تسجيل الدخول المستخدم"/>
+        <activity android:name=".PublicOwnerRegistration"
+            android:label="تسجيل الدخول صاحب عربه"/>
+        <activity android:name=".privateOnerLogIn"
+            android:label="انشاء حساب صاحب عربه"/>
+        <activity android:name=".publicOnerLogIn"
+            android:label="تسجيل الدخول صاحب عربه"/>
+        <activity android:name=".PublicOrPrivat"
+            android:label="TruckStation"/>
+        <activity android:name=".GoTOPrivatRegisterPage"
+        android:label="انشاء حساب صاحب عربه"/>
+        <activity android:name=".MyMain"
+        android:label="انشاء حساب صاحب عربه"
+            tools:ignore="DuplicateActivity" />
+        <activity android:name=".GoTOCustomerRegisterPage"
+            android:label="انشاء حساب مستخدم"/>
+        <activity android:name=".resetpassword"
+        android:label="اعاده تعيين كلمه المرور"/>
+        <activity android:name=".customer_profile"
+            android:label="الملف الشخصي"/>
+        <activity android:name=".VisitorHomePage"
+            android:label="عربات الطعام ع الخريطه"/>
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyC_PwVA-gJQ24JZbhZYJINoK9XLC3KdGrg" />
 
-        <activity android:name=".Homepage" />
-        <activity android:name=".ownerprofile" />
-        <activity android:name=".resetpassword"></activity>
     </application>
-
 </manifest>
