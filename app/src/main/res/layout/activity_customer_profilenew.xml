@@ -4,11 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="truckstationsa.truckstation.customer_profile"
+    tools:context="truckstationsa.truckstation.customer_profilenew"
     android:background="@color/graylight"
     android:orientation="vertical"
     >
-
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -31,11 +30,11 @@
                 android:src="@drawable/profile_pictures_con" />
 
             <TextView
+                android:id="@+id/name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
-                android:text="ahmad"
                 android:textColor="#fff"
                 android:textSize="21sp"
                 android:textStyle="bold" />
@@ -71,7 +70,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:paddingLeft="20dp"
-                android:text="hjdfsk" />
+                />
 
 
         </LinearLayout>
@@ -93,7 +92,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:paddingLeft="20dp"
-                android:text="hell@gmail.com"/>
+                />
 
 
         </LinearLayout>
@@ -115,7 +114,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:paddingLeft="20dp"
-                android:text="050998387"/>
+                />
 
 
         </LinearLayout>
@@ -130,9 +129,10 @@
                 android:layout_width="36dp"
                 android:layout_height="36dp"
                 android:src="@drawable/ic_location_on_black_24dp"
+                android:id="@+id/location1"
                 />
 
-            <EditText
+            <TextView
                 android:id="@+id/editlocation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -184,3 +184,7 @@
 
 
 </LinearLayout>
+
+
+
+
