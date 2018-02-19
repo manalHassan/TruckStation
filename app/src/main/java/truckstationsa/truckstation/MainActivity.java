@@ -23,8 +23,8 @@ TextView viseter ;
     }
 
     public void goToVisitorHomePage (View view){
-        Intent intent = new Intent(MainActivity.this , MyMain.class);
-       startActivity(intent);
+       // Intent intent = new Intent(MainActivity.this , MyMain.class);
+      // startActivity(intent);
 
     }
 

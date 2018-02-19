@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
 /**
  * Created by manal on 2/10/2018.
@@ -33,7 +32,7 @@ public class PublicOrPrivat extends AppCompatActivity {
 
 
     public void goToPrivateLogInPage (View view){
-        Intent intent = new Intent(PublicOrPrivat.this , privateOnerLogIn.class );
+        Intent intent = new Intent(PublicOrPrivat.this , privateOwnerLogIn.class );
         startActivity(intent);
 
     }

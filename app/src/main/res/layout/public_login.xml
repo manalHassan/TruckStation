@@ -96,21 +96,19 @@
                 android:text="انشاء حساب"
                 android:textAllCaps="false"
                 android:textColor="#fff" />
-            <Button
-                android:id="@+id/btnResetPassword"
-                style="@style/TextAppearance.AppCompat.Body1"
+
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="forgetPassword"
                 android:layout_marginTop="16dp"
-                android:background="@drawable/background_signup"
                 android:clickable="true"
                 android:focusable="true"
-                android:onClick="forgetPassword"
-                android:padding="16dp"
+                android:textColor="#242423"
                 android:text="نسيت كلمة المرور"
-                android:textAllCaps="false"
-                android:textColor="#fff"
+                android:gravity="center"
                 />
+
         </LinearLayout>
 
     </ScrollView>

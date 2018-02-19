@@ -5,11 +5,11 @@ package truckstationsa.truckstation;
  */
 
 public class Rate {
-    String FID , CID ;
-    double ratingValue ;
-    public Rate (String FID , String CID , double ratingValue){
-        this.setCID(CID);
+    private String FID , CID ;
+    private double ratingValue ;
+    public Rate ( String CID,String FID , double ratingValue){
         this.setFID(FID);
+        this.setCID(CID);
         this.setRatingValue(ratingValue);
 
     }
