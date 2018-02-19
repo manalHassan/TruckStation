@@ -139,9 +139,9 @@ public  void chickInfo(View view ){
 ///<<<<<<< Updated upstream
                             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                             String uid = user.getUid();
-                            String id = fdb.push().getKey();
+                           // String id = fdb.push().getKey();
                             Customer customer = new Customer(pass, emailc, fname, lname, Integer.parseInt(phoneN), x, y  , uid);
-                            fdb.child(id).setValue(customer);
+                            fdb.child(uid).setValue(customer);
 
                             //Customer customer = new Customer(pass, emailc, fname, lname, Integer.parseInt(phoneN), x, y);
                             //fdb.setValue(customer);

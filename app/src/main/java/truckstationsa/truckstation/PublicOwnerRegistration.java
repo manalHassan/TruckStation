@@ -163,6 +163,16 @@ public class PublicOwnerRegistration extends AppCompatActivity {
                 Upload_image.setText("Image Selected");
             } catch (IOException e) {e.printStackTrace(); }
         }
+        if (requestCode == PLACE_PICKER_REQUEST) {
+            if (resultCode == RESULT_OK) {
+                Place place = PlacePicker.getPlace(data, this);
+
+                x = place.getLatLng().latitude;
+                y = place.getLatLng().longitude;
+
+
+            }
+        }
     }
 
     ////
@@ -243,7 +253,7 @@ public class PublicOwnerRegistration extends AppCompatActivity {
                                                 // startActivity(intent);
                                                 finish();
                                             } else
-                                                Toast.makeText(PublicOwnerRegistration.this, "البريد الالكتروني مستخدم مسبقا", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(PublicOwnerRegistration.this, "البريد الالكتروني  غير صحيح ", Toast.LENGTH_SHORT).show();
 
                                         }
                                     });
@@ -292,9 +302,9 @@ public class PublicOwnerRegistration extends AppCompatActivity {
                                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                                 String uid = user.getUid();
 //<<<<<<< Updated upstream
-                                String id = databaseReference.push().getKey();
+                              //  String id = databaseReference.push().getKey();        _____________>------------->  ،لااعرف مافايده هذا السطر &&&&&&&&&&&&
                                 PublicFoodTruckOwner owner = new PublicFoodTruckOwner("" , username, pass, emailp,Integer.parseInt(phoneN) ,  x, y , qusin , uid);
-                                databaseReference.child(id).setValue(owner);
+                                databaseReference.child(uid).setValue(owner);
 //======
                              //   PublicFoodTruckOwner owner = new PublicFoodTruckOwner("", username, pass, emailp, Integer.parseInt(phoneN), x, y, qusin);
                               //  databaseReference.child(uid).setValue(owner);
