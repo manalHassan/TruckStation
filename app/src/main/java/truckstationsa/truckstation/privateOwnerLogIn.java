@@ -3,9 +3,7 @@ package truckstationsa.truckstation;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
@@ -22,10 +20,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 /**
- * Created by manal on 2/9/2018.
+ * Created by manal on 2/10/2018.
  */
 
-public class CustomerLogInPage extends AppCompatActivity {
+public class privateOwnerLogIn extends AppCompatActivity {
     private FirebaseDatabase db = FirebaseDatabase.getInstance();
     private DatabaseReference dbRef = db.getReference();
 
@@ -49,17 +47,18 @@ public class CustomerLogInPage extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         initAuthStateListener();
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login);
-        rigister = (Button) findViewById(R.id.CustomerSignup);
+        setContentView(R.layout.private_login);
+
+        rigister = (Button) findViewById(R.id.PrivateSignup);
 
 
 
 
 
         progressDialog = new ProgressDialog(this);
-        textEmail = (EditText) findViewById(R.id.CustomerEmail);
-        textPass = (EditText) findViewById(R.id.CustomerPassword);
-        btnLogin = (Button) findViewById(R.id.CustomerBtnLogin);
+        textEmail = (EditText) findViewById(R.id.privteEmail);
+        textPass = (EditText) findViewById(R.id.privatePass);
+        btnLogin = (Button) findViewById(R.id.privteSignin);
         mAuth = FirebaseAuth.getInstance();
 
         FirebaseAuth.AuthStateListener mAuthListener;
@@ -74,9 +73,10 @@ public class CustomerLogInPage extends AppCompatActivity {
 
 
 
-    //IF not registered
-    public void goTOCustomerRegisterPage (View view ){
-        Intent intent = new Intent(CustomerLogInPage.this , GoTOCustomerRegisterPage.class );
+    //  If NOT registerd
+
+   public void goTOPrivatRegisterPage (View view ){
+        Intent intent = new Intent(privateOwnerLogIn.this , GoTOPrivatRegisterPage.class );
         startActivity(intent);
 
     }
@@ -145,14 +145,14 @@ public class CustomerLogInPage extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             progressDialog.dismiss();
                             if (task.isSuccessful()) {
-                                Toast.makeText(CustomerLogInPage.this, "تم تسجيل الدخول بنجاح", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(privateOwnerLogIn.this, "تم تسجيل الدخول بنجاح", Toast.LENGTH_SHORT).show();
 
-                                Intent intent = new Intent(CustomerLogInPage.this, Rating.class);
+                                Intent intent = new Intent(privateOwnerLogIn.this, Homepage.class);
                                 startActivity(intent);
 
                             } // Singed in successfull
                             if (!task.isSuccessful()) {
-                                Toast.makeText(CustomerLogInPage.this, "خطأ في ادخال البريد الالكتروني أو كلمة المرور", Toast.LENGTH_LONG).show();
+                                Toast.makeText(privateOwnerLogIn.this, "خطأ في ادخال البريد الالكتروني أو كلمة المرور", Toast.LENGTH_LONG).show();
                             }
 
 
@@ -165,11 +165,9 @@ public class CustomerLogInPage extends AppCompatActivity {
     } // Do login
 
     public void forgetPassword(View view){
-        Intent intent = new Intent(CustomerLogInPage.this , resetpassword.class );
+        Intent intent = new Intent(privateOwnerLogIn.this , resetpassword.class );
         startActivity(intent);
     }
-
-
 
 
 }

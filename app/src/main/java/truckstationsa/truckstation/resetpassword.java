@@ -48,7 +48,7 @@ public class resetpassword extends AppCompatActivity {
                 String email = textEmail.getText().toString().trim();
 
                 if (TextUtils.isEmpty(email)) {
-                    Toast.makeText(getApplication(), "Enter your registered email id", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplication(), "الرجاء ادخال الايميل لحسابك", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -62,9 +62,10 @@ public class resetpassword extends AppCompatActivity {
                                 progressDialog.dismiss();
                                 if (task.isSuccessful()) {
                                     Toast.makeText(resetpassword.this, "لقد ارسلنا لك التعليمات لاعادة تعيين كلمة المرور", Toast.LENGTH_SHORT).show();
+                                finish();
                                 } else {
-                                    Toast.makeText(resetpassword.this, "\n" +
-                                            "فشل في إرسال البريد الالكتروني لإعادة تعيين كلمة المرور", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(resetpassword.this,
+                                            "فشل في إرسال البريد الالكتروني لإعادة تعيين كلمة المرور الرجاء التأكد من الايميل المدخل", Toast.LENGTH_SHORT).show();
                                 }
 
                             }
