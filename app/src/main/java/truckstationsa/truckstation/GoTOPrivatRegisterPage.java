@@ -44,6 +44,7 @@ import java.io.IOException;
  */
 
 public class GoTOPrivatRegisterPage  extends AppCompatActivity {
+    //new
     EditText password , phone , email , userName , Qusen ;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -94,9 +95,9 @@ public class GoTOPrivatRegisterPage  extends AppCompatActivity {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 if (firebaseAuth.getCurrentUser() != null) {
-                    Intent intent = new Intent( GoTOPrivatRegisterPage.this, privateOnerLogIn.class);
-                    startActivity(intent);
-                    finish();
+                   // Intent intent = new Intent( GoTOPrivatRegisterPage.this, privateOnerLogIn.class); ///*************هذي privateOnerLogIn  ي منال مو موجدة *******************
+                  //  startActivity(intent);
+                   // finish();
                 }
             }
         };}//creat

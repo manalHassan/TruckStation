@@ -47,6 +47,7 @@ import java.io.IOException;
  */
 
 public class PublicOwnerRegistration extends AppCompatActivity {
+    //new
     String address ;
     Context context;
     int PLACE_PICKER_REQUEST = 1;
