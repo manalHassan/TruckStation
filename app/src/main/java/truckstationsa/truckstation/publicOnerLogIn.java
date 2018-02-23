@@ -35,7 +35,7 @@ public class publicOnerLogIn extends AppCompatActivity {
 
     //Buttons  ;
     Button rigister ;
-
+    Button btnResetPassword;
 
 
     //EditText username ,password ;
@@ -140,7 +140,7 @@ public class publicOnerLogIn extends AppCompatActivity {
         }
 
         if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)) {
-            progressDialog.setMessage("انتظر من فصلك, جاري تسجيل الدخول..");
+            progressDialog.setMessage("Loging in , please wait");
             progressDialog.show();
             mAuth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -150,7 +150,7 @@ public class publicOnerLogIn extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 Toast.makeText(publicOnerLogIn.this, "تم تسجيل الدخول بنجاح", Toast.LENGTH_SHORT).show();
 
-                              //Intent intent = new Intent(publicOnerLogIn.this, ownerprofile.class);
+                              //  Intent intent = new Intent(publicOnerLogIn.this, ownerprofile.class);
                                // startActivity(intent);
 //نانتاتناتات
                             } // Singed in successfull
