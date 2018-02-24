@@ -24,7 +24,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 
-// هذا الجديد************************//////////
+// //هذا الجديد************************//////////
 
 public class customer_profilenew extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
