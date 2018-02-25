@@ -24,6 +24,7 @@ TextView viseter ;
 
     public void goToVisitorHomePage (View view){
         Intent intent = new Intent(MainActivity.this , MyMain.class);
+        //Intent intent = new Intent(MainActivity.this , NearByTrucks.class);
        startActivity(intent);
 
     }

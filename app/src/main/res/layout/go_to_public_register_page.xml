@@ -177,17 +177,36 @@
                 tools:targetApi="jelly_bean_mr1" />
 </LinearLayout>
 
-            <TextView
-                android:id="@+id/location"
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:focusable="true"
-                android:gravity="center"
-                android:onClick="goToVisitorHomePage"
-                android:text="حدد موقعك"
-                android:textAllCaps="false"
-                android:textColor="#000" />
+                android:orientation="horizontal"
+                android:paddingLeft="25dp"
+                android:layout_marginBottom="9dp">
+                <ImageView
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:src="@drawable/ic_location_on_black_24dp"
+                    android:id="@+id/location1"
+                    />
+
+                <TextView
+                    android:id="@+id/location"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:onClick="goToVisitorHomePage"
+                    android:text="حدد موقعك"
+                    android:textAllCaps="false"
+                    android:textColor="#000" />
+
+
+            </LinearLayout>
+
+
 
             <Button
                 android:id="@+id/singup"

@@ -128,7 +128,7 @@ public class NearByTrucks extends AppCompatActivity implements OnMapReadyCallbac
                             LatLng location = new LatLng(x, y);
                             float [] result = new float[1] ;
                             Location.distanceBetween(location.latitude , location.longitude ,latLng.latitude , latLng.longitude , result );
-                            if (result[0] <= 50 ){
+                            if (result[0] <= 5000 ){
                             mMap.addMarker(new MarkerOptions()
                                     .position(location)
                                     .title(pOwner.getFUsername()));

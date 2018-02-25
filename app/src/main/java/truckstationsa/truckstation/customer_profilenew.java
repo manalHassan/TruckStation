@@ -15,6 +15,7 @@ import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
+import com.google.android.gms.maps.GoogleMap;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -22,6 +23,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.io.Serializable;
 
 
 // //هذا الجديد************************//////////
@@ -34,13 +37,14 @@ public class customer_profilenew extends AppCompatActivity {
     String address;
     Context context;
     int PLACE_PICKER_REQUEST = 1;
-    double x =0 , y =0 ;
+    private double x =0 , y =0 ;
     private DatabaseReference databaseReference;
     private EditText TextName;
     private EditText TextEmail;
     private EditText TextPhone;
     private TextView Textmain;
     private TextView location;
+
 
 
     private String username;
@@ -52,9 +56,11 @@ public class customer_profilenew extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseUser user;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        context = this;
         setContentView(R.layout.activity_customer_profilenew);
         Textmain=(TextView)findViewById(R.id.name);
         TextName = (EditText) findViewById(R.id.editname);
@@ -140,18 +146,7 @@ public class customer_profilenew extends AppCompatActivity {
         });
 
     }//creat
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == PLACE_PICKER_REQUEST) {
-            if (resultCode == RESULT_OK) {
-                Place place = PlacePicker.getPlace(data, this);
 
-                x = place.getLatLng().latitude;
-                y = place.getLatLng().longitude;
-
-
-            }
-        }
-    }
     private void EditCustomerInfo(){
         username = TextName.getText().toString().trim();
         email = TextEmail.getText().toString().trim();
@@ -192,7 +187,17 @@ public class customer_profilenew extends AppCompatActivity {
         //startActivity(new Intent(getActivity(), AdminHome2.class));
     }//edit
 
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == PLACE_PICKER_REQUEST) {
+            if (resultCode == RESULT_OK) {
+                Place place = PlacePicker.getPlace(data, this);
+
+                x = place.getLatLng().latitude;
+                y = place.getLatLng().longitude;
 
 
+            }
+        }
+    }
 }
 
