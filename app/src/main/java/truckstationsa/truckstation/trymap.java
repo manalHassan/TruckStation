@@ -31,7 +31,7 @@ import com.google.firebase.database.ValueEventListener;
  * Created by manal on 2/23/2018.
  */
 
-public class VisitorHomePage extends AppCompatActivity implements OnMapReadyCallback {
+public class trymap extends AppCompatActivity implements OnMapReadyCallback {
     private FirebaseDatabase db = FirebaseDatabase.getInstance();
     private DatabaseReference dbRef = db.getReference();
     double x = 0;
@@ -48,7 +48,7 @@ public class VisitorHomePage extends AppCompatActivity implements OnMapReadyCall
                     PublicFoodTruckOwner pOwner;
                     pOwner = postSnapshot.getValue(PublicFoodTruckOwner.class);
                     if (pOwner == null)
-                        Toast.makeText(VisitorHomePage.this, "فاضي !!!!!!!!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(trymap.this, "فاضي !!!!!!!!", Toast.LENGTH_SHORT).show();
                     try {
                         if (pOwner != null) {
                             x = pOwner.getXFLication();
@@ -62,7 +62,7 @@ public class VisitorHomePage extends AppCompatActivity implements OnMapReadyCall
                             //.icon(BitmapDescriptorFactory.fromBitmap(bmp))
                         }
                     } catch (Exception e) {
-                        Toast.makeText(VisitorHomePage.this, "حدث خطاء ما !!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(trymap.this, "حدث خطاء ما !!", Toast.LENGTH_SHORT).show();
                     }
 
                 }
@@ -128,7 +128,7 @@ public class VisitorHomePage extends AppCompatActivity implements OnMapReadyCall
 
                         }else{
                             Log.d(TAG, "onComplete: current location is null");
-                            Toast.makeText(VisitorHomePage.this, "unable to get current location", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(trymap.this, "unable to get current location", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -147,7 +147,7 @@ public class VisitorHomePage extends AppCompatActivity implements OnMapReadyCall
         Log.d(TAG, "initMap: initializing map");
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
 
-        mapFragment.getMapAsync(VisitorHomePage.this);
+        mapFragment.getMapAsync(trymap.this);
     }
 
     private void getLocationPermission(){

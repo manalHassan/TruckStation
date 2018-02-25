@@ -31,7 +31,7 @@ public class Rating extends AppCompatActivity {
     EditText mFeedback;
     Button mSendFeedback;
     FirebaseAuth firebaseAuth;
-    int onleyOne=0;
+
     // DATABASE
     DatabaseReference RatingRef;
     DatabaseReference CommentRef;
@@ -85,49 +85,8 @@ public class Rating extends AppCompatActivity {
 
 
     public  void DoRating(View view ){
-        //add comment
-        final String Comment=mFeedback.getText().toString();
 
-        if(!TextUtils.isEmpty(Comment)) {
-
-
-
-
-            CommentRef.addListenerForSingleValueEvent(new ValueEventListener() {
-
-                @RequiresApi(api = Build.VERSION_CODES.O)
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-
-                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                    String id = user.getUid();//customer id is the same as comment id to make it easy to refer
-
-                    final String FID = "FIDtst";
-                    final String CID = id;
-
-                    if (!TextUtils.isEmpty(FID) && !TextUtils.isEmpty(CID)&&onleyOne==0) {
-                        onleyOne=1;
-                        Comment commentObject= new Comment(CID ,FID ,Comment);
-                        String commentID=CommentRef.push().getKey();
-
-                        CommentRef.child(commentID).setValue(commentObject);
-                        //Toast.makeText(Rating.this,  "شكرًا لمشاركتنا رأيك", Toast.LENGTH_SHORT).show();
-                        // Intent intent = new Intent(GoTOCustomerRegisterPage.this, .class);
-                        // startActivity(intent);
-                        //finish();
-                    }
-
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-                }
-            });
-        }
-
-        // rating
-
-        RatingRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        RatingRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -144,10 +103,10 @@ public class Rating extends AppCompatActivity {
                 Rate rate= new Rate(CID,FID,ratingValue);
 
                 RatingRef.child(id).setValue(rate);
-                Toast.makeText(Rating.this, "شكرًا لمشاركتنا رأيك", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Rating.this, ""+ratingValue+"شكرًا لمشاركتنا رأيك", Toast.LENGTH_SHORT).show();
                 // Intent intent = new Intent(GoTOCustomerRegisterPage.this, .class);
                 // startActivity(intent);
-                finish();
+                //finish();
                 }
 
             }
@@ -157,7 +116,40 @@ public class Rating extends AppCompatActivity {
         });
 
 
+        //add comment
+        final String Comment=mFeedback.getText().toString();
 
+if(!TextUtils.isEmpty(Comment)) {
+
+    CommentRef.addValueEventListener(new ValueEventListener() {
+
+        @RequiresApi(api = Build.VERSION_CODES.O)
+        @Override
+        public void onDataChange(DataSnapshot dataSnapshot) {
+
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            String id = user.getUid();//customer id is the same as comment id to make it easy to refer
+
+            final String FID = "FIDtst";
+            final String CID = id;
+            if (!TextUtils.isEmpty(FID) && !TextUtils.isEmpty(CID)) {
+
+              Comment commentObject= new Comment(CID ,FID ,Comment);
+
+                CommentRef.child(id).setValue(commentObject);
+                //Toast.makeText(Rating.this,  "شكرًا لمشاركتنا رأيك", Toast.LENGTH_SHORT).show();
+                // Intent intent = new Intent(GoTOCustomerRegisterPage.this, .class);
+                // startActivity(intent);
+                //finish();
+            }
+
+        }
+
+        @Override
+        public void onCancelled(DatabaseError databaseError) {
+        }
+    });
+}
 
 
 

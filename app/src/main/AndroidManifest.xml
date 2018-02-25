@@ -61,6 +61,16 @@
         <activity
             android:name=".customer_profilenew"
             android:label="الملف الشخصي" />
+        <activity
+            android:name=".Rating"
+            android:label="تقييم العربه" />
+        <activity
+            android:name=".NearByTrucks"
+            />
+        <activity
+            android:name=".trymap"
+            />
+
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

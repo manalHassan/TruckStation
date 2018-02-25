@@ -31,7 +31,7 @@ import com.google.firebase.database.ValueEventListener;
  * Created by manal on 2/23/2018.
  */
 
-public class VisitorHomePage extends AppCompatActivity implements OnMapReadyCallback {
+public class NearByTrucks extends AppCompatActivity implements OnMapReadyCallback {
     private FirebaseDatabase db = FirebaseDatabase.getInstance();
     private DatabaseReference dbRef = db.getReference();
     double x = 0;
@@ -39,40 +39,9 @@ public class VisitorHomePage extends AppCompatActivity implements OnMapReadyCall
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.visitor_home_page);
+        setContentView(R.layout.near_by_truck);
         getLocationPermission();
-        dbRef.child("PublicFoodTruckOwner").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
-                    PublicFoodTruckOwner pOwner;
-                    pOwner = postSnapshot.getValue(PublicFoodTruckOwner.class);
-                    if (pOwner == null)
-                        Toast.makeText(VisitorHomePage.this, "فاضي !!!!!!!!", Toast.LENGTH_SHORT).show();
-                    try {
-                        if (pOwner != null) {
-                            x = pOwner.getXFLication();
-                            y = pOwner.getYFLocation();
-                            //   Toast.makeText(VisitorHomePage.this, "يتم تحديد المواقع الان....", Toast.LENGTH_SHORT).show();
-                            // mMap.clear();
-                            LatLng location = new LatLng(x, y);
-                            mMap.addMarker(new MarkerOptions()
-                                    .position(location)
-                                    .title(pOwner.getFUsername()));
-                            //.icon(BitmapDescriptorFactory.fromBitmap(bmp))
-                        }
-                    } catch (Exception e) {
-                        Toast.makeText(VisitorHomePage.this, "حدث خطاء ما !!", Toast.LENGTH_SHORT).show();
-                    }
 
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
     }
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -128,7 +97,7 @@ public class VisitorHomePage extends AppCompatActivity implements OnMapReadyCall
 
                         }else{
                             Log.d(TAG, "onComplete: current location is null");
-                            Toast.makeText(VisitorHomePage.this, "unable to get current location", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(NearByTrucks.this, "unable to get current location", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -138,16 +107,52 @@ public class VisitorHomePage extends AppCompatActivity implements OnMapReadyCall
         }
     }
 
-    private void moveCamera(LatLng latLng, float zoom){
+    private void moveCamera(final LatLng latLng, float zoom){
         Log.d(TAG, "moveCamera: moving the camera to: lat: " + latLng.latitude + ", lng: " + latLng.longitude );
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
+
+        dbRef.child("PublicFoodTruckOwner").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
+                    PublicFoodTruckOwner pOwner;
+                    pOwner = postSnapshot.getValue(PublicFoodTruckOwner.class);
+                    if (pOwner == null)
+                        Toast.makeText(NearByTrucks.this, "فاضي !!!!!!!!", Toast.LENGTH_SHORT).show();
+                    try {
+                        if (pOwner != null) {
+                            x = pOwner.getXFLication();
+                            y = pOwner.getYFLocation();
+                            //   Toast.makeText(VisitorHomePage.this, "يتم تحديد المواقع الان....", Toast.LENGTH_SHORT).show();
+                            // mMap.clear();
+                            LatLng location = new LatLng(x, y);
+                            float [] result = new float[1] ;
+                            Location.distanceBetween(location.latitude , location.longitude ,latLng.latitude , latLng.longitude , result );
+                            if (result[0] <= 50 ){
+                            mMap.addMarker(new MarkerOptions()
+                                    .position(location)
+                                    .title(pOwner.getFUsername()));
+                            //.icon(BitmapDescriptorFactory.fromBitmap(bmp))
+                        }}
+                    } catch (Exception e) {
+                        Toast.makeText(NearByTrucks.this, "حدث خطاء ما !!", Toast.LENGTH_SHORT).show();
+                    }
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     private void initMap(){
         Log.d(TAG, "initMap: initializing map");
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
 
-        mapFragment.getMapAsync(VisitorHomePage.this);
+        mapFragment.getMapAsync(NearByTrucks.this);
     }
 
     private void getLocationPermission(){
