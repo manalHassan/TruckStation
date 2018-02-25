@@ -34,7 +34,8 @@
             android:name=".PublicOwnerRegistration"
             android:label="تسجيل الدخول صاحب عربه" />
         <activity
-            android:name=".privateOnerLogIn"
+            android:name=".privateOwnerLogIn"
+
             android:label="انشاء حساب صاحب عربه" />
         <activity
             android:name=".publicOnerLogIn"
