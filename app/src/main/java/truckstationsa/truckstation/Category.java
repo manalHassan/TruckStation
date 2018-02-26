@@ -9,6 +9,13 @@ public class Category {
     private String   CatID  ;
     private String CatName ;
 
+    public Category(){
+    }
+    public Category(Category c){
+        this.setCatID(c.CatID);
+        this.setCatName(c.CatName);
+        this.setMID(c.MID);
+    }
     public Category (String CatName , String  MID , String   CatID){
         this.setCatID(CatID);
         this.setCatName(CatName);

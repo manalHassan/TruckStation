@@ -34,7 +34,7 @@
             android:name=".PublicOwnerRegistration"
             android:label="تسجيل الدخول صاحب عربه" />
         <activity
-            android:name=".privateOnerLogIn"
+            android:name=".privateOwnerLogIn"
             android:label="انشاء حساب صاحب عربه" />
         <activity
             android:name=".publicOnerLogIn"
@@ -70,6 +70,30 @@
         <activity
             android:name=".trymap"
             />
+
+
+
+
+        <activity
+            android:name=".editprofile">
+        </activity>
+        <activity
+            android:name=".contentmain">
+        </activity>
+        <activity
+            android:name=".ownermenu">
+        </activity>
+
+        <activity
+            android:name=".itemlist">
+        </activity>
+        <activity
+            android:name=".edititem">
+        </activity>
+        <activity
+            android:name=".publictruckownerprofile"></activity>
+
+
 
 
         <meta-data
