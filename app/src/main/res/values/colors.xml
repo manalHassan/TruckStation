@@ -6,4 +6,5 @@
     <color name="startblue">#ecd463</color>
     <color name="endblue">#DEC85F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="colorrating">#ecd463</color>
 </resources>
