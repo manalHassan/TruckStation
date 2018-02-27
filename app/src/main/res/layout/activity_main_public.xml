@@ -24,5 +24,9 @@
         app:headerLayout="@layout/nav_header_main"
         app:itemIconTint="@color/startblue"
         app:menu="@menu/activity_main_drawer" />
+    <TextView
+        android:id="@+id/location"
+        android:onClick="changLocation"
+        android:text="غير مكاني"/>
 
 </android.support.v4.widget.DrawerLayout>

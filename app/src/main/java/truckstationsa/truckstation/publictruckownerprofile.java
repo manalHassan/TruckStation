@@ -1,5 +1,7 @@
 package truckstationsa.truckstation;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -10,8 +12,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -31,6 +39,11 @@ public class publictruckownerprofile extends AppCompatActivity
     TextView phone;
     TextView wwh;
     FirebaseAuth firebaseAuth;
+    private TextView location;
+    String address;
+    Context context;
+    int PLACE_PICKER_REQUEST = 1;
+    private double x =0 , y =0 ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +52,8 @@ public class publictruckownerprofile extends AppCompatActivity
         setContentView(R.layout.activity_main_public);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        context = this;
+        location = (TextView) findViewById(R.id.location);
 
 /*
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -100,7 +115,27 @@ public class publictruckownerprofile extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-    }
+
+        location.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
+                // finish();
+                Intent intent;
+                try {
+                    address = "  ";
+                    intent = builder.build((Activity)  context);
+                    startActivityForResult(intent,PLACE_PICKER_REQUEST);
+
+                } catch (GooglePlayServicesRepairableException e) {
+                    e.printStackTrace();
+                } catch (GooglePlayServicesNotAvailableException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }); }
 
     @Override
     public void onBackPressed() {
@@ -184,6 +219,18 @@ public class publictruckownerprofile extends AppCompatActivity
 
 
 
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == PLACE_PICKER_REQUEST) {
+            if (resultCode == RESULT_OK) {
+                Place place = PlacePicker.getPlace(data, this);
+
+                x = place.getLatLng().latitude;
+                y = place.getLatLng().longitude;
+
+
+            }
+        }
+    }
 
 
 }
