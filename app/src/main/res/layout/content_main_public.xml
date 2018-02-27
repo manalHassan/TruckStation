@@ -34,7 +34,8 @@
                     android:layout_height="72dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="45dp"
-                     />
+                    android:src="@drawable/profile_pictures_con"
+                    />
 
                 <TextView
                     android:id="@+id/user"
@@ -152,7 +153,7 @@
             <ImageView
                 android:layout_width="36dp"
                 android:layout_height="36dp"
-                 />
+                android:src="@drawable/ic_action_typefood" />
             <TextView
                 android:id="@+id/type"
                 android:layout_width="286dp"
@@ -177,6 +178,7 @@
             <ImageView
                 android:layout_width="36dp"
                 android:layout_height="36dp"
+                android:src="@drawable/ic_email_black_24dp"
                  />
             <TextView
                 android:id="@+id/email"
@@ -188,10 +190,12 @@
                 android:paddingLeft="20dp"
                 android:text="البريد الالكتروني"
                 android:textDirection="rtl"
+
                 android:textStyle="bold" />
 
 
         </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -203,31 +207,7 @@
             <ImageView
                 android:layout_width="35dp"
                 android:layout_height="36dp"
-                 />
-            <TextView
-                android:id="@+id/phone"
-
-                android:layout_width="287dp"
-                android:layout_height="29dp"
-                android:layout_gravity="center_vertical"
-                android:layoutDirection="rtl"
-                android:paddingLeft="20dp"
-                android:text="رقم الهاتف"
-                android:textDirection="rtl"
-                android:textStyle="bold" />
-
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginTop="25dp"
-            android:orientation="horizontal"
-            android:paddingLeft="25dp">
-
-            <ImageView
-                android:layout_width="35dp"
-                android:layout_height="36dp"
+                android:src="@drawable/ic_action_wh"
                  />
             <TextView
                 android:id="@+id/wh"
@@ -239,6 +219,32 @@
                 android:text="ساعـات العمل"
                 android:textDirection="rtl"
                 android:lines="5"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="25dp"
+            android:orientation="horizontal"
+            android:paddingLeft="25dp">
+
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="36dp"
+                android:src="@drawable/ic_phone_black_24dp"
+                />
+            <TextView
+                android:id="@+id/phone"
+
+                android:layout_width="287dp"
+                android:layout_height="29dp"
+                android:layout_gravity="center_vertical"
+                android:layoutDirection="rtl"
+                android:paddingLeft="20dp"
+                android:text="رقم الهاتف"
+                android:textDirection="rtl"
                 android:textStyle="bold" />
 
 

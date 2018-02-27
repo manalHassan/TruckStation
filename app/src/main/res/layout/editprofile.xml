@@ -15,9 +15,8 @@
         android:paddingLeft="18dp"
         android:paddingRight="18dp"
         tools:context=".editprofile"
-
-        android:background="#F5CB5C">
-        <!-- F5CB5C #FCE196  #ED6B69 FCE196-->
+        >
+        <!--  ED6B69  #FCE196 FCE196-->
 
         <ScrollView
             android:layout_width="match_parent"
@@ -29,50 +28,55 @@
                 android:id="@+id/linearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="220dp"
-                android:background="@drawable/gradientbackground"
                 android:orientation="vertical">
 
-                <ImageView
-                    android:layout_width="58dp"
-                    android:layout_height="53dp"
-                    android:layout_gravity="start"
-                    android:layout_marginTop="45dp"
-                    android:src="@drawable/logo" />
+                <LinearLayout android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_marginTop="25dp"
+                    android:orientation="horizontal"
+                    android:paddingLeft="25dp">
 
-                <EditText
-                    android:id="@+id/name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="40dp"
-                    android:background="@android:color/transparent"
-                    android:drawablePadding="12dp"
-                    android:ems="10"
-                    android:hint="اسم المستخدم"
-                    android:inputType="textEmailAddress"
-                    android:layoutDirection="rtl"
-                    android:maxLines="1"
-                    android:padding="8dp"
-                    android:textColorHint="#fff"
-                    android:textDirection="rtl" />
+                    <ImageView
+                        android:layout_width="41dp"
+                        android:layout_height="45dp"
+                        android:layout_gravity="start"
+                        android:layout_marginTop="45dp"
+                        android:src="@drawable/logo" />
 
+                    <EditText
+                        android:id="@+id/name"
+                        android:layout_width="236dp"
+                        android:layout_height="52dp"
+                        android:layout_gravity="end"
+
+                        android:layout_marginTop="40dp"
+                        android:drawablePadding="12dp"
+                        android:ems="10"
+                        android:gravity="top"
+                        android:hint="اسم المستخدم"
+                        android:inputType="textEmailAddress"
+                        android:layoutDirection="rtl"
+                        android:maxLines="1"
+                        android:padding="8dp"
+                        android:textDirection="rtl" />
+            </LinearLayout>
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="#fff" />
+                     />
 
                 <TextView
                     android:id="@+id/ppp"
                     android:layout_width="match_parent"
                     android:layout_height="35dp"
-                    android:text="كلمة المرور"
-                    android:textColor="#fff" />
+                    android:text="كلمة المرور" />
 
                 <EditText
                     android:id="@+id/pass"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:background="@android:color/transparent"
+
 
                     android:drawablePadding="12dp"
 
@@ -83,7 +87,6 @@
                     android:layoutDirection="rtl"
                     android:maxLines="1"
                     android:padding="8dp"
-                    android:textColorHint="#fff"
                     android:textDirection="rtl"
                     android:textStyle="bold"
                     tools:targetApi="jelly_bean_mr1" />
@@ -98,14 +101,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="35dp"
                     android:text="رقم الجوال"
-                    android:textColor="#fff" />
+                     />
 
                 <EditText
                     android:id="@+id/phone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:background="@android:color/transparent"
 
                     android:drawablePadding="12dp"
 
@@ -115,7 +117,6 @@
                     android:layoutDirection="rtl"
                     android:maxLines="1"
                     android:padding="8dp"
-                    android:textColorHint="#fff"
                     android:textDirection="rtl"
                     android:textStyle="bold"
                     tools:targetApi="jelly_bean_mr1" />
@@ -124,21 +125,21 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="#fff" />
+                   />
 
                 <TextView
                     android:id="@+id/maili"
                     android:layout_width="match_parent"
                     android:layout_height="35dp"
                     android:text="البريد الالكتروني"
-                    android:textColor="#fff" />
+                     />
 
                 <EditText
                     android:id="@+id/email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:background="@android:color/transparent"
+
 
                     android:drawablePadding="12dp"
 
@@ -148,7 +149,6 @@
                     android:layoutDirection="rtl"
                     android:maxLines="1"
                     android:padding="8dp"
-                    android:textColorHint="#fff"
                     android:textDirection="rtl"
                     android:textStyle="bold"
                     tools:targetApi="jelly_bean_mr1" />
@@ -156,21 +156,21 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="#fff" />
+                    />
 
                 <TextView
                     android:id="@+id/ccc"
                     android:layout_width="match_parent"
                     android:layout_height="35dp"
                     android:text="توع المطبخ"
-                    android:textColor="#fff" />
+                    />
 
                 <EditText
                     android:id="@+id/cusin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:background="@android:color/transparent"
+
 
                     android:drawablePadding="12dp"
 
@@ -179,7 +179,6 @@
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
                     android:padding="8dp"
-                    android:textColorHint="#fff"
                     android:textDirection="rtl"
                     android:textStyle="bold"
                     tools:targetApi="jelly_bean_mr1" />
@@ -187,14 +186,14 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="#fff" />
+                    />
 
                 <TextView
                     android:id="@+id/ddd"
                     android:layout_width="match_parent"
                     android:layout_height="35dp"
                     android:text="ساعـات العمل"
-                    android:textColor="#fff" />
+                    />
                 <EditText
                     android:id="@+id/etFeedback"
                     android:layout_width="match_parent"
@@ -208,7 +207,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="#fff" />
+                    />
 
 
                 <Button
@@ -217,14 +216,14 @@
                     android:layout_width="165dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:background="@color/cardview_dark_background"
+                    android:background="@drawable/buttonstayle"
                     android:clickable="true"
                     android:focusable="true"
                     android:onClick="chickInfo"
                     android:padding="16dp"
                     android:text="حفظ التغييــــرات"
                     android:textAllCaps="false"
-                    android:textColor="#fff" />
+                    />
 
 
             </LinearLayout>
@@ -234,14 +233,6 @@
 
     </LinearLayout>
 
-    <android.support.design.widget.NavigationView
-        android:id="@+id/nav_view"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="left|start"
-        android:fitsSystemWindows="true"
-        app:headerLayout="@layout/nav_header_main"
-        app:itemIconTint="@color/startblue"
-        app:menu="@menu/activity_main_drawer" />
+
 
 </android.support.v4.widget.DrawerLayout>
