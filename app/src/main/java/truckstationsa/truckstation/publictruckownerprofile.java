@@ -12,21 +12,25 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+
 public class publictruckownerprofile extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     DatabaseReference databaseref;
-    String user = "-L5hPscXmLNDYe8_3KNL";
+   // String user = "-L5hPscXmLNDYe8_3KNL";
     TextView username;
     TextView mail;
     TextView phone;
     TextView wwh;
+    FirebaseAuth firebaseAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +39,7 @@ public class publictruckownerprofile extends AppCompatActivity
         setContentView(R.layout.activity_main_public);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
 /*
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -49,17 +54,19 @@ public class publictruckownerprofile extends AppCompatActivity
         databaseref = FirebaseDatabase.getInstance().getReference();
 
         // Read from the database
-        databaseref.child("PublicFoodTruckOwner").child(user).addValueEventListener(new ValueEventListener() {
+        databaseref.child("PublicFoodTruckOwner").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
+                FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
+                String user1 = user.getUid();//customer id is the same as rating id to make it easy to refer
 
-                String name = dataSnapshot.child("fusername").getValue(String.class);
-                int phonnum = dataSnapshot.child("fponeNoumber").getValue(int.class);
-                String email = dataSnapshot.child("femail").getValue(String.class);
-                String cc = dataSnapshot.child("qusins").getValue(String.class);
-                  String wh=dataSnapshot.child("fworkingHours").getValue(String.class);
+                String name = dataSnapshot.child(user1).child("fusername").getValue(String.class);
+                int phonnum = dataSnapshot.child(user1).child("fponeNoumber").getValue(int.class);
+                String email = dataSnapshot.child(user1).child("femail").getValue(String.class);
+                String cc = dataSnapshot.child(user1).child("qusins").getValue(String.class);
+                  String wh=dataSnapshot.child(user1).child("fworkingHours").getValue(String.class);
 
                 username = (TextView) findViewById(R.id.type);
                 username.setText(" " + cc);
@@ -120,9 +127,6 @@ public class publictruckownerprofile extends AppCompatActivity
 
         if (id == R.id.nav_profile) {
             Intent intent = new Intent(publictruckownerprofile.this, editprofile.class);
-            Bundle b=new Bundle();
-            b.putString("id",user);
-            intent.putExtras(b);
             startActivity(intent);
             DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
             drawer.closeDrawer(GravityCompat.START);
@@ -155,8 +159,7 @@ public class publictruckownerprofile extends AppCompatActivity
 
   Intent intent = new Intent(publictruckownerprofile.this, ownermenu.class);
             Bundle b=new Bundle();
-            b.putString("id",user);
-            intent.putExtras(b);
+
             startActivity(intent);
             DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
             drawer.closeDrawer(GravityCompat.START);

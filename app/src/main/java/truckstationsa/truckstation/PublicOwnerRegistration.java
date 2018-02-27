@@ -245,6 +245,13 @@ public class PublicOwnerRegistration extends AppCompatActivity {
                                                      // truck t=new truck(username, finalUrl);
                                                      PublicFoodTruckOwner owner = new PublicFoodTruckOwner(finalUrl, username, pass, emailp, Integer.parseInt(phoneN), x, y, qusin,uid);
                                                      databaseReference.child(uid).setValue(owner);
+                                                     //code for adding menu to owner
+                                                     FirebaseDatabase database = FirebaseDatabase.getInstance();
+                                                     DatabaseReference myRef = database.getReference();
+                                                     String mid =myRef.push().getKey();
+                                                     Menu menu =new Menu(uid,mid);
+                                                     myRef.child("Menu").child(uid).setValue(menu);
+                                                     //end menu
                                                      // fdb2.child(t.getTruckname()).setValue(t);
                                                  }catch (Exception e){
                                                     e.printStackTrace();

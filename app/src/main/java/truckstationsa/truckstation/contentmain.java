@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -16,11 +18,11 @@ import com.google.firebase.database.ValueEventListener;
 public class contentmain extends AppCompatActivity {
 
     DatabaseReference databaseref;
-    String user = "-L5hPscXmLNDYe8_3KNL";
+   // String user = "-L5hPscXmLNDYe8_3KNL";
     TextView type;
     TextView mail;
     TextView phone;
-
+    FirebaseAuth firebaseAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +33,9 @@ public class contentmain extends AppCompatActivity {
         databaseref = FirebaseDatabase.getInstance().getReference();
 
         // Read from the database
+        FirebaseUser user1=FirebaseAuth.getInstance().getCurrentUser();
+        String user = user1.getUid();//customer id is the same as rating id to make it easy to refer
+
         databaseref.child("PublicFoodTruckOwner").child(user).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -68,9 +73,6 @@ public class contentmain extends AppCompatActivity {
     public void editprofilepage(View view) {
 
         Intent intent = new Intent(contentmain.this, editprofile.class);
-        Bundle b=new Bundle();
-        b.putString("user", user);
-        intent.putExtras(b);
         startActivity(intent);
     }
 

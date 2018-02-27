@@ -150,8 +150,8 @@ public class publicOnerLogIn extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 Toast.makeText(publicOnerLogIn.this, "تم تسجيل الدخول بنجاح", Toast.LENGTH_SHORT).show();
 
-                              //  Intent intent = new Intent(publicOnerLogIn.this, ownerprofile.class);
-                               // startActivity(intent);
+                              Intent intent = new Intent(publicOnerLogIn.this, publictruckownerprofile.class);
+                               startActivity(intent);
 //نانتاتناتات
                             } // Singed in successfull
                             if (!task.isSuccessful()) {

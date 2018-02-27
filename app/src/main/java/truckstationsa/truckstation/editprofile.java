@@ -13,10 +13,17 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 public class editprofile extends AppCompatActivity {
 
-    String id="-L5hPscXmLNDYe8_3KNL" ;
+   // String id="-L5hPscXmLNDYe8_3KNL" ;
     DatabaseReference databaseref;
     EditText username;
     EditText mail;
@@ -26,7 +33,7 @@ public class editprofile extends AppCompatActivity {
     EditText workh;
     static double xx=12.32;
     static double yy=12.32;
-
+    FirebaseAuth firebaseAuth;
 
 
     @Override
@@ -34,12 +41,11 @@ public class editprofile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.editprofile);
 
-        Bundle b =getIntent().getExtras();
-        id = b.getString("id");
-        //start
+
 
         databaseref = FirebaseDatabase.getInstance().getReference();
-
+        FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
+        String id = user.getUid();//customer id is the same as rating id to make it easy to refer
         // Read from the database
         databaseref.child("PublicFoodTruckOwner").child(id).addValueEventListener(new ValueEventListener() {
             @Override
@@ -101,7 +107,8 @@ public class editprofile extends AppCompatActivity {
         final String wh = workh.getText().toString().trim();
         final double x=12.321;
         final double y = 13.1;
-
+        FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
+        String id = user.getUid();//customer id is the same as rating id to make it easy to refer
         if (!TextUtils.isEmpty(emailp) && !TextUtils.isEmpty(pass) && !TextUtils.isEmpty(phoneN) && !TextUtils.isEmpty(qusin) && !TextUtils.isEmpty(usern) && !TextUtils.isEmpty(wh)) {
 
             databaseref = FirebaseDatabase.getInstance().getReference("PublicFoodTruckOwner").child(id);

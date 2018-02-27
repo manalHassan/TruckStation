@@ -13,6 +13,8 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -25,17 +27,17 @@ import java.util.List;
 public class ownermenu extends AppCompatActivity {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference();
-    String id="";
+   // String id="";
     ListView listViewArtists;
     List<Category> artists;
     EditText editTextName;
     String mid1="";
+    FirebaseAuth firebaseAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menumain);
-        Bundle b =getIntent().getExtras();
-        id = b.getString("id");
+
 
         //getting views
         editTextName = (EditText) findViewById(R.id.editTextName);
@@ -70,7 +72,8 @@ public class ownermenu extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         //attaching value event listener
-
+        FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
+        String id = user.getUid();//customer id is the same as rating id to make it easy to refer
         myRef.child("Menu").child(id).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -111,7 +114,8 @@ public class ownermenu extends AppCompatActivity {
 
 
     public void addcategory(View view) {
-
+        FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
+        String id = user.getUid();//customer id is the same as rating id to make it easy to refer
         myRef.child("Menu").child(id).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -209,14 +213,16 @@ public class ownermenu extends AppCompatActivity {
     }
 
     public void addmenu(View view) {
-
+        FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
+        String id = user.getUid();//customer id is the same as rating id to make it easy to refer
         String mid =myRef.push().getKey();
         Menu menu =new Menu(id,mid);
         myRef.child("Menu").child(id).setValue(menu);
         Toast.makeText(ownermenu.this, " "+mid+"تم اضافه المنيو", Toast.LENGTH_LONG).show();
     }
     public void additem(View view) {
-
+        FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
+        String id = user.getUid();//customer id is the same as rating id to make it easy to refer
         String tid =myRef.push().getKey();
         Item t= new Item ("vegan pizza" ,"https://www.cicis.com/media/1176/pizza_trad_pepperonibeef.png" ,"this is pizza for vegan" , 33  ,"-L5iy2Lnxk-3j5BtRKZY" , tid );
         myRef.child("Item").child(id).child("-L5iy2Lnxk-3j5BtRKZY").child(tid).setValue(t);

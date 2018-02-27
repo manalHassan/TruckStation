@@ -16,7 +16,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:hint="ادخال فئة جديده" />
+        android:hint="ادخال فئة جديده"
+        android:layout_alignParentLeft="true" />
 
     <LinearLayout
         android:orientation="horizontal"
@@ -35,7 +36,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/linearLayout"
-        android:background="@drawable/buttonstyle"
+        android:background="@drawable/buttonstayle"
         android:onClick="addcategory"
         android:text="إضافة فئة" />
 
