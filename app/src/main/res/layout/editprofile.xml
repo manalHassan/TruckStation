@@ -203,6 +203,36 @@
                     android:hint="الاحد 7 مساء-2 صباحا"
                     android:inputType="textMultiLine"
                     android:lines="4" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="9dp"
+                    android:orientation="horizontal"
+                    android:paddingLeft="25dp">
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        />
+                    <ImageView
+                        android:id="@+id/location1"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:src="@drawable/ic_location_on_black_24dp" />
+
+                    <TextView
+                        android:id="@+id/location"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:focusable="true"
+                        android:gravity="center"
+                        android:onClick="goToVisitorHomePage"
+                        android:text="حدد موقعك"
+                        android:textAllCaps="false"
+                        android:textColor="#000" />
+
+
+                </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"

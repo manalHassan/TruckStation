@@ -16,6 +16,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -59,6 +60,7 @@ public class PublicOwnerRegistration extends AppCompatActivity {
     DatabaseReference fdb;
     DatabaseReference fdb2;
     double x =0 , y =0 ;
+    private CheckBox isPrivate ;
     private ProgressDialog mProgress;
     //for imge
     private DatabaseReference mDatabase2;
@@ -91,6 +93,7 @@ public class PublicOwnerRegistration extends AppCompatActivity {
         storageReference = FirebaseStorage.getInstance().getReference();
         databaseReference = FirebaseDatabase.getInstance().getReference().child("PublicFoodTruckOwner");
         Upload_image = (Button) findViewById(R.id.Pimage);
+        isPrivate = (CheckBox) findViewById(R.id.checkBox);
         //Pimage = (ImageView) view.findViewById(R.id.imageView);
 
         //////////////
@@ -207,6 +210,7 @@ public class PublicOwnerRegistration extends AppCompatActivity {
         final String  emailp =    email.getText().toString().trim();
         final String  username = userName.getText().toString().trim();
         final String  qusin =    Qusen.getText().toString().trim();
+        final boolean canBeP = isPrivate.isChecked();
 
 
 
@@ -243,7 +247,7 @@ public class PublicOwnerRegistration extends AppCompatActivity {
 
                                                  try {
                                                      // truck t=new truck(username, finalUrl);
-                                                     PublicFoodTruckOwner owner = new PublicFoodTruckOwner(finalUrl, username, pass, emailp, Integer.parseInt(phoneN), x, y, qusin,uid);
+                                                     PublicFoodTruckOwner owner = new PublicFoodTruckOwner(username, pass, emailp, Integer.parseInt(phoneN), x, y, qusin,uid , canBeP);
                                                      databaseReference.child(uid).setValue(owner);
                                                      //code for adding menu to owner
                                                      FirebaseDatabase database = FirebaseDatabase.getInstance();

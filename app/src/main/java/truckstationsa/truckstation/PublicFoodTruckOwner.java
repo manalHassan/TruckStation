@@ -15,6 +15,7 @@ public class PublicFoodTruckOwner  {
     private double XFLication;
     private double YFLocation;
     private String url;
+    private boolean canBePrivate ;
 
     public String getUrl() {
         return url;
@@ -26,8 +27,7 @@ public class PublicFoodTruckOwner  {
 
     public PublicFoodTruckOwner (){}
 
-
-    public PublicFoodTruckOwner ( String FUsername  ,String FPassword ,String FEmail ,  int FPoneNoumber,double XFLication , double YFLocation,String  qusins ,String FWorkingHours ){
+    public PublicFoodTruckOwner ( String FUsername  ,String FPassword ,String FEmail ,  int FPoneNoumber,double XFLication , double YFLocation,String  qusins ,String FWorkingHours ,boolean  canBePrivte ){
         this.setFEmail(FEmail);
         this.setFPassword(FPassword);
         this.setFPoneNoumber(FPoneNoumber);
@@ -36,12 +36,12 @@ public class PublicFoodTruckOwner  {
         this.setYFLocation(YFLocation);
         this.setQusins(qusins);
         this.setFWorkingHours(FWorkingHours);
-
+        this.setCanBePrivate(canBePrivte);
     }
 
 
 
-    public PublicFoodTruckOwner (String url, String FUsername  ,String FPassword ,String FEmail ,  int FPoneNoumber , double XFLication , double YFLocation ,String  qusins , String uid ){
+    public PublicFoodTruckOwner (String url, String FUsername  ,String FPassword ,String FEmail ,  int FPoneNoumber , double XFLication , double YFLocation ,String  qusins , String uid   ){
         this.setUrl(url);
 
         this.setFEmail(FEmail);
@@ -59,6 +59,7 @@ public class PublicFoodTruckOwner  {
 
         this.setQusins(qusins);
         this.setUid(uid);
+
 
     }
 
@@ -80,6 +81,10 @@ public class PublicFoodTruckOwner  {
 
     public void setFPreOrderStatuse(String FPreOrderStatuse) {
         this.FPreOrderStatuse = FPreOrderStatuse;
+    }
+
+    public void setCanBePrivate(boolean canBePrivate) {
+        this.canBePrivate = canBePrivate;
     }
 
     public void setFstatus(String fstatus) {
@@ -140,6 +145,9 @@ public class PublicFoodTruckOwner  {
         return FUsername;
     }
 
+    public boolean getCanBePrivate (){
+        return canBePrivate ;
+    }
     public String getFWorkingHours() {
         return FWorkingHours;
     }
