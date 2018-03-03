@@ -16,14 +16,15 @@ public class Request {
     private String CID , FID , RStatus , RDate ;
     private DateTimeFormatter dtf ;
      @RequiresApi(api = Build.VERSION_CODES.O)
-     public Request (String CID , String FID  ,String  RID){
-         dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-         LocalDateTime now = LocalDateTime.now();
+     public Request (String CID , String FID  ,String  RID,String RDate){
+         //dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+         //LocalDateTime now = LocalDateTime.now();
         // System.out.println(dtf.format(now));
-         this.setRDate(dtf.format(now));
+         this.setRDate(RDate);
          this.setCID(CID);
          this.setFID(FID);
          this.setRID(RID);
+         this.setRStatus("wait");
      }
 
 

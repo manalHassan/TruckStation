@@ -86,9 +86,9 @@ public class customer_profilenew extends AppCompatActivity implements Navigation
         location = (TextView) findViewById(R.id.editlocation);
 
 
-       // user=FirebaseAuth.getInstance().getCurrentUser();
-       // String id = user.getUid();//
-        databaseReference = FirebaseDatabase.getInstance().getReference().child("Customer").child("ZvQEIchg7tVyURxNCj108HrMxLD2");
+         user=FirebaseAuth.getInstance().getCurrentUser();
+        String id = user.getUid();//
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("Customer").child(id);
         Toast.makeText(this, databaseReference.toString(), Toast.LENGTH_SHORT).show();
 
         ValueEventListener EventListener = new ValueEventListener() {
@@ -114,7 +114,7 @@ public class customer_profilenew extends AppCompatActivity implements Navigation
         };
         databaseReference.addListenerForSingleValueEvent(EventListener);
 
-//&&&&&&        TextEmail.setText(user.getEmail());
+        TextEmail.setText(user.getEmail());
         //to create listner, update info
         findViewById(R.id.button2).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -237,7 +237,7 @@ public class customer_profilenew extends AppCompatActivity implements Navigation
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(android.view.Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
@@ -250,7 +250,7 @@ public class customer_profilenew extends AppCompatActivity implements Navigation
         int id = item.getItemId();
 
         if (id == R.id.nav_profile) {
-            Intent intent = new Intent(customer_profilenew.this, customer_profilenew.class);
+            Intent intent = new Intent(this, customer_profilenew.class);
             Bundle b=new Bundle();
             //b.putString("id",user);
             //intent.putExtras(b);
@@ -259,22 +259,22 @@ public class customer_profilenew extends AppCompatActivity implements Navigation
             drawer.closeDrawer(GravityCompat.START);
             return true;
 
-        } else if (id == R.id.nav_menu_P) {
-            Intent intent = new Intent(customer_profilenew.this, ListPuplic.class);
+        } else if (id == R.id.nav_list) {
+            Intent intent = new Intent(this, MyMain.class);
             Bundle b=new Bundle();
-           // b.putString("id",user);
-           // intent.putExtras(b);
+            // b.putString("id",user);
+            // intent.putExtras(b);
             startActivity(intent);
             DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
             drawer.closeDrawer(GravityCompat.START);
             return true;
 
         }
-        else if (id == R.id.nav_menu_V) {
-            Intent intent = new Intent(customer_profilenew.this, ListPrivate.class);
+        else if (id == R.id.nav_map) {
+            Intent intent = new Intent(this, VisitorHomePage.class);
             Bundle b=new Bundle();
-           // b.putString("id",user);
-           // intent.putExtras(b);
+            //  b.putString("id",user);
+            // intent.putExtras(b);
             startActivity(intent);
             DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
             drawer.closeDrawer(GravityCompat.START);
@@ -282,9 +282,9 @@ public class customer_profilenew extends AppCompatActivity implements Navigation
 
         }
 
-        else if (id == R.id.nav_menu) {
+        else if (id == R.id.nav_pre_request) {
 /*
-            Intent intent = new Intent(publictruckownerprofile.this, ownermenu.class);
+            Intent intent = new Intent(this, ownermenu.class);
             Bundle b=new Bundle();
             b.putString("id",user);
             intent.putExtras(b);
@@ -296,9 +296,9 @@ public class customer_profilenew extends AppCompatActivity implements Navigation
         }
 
 
-        else if (id == R.id.nav_request) {
+        else if (id == R.id.nav_pre_preorder) {
 /*
-  Intent intent = new Intent(MainActivity.this, editprofile.class);
+  Intent intent = new Intent(this, editprofile.class);
             Bundle b=new Bundle();
             b.putString("id",user);
             intent.putExtras(b);
@@ -308,6 +308,31 @@ public class customer_profilenew extends AppCompatActivity implements Navigation
             return true;
  */
         }
+        else if (id == R.id.nav_app) {
+
+            Intent intent = new Intent(this, Chart.class);
+            Bundle b=new Bundle();
+            //  b.putString("id",user);
+            //  intent.putExtras(b);
+            startActivity(intent);
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
+            return true;
+
+        }
+        else if (id == R.id.nav_logout) {
+
+            Intent intent = new Intent(this, Logout1.class);
+            Bundle b=new Bundle();
+            // b.putString("id",user);
+            // intent.putExtras(b);
+            startActivity(intent);
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
+            return true;
+
+        }
+
         return false;
     }
 

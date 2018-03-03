@@ -7,11 +7,14 @@ import android.test.ServiceTestCase;
  */
 
 public class Subscription {
-    private String CID , FID ;
+    //FUnf = follow or unfollow if its 1=follow , 0=unfollow
+    private String FUnf;
+    private String CID , FID;
 
-    public Subscription (String CID , String FID){
+    public Subscription (String CID , String FID,String FUnf){
         this.setCID(CID);
         this.setFID(FID);
+        this.setFUnf(FUnf);
     }
 
     public void setFID(String FID) {
@@ -22,6 +25,8 @@ public class Subscription {
         this.CID = CID;
     }
 
+    public void setFUnf(String FUnf) { this.FUnf = FUnf;}
+
     public String getFID() {
         return FID;
     }
@@ -29,4 +34,8 @@ public class Subscription {
     public String getCID() {
         return CID;
     }
+    public String getFUnf() {
+        return FUnf;
+    }
+
 }

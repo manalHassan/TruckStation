@@ -24,7 +24,7 @@ public class Homepage extends AppCompatActivity {
 
     public void test(View view){
 
-            Intent intent = new Intent(Homepage.this, Logout1.class);
+            Intent intent = new Intent(Homepage.this, MyMain.class);
       startActivity(intent);
 
 }
