@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 
 public class MyHolder {
-/////////////
+//////////////////////////
     TextView nameTxt;
     TextView cusin ;
 

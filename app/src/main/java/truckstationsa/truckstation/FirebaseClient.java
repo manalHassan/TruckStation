@@ -32,7 +32,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-///////////////////
+//////////////////////////////////
 public class FirebaseClient extends AppCompatActivity  {
 
     Context c;
