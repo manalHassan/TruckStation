@@ -3,9 +3,19 @@ package truckstationsa.truckstation;
 /**
  * Created by amerah on 2/12/2018 AD.
  */
-
+import android.support.v7.widget.Toolbar;
+import android.os.Bundle;
 import android.content.Context;
 import android.content.Intent;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
+import android.view.*;
+import android.view.Menu;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -23,7 +33,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 
-public class FirebaseClient  {
+public class FirebaseClient extends AppCompatActivity  {
 
     Context c;
     String DB_URL;
@@ -31,6 +41,8 @@ public class FirebaseClient  {
     Firebase firebase;
     ArrayList<PublicFoodTruckOwner> dogies= new ArrayList<>();
     CustomAdapter customAdapter;
+    ArrayList<PrivateFoodTruckOwner> dogies1= new ArrayList<>();
+    CustomAdapterPrivate customAdapter1;
     DatabaseReference f;
 
 
@@ -41,88 +53,133 @@ public class FirebaseClient  {
         this.DB_URL= DB_URL;
 
         Firebase.setAndroidContext(c);
-        //firebase=new Firebase(DB_URL);
+
     }
 
-    public  void savedata(String name, String url)
-    {
+    public  void savedata(String name) {
         //Dog d= new Dog();
-       // d.setName(name);
+        // d.setName(name);
         //d.setUrl(url);
 
-       // f.child("dog").push().setValue(d);
-       f= FirebaseDatabase.getInstance().getReference().child("PublicFoodTruckOwner");
+        // f.child("dog").push().setValue(d);
+        if (name.equals("pu")) {
+            f = FirebaseDatabase.getInstance().getReference().child("PublicFoodTruckOwner");
 
-        ValueEventListener eventListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(com.google.firebase.database.DataSnapshot dataSnapshot) {
-                if (dataSnapshot.getChildren() == null) {
-                    Toast.makeText(c, "no trucks", Toast.LENGTH_SHORT).show();
+            ValueEventListener eventListener = new ValueEventListener() {
+                @Override
+                public void onDataChange(com.google.firebase.database.DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.getChildren() == null) {
+                        Toast.makeText(c, "no trucks", Toast.LENGTH_SHORT).show();
 
-                    //Toast.makeText(this, "hi", Toast.LENGTH_SHORT).show();
-                    //startActivity(new Intent(getActivity(), AdminHome2.class));
-                }
+                        //Toast.makeText(this, "hi", Toast.LENGTH_SHORT).show();
+                        //startActivity(new Intent(getActivity(), AdminHome2.class));
+                    }
                     dogies.clear();
 
-                for (com.google.firebase.database.DataSnapshot ds : dataSnapshot.getChildren()) {
-                    PublicFoodTruckOwner d= new PublicFoodTruckOwner();
+                    for (com.google.firebase.database.DataSnapshot ds : dataSnapshot.getChildren()) {
+                        PublicFoodTruckOwner d = new PublicFoodTruckOwner();
                         d.setFUsername(ds.getValue(PublicFoodTruckOwner.class).getFUsername());
                         d.setUrl(ds.getValue(PublicFoodTruckOwner.class).getUrl());
+                        d.setQusins(ds.getValue(PublicFoodTruckOwner.class).getQusins());
+
                         dogies.add(d);
 
                     }
-                    if(dogies.size()>0)
-                    {
-                        customAdapter=new CustomAdapter(c, dogies);
+                    if (dogies.size() > 0) {
+                        customAdapter = new CustomAdapter(c, dogies);
                         listView.setAdapter((ListAdapter) customAdapter);
-                    }else
-                    {
+                    } else {
                         Toast.makeText(c, "No data", Toast.LENGTH_SHORT).show();
                     }
 
 
-            }
+                }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(c, "cancelled", Toast.LENGTH_SHORT).show();
-            }
-        };
-        f.addListenerForSingleValueEvent(eventListener);
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    Toast.makeText(c, "cancelled", Toast.LENGTH_SHORT).show();
+                }
+            };
+            f.addListenerForSingleValueEvent(eventListener);
 
+        }else if (name.equals("pr")) {
+            f = FirebaseDatabase.getInstance().getReference().child("PrivateFoodTruckOwner");
+
+            ValueEventListener eventListener = new ValueEventListener() {
+                @Override
+                public void onDataChange(com.google.firebase.database.DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.getChildren() == null) {
+                        Toast.makeText(c, "no trucks", Toast.LENGTH_SHORT).show();
+
+                        //Toast.makeText(this, "hi", Toast.LENGTH_SHORT).show();
+                        //startActivity(new Intent(getActivity(), AdminHome2.class));
+                    }
+                    dogies1.clear();
+
+                    for (com.google.firebase.database.DataSnapshot ds : dataSnapshot.getChildren()) {
+                        PrivateFoodTruckOwner d= new PrivateFoodTruckOwner();
+                        d.setFUsername(ds.getValue(PrivateFoodTruckOwner.class).getFUsername());
+                        d.setUrl(ds.getValue(PrivateFoodTruckOwner.class).getUrl());
+                        d.setQusins(ds.getValue(PrivateFoodTruckOwner.class).getQusins());
+                        dogies1.add(d);
+
+                    }
+                    if (dogies1.size() > 0) {
+                        customAdapter1 = new CustomAdapterPrivate(c, dogies1);
+                        listView.setAdapter((ListAdapter) customAdapter1);
+                    } else {
+                        Toast.makeText(c, "No data", Toast.LENGTH_SHORT).show();
+                    }
+
+
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    Toast.makeText(c, "cancelled", Toast.LENGTH_SHORT).show();
+                }
+            };
+            f.addListenerForSingleValueEvent(eventListener);
+
+        }//if private
     }
+//////////sherch/////////
+    @Override
+    public  boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater =getMenuInflater();
+        inflater.inflate(R.menu.main, menu);
 
-    /*
-    public  void refreshdata()
-    {
-        f.addChildEventListener(new ChildEventListener() {
+        MenuItem searchIem =menu.findItem(R.id.action_search);
+        SearchView searchView =(SearchView)MenuItemCompat.getActionView(searchIem);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                getupdates(dataSnapshot);
+            public boolean onQueryTextSubmit(String query) {
+                return false;
             }
 
             @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                getupdates(dataSnapshot);
-            }
+            public boolean onQueryTextChange(String newText) {
+                ArrayList<PrivateFoodTruckOwner> templist = new ArrayList<>();
+                for (PrivateFoodTruckOwner temp : dogies1){
+                    if(temp.getFUsername().toLowerCase().contains(newText.toLowerCase())){
 
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
+                        templist.add(temp);
+                    }
+                    customAdapter1 = new CustomAdapterPrivate(c, templist);
+                    listView.setAdapter((ListAdapter) customAdapter1);
 
-            }
+                }
 
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
 
-            }
-
-            @Override
-            public void onCancelled(FirebaseError firebaseError) {
-
+                return true;
             }
         });
-    }*/
 
 
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    //////////////////////
 
 }

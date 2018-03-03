@@ -8,13 +8,18 @@ import android.widget.BaseAdapter;
 
 import java.util.ArrayList;
 
-public class CustomAdapter extends BaseAdapter {
+/**
+ * Created by amerah on 2/26/2018 AD.
+ */
+
+public class CustomAdapterPrivate extends BaseAdapter {
+
     Context c;
-    ArrayList<PublicFoodTruckOwner> dogies;
+    ArrayList<PrivateFoodTruckOwner> dogies;
     LayoutInflater inflater;
 
 
-    public CustomAdapter(Context c, ArrayList<PublicFoodTruckOwner> dogies) {
+    public CustomAdapterPrivate(Context c, ArrayList<PrivateFoodTruckOwner> dogies) {
         this.c = c;
         this.dogies = dogies;
     }
@@ -50,7 +55,7 @@ public class CustomAdapter extends BaseAdapter {
 
         }
 
-        MyHolder holder= new MyHolder(convertview);
+        MyHolderPrivate holder= new MyHolderPrivate(convertview);
         holder.nameTxt.setText(dogies.get(i).getFUsername());
         holder.cusin.setText(dogies.get(i).getQusins());
         PicassoClient.downloadimg(c,dogies.get(i).getUrl(),holder.img);

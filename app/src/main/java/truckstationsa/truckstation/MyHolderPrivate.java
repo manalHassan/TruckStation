@@ -1,21 +1,19 @@
 package truckstationsa.truckstation;
 
-/**
- * Created by amerah on 2/12/2018 AD.
- */
-
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+/**
+ * Created by amerah on 2/26/2018 AD.
+ */
 
-public class MyHolder {
-
+public class MyHolderPrivate {
     TextView nameTxt;
     TextView cusin ;
 
     ImageView img;
-    public MyHolder(View itemView) {
+    public MyHolderPrivate(View itemView) {
 
 
         nameTxt= (TextView) itemView.findViewById(R.id.nameTxt);

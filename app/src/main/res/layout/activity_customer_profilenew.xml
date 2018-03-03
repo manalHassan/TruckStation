@@ -53,7 +53,6 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="9dp"
             android:background="@color/graylight"
-            android:orientation="horizontal"
             android:paddingLeft="25dp"
 
 
@@ -69,8 +68,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:paddingLeft="20dp"
-                />
+                android:paddingLeft="20dp" />
 
 
         </LinearLayout>
@@ -137,7 +135,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:hint="click on icon to display location"
+                android:hint="اضغط علي الايقونه لرؤيه موقعك المسجل "
                 android:paddingLeft="20dp"
               />
 
@@ -164,7 +162,7 @@
             android:layout_marginLeft="70dp"
             android:layout_marginStart="70dp"
             android:background="@drawable/buttonstayle"
-            android:text="Edit" />
+            android:text="تعديل" />
 
         <Button
             android:id="@+id/button3"
@@ -179,7 +177,7 @@
             android:layout_marginEnd="50dp"
             android:layout_marginRight="40dp"
             android:background="@drawable/buttonstayle"
-            android:text="Cancle" />
+            android:text="إالغاء" />
 
     </RelativeLayout>
 

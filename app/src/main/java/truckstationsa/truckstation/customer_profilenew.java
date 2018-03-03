@@ -86,9 +86,9 @@ public class customer_profilenew extends AppCompatActivity implements Navigation
         location = (TextView) findViewById(R.id.editlocation);
 
 
-         user=FirebaseAuth.getInstance().getCurrentUser();
-        String id = user.getUid();//
-        databaseReference = FirebaseDatabase.getInstance().getReference().child("Customer").child(id);
+       // user=FirebaseAuth.getInstance().getCurrentUser();
+       // String id = user.getUid();//
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("Customer").child("ZvQEIchg7tVyURxNCj108HrMxLD2");
         Toast.makeText(this, databaseReference.toString(), Toast.LENGTH_SHORT).show();
 
         ValueEventListener EventListener = new ValueEventListener() {
@@ -114,7 +114,7 @@ public class customer_profilenew extends AppCompatActivity implements Navigation
         };
         databaseReference.addListenerForSingleValueEvent(EventListener);
 
-        TextEmail.setText(user.getEmail());
+//&&&&&&        TextEmail.setText(user.getEmail());
         //to create listner, update info
         findViewById(R.id.button2).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -250,7 +250,7 @@ public class customer_profilenew extends AppCompatActivity implements Navigation
         int id = item.getItemId();
 
         if (id == R.id.nav_profile) {
-            Intent intent = new Intent(customer_profilenew.this, Rating.class);
+            Intent intent = new Intent(customer_profilenew.this, customer_profilenew.class);
             Bundle b=new Bundle();
             //b.putString("id",user);
             //intent.putExtras(b);
@@ -259,27 +259,27 @@ public class customer_profilenew extends AppCompatActivity implements Navigation
             drawer.closeDrawer(GravityCompat.START);
             return true;
 
-        } else if (id == R.id.nav_preorder) {
-            /*Intent intent = new Intent(MainActivity.this, postActivity.class);
+        } else if (id == R.id.nav_menu_P) {
+            Intent intent = new Intent(customer_profilenew.this, ListPuplic.class);
             Bundle b=new Bundle();
-            b.putString("id",user);
-            intent.putExtras(b);
+           // b.putString("id",user);
+           // intent.putExtras(b);
             startActivity(intent);
             DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
             drawer.closeDrawer(GravityCompat.START);
             return true;
-            */
+
         }
-        else if (id == R.id.nav_booking) {
-            /*Intent intent = new Intent(MainActivity.this, postActivity.class);
+        else if (id == R.id.nav_menu_V) {
+            Intent intent = new Intent(customer_profilenew.this, ListPrivate.class);
             Bundle b=new Bundle();
-            b.putString("id",user);
-            intent.putExtras(b);
+           // b.putString("id",user);
+           // intent.putExtras(b);
             startActivity(intent);
             DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
             drawer.closeDrawer(GravityCompat.START);
             return true;
-            */
+
         }
 
         else if (id == R.id.nav_menu) {

@@ -173,7 +173,7 @@ public class GoTOPrivatRegisterPage  extends AppCompatActivity {
                                                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                                                 String uid = user.getUid();
                                                 //String id = fdb.push().getKey();
-                                                PrivateFoodTruckOwner owner = new PrivateFoodTruckOwner(username, pass, emailp,Integer.parseInt(phoneN) , qusin , uid);
+                                                PrivateFoodTruckOwner owner = new PrivateFoodTruckOwner(username, pass, emailp,Integer.parseInt(phoneN) , qusin , uid, finalUrl);
                                                 fdb.child(uid).setValue(owner);
                                                 Toast.makeText(GoTOPrivatRegisterPage.this, "تم التسجل بنجاح!!", Toast.LENGTH_SHORT).show();
                                                 // Intent intent = new Intent(GoTOCustomerRegisterPage.this, .class);
@@ -232,7 +232,7 @@ public class GoTOPrivatRegisterPage  extends AppCompatActivity {
                                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                                 String uid = user.getUid();
                               //  String id = fdb.push().getKey();
-                                PrivateFoodTruckOwner owner = new PrivateFoodTruckOwner(username, pass, emailp,Integer.parseInt(phoneN) , qusin , uid);
+                                PrivateFoodTruckOwner owner = new PrivateFoodTruckOwner(username, pass, emailp,Integer.parseInt(phoneN) , qusin , uid,"");
                                 fdb.child(uid).setValue(owner);
                                 Toast.makeText(GoTOPrivatRegisterPage.this, "تم التسجل بنجاح!!", Toast.LENGTH_SHORT).show();
                                 // Intent intent = new Intent(GoTOCustomerRegisterPage.this, .class);

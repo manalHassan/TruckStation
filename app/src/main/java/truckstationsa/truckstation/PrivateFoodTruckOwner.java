@@ -6,11 +6,21 @@ package truckstationsa.truckstation;
 
 public class PrivateFoodTruckOwner  {
 
-    private  String FUsername  , FPassword , FEmail  , FWorkingHours , Fstatus , qusins , uid;
+    private  String FUsername;
+    private String FPassword;
+    private String FEmail;
+    private String FWorkingHours;
+    private String Fstatus;
+    private String qusins;
+    private String uid;
+    private String url;
     private  int FPoneNoumber ;
 
 
-    public PrivateFoodTruckOwner ( String FUsername  ,String FPassword ,String FEmail ,  int FPoneNoumber  ,String  qusins , String uid ){
+    public PrivateFoodTruckOwner(){}
+
+
+    public PrivateFoodTruckOwner ( String FUsername  ,String FPassword ,String FEmail ,  int FPoneNoumber  ,String  qusins , String uid ,String url){
         this.setFEmail(FEmail);
 
         this.setFPassword(FPassword);
@@ -22,7 +32,15 @@ public class PrivateFoodTruckOwner  {
         this.setQusins(qusins);
 
         this.setUid(uid);
+        this.setUrl(url);
 
+    }
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public void setQusins(String qusins) {

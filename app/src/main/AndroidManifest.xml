@@ -64,44 +64,22 @@
         <activity
             android:name=".Rating"
             android:label="تقييم العربه" />
-        <activity
-            android:name=".NearByTrucks"
-            />
-        <activity
-            android:name=".trymap"
-            />
-
-
-
-
-        <activity
-            android:name=".editprofile">
-        </activity>
-        <activity
-            android:name=".contentmain">
-        </activity>
-        <activity
-            android:name=".ownermenu">
-        </activity>
-
-        <activity
-            android:name=".itemlist">
-        </activity>
-        <activity
-            android:name=".edititem">
-        </activity>
-        <activity
-            android:name=".publictruckownerprofile"></activity>
-        <activity
-            android:name=".Homepage"></activity>
-
-
+        <activity android:name=".NearByTrucks" />
+        <activity android:name=".trymap" />
+        <activity android:name=".editprofile" />
+        <activity android:name=".contentmain" />
+        <activity android:name=".ownermenu" />
+        <activity android:name=".itemlist" />
+        <activity android:name=".edititem" />
+        <activity android:name=".publictruckownerprofile" />
+        <activity android:name=".Homepage" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyC_PwVA-gJQ24JZbhZYJINoK9XLC3KdGrg" />
 
-
+        <activity android:name=".ListPrivate" />
+        <activity android:name=".ListPuplic"></activity>
     </application>
 
 </manifest>
