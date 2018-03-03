@@ -13,12 +13,12 @@ import android.widget.Button;
  * Created by hadeel on 2/10/18.
  */
 
-public class Tab1 extends Fragment {
+public class publicTab1profile extends Fragment {
     Button button;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View rootView= inflater.inflate(R.layout.tab1, container, false);
+        View rootView= inflater.inflate(R.layout.public_tab1_profile, container, false);
 
         Button button = (Button) rootView.findViewById(R.id.buttonNewAc);
         button.setOnClickListener(new View.OnClickListener() {

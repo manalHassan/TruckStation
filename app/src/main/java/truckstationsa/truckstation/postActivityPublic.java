@@ -26,7 +26,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-public class postActivity extends AppCompatActivity {
+public class postActivityPublic extends AppCompatActivity {
 
 
 
@@ -54,7 +54,7 @@ public class postActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_post);
+        setContentView(R.layout.activity_public_post);
 
 
         buttonUpload = (Button) findViewById(R.id.buttonUpload);
@@ -165,7 +165,7 @@ public class postActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     final Uri downloadurl=taskSnapshot.getDownloadUrl();
-                    Toast.makeText(postActivity.this, "Upload completed", Toast.LENGTH_LONG).show();
+                    Toast.makeText(postActivityPublic.this, "Upload completed", Toast.LENGTH_LONG).show();
                    final DatabaseReference newPost= databaseReference.push();
             databaseOWner.addValueEventListener(new ValueEventListener() {
                 @Override
@@ -178,7 +178,7 @@ public class postActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if(task.isSuccessful()){
-                                Intent mIntent = new Intent(postActivity.this, PublicOwnerProfileActivity.class);
+                                Intent mIntent = new Intent(postActivityPublic.this, PublicOwnerProfileActivity.class);
                                 startActivity(mIntent);
                             }
                         }

@@ -24,7 +24,7 @@ import com.squareup.picasso.Picasso;
  * Created by hadeel on 2/10/18.
  */
 
-public class Tab2 extends Fragment {
+public class publicTab2posts extends Fragment {
 
     private RecyclerView mPostList;
     private DatabaseReference databaseReference;
@@ -34,7 +34,7 @@ public class Tab2 extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View rootView= inflater.inflate(R.layout.tab2, container, false);
+        View rootView= inflater.inflate(R.layout.public_tab2_posts, container, false);
 
         mPostList= rootView.findViewById(R.id.insta_list);
         mPostList.setHasFixedSize(true);

@@ -33,7 +33,7 @@ public class PublicOwnerProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_owner);
+        setContentView(R.layout.activity_public_owner);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -89,7 +89,7 @@ public class PublicOwnerProfileActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_public_main, menu);
         return true;
     }
 
@@ -105,7 +105,7 @@ public class PublicOwnerProfileActivity extends AppCompatActivity {
             return true;
         }
         else if (id == R.id.addIcon){
-            Intent intent = new Intent(PublicOwnerProfileActivity.this, postActivity.class);
+            Intent intent = new Intent(PublicOwnerProfileActivity.this, postActivityPublic.class);
             startActivity(intent);
         }
         else if (id == R.id.logout){
@@ -145,7 +145,7 @@ public class PublicOwnerProfileActivity extends AppCompatActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.tab1, container, false);
+            View rootView = inflater.inflate(R.layout.public_tab1_profile, container, false);
             TextView textView = (TextView) rootView.findViewById(R.id.section_label);
             textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
             return rootView;
@@ -169,13 +169,13 @@ public class PublicOwnerProfileActivity extends AppCompatActivity {
             // Return a PlaceholderFragment (defined as a static inner class below).
             switch (position) {
                 case 0:
-                    Tab1 tab1 = new Tab1();
+                    publicTab1profile tab1 = new publicTab1profile();
                     return tab1;
                 case 1:
-                    Tab2 tab2 = new Tab2();
+                    publicTab2posts tab2 = new publicTab2posts();
                     return tab2;
                 case 2:
-                    Tab3 tab3 = new Tab3();
+                    publicTab3menu tab3 = new publicTab3menu();
                     return tab3;
             }
 

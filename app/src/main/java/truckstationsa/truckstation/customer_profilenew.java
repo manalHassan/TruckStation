@@ -260,7 +260,7 @@ public class customer_profilenew extends AppCompatActivity implements Navigation
             return true;
 
         } else if (id == R.id.nav_preorder) {
-            /*Intent intent = new Intent(MainActivity.this, postActivity.class);
+            /*Intent intent = new Intent(MainActivity.this, postActivityPublic.class);
             Bundle b=new Bundle();
             b.putString("id",user);
             intent.putExtras(b);
@@ -271,7 +271,7 @@ public class customer_profilenew extends AppCompatActivity implements Navigation
             */
         }
         else if (id == R.id.nav_booking) {
-            /*Intent intent = new Intent(MainActivity.this, postActivity.class);
+            /*Intent intent = new Intent(MainActivity.this, postActivityPublic.class);
             Bundle b=new Bundle();
             b.putString("id",user);
             intent.putExtras(b);

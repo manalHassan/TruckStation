@@ -76,7 +76,7 @@
         </activity>
 
         <activity
-            android:name=".postActivity">
+            android:name=".postActivityPublic">
         </activity>
         <activity
             android:name=".editprofile">
