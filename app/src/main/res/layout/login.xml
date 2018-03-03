@@ -80,7 +80,9 @@
                 android:padding="16dp"
                 android:text="@string/log_in"
                 android:textAllCaps="false"
-                android:textColor="#242423" />
+                android:textColor="#242423"
+                android:onClick="goTOProfilePage"
+                />
 
             <Button
                 android:id="@+id/CustomerSignup"

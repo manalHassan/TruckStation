@@ -9,7 +9,6 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,11 +16,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 /**
  * Created by manal on 2/10/2018.
@@ -35,7 +31,7 @@ public class publicOnerLogIn extends AppCompatActivity {
 
     //Buttons  ;
     Button rigister ;
-
+    Button btnResetPassword;
 
 
     //EditText username ,password ;
@@ -140,7 +136,7 @@ public class publicOnerLogIn extends AppCompatActivity {
         }
 
         if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)) {
-            progressDialog.setMessage("انتظر من فصلك, جاري تسجيل الدخول..");
+            progressDialog.setMessage("Loging in , please wait");
             progressDialog.show();
             mAuth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -150,8 +146,8 @@ public class publicOnerLogIn extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 Toast.makeText(publicOnerLogIn.this, "تم تسجيل الدخول بنجاح", Toast.LENGTH_SHORT).show();
 
-                             // Intent intent = new Intent(publicOnerLogIn.this, ownerProfile.class);
-                            //   startActivity(intent);
+                              Intent intent = new Intent(publicOnerLogIn.this, PublicOwnerProfileActivity.class);
+                               startActivity(intent);
 //نانتاتناتات
                             } // Singed in successfull
                             if (!task.isSuccessful()) {

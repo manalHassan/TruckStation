@@ -20,15 +20,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity" />
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".CustomerLogInPage"
-            android:label="تسجيل الدخول المستخدم" >
-            <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter></activity>
+            android:label="تسجيل الدخول المستخدم" />
         <activity
             android:name=".PublicOwnerRegistration"
             android:label="تسجيل الدخول صاحب عربه" />
@@ -37,13 +38,17 @@
             android:label="انشاء حساب صاحب عربه" />
         <activity
             android:name=".publicOnerLogIn"
-            android:label="تسجيل الدخول صاحب عربه" ></activity>
+            android:label="تسجيل الدخول صاحب عربه" />
         <activity
             android:name=".PublicOrPrivat"
             android:label="TruckStation" />
         <activity
             android:name=".GoTOPrivatRegisterPage"
             android:label="انشاء حساب صاحب عربه" />
+        <activity
+            android:name=".MyMain"
+            android:label="انشاء حساب صاحب عربه"
+            tools:ignore="DuplicateActivity" />
         <activity
             android:name=".GoTOCustomerRegisterPage"
             android:label="انشاء حساب مستخدم" />
@@ -53,21 +58,54 @@
         <activity
             android:name=".VisitorHomePage"
             android:label="عربات الطعام ع الخريطه" />
-        <activity android:name=".Rating" />
+        <activity
+            android:name=".customer_profilenew"
+            android:label="الملف الشخصي" />
+        <activity
+            android:name=".Rating"
+            android:label="تقييم العربه" />
+        <activity
+            android:name=".NearByTrucks"
+            />
+        <activity
+            android:name=".trymap"
+            />
+
+        <activity
+            android:name=".PublicOwnerProfileActivity">
+        </activity>
+
+        <activity
+            android:name=".postActivity">
+        </activity>
+        <activity
+            android:name=".editprofile">
+        </activity>
+        <activity
+            android:name=".contentmain">
+        </activity>
+        <activity
+            android:name=".ownermenu">
+        </activity>
+
+        <activity
+            android:name=".itemlist">
+        </activity>
+        <activity
+            android:name=".edititem">
+        </activity>
+        <activity
+            android:name=".publictruckownerprofile"></activity>
+        <activity
+            android:name=".Homepage"></activity>
+
+
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyC_PwVA-gJQ24JZbhZYJINoK9XLC3KdGrg" />
 
-        <activity
-            android:name=".Logout1"
-            android:label="@string/title_activity_logout"
-            android:theme="@style/AppTheme.ActionBar" />
-        <activity android:name=".Homepage"></activity>
-        <activity android:name=".ReserveTruck">
 
-        </activity>
-        <activity android:name=".Follow"></activity>
     </application>
 
 </manifest>

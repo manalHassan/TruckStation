@@ -16,6 +16,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -47,6 +48,7 @@ import java.io.IOException;
  */
 
 public class PublicOwnerRegistration extends AppCompatActivity {
+    //new
     String address ;
     Context context;
     int PLACE_PICKER_REQUEST = 1;
@@ -58,6 +60,7 @@ public class PublicOwnerRegistration extends AppCompatActivity {
     DatabaseReference fdb;
     DatabaseReference fdb2;
     double x =0 , y =0 ;
+    private CheckBox isPrivate ;
     private ProgressDialog mProgress;
     //for imge
     private DatabaseReference mDatabase2;
@@ -90,6 +93,7 @@ public class PublicOwnerRegistration extends AppCompatActivity {
         storageReference = FirebaseStorage.getInstance().getReference();
         databaseReference = FirebaseDatabase.getInstance().getReference().child("PublicFoodTruckOwner");
         Upload_image = (Button) findViewById(R.id.Pimage);
+        isPrivate = (CheckBox) findViewById(R.id.checkBox);
         //Pimage = (ImageView) view.findViewById(R.id.imageView);
 
         //////////////
@@ -163,6 +167,16 @@ public class PublicOwnerRegistration extends AppCompatActivity {
                 Upload_image.setText("Image Selected");
             } catch (IOException e) {e.printStackTrace(); }
         }
+        if (requestCode == PLACE_PICKER_REQUEST) {
+            if (resultCode == RESULT_OK) {
+                Place place = PlacePicker.getPlace(data, this);
+
+                x = place.getLatLng().latitude;
+                y = place.getLatLng().longitude;
+
+
+            }
+        }
     }
 
     ////
@@ -196,6 +210,7 @@ public class PublicOwnerRegistration extends AppCompatActivity {
         final String  emailp =    email.getText().toString().trim();
         final String  username = userName.getText().toString().trim();
         final String  qusin =    Qusen.getText().toString().trim();
+        final boolean canBeP = isPrivate.isChecked();
 
 
 
@@ -232,8 +247,15 @@ public class PublicOwnerRegistration extends AppCompatActivity {
 
                                                  try {
                                                      // truck t=new truck(username, finalUrl);
-                                                     PublicFoodTruckOwner owner = new PublicFoodTruckOwner(finalUrl, username, pass, emailp, Integer.parseInt(phoneN), x, y, qusin,uid);
+                                                     PublicFoodTruckOwner owner = new PublicFoodTruckOwner(username, pass, emailp, Integer.parseInt(phoneN), x, y, qusin,uid , canBeP);
                                                      databaseReference.child(uid).setValue(owner);
+                                                     //code for adding menu to owner
+                                                     FirebaseDatabase database = FirebaseDatabase.getInstance();
+                                                     DatabaseReference myRef = database.getReference();
+                                                     String mid =myRef.push().getKey();
+                                                     Menu menu =new Menu(uid,mid);
+                                                     myRef.child("Menu").child(uid).setValue(menu);
+                                                     //end menu
                                                      // fdb2.child(t.getTruckname()).setValue(t);
                                                  }catch (Exception e){
                                                     e.printStackTrace();
@@ -243,7 +265,7 @@ public class PublicOwnerRegistration extends AppCompatActivity {
                                                 // startActivity(intent);
                                                 finish();
                                             } else
-                                                Toast.makeText(PublicOwnerRegistration.this, "البريد الالكتروني مستخدم مسبقا", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(PublicOwnerRegistration.this, "البريد الالكتروني  غير صحيح ", Toast.LENGTH_SHORT).show();
 
                                         }
                                     });
@@ -292,9 +314,9 @@ public class PublicOwnerRegistration extends AppCompatActivity {
                                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                                 String uid = user.getUid();
 //<<<<<<< Updated upstream
-                                String id = databaseReference.push().getKey();
+                              //  String id = databaseReference.push().getKey();        _____________>------------->  ،لااعرف مافايده هذا السطر &&&&&&&&&&&&
                                 PublicFoodTruckOwner owner = new PublicFoodTruckOwner("" , username, pass, emailp,Integer.parseInt(phoneN) ,  x, y , qusin , uid);
-                                databaseReference.child(id).setValue(owner);
+                                databaseReference.child(uid).setValue(owner);
 //======
                              //   PublicFoodTruckOwner owner = new PublicFoodTruckOwner("", username, pass, emailp, Integer.parseInt(phoneN), x, y, qusin);
                               //  databaseReference.child(uid).setValue(owner);

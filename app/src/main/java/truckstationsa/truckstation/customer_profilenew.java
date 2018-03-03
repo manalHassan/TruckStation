@@ -15,6 +15,7 @@ import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
+import com.google.android.gms.maps.GoogleMap;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -23,10 +24,23 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.Serializable;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.TextView;
+import android.widget.Toast;
 
-// هذا الجديد************************
-
-public class customer_profilenew extends AppCompatActivity {
+// //هذا الجديد************************//////////
+//////
+public class customer_profilenew extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     private FirebaseAuth firebaseAuth;
 //jbjbjbj
 
@@ -34,13 +48,14 @@ public class customer_profilenew extends AppCompatActivity {
     String address;
     Context context;
     int PLACE_PICKER_REQUEST = 1;
-    double x =0 , y =0 ;
+    private double x =0 , y =0 ;
     private DatabaseReference databaseReference;
     private EditText TextName;
     private EditText TextEmail;
     private EditText TextPhone;
     private TextView Textmain;
     private TextView location;
+
 
 
     private String username;
@@ -52,10 +67,18 @@ public class customer_profilenew extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseUser user;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_customer_profilenew);
+
+        context = this;
+        setContentView(R.layout.activity_customer);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+
         Textmain=(TextView)findViewById(R.id.name);
         TextName = (EditText) findViewById(R.id.editname);
         TextEmail = (EditText) findViewById(R.id.editemail);
@@ -139,19 +162,18 @@ public class customer_profilenew extends AppCompatActivity {
             }
         });
 
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
     }//creat
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == PLACE_PICKER_REQUEST) {
-            if (resultCode == RESULT_OK) {
-                Place place = PlacePicker.getPlace(data, this);
 
-                x = place.getLatLng().latitude;
-                y = place.getLatLng().longitude;
-
-
-            }
-        }
-    }
     private void EditCustomerInfo(){
         username = TextName.getText().toString().trim();
         email = TextEmail.getText().toString().trim();
@@ -192,7 +214,102 @@ public class customer_profilenew extends AppCompatActivity {
         //startActivity(new Intent(getActivity(), AdminHome2.class));
     }//edit
 
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == PLACE_PICKER_REQUEST) {
+            if (resultCode == RESULT_OK) {
+                Place place = PlacePicker.getPlace(data, this);
 
+                x = place.getLatLng().latitude;
+                y = place.getLatLng().longitude;
+
+
+            }
+        }
+    }
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+
+        if (id == R.id.nav_profile) {
+            Intent intent = new Intent(customer_profilenew.this, Rating.class);
+            Bundle b=new Bundle();
+            //b.putString("id",user);
+            //intent.putExtras(b);
+            startActivity(intent);
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
+            return true;
+
+        } else if (id == R.id.nav_preorder) {
+            /*Intent intent = new Intent(MainActivity.this, postActivity.class);
+            Bundle b=new Bundle();
+            b.putString("id",user);
+            intent.putExtras(b);
+            startActivity(intent);
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
+            return true;
+            */
+        }
+        else if (id == R.id.nav_booking) {
+            /*Intent intent = new Intent(MainActivity.this, postActivity.class);
+            Bundle b=new Bundle();
+            b.putString("id",user);
+            intent.putExtras(b);
+            startActivity(intent);
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
+            return true;
+            */
+        }
+
+        else if (id == R.id.nav_menu) {
+/*
+            Intent intent = new Intent(publictruckownerprofile.this, ownermenu.class);
+            Bundle b=new Bundle();
+            b.putString("id",user);
+            intent.putExtras(b);
+            startActivity(intent);
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
+            return true;
+            */
+        }
+
+
+        else if (id == R.id.nav_request) {
+/*
+  Intent intent = new Intent(MainActivity.this, editprofile.class);
+            Bundle b=new Bundle();
+            b.putString("id",user);
+            intent.putExtras(b);
+            startActivity(intent);
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
+            return true;
+ */
+        }
+        return false;
+    }
 
 }
 

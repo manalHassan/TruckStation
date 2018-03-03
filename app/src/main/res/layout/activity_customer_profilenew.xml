@@ -138,7 +138,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:hint="click on icon to display location"
-                android:paddingLeft="20dp" />
+                android:paddingLeft="20dp"
+              />
 
 
         </LinearLayout>
