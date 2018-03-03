@@ -9,7 +9,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-            multiDexEnabled true
+        multiDexEnabled true
 
     }
     buildTypes {
@@ -54,11 +54,8 @@ dependencies {
     compile 'com.firebaseui:firebase-ui-database:1.0.1'
 
 
-
-
-
-
 }
+
 
 
 

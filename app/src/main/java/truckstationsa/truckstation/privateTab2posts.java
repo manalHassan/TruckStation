@@ -24,7 +24,7 @@ import com.squareup.picasso.Picasso;
  * Created by hadeel on 2/10/18.
  */
 
-public class publicTab2posts extends Fragment {
+public class privateTab2posts extends Fragment {
 
     private RecyclerView mPostList;
     private DatabaseReference databaseReference;
@@ -36,7 +36,7 @@ public class publicTab2posts extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View rootView= inflater.inflate(R.layout.public_tab2_posts, container, false);
 
-        mPostList= rootView.findViewById(R.id.insta_list);
+        mPostList= rootView.findViewById(R.id.insta_private_list);
         mPostList.setHasFixedSize(true);
         LinearLayoutManager layoutManager=new LinearLayoutManager(getActivity());
         layoutManager.setReverseLayout(true);
@@ -49,13 +49,13 @@ public class publicTab2posts extends Fragment {
         mQueryCurrentOwner = databaseReference.orderByChild("uid").equalTo(currentUID);
         return rootView;
     }
-        //من الفود ترك اي دي اجيب الاوجكت اللي نزل الصورة بعدين قيت اليوزر نيم
+    //من الفود ترك اي دي اجيب الاوجكت اللي نزل الصورة بعدين قيت اليوزر نيم
     @Override
     public void onStart() {
         super.onStart();
         FirebaseRecyclerAdapter<Post,PostHolder> FBRA =new FirebaseRecyclerAdapter<Post, PostHolder>(
                 Post.class,
-                R.layout.public_card,
+                R.layout.private_card,
                 PostHolder.class,
                 mQueryCurrentOwner
 

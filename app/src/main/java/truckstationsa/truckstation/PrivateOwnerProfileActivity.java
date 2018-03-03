@@ -20,7 +20,7 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-public class PublicOwnerProfileActivity extends AppCompatActivity {
+public class PrivateOwnerProfileActivity extends AppCompatActivity {
 
     /**
      * The {@link ViewPager} that will host the section contents.
@@ -33,7 +33,7 @@ public class PublicOwnerProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_public_owner);
+        setContentView(R.layout.activity_private_owner_profile);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -64,7 +64,7 @@ public class PublicOwnerProfileActivity extends AppCompatActivity {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 if(firebaseAuth.getCurrentUser()==null){
-                    Intent loginIntent= new Intent(PublicOwnerProfileActivity.this, publicOnerLogIn.class);
+                    Intent loginIntent= new Intent(PrivateOwnerProfileActivity.this, publicOnerLogIn.class);
                     loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(loginIntent);
                 }
@@ -89,7 +89,7 @@ public class PublicOwnerProfileActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_public_main, menu);
+        getMenuInflater().inflate(R.menu.menu_private_main, menu);
         return true;
     }
 
@@ -105,11 +105,11 @@ public class PublicOwnerProfileActivity extends AppCompatActivity {
             return true;
         }
         else if (id == R.id.addIcon){
-            Intent intent = new Intent(PublicOwnerProfileActivity.this, postActivityPublic.class);
+            Intent intent = new Intent(PrivateOwnerProfileActivity.this, postActivityPrivate.class);
             startActivity(intent);
         }
         else if (id == R.id.logout){
-           mAuth.signOut();
+            mAuth.signOut();
         }
 
 
@@ -169,13 +169,13 @@ public class PublicOwnerProfileActivity extends AppCompatActivity {
             // Return a PlaceholderFragment (defined as a static inner class below).
             switch (position) {
                 case 0:
-                    publicTab1profile tab1 = new publicTab1profile();
+                    privateTab1profile tab1 = new privateTab1profile();
                     return tab1;
                 case 1:
-                    publicTab2posts tab2 = new publicTab2posts();
+                    privateTab2posts tab2 = new privateTab2posts();
                     return tab2;
                 case 2:
-                    publicTab3menu tab3 = new publicTab3menu();
+                    privateTab3menu tab3 = new privateTab3menu();
                     return tab3;
             }
 

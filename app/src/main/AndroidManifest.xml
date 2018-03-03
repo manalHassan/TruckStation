@@ -66,50 +66,37 @@
             android:label="تقييم العربه" />
         <activity
             android:name=".NearByTrucks"
-            android:label="العربات القريبه مني"
-            />
+            android:label="العربات القريبه مني" />
         <activity
             android:name=".Chart"
-            android:label="مستخدمي التطبيق"
-            />
+            android:label="مستخدمي التطبيق" />
         <activity
             android:name=".editprofile"
-            android:label="اعاده تعيين معلوماتي">
-        </activity>
-        <activity
-            android:name=".contentmain">
-        </activity>
+            android:label="اعاده تعيين معلوماتي" />
+        <activity android:name=".contentmain" />
         <activity
             android:name=".ownermenu"
-            android:label="قائمه الطعام">
-        </activity>
-
-        <activity
-            android:name=".itemlist">
-        </activity>
+            android:label="قائمه الطعام" />
+        <activity android:name=".itemlist" />
         <activity
             android:name=".edititem"
-            android:label="تعديل الصنف">
-        </activity>
+            android:label="تعديل الصنف" />
         <activity
             android:name=".publictruckownerprofile"
-            android:label="صفحتي الشخصيه"></activity>
-        <activity
-            android:name=".Homepage"
-            ></activity>
+            android:label="صفحتي الشخصيه" />
+        <activity android:name=".Homepage" />
+        <activity android:name=".postActivityPublic" />
+        <activity android:name=".PublicOwnerProfileActivity" />
 
-        <activity
-            android:name=".postActivityPublic"
-            ></activity>
-
-        <activity
-            android:name=".PublicOwnerProfileActivity"
-            ></activity>
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyC_PwVA-gJQ24JZbhZYJINoK9XLC3KdGrg" />
 
-
+        <activity
+            android:name=".PrivateOwnerProfileActivity"
+            android:label="@string/title_activity_private_owner_profile"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".postActivityPrivate"></activity>
     </application>
 
 </manifest>
