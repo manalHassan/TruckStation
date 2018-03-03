@@ -66,41 +66,37 @@
             android:label="تقييم العربه" />
         <activity
             android:name=".NearByTrucks"
+            android:label="العربات القريبه مني"
             />
         <activity
-            android:name=".trymap"
+            android:name=".Chart"
+            android:label="مستخدمي التطبيق"
             />
-
         <activity
-            android:name=".PublicOwnerProfileActivity">
-        </activity>
-
-        <activity
-            android:name=".postActivityPublic">
-        </activity>
-        <activity
-            android:name=".editprofile">
+            android:name=".editprofile"
+            android:label="اعاده تعيين معلوماتي">
         </activity>
         <activity
             android:name=".contentmain">
         </activity>
         <activity
-            android:name=".ownermenu">
+            android:name=".ownermenu"
+            android:label="قائمه الطعام">
         </activity>
 
         <activity
             android:name=".itemlist">
         </activity>
         <activity
-            android:name=".edititem">
+            android:name=".edititem"
+            android:label="تعديل الصنف">
         </activity>
         <activity
-            android:name=".publictruckownerprofile"></activity>
+            android:name=".publictruckownerprofile"
+            android:label="صفحتي الشخصيه"></activity>
         <activity
-            android:name=".Homepage"></activity>
-
-
-
+            android:name=".Homepage"
+            ></activity>
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyC_PwVA-gJQ24JZbhZYJINoK9XLC3KdGrg" />

@@ -147,7 +147,7 @@ public class CustomerLogInPage extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 Toast.makeText(CustomerLogInPage.this, "تم تسجيل الدخول بنجاح", Toast.LENGTH_SHORT).show();
 
-                                Intent intent = new Intent(CustomerLogInPage.this, customer_profilenew.class);
+                                Intent intent = new Intent(CustomerLogInPage.this,MyMain.class);
                                 startActivity(intent);
 
                             } // Singed in successfull
