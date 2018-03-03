@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="activity_vertical_margin_1">5dp</dimen>
-    <dimen name="activity_horizontal_margin">16dp</dimen>
-    <dimen name="activity_vertical_margin">16dp</dimen>
+
+        <dimen name="activity_vertical_margin_1">5dp</dimen>
+    <dimen name="activity_horizontal_margin">0dp</dimen> ///////ichange it
+    <dimen name="activity_vertical_margin">0dp</dimen> ///////ichange it
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="appbar_padding_top">8dp</dimen>
 </resources>

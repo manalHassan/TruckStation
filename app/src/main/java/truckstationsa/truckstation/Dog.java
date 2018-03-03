@@ -27,4 +27,15 @@ public class Dog {
     }
 
     private  String url;
+
+    public String getCusin() {
+        return cusin;
+    }
+
+
+    public void setCusin(String cusin) {
+        this.cusin = cusin;
+    }
+
+    private  String cusin;
 }

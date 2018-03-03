@@ -27,7 +27,7 @@ public class ListPrivate extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_private);
 
-///////////
+///////////////////
 
         listView = (ListView) findViewById(R.id.listview);
         firebaseClient = new FirebaseClient(this, DB_URL, listView);

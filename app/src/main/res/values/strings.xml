@@ -7,6 +7,11 @@
     <string name="log_in">تسجيل الدخول</string>
     <string name="Am_customer">انا مستخدم</string>
     <string name="Am_owner">انا صاحب عربة طعام</string>
+    <string name="nameoft">اسم العربة</string>
+    <string name="nameofc">نوع المطبخ</string>
+    <string name="fllow">متابعة </string>
+    <string name="unfllow">الغاء متابعة</string>
+
     <string name="Am_vistor">انا زائر</string>
     <string name="title_activity_ownerprofile">ownerprofile</string>
     <string name="action_settings">Settings</string>
