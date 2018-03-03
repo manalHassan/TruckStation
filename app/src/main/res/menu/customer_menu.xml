@@ -4,30 +4,34 @@
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_list"
+            android:icon="@drawable/ic_action_menu"
+            android:title="قائمة عربات الطعام" />
+        <item
+            android:id="@+id/nav_map"
+            android:icon="@drawable/ic_map_black_24dp"
+            android:title="العربات ع الخريطه" />
+        <item
+            android:id="@+id/nav_pre_request"
+            android:icon="@drawable/ic_action_request"
+            android:title="الحجــوزات السابقه " />
+        <item
+            android:id="@+id/nav_pre_preorder"
+            android:icon="@drawable/ic_record_voice_over_black_24dp"
+            android:title="الطلبات السابقه" />
 
+
+    </group>
+    <group android:checkableBehavior="single" android:visible="true" android:id="@+id/icon_group">
+        <item
+            android:id="@+id/nav_app"
+            android:icon="@drawable/ic_assessment_black_24dp"
+            android:title="حول التطبيق " />
         <item
             android:id="@+id/nav_profile"
             android:icon="@drawable/ic_action_name"
             android:title="تعديل المعلومات الشخصية " />
-        <item
-            android:id="@+id/nav_menu"
-            android:icon="@drawable/ic_action_menu"
-            android:title="قائمة الطعام" />
-        <item
-            android:id="@+id/nav_request"
-            android:icon="@drawable/ic_action_request"
-            android:title="الحجــوزات " />
-        <item
-            android:id="@+id/nav_preorder"
-            android:icon="@drawable/ic_action_preorder"
-            android:title="الطلبات " />
-        <item
-            android:id="@+id/nav_booking"
-            android:icon="@drawable/ic_action_bookingsch"
-            android:title="جدول الحجوزات" />
-
-    </group>
-    <group android:checkableBehavior="single" android:visible="true" android:id="@+id/icon_group">
         <item android:id="@+id/nav_logout"
             android:icon="@drawable/ic_action_logout"
             android:title="تسجيل الخــروج" />

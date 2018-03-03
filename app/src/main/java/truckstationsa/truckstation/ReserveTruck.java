@@ -1,6 +1,9 @@
 package truckstationsa.truckstation;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AlertDialog;
@@ -10,9 +13,15 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -27,14 +36,39 @@ import java.util.List;
 public class ReserveTruck extends AppCompatActivity {
     private DatabaseReference spinnerRef ,reserveRef;
     Spinner DateTimeSpinner;
+    String address;
+    Context context;
+    int PLACE_PICKER_REQUEST = 1;
+    TextView location ;
+    double x =0 , y =0 ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reserve_truck);
-
+        location = (TextView) findViewById(R.id.location);
+        context = this;
         spinnerRef = FirebaseDatabase.getInstance().getReference("PublicFoodTruckOwner");
+        location.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
+                // finish();
+                Intent intent;
+                try {
+                    address = "  ";
+                    intent = builder.build((Activity)  context);
+                    startActivityForResult(intent,PLACE_PICKER_REQUEST);
+
+                } catch (GooglePlayServicesRepairableException e) {
+                    e.printStackTrace();
+                } catch (GooglePlayServicesNotAvailableException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
         //request =reserve
         reserveRef = FirebaseDatabase.getInstance().getReference("Request"); // make sure its identical to the table name in the database
 
@@ -135,6 +169,19 @@ if(!TextUtils.isEmpty(DateTIME)){
         ab.setMessage("هل أنت متأكد من أنك تريد إلغاء الحجز ؟").setPositiveButton("نعم", dialogClickListener)
                 .setNegativeButton("لا", dialogClickListener).show();
 
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == PLACE_PICKER_REQUEST) {
+            if (resultCode == RESULT_OK) {
+                Place place = PlacePicker.getPlace(data, this);
+
+                x = place.getLatLng().latitude;
+                y = place.getLatLng().longitude;
+
+
+            }
+        }
     }
 
 }
