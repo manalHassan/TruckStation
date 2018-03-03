@@ -142,7 +142,7 @@ if(!TextUtils.isEmpty(DateTIME)){
 
                 if ( !TextUtils.isEmpty(FID) && !TextUtils.isEmpty(CID) && !TextUtils.isEmpty(RID)) {
 
-                    Request request=new Request(CID,FID,RID,DateTIME);
+                    Request request=new Request(CID,FID,RID,DateTIME,x,y);
 
                     reserveRef.child(RID).setValue(request);
                     Toast.makeText(ReserveTruck.this, "تم الحجز,بانتظار موافقة صاحب حافلة الطعام", Toast.LENGTH_SHORT).show();
