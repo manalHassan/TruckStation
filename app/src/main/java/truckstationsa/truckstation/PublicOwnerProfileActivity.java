@@ -4,11 +4,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -20,7 +24,8 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-public class PublicOwnerProfileActivity extends AppCompatActivity {
+public class PublicOwnerProfileActivity extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener{
 
     /**
      * The {@link ViewPager} that will host the section contents.
@@ -33,7 +38,7 @@ public class PublicOwnerProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_public_owner);
+        setContentView(R.layout.testmenu);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -71,7 +76,18 @@ public class PublicOwnerProfileActivity extends AppCompatActivity {
             }
         };
 
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+
+        navigationView.setNavigationItemSelectedListener(this);
     }
+
+
 
     @Override
     protected void onStart() {
@@ -85,14 +101,14 @@ public class PublicOwnerProfileActivity extends AppCompatActivity {
     {
         return contextOfApplication;
     }
-
+/*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_public_main, menu);
         return true;
     }
-
+*/
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -146,9 +162,10 @@ public class PublicOwnerProfileActivity extends AppCompatActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.public_tab1_profile, container, false);
-            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
+            TextView textView = (TextView) rootView.findViewById(R.id.section_label_public);
             textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
             return rootView;
+
         }
     }
 
@@ -201,4 +218,85 @@ public class PublicOwnerProfileActivity extends AppCompatActivity {
             return null;
         }
     }
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+
+        if (id == R.id.nav_profile) {
+            Intent intent = new Intent(PublicOwnerProfileActivity.this, editprofile.class);
+            startActivity(intent);
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
+            return true;
+
+        } else if (id == R.id.nav_preorder) {
+            /*Intent intent = new Intent(MainActivity.this, postActivity.class);
+            Bundle b=new Bundle();
+            b.putString("id",user);
+            intent.putExtras(b);
+            startActivity(intent);
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
+            return true;
+            */
+        }
+        else if (id == R.id.nav_booking) {
+            /*Intent intent = new Intent(MainActivity.this, postActivity.class);
+            Bundle b=new Bundle();
+            b.putString("id",user);
+            intent.putExtras(b);
+            startActivity(intent);
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
+            return true;
+            */
+        }
+
+        else if (id == R.id.nav_menu) {
+
+            Intent intent = new Intent(PublicOwnerProfileActivity.this, ownermenu.class);
+            Bundle b=new Bundle();
+
+            startActivity(intent);
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
+            return true;
+        }
+
+
+        else if (id == R.id.nav_request) {
+/*
+  Intent intent = new Intent(MainActivity.this, editprofile.class);
+            Bundle b=new Bundle();
+            b.putString("id",user);
+            intent.putExtras(b);
+            startActivity(intent);
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
+            return true;
+ */
+        }
+        return false;
+    }
+
+
 }

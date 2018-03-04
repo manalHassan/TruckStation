@@ -95,7 +95,7 @@
         <activity android:name=".Homepage" />
         <activity android:name=".postActivityPublic" />
         <activity android:name=".PublicOwnerProfileActivity" />
-
+         <activity android:name=".tab3_itemlist"/>
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyC_PwVA-gJQ24JZbhZYJINoK9XLC3KdGrg" />

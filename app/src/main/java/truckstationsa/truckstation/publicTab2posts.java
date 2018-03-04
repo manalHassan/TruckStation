@@ -35,8 +35,8 @@ public class publicTab2posts extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View rootView= inflater.inflate(R.layout.public_tab2_posts, container, false);
-
         mPostList= rootView.findViewById(R.id.insta_list);
+
         mPostList.setHasFixedSize(true);
         LinearLayoutManager layoutManager=new LinearLayoutManager(getActivity());
         layoutManager.setReverseLayout(true);

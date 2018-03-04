@@ -19,18 +19,16 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
- * Created by wafaa7maD on 20/02/18.
+ * Created by wafaa7maD on 04/03/18.
  */
 
-public class itemlist extends AppCompatActivity {
+public class tab3_itemlist extends AppCompatActivity {
 
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference();
-    String id = "";
-   String cid="";
+    String cid="";
     String mid="";
     ListView listViewArtists;
     List<Item> artists;
@@ -38,9 +36,9 @@ public class itemlist extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.items_list);
+        setContentView(R.layout.public_tab3_menuitem);
 
-       Bundle b = getIntent().getExtras();
+        Bundle b = getIntent().getExtras();
         cid = b.getString("cid");
         //TextView view =(TextView) findViewById(R.id.foodmenu);
         //view.setText(cid);
@@ -49,29 +47,10 @@ public class itemlist extends AppCompatActivity {
         //list to store artists
         artists = new ArrayList<>();
 
-        listViewArtists.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Item artist = artists.get(i);
-                //   String
-                Intent intent = new Intent(itemlist.this, edititem.class);
-                Bundle b=new Bundle();
-                b.putString("tid",artist.getItemID());
-                intent.putExtras(b);
-                startActivity(intent);
-           return true;
-            }
-        });
 
     }
 
-    public void additem(View view) {
 
-        String tid =myRef.push().getKey();
-        Item t1= new Item ("برجر لحم" ,"http://www.overcaffeinated.org/sites/default/files/styles/large/public/products/tazo_black_shaken_iced_tea.jpg?itok=u6CezagO" ,"مثجلجات بنكهة الشاي" , 23  ,cid , tid );
-        myRef.child("Item").child(mid).child(cid).child(tid).setValue(t1);
-        Toast.makeText(itemlist.this, "تمت اللإضافة", Toast.LENGTH_LONG).show();
-    }
 
     @Override
     protected void onStart() {
@@ -90,13 +69,13 @@ public class itemlist extends AppCompatActivity {
                         artists.clear();
 
                         for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                           Item artist =new Item(ds.getValue(Item.class));
+                            Item artist =new Item(ds.getValue(Item.class));
                             artists.add(artist);
                         }
 
 
                         //creating adapter
-                        Itemarray artistAdapter = new Itemarray(itemlist.this, artists);
+                        Itemarray artistAdapter = new Itemarray(tab3_itemlist.this, artists);
                         //attaching adapter to the listview
                         listViewArtists.setAdapter(artistAdapter);
                     }
@@ -120,7 +99,4 @@ public class itemlist extends AppCompatActivity {
 
 
 
-
-
 }
-        //start

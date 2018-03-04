@@ -145,8 +145,8 @@ public class PrivateOwnerProfileActivity extends AppCompatActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.public_tab1_profile, container, false);
-            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
+            View rootView = inflater.inflate(R.layout.private_tab1_profile, container, false);
+            TextView textView = (TextView) rootView.findViewById(R.id.section_label_private);
             textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
             return rootView;
         }
@@ -201,4 +201,5 @@ public class PrivateOwnerProfileActivity extends AppCompatActivity {
             return null;
         }
     }
+
 }
