@@ -1,12 +1,12 @@
 package truckstationsa.truckstation;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.Button;
@@ -16,36 +16,38 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-public class ListPrivate extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener  {
+/**
+ * Created by manal on 3/4/2018.
+ */
+
+public class visitorPublicList extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener  {
+    FirebaseAuth auth ;
     final static String DB_URL = "https://truckstation-3c3eb.firebaseio.com/";
     EditText nameeditText, urleditText;
     Button btnsave;
     ListView listView;
     FirebaseClient firebaseClient;
     DrawerLayout drawer;
-    FirebaseAuth auth ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.listview_drawer2);
-/////////////
-///////
+        setContentView(R.layout.listview_drawer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+///////////////////////////////////////////
         listView = (ListView) findViewById(R.id.listview);
         firebaseClient = new FirebaseClient(this, DB_URL, listView);
         //  firebaseClient.refreshdata();
-        firebaseClient.savedata("pr");
-       // Toast.makeText(this, "you hear", Toast.LENGTH_LONG).show();
+        firebaseClient.savedata("pu");
+        // Toast.makeText(this, "you hear", Toast.LENGTH_LONG).show();
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
-        toggle.syncState();
+        toggle.syncState();}//crest
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-    }//crert
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -163,17 +165,7 @@ public class ListPrivate extends AppCompatActivity implements NavigationView.OnN
             return true;
 
         }
-        else if (id == R.id.nav_logout) {
 
-            auth.signOut();
-            if(auth.getCurrentUser() == null){
-                Toast.makeText(this , "تم تسجيل الدخول بنجاح" , Toast.LENGTH_SHORT).show();
-                startActivity(new Intent (this , CustomerLogInPage.class));
-                DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-                drawer.closeDrawer(GravityCompat.START);
-                return true;
-
-            }}
 
         return false;
     }

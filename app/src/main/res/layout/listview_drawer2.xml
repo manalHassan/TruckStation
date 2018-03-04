@@ -11,7 +11,7 @@
     tools:openDrawer="start">
 
     <include
-        layout="@layout/activity_list_puplic"
+        layout="@layout/activity_list_private"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

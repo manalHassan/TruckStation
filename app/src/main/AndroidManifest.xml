@@ -46,8 +46,12 @@
             android:name=".GoTOPrivatRegisterPage"
             android:label="انشاء حساب صاحب عربه" />
         <activity
-            android:name=".MyMain"
-            android:label="انشاء حساب صاحب عربه"
+            android:name=".ListPrivate"
+            android:label="عربات الطعام الخاصة"
+            tools:ignore="DuplicateActivity" />
+        <activity
+            android:name=".ListPuplic"
+            android:label="عربات الطعام العامة"
             tools:ignore="DuplicateActivity" />
         <activity
             android:name=".GoTOCustomerRegisterPage"
@@ -81,6 +85,10 @@
         <activity
             android:name=".edititem"
             android:label="تعديل الصنف" />
+        <activity
+            android:name=".Logout1"
+            >
+        </activity>
         <activity
             android:name=".publictruckownerprofile"
             android:label="صفحتي الشخصيه" />

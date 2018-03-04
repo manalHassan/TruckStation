@@ -20,15 +20,6 @@
             android:id="@+id/nav_nearmap"
             android:icon="@drawable/ic_map_black_24dp"
             android:title="العربات القريبة ع الخريطه" />
-        <item
-            android:id="@+id/nav_pre_request"
-            android:icon="@drawable/ic_action_request"
-            android:title="الحجــوزات السابقه " />
-        <item
-            android:id="@+id/nav_pre_preorder"
-            android:icon="@drawable/ic_record_voice_over_black_24dp"
-            android:title="الطلبات السابقه" />
-
 
     </group>
     <group android:checkableBehavior="single" android:visible="true" android:id="@+id/icon_group">
@@ -36,13 +27,7 @@
             android:id="@+id/nav_app"
             android:icon="@drawable/ic_assessment_black_24dp"
             android:title="حول التطبيق " />
-        <item
-            android:id="@+id/nav_profile"
-            android:icon="@drawable/ic_action_name"
-            android:title="تعديل المعلومات الشخصية " />
-        <item android:id="@+id/nav_logout"
-            android:icon="@drawable/ic_action_logout"
-            android:title="تسجيل الخــروج" />
+
     </group>
 
 </menu>

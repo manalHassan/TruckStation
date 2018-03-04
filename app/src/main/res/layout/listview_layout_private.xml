@@ -131,7 +131,7 @@
                     android:layout_weight="0"
 
 
-                    android:src="@drawable/foodicon" />
+                   />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"

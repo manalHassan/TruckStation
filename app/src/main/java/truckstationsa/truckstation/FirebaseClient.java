@@ -78,7 +78,7 @@ public class FirebaseClient extends AppCompatActivity  {
 
                     for (com.google.firebase.database.DataSnapshot ds : dataSnapshot.getChildren()) {
                         PublicFoodTruckOwner d = new PublicFoodTruckOwner();
-                        d.setFUsername(ds.getValue(PublicFoodTruckOwner.class).getFUsername());
+                        d.setFUsername(""+(ds.getValue(PublicFoodTruckOwner.class).getFUsername()));
                         d.setUrl(ds.getValue(PublicFoodTruckOwner.class).getUrl());
                         d.setQusins(ds.getValue(PublicFoodTruckOwner.class).getQusins());
 

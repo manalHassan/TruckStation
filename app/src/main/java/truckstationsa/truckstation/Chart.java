@@ -1,6 +1,7 @@
 package truckstationsa.truckstation;
 
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -43,7 +44,7 @@ public class Chart extends AppCompatActivity implements NavigationView.OnNavigat
     static float[] yData = { 2f , 3f  ,12f};
     private String[] xData = {"عملاء", "عربات حفلات خاصه" , "عربات عامه"};
     PieChart pieChart;
-
+FirebaseAuth auth ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +52,7 @@ public class Chart extends AppCompatActivity implements NavigationView.OnNavigat
         Log.d(TAG, "onCreate: starting to create chart");
         pieChart = (PieChart) findViewById(R.id.chart);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        auth = FirebaseAuth.getInstance();
         setSupportActionBar(toolbar);
       /*  dbRef.child("PublicFoodTruckOwner").addValueEventListener(new ValueEventListener() {
             @Override
@@ -221,13 +223,15 @@ public void setUpTheChart(){
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
+
+
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
         if (id == R.id.nav_profile) {
-            Intent intent = new Intent(Chart.this, customer_profilenew.class);
+            Intent intent = new Intent(this, customer_profilenew.class);
             Bundle b=new Bundle();
             //b.putString("id",user);
             //intent.putExtras(b);
@@ -236,11 +240,22 @@ public void setUpTheChart(){
             drawer.closeDrawer(GravityCompat.START);
             return true;
 
-        } else if (id == R.id.nav_list) {
-            Intent intent = new Intent(Chart.this, MyMain.class);
+        } else if (id == R.id.nav_publiclist) {
+            Intent intent = new Intent(this, ListPuplic.class);
             Bundle b=new Bundle();
-           // b.putString("id",user);
-           // intent.putExtras(b);
+            // b.putString("id",user);
+            // intent.putExtras(b);
+            startActivity(intent);
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
+            return true;
+
+        }
+        else if (id == R.id.nav_privatelist) {
+            Intent intent = new Intent(this, ListPrivate.class);
+            Bundle b=new Bundle();
+            // b.putString("id",user);
+            // intent.putExtras(b);
             startActivity(intent);
             DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
             drawer.closeDrawer(GravityCompat.START);
@@ -248,10 +263,22 @@ public void setUpTheChart(){
 
         }
         else if (id == R.id.nav_map) {
-            Intent intent = new Intent(Chart.this, VisitorHomePage.class);
+            Intent intent = new Intent(this, VisitorHomePage.class);
             Bundle b=new Bundle();
-          //  b.putString("id",user);
-           // intent.putExtras(b);
+            //  b.putString("id",user);
+            // intent.putExtras(b);
+            startActivity(intent);
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
+            return true;
+
+        }
+
+        else if (id == R.id.nav_nearmap) {
+            Intent intent = new Intent(this, NearByTrucks.class);
+            Bundle b=new Bundle();
+            //  b.putString("id",user);
+            // intent.putExtras(b);
             startActivity(intent);
             DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
             drawer.closeDrawer(GravityCompat.START);
@@ -261,7 +288,7 @@ public void setUpTheChart(){
 
         else if (id == R.id.nav_pre_request) {
 /*
-            Intent intent = new Intent(Chart.this, ownermenu.class);
+            Intent intent = new Intent(this, ownermenu.class);
             Bundle b=new Bundle();
             b.putString("id",user);
             intent.putExtras(b);
@@ -275,7 +302,7 @@ public void setUpTheChart(){
 
         else if (id == R.id.nav_pre_preorder) {
 /*
-  Intent intent = new Intent(Chart.this, editprofile.class);
+  Intent intent = new Intent(this, editprofile.class);
             Bundle b=new Bundle();
             b.putString("id",user);
             intent.putExtras(b);
@@ -287,10 +314,10 @@ public void setUpTheChart(){
         }
         else if (id == R.id.nav_app) {
 
-  Intent intent = new Intent(Chart.this, Chart.class);
+            Intent intent = new Intent(this, Chart.class);
             Bundle b=new Bundle();
-          //  b.putString("id",user);
-          //  intent.putExtras(b);
+            //  b.putString("id",user);
+            //  intent.putExtras(b);
             startActivity(intent);
             DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
             drawer.closeDrawer(GravityCompat.START);
@@ -299,16 +326,15 @@ public void setUpTheChart(){
         }
         else if (id == R.id.nav_logout) {
 
-  Intent intent = new Intent(Chart.this, Logout1.class);
-            Bundle b=new Bundle();
-           // b.putString("id",user);
-           // intent.putExtras(b);
-            startActivity(intent);
-            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-            drawer.closeDrawer(GravityCompat.START);
-            return true;
+            auth.signOut();
+            if(auth.getCurrentUser() == null){
+                Toast.makeText(this , "تم تسجيل الدخول بنجاح" , Toast.LENGTH_SHORT).show();
+                startActivity(new Intent (this , CustomerLogInPage.class));
+                DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+                drawer.closeDrawer(GravityCompat.START);
+                return true;
 
-        }
+            }}
 
         return false;
     }

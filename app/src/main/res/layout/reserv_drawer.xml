@@ -11,7 +11,7 @@
     tools:openDrawer="start">
 
     <include
-        layout="@layout/activity_list_puplic"
+        layout="@layout/activity_reserve_truck"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
