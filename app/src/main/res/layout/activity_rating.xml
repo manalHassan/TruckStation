@@ -38,18 +38,11 @@
         android:layout_marginTop="10dp"
         android:text="رائعة, لقد احببتها"
         android:textSize="16sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:layout_marginBottom="40dp"/>
 
 
-    <EditText
-        android:id="@+id/etFeedback"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="top"
-        android:layout_marginTop="10dp"
-        android:hint="اخبرنا ماذا أحببت "
-        android:inputType="textMultiLine"
-        android:lines="5" />
+
 
     <Button
         android:id="@+id/btnSubmit"
@@ -57,7 +50,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:background="@drawable/background_login"
+        android:background="@drawable/buttonstyle"
         android:clickable="true"
         android:focusable="true"
         android:padding="16dp"

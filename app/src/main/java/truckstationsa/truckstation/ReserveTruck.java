@@ -1,9 +1,12 @@
 package truckstationsa.truckstation;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
@@ -15,10 +18,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -37,6 +42,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class ReserveTruck extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
@@ -46,9 +52,16 @@ public class ReserveTruck extends AppCompatActivity implements NavigationView.On
     Context context;
     int PLACE_PICKER_REQUEST = 1;
     TextView location ;
-    double x =0 , y =0 ;
+    double x =0 , y =0;
 FirebaseAuth auth ;
-    @Override
+    String date=" ";
+
+// for date :
+    private static final String TAG = "ReserveTruck";
+    private TextView mDisplayDate;
+    private DatePickerDialog.OnDateSetListener mdateSetListener;
+
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.reserv_drawer);
@@ -58,7 +71,7 @@ FirebaseAuth auth ;
         location = (TextView) findViewById(R.id.location);
         context = this;
         auth = FirebaseAuth.getInstance() ;
-        spinnerRef = FirebaseDatabase.getInstance().getReference("PublicFoodTruckOwner");
+        spinnerRef = FirebaseDatabase.getInstance().getReference("PrivateOwnerDate");
         location.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,8 +99,8 @@ FirebaseAuth auth ;
 
 
 
-String ownerID="kPmL8c1nkdOnfvvIFC3kJbX7DP73";
-        spinnerRef.child(ownerID).child("RDate").addValueEventListener(new ValueEventListener() {
+String ownerID="yEeRopjhMTYTwPyujM6p694A40j1";
+        spinnerRef.child(ownerID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // Is better to use a List, because you don't know the size
@@ -120,29 +133,69 @@ String ownerID="kPmL8c1nkdOnfvvIFC3kJbX7DP73";
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);  }
+        navigationView.setNavigationItemSelectedListener(this);
+
+
+    // for date
+
+        mDisplayDate=(TextView)findViewById(R.id.tvDate);
+
+        mDisplayDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Calendar cal=Calendar.getInstance();
+                int year=cal.get(Calendar.YEAR);
+                int month=cal.get(Calendar.MONTH);
+                int day=cal.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog dialog= new DatePickerDialog(
+                        ReserveTruck.this,
+                        android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                        mdateSetListener,
+                        year,month,day);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
+            }
+        });
+        mdateSetListener=new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                month=month+1;
+                Log.d(TAG,"onDateSet: mm/dd/yyy"+month+"/"+day+"/"+year);
+                date=month+"/"+day+"/"+year;
+                mDisplayDate.setText(date);
+            }
+        };
+    }
 
     public void ReservationInfo(View view){
 
         // get selected value from dropdoenlist(spinner)
-        final String DateTIME=DateTimeSpinner.getSelectedItem().toString().trim();
-if(!TextUtils.isEmpty(DateTIME)){
+        final String TIME=DateTimeSpinner.getSelectedItem().toString().trim();
+        final String DT=TIME+"  "+date;
+if(!TextUtils.isEmpty(TIME)){
+    if(date.equals(" ")){
+
+        Toast.makeText(ReserveTruck.this, "الرجاء ادخال التاريخ ", Toast.LENGTH_SHORT).show();
+
+    }else {
         reserveRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 String id = user.getUid();//customer id is the same as rating id to make it easy to refer
 
-                final String FID="FIDtst";
-                final String CID=id;
-                final String RID=reserveRef.push().getKey();  //random id for request  *malh da3i*
+                final String FID = "FIDtst";
+                final String CID = id;
+                final String RID = reserveRef.push().getKey();  //random id for request  *malh da3i*
 
+                if (x == 0 && y == 0) {
+                    Toast.makeText(ReserveTruck.this, "الرجاء ادخال الموقع المراد حضور العربة له ", Toast.LENGTH_SHORT).show();
+                } else if (!TextUtils.isEmpty(FID) && !TextUtils.isEmpty(CID) && !TextUtils.isEmpty(RID)) {
 
-                if ( !TextUtils.isEmpty(FID) && !TextUtils.isEmpty(CID) && !TextUtils.isEmpty(RID)) {
-
-                    Request request=new Request(CID,FID,RID,DateTIME,x,y);
+                    Request request = new Request(CID, FID, RID, DT, x, y);
 
                     reserveRef.child(RID).setValue(request);
                     Toast.makeText(ReserveTruck.this, "تم الحجز,بانتظار موافقة صاحب حافلة الطعام", Toast.LENGTH_SHORT).show();
@@ -152,8 +205,10 @@ if(!TextUtils.isEmpty(DateTIME)){
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {}
+            public void onCancelled(DatabaseError databaseError) {
+            }
         });
+    }
     }
 
     else{
@@ -183,7 +238,7 @@ if(!TextUtils.isEmpty(DateTIME)){
             }
         };
         AlertDialog.Builder ab = new AlertDialog.Builder(this);
-        ab.setMessage("هل أنت متأكد من أنك تريد إلغاء الحجز ؟").setPositiveButton("نعم", dialogClickListener)
+        ab.setMessage("هل أنت متأكد من أنك تريد إغلاق صفحة الحجز ؟").setPositiveButton("نعم", dialogClickListener)
                 .setNegativeButton("لا", dialogClickListener).show();
 
     }

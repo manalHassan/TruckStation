@@ -117,7 +117,7 @@ public class Rating extends AppCompatActivity implements NavigationView.OnNaviga
                 Rate rate= new Rate(CID,FID,ratingValue);
 
                 RatingRef.child(id).setValue(rate);
-                Toast.makeText(Rating.this, ""+ratingValue+"شكرًا لمشاركتنا رأيك", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Rating.this, "شكرًا لمشاركتنا رأيك", Toast.LENGTH_SHORT).show();
                 // Intent intent = new Intent(GoTOCustomerRegisterPage.this, .class);
                 // startActivity(intent);
                 //finish();
@@ -131,7 +131,7 @@ public class Rating extends AppCompatActivity implements NavigationView.OnNaviga
 
 
         //add comment
-        final String Comment=mFeedback.getText().toString();
+       /* final String Comment=mFeedback.getText().toString();
 
 if(!TextUtils.isEmpty(Comment)) {
 
@@ -168,32 +168,8 @@ if(!TextUtils.isEmpty(Comment)) {
 
 
 
-
-
-
-
-
-        ///////////////////////////////////////////
-
-
-
-        /*if ( !TextUtils.isEmpty(FID) && !TextUtils.isEmpty(CID) && !TextUtils.isEmpty(strRate)) {
-
-
-
-                          //  if (task.isSuccessful()) { // b3deen a76 en user cant rate more than one
-
-
-
-                           // } else
-                                //Toast.makeText(GoTOCustomerRegisterPage.this, "البريد الالكتروني مستخدم مسبقا", Toast.LENGTH_SHORT).show();
-
-                        }
-                        else
-            Toast.makeText(Rating.this, "wrong!!", Toast.LENGTH_SHORT).show();
-
-
 */
+
     }
     @Override
     public void onBackPressed() {
