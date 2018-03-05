@@ -15,7 +15,7 @@
         android:layout_height="match_parent"
         android:background="@color/cardview_light_background"
         android:orientation="vertical"
-        tools:context=".publictruckownerprofile">
+       >
 
 
         <RelativeLayout
@@ -28,26 +28,6 @@
                 android:layout_height="225dp"
                 android:background="@drawable/gradientbackground"
                 android:orientation="vertical">
-
-                <ToggleButton
-                    android:id="@+id/avlclos"
-                    android:layout_width="41dp"
-                    android:layout_height="28dp"
-                    android:background="@drawable/check"
-                    android:text="ToggleButton"
-                    android:textOff=""
-                    android:textOn=""
-
-                    />
-
-                <ToggleButton
-                    android:id="@+id/allowdisallowpreorder"
-                    android:layout_width="44dp"
-                    android:layout_height="30dp"
-                    android:background="@drawable/check"
-                    android:text="ToggleButton1"
-                    android:textOff=""
-                    android:textOn="" />
 
                 <ImageView
                     android:layout_width="101dp"
@@ -199,7 +179,7 @@
                 android:layout_width="36dp"
                 android:layout_height="36dp"
                 android:src="@drawable/ic_email_black_24dp"
-                 />
+                />
             <TextView
                 android:id="@+id/email"
 
@@ -217,7 +197,32 @@
         </LinearLayout>
 
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="25dp"
+            android:orientation="horizontal"
+            android:paddingLeft="25dp">
 
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="36dp"
+                android:src="@drawable/ic_action_wh"
+                />
+            <TextView
+                android:id="@+id/wh"
+                android:layout_width="287dp"
+                android:layout_height="29dp"
+                android:layout_gravity="center_vertical"
+                android:layoutDirection="rtl"
+                android:paddingLeft="20dp"
+                android:text="ساعـات العمل"
+                android:textDirection="rtl"
+                android:lines="5"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="40dp"
