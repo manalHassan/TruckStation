@@ -33,15 +33,22 @@ public class editprofile extends AppCompatActivity {
 
     // String id="-L5hPscXmLNDYe8_3KNL" ;
     DatabaseReference databaseref;
+    DatabaseReference wh;
     EditText username;
     EditText mail;
     EditText phone;
     EditText passwor;
     EditText cusine;
-    EditText workh;
+    EditText sund;
+    EditText mon;
+    EditText the;
+    EditText wen;
+    EditText thus;
+    EditText fri;
+    EditText sat;
     private String address;
-    static double xx = 12.32;
-    static double yy = 12.32;
+    //static double xx = 12.32;
+  //  static double yy = 12.32;
     FirebaseAuth firebaseAuth;
     Context context;
     int PLACE_PICKER_REQUEST = 1;
@@ -89,7 +96,7 @@ public class editprofile extends AppCompatActivity {
                 String email = dataSnapshot.child("femail").getValue(String.class);
                 String password = dataSnapshot.child("fpassword").getValue(String.class);
                 String cusin = dataSnapshot.child("qusins").getValue(String.class);
-                String whh = dataSnapshot.child("fworkingHours").getValue(String.class);
+               // String whh = dataSnapshot.child("fworkingHours").getValue(String.class);
                 // xx = dataSnapshot.child("xflication").getValue(Double.class);
                 // yy = dataSnapshot.child("yflication").getValue(Double.class);
 
@@ -108,8 +115,8 @@ public class editprofile extends AppCompatActivity {
                 passwor = (EditText) findViewById(R.id.pass);
                 passwor.setText(password);
 
-                workh = (EditText) findViewById(R.id.etFeedback);
-                workh.setText(whh);
+              //  workh = (EditText) findViewById(R.id.etFeedback);
+               // workh.setText(whh);
 
             }
 
@@ -121,8 +128,62 @@ public class editprofile extends AppCompatActivity {
             }
         });
 
-
+        wh = FirebaseDatabase.getInstance().getReference();
+        // Read from the database
         //end
+        wh.child("PrivateOwnerDate").child(id).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+
+                String sun = dataSnapshot.child("d0").getValue(String.class);
+                String mon1 = dataSnapshot.child("d1").getValue(String.class);
+                String the1 = dataSnapshot.child("d2").getValue(String.class);
+                String wen1 = dataSnapshot.child("d3").getValue(String.class);
+                String thus1 = dataSnapshot.child("d4").getValue(String.class);
+                String fri1 = dataSnapshot.child("d5").getValue(String.class);
+                String sat1 = dataSnapshot.child("d6").getValue(String.class);
+
+                sund = (EditText) findViewById(R.id.etFeedback);
+                mon = (EditText) findViewById(R.id.mon);
+                the = (EditText) findViewById(R.id.ths);
+                wen = (EditText) findViewById(R.id.wensday);
+                thus = (EditText) findViewById(R.id.thus);
+                fri = (EditText) findViewById(R.id.fri);
+                sat = (EditText) findViewById(R.id.sat);
+
+               if(!TextUtils.isEmpty(sun)){
+
+                sund.setText(sun+"");}
+                   if(!TextUtils.isEmpty(mon1)){
+
+                mon.setText(mon1+"");}
+             if(!TextUtils.isEmpty(the1)){
+
+                the.setText(the1+"");}
+                 if(!TextUtils.isEmpty(wen1)){
+
+               wen.setText(wen1+"");}
+                 if(!TextUtils.isEmpty(thus1)){
+
+                thus.setText(thus1+"");}
+                     if(!TextUtils.isEmpty(fri1)){
+
+                fri.setText(fri1+"");}
+                if(!TextUtils.isEmpty(sat1)){
+
+                sat.setText(sat1+"");}
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+
+                Toast.makeText(editprofile.this, "لايوجد اتصال بالانترنت", Toast.LENGTH_LONG).show();
+            }
+        });
 
     }
 
@@ -133,12 +194,12 @@ public class editprofile extends AppCompatActivity {
         final String emailp = mail.getText().toString().trim();
         final String usern = username.getText().toString().trim();
         final String qusin = cusine.getText().toString().trim();
-        final String wh = workh.getText().toString().trim();
+
         final double x = 12.321;
         final double y = 13.1;
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String id = user.getUid();//customer id is the same as rating id to make it easy to refer
-        if (!TextUtils.isEmpty(emailp) && !TextUtils.isEmpty(pass) && !TextUtils.isEmpty(phoneN) && !TextUtils.isEmpty(qusin) && !TextUtils.isEmpty(usern) && !TextUtils.isEmpty(wh)) {
+        if (!TextUtils.isEmpty(emailp) && !TextUtils.isEmpty(pass) && !TextUtils.isEmpty(phoneN) && !TextUtils.isEmpty(qusin) && !TextUtils.isEmpty(usern) ) {
 
             databaseref = FirebaseDatabase.getInstance().getReference("PublicFoodTruckOwner").child(id);
 
@@ -150,8 +211,26 @@ public class editprofile extends AppCompatActivity {
             owner.setXFLication(x);
             owner.setYFLocation(y);
             owner.setQusins(qusin);
-            owner.setFWorkingHours(wh);
             databaseref.setValue(owner);
+            //wh
+            wh = FirebaseDatabase.getInstance().getReference("PrivateOwnerDate").child(id);
+            workh s=new workh();
+            if(!TextUtils.isEmpty(sund.getText().toString().trim())){final String sunday = sund.getText().toString().trim();
+                s.setD0(sunday);}
+            if(!TextUtils.isEmpty(mon.getText().toString().trim())){final String monday = mon.getText().toString().trim();
+                s.setD1(monday);}
+            if(!TextUtils.isEmpty(the.getText().toString().trim())){ final String thes = the.getText().toString().trim();
+                s.setD2(thes);}
+            if(!TextUtils.isEmpty(wen.getText().toString().trim())){  final String wensday = wen.getText().toString().trim();
+                s.setD3(wensday); }
+            if(!TextUtils.isEmpty(thus.getText().toString().trim())){     final String thusday = thus.getText().toString().trim();
+                s.setD4(thusday); }
+            if(!TextUtils.isEmpty(fri.getText().toString().trim())){ final String friday = fri.getText().toString().trim();
+                s.setD5(friday);}
+            if(!TextUtils.isEmpty(sat.getText().toString().trim())){ final String satrady= sat.getText().toString().trim();
+                s.setD6(satrady);}
+                wh.setValue(s);
+            //wh end
             Toast.makeText(editprofile.this, "تم حفظ التغييرات بنجاح!!", Toast.LENGTH_SHORT).show();
         } else
             Toast.makeText(editprofile.this, "البريد الالكتروني مستخدم مسبقا", Toast.LENGTH_SHORT).show();

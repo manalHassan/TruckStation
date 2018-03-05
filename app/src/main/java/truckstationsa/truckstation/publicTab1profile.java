@@ -31,7 +31,7 @@ import com.google.firebase.database.ValueEventListener;
  * Created by hadeel on 2/10/18.
  */
 
-public class publicTab1profile extends Fragment implements NavigationView.OnNavigationItemSelectedListener{
+public class publicTab1profile extends Fragment {
     Button button;
     DatabaseReference databaseref;
     TextView username;
@@ -48,8 +48,8 @@ public class publicTab1profile extends Fragment implements NavigationView.OnNavi
         final View rootView= inflater.inflate(R.layout.public_tab1_profile, container, false);
 //
 
-        Toolbar toolbar = (Toolbar) rootView.findViewById(R.id.toolbar);
-        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
+       // Toolbar toolbar = (Toolbar) rootView.findViewById(R.id.toolbar);
+       // ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
         setHasOptionsMenu(true);//Make sure you have this line of code
         databaseref = FirebaseDatabase.getInstance().getReference();
 
@@ -91,108 +91,10 @@ public class publicTab1profile extends Fragment implements NavigationView.OnNavi
 
 
 
-        DrawerLayout drawer = (DrawerLayout) rootView.findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(getActivity(), drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-
-        NavigationView navigationView = (NavigationView) rootView.findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
 
         //
         return rootView;
     }
-
-    //
-
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout)  getView().findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-           onBackPressed();
-        }
-    }
-/*
-    public boolean onCreateOptionsMenu(android.view.Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-    */
-    public void onCreateOptionsMenu(android.view.Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.main,menu);
-        onCreateOptionsMenu(menu,inflater);
-    }
-
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.nav_profile) {
-            Intent intent = new Intent(getActivity(), editprofile.class);
-            startActivity(intent);
-            DrawerLayout drawer = (DrawerLayout) getView().findViewById(R.id.drawer_layout);
-            drawer.closeDrawer(GravityCompat.START);
-            return true;
-
-        } else if (id == R.id.nav_preorder) {
-            /*Intent intent = new Intent(MainActivity.this, postActivity.class);
-            Bundle b=new Bundle();
-            b.putString("id",user);
-            intent.putExtras(b);
-            startActivity(intent);
-            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-            drawer.closeDrawer(GravityCompat.START);
-            return true;
-            */
-        }
-        else if (id == R.id.nav_booking) {
-            /*Intent intent = new Intent(MainActivity.this, postActivity.class);
-            Bundle b=new Bundle();
-            b.putString("id",user);
-            intent.putExtras(b);
-            startActivity(intent);
-            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-            drawer.closeDrawer(GravityCompat.START);
-            return true;
-            */
-        }
-
-        else if (id == R.id.nav_menu) {
-
-            Intent intent = new Intent(getActivity(), ownermenu.class);
-            Bundle b=new Bundle();
-
-            startActivity(intent);
-            DrawerLayout drawer = (DrawerLayout) getView().findViewById(R.id.drawer_layout);
-            drawer.closeDrawer(GravityCompat.START);
-            return true;
-        }
-
-
-        else if (id == R.id.nav_request) {
-/*
-  Intent intent = new Intent(MainActivity.this, editprofile.class);
-            Bundle b=new Bundle();
-            b.putString("id",user);
-            intent.putExtras(b);
-            startActivity(intent);
-            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-            drawer.closeDrawer(GravityCompat.START);
-            return true;
- */
-        }
-        return false;
-    }
-
-
-
-
-
-    //
-
 
 
 }

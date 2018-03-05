@@ -69,7 +69,8 @@
                     android:id="@+id/ppp"
                     android:layout_width="match_parent"
                     android:layout_height="35dp"
-                    android:text="كلمة المرور" />
+                    android:text="كلمة المرور"
+                    android:textSize="18sp" />
 
                 <EditText
                     android:id="@+id/pass"
@@ -101,7 +102,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="35dp"
                     android:text="رقم الجوال"
-                     />
+                    android:textSize="18sp" />
 
                 <EditText
                     android:id="@+id/phone"
@@ -132,7 +133,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="35dp"
                     android:text="البريد الالكتروني"
-                     />
+                    android:textSize="18sp" />
 
                 <EditText
                     android:id="@+id/email"
@@ -162,8 +163,8 @@
                     android:id="@+id/ccc"
                     android:layout_width="match_parent"
                     android:layout_height="35dp"
-                    android:text="توع المطبخ"
-                    />
+                    android:text="نوع المطبخ"
+                    android:textSize="18sp" />
 
                 <EditText
                     android:id="@+id/cusin"
@@ -192,8 +193,19 @@
                     android:id="@+id/ddd"
                     android:layout_width="match_parent"
                     android:layout_height="35dp"
-                    android:text="ساعـات العمل"
+                    android:text="ســــــاعـــــــات العمـــــــــــــــل"
+
+                    android:textAlignment="center"
+                    android:textAllCaps="false"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:text="الاحد"
                     />
+
                 <EditText
                     android:id="@+id/etFeedback"
                     android:layout_width="match_parent"
@@ -201,8 +213,99 @@
                     android:layout_marginTop="10dp"
                     android:gravity="top"
                     android:hint="الاحد 7 مساء-2 صباحا"
-                    android:inputType="textMultiLine"
-                    android:lines="4" />
+                    android:inputType="text"
+                    android:lines="1" />
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:text="الاثنين"
+                    />
+
+                <EditText
+                    android:id="@+id/mon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="top"
+                    android:hint="الاثنين 7 مساء-2 صباحا"
+                    android:inputType="text"
+                    android:lines="1" />
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:text="الثلاثاء"
+                    />
+                <EditText
+                    android:id="@+id/ths"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="top"
+                    android:hint="الثلاثاء 7 مساء-2 صباحا"
+                    android:inputType="text"
+                    android:lines="1" />
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:text="الاربعاء"
+                    />
+                <EditText
+                    android:id="@+id/wensday"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="top"
+                    android:hint="الاربعاء 7 مساء-2 صباحا"
+                    android:inputType="text"
+                    android:lines="1" />
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:text="الخميس"
+                    />
+                <EditText
+                    android:id="@+id/thus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="top"
+                    android:hint="الخميس 7 مساء-2 صباحا"
+                    android:inputType="text"
+                    android:lines="1" />
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:text="الجمعه"
+                    />
+                <EditText
+                    android:id="@+id/fri"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="top"
+                    android:hint="الجمعه 7 مساء-2 صباحا"
+                    android:inputType="text"
+                    android:lines="1" />
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:text="السبت"
+                    />
+                <EditText
+                    android:id="@+id/sat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="top"
+                    android:hint="السبت 7 مساء-2 صباحا"
+                    android:inputType="text"
+                    android:lines="1" />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

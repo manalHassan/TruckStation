@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -75,6 +76,7 @@ public class contentmain extends AppCompatActivity {
         Intent intent = new Intent(contentmain.this, editprofile.class);
         startActivity(intent);
     }
+
 
 
 }
