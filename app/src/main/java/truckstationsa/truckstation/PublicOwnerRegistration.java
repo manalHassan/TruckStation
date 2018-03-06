@@ -69,7 +69,7 @@ public class PublicOwnerRegistration extends AppCompatActivity {
     DatabaseReference databaseReference;
     int Image_Request_Code = 7;
     ProgressDialog progressDialog ;
-
+    DatabaseReference UDB;
     // Folder path for Firebase Storage.
     String Storage_Path = "Trucks Images/";
 
@@ -92,7 +92,7 @@ public class PublicOwnerRegistration extends AppCompatActivity {
         databaseReference = FirebaseDatabase.getInstance().getReference().child("PublicFoodTruckOwner");
         Upload_image = (Button) findViewById(R.id.Pimage);
         //Pimage = (ImageView) view.findViewById(R.id.imageView);
-
+        UDB=FirebaseDatabase.getInstance().getReference("APPUsers");
         //////////////
         // Adding click listener to Choose image button.
         Upload_image.setOnClickListener(new View.OnClickListener() {
@@ -213,7 +213,7 @@ public class PublicOwnerRegistration extends AppCompatActivity {
         if ( !TextUtils.isEmpty(emailp) && !TextUtils.isEmpty(pass) && !TextUtils.isEmpty(phoneN) && !TextUtils.isEmpty(qusin)  && !TextUtils.isEmpty(username) &&
                 FilePathUri != null) {
 
-            mProgress.setMessage("انتضر من فضلك....");
+            mProgress.setMessage("انتظر من فضلك....");
             mProgress.show();
             StorageReference storageReference2nd = storageReference.child(Storage_Path + System.currentTimeMillis() + "." + GetFileExtension(FilePathUri));
 
@@ -246,6 +246,11 @@ public class PublicOwnerRegistration extends AppCompatActivity {
                                                          PublicFoodTruckOwner owner = new PublicFoodTruckOwner(finalUrl, username, pass, emailp, Integer.parseInt(phoneN), x, y, qusin, uid);
                                                          databaseReference.child(uid).setValue(owner);
                                                          // fdb2.child(t.getTruckname()).setValue(t);
+
+                                                         //to know the type of the user
+                                                         String type="Customer";
+                                                         APPUsers user1=new APPUsers(type);
+                                                         UDB.child(uid).setValue(user1);
                                                      } catch (Exception e) {
                                                          e.printStackTrace();
                                                      }

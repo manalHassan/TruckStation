@@ -16,8 +16,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 /**
  * Created by manal on 2/10/2018.
@@ -27,7 +30,8 @@ public class publicOnerLogIn extends AppCompatActivity {
 
     private FirebaseDatabase db = FirebaseDatabase.getInstance();
     private DatabaseReference dbRef = db.getReference();
-
+    String type="hi";
+    private DatabaseReference appUse=db.getReference("APPUsers");
 
     //Buttons  ;
     Button rigister ;
@@ -144,10 +148,33 @@ public class publicOnerLogIn extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             progressDialog.dismiss();
                             if (task.isSuccessful()) {
-                                Toast.makeText(publicOnerLogIn.this, "تم تسجيل الدخول بنجاح", Toast.LENGTH_SHORT).show();
 
-                              Intent intent = new Intent(publicOnerLogIn.this, PublicOwnerProfileActivity.class);
-                               startActivity(intent);
+                                // verfy if he/she a customer
+                                String id=mAuth.getCurrentUser().getUid();
+                                appUse.child(id).child("type").addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(DataSnapshot dataSnapshot) {
+                                        //data snapchat is the whole database
+                                        type=dataSnapshot.getValue(String.class).toString().trim();
+
+                                        if(type.equals("PublicOwner")){
+                                            Toast.makeText(publicOnerLogIn.this, "تم تسجيل الدخول بنجاح", Toast.LENGTH_SHORT).show();
+
+                                            Intent intent = new Intent(publicOnerLogIn.this, PublicOwnerProfileActivity.class);
+                                            startActivity(intent);
+                                        }
+                                        else{
+                                            Toast.makeText(publicOnerLogIn.this, "الرجاء التأكد من نوع الدخول", Toast.LENGTH_SHORT).show();
+
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(DatabaseError databaseError) {
+
+                                    }
+                                });
+
 //نانتاتناتات
                             } // Singed in successfull
                             if (!task.isSuccessful()) {

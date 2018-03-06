@@ -50,6 +50,7 @@ public class GoTOPrivatRegisterPage  extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener mAuthListener;
     Button rigister ;
     DatabaseReference fdb;
+    DatabaseReference UDB;
     private ProgressDialog mProgress;
     private Button Upload_image,AddP;
     Uri FilePathUri;
@@ -69,6 +70,7 @@ public class GoTOPrivatRegisterPage  extends AppCompatActivity {
         Qusen = (EditText) findViewById(R.id.qusin);
         userName = (EditText) findViewById(R.id.username);
         rigister = (Button) findViewById(R.id.singup);
+        UDB=FirebaseDatabase.getInstance().getReference("APPUsers");
         //Start Image code
         storageReference = FirebaseStorage.getInstance().getReference();
         databaseReference = FirebaseDatabase.getInstance().getReference().child("PublicFoodTruckOwner");
@@ -175,12 +177,17 @@ public class GoTOPrivatRegisterPage  extends AppCompatActivity {
                                                 //String id = fdb.push().getKey();
                                                 PrivateFoodTruckOwner owner = new PrivateFoodTruckOwner(username, pass, emailp,Integer.parseInt(phoneN) , qusin , uid, finalUrl);
                                                 fdb.child(uid).setValue(owner);
+
+                                                //to know the type of the user
+                                                String type="PrivateOwner";
+                                                APPUsers user1=new APPUsers(type);
+                                                UDB.child(uid).setValue(user1);
                                                 Toast.makeText(GoTOPrivatRegisterPage.this, "تم التسجل بنجاح!!", Toast.LENGTH_SHORT).show();
                                                 // Intent intent = new Intent(GoTOCustomerRegisterPage.this, .class);
                                                 // startActivity(intent);
                                                 finish();
                                             } else
-                                                Toast.makeText(GoTOPrivatRegisterPage.this, "البريد الالكتروني البريد الالكتروني غير صحيح ", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(GoTOPrivatRegisterPage.this, "البريد الالكتروني غير صحيح ", Toast.LENGTH_SHORT).show();
 
 
 
@@ -234,6 +241,10 @@ public class GoTOPrivatRegisterPage  extends AppCompatActivity {
                               //  String id = fdb.push().getKey();
                                 PrivateFoodTruckOwner owner = new PrivateFoodTruckOwner(username, pass, emailp,Integer.parseInt(phoneN) , qusin , uid,"");
                                 fdb.child(uid).setValue(owner);
+                                //to know the type of the user
+                                String type="PrivateOwner";
+                                APPUsers user1=new APPUsers(type);
+                                UDB.child(uid).setValue(user1);
                                 Toast.makeText(GoTOPrivatRegisterPage.this, "تم التسجل بنجاح!!", Toast.LENGTH_SHORT).show();
                                 // Intent intent = new Intent(GoTOCustomerRegisterPage.this, .class);
                                 // startActivity(intent);
