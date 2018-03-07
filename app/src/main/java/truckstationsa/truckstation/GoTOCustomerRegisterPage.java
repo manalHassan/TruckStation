@@ -5,9 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
@@ -22,19 +20,11 @@ import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
-import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.Place;
-
-import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
-import com.google.android.gms.common.GooglePlayServicesRepairableException;
 
 /**
  * Created by manal on 2/9/2018.
@@ -51,6 +41,8 @@ public class GoTOCustomerRegisterPage  extends AppCompatActivity  {
     private FirebaseUser user;
     Button rigister ;
     DatabaseReference fdb;
+    DatabaseReference UDB;
+
     double x =0 , y =0 ;
     private ProgressDialog mProgress;
     @Override
@@ -68,7 +60,7 @@ public class GoTOCustomerRegisterPage  extends AppCompatActivity  {
         rigister = (Button) findViewById(R.id.singup);
         mProgress = new ProgressDialog(this);
         fdb = FirebaseDatabase.getInstance().getReference("Customer");
-
+        UDB=FirebaseDatabase.getInstance().getReference("APPUsers");
        location.setOnClickListener(new View.OnClickListener() {
            @Override
             public void onClick(View v) {
@@ -143,6 +135,10 @@ public  void chickInfo(View view ){
                             Customer customer = new Customer(pass, emailc, fname, lname, Integer.parseInt(phoneN), x, y  , uid);
                             fdb.child(uid).setValue(customer);
 
+                            //to know the type of the user
+                            String type="Customer";
+                            APPUsers user1=new APPUsers(type);
+                            UDB.child(uid).setValue(user1);
                             //Customer customer = new Customer(pass, emailc, fname, lname, Integer.parseInt(phoneN), x, y);
                             //fdb.setValue(customer);
 

@@ -18,8 +18,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 /**
  * Created by manal on 2/9/2018.
@@ -28,8 +31,8 @@ import com.google.firebase.database.FirebaseDatabase;
 public class CustomerLogInPage extends AppCompatActivity {
     private FirebaseDatabase db = FirebaseDatabase.getInstance();
     private DatabaseReference dbRef = db.getReference();
-
-
+    private DatabaseReference appUse=db.getReference("APPUsers");
+    String type="hi";
     //Buttons  ;
     Button rigister ;
 
@@ -145,10 +148,32 @@ public class CustomerLogInPage extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             progressDialog.dismiss();
                             if (task.isSuccessful()) {
-                                Toast.makeText(CustomerLogInPage.this, "تم تسجيل الدخول بنجاح", Toast.LENGTH_SHORT).show();
+                                // verfy if he/she a customer
+                                String id=mAuth.getCurrentUser().getUid();
+                                appUse.child(id).child("type").addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(DataSnapshot dataSnapshot) {
+                                        //data snapchat is the whole database
+                                        type=dataSnapshot.getValue(String.class).toString().trim();
 
-                                Intent intent = new Intent(CustomerLogInPage.this,ListPuplic.class);
-                                startActivity(intent);
+                                        if(type.equals("Customer")){
+                                            Toast.makeText(CustomerLogInPage.this, "تم تسجيل الدخول بنجاح", Toast.LENGTH_SHORT).show();
+                                            Intent intent = new Intent(CustomerLogInPage.this,ListPuplic.class);
+                                            startActivity(intent);}
+                                        else{
+                                            Toast.makeText(CustomerLogInPage.this, "الرجاء التأكد من نوع الدخول", Toast.LENGTH_SHORT).show();
+
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(DatabaseError databaseError) {
+
+                                    }
+                                });
+
+
+
 
                             } // Singed in successfull
                             if (!task.isSuccessful()) {
