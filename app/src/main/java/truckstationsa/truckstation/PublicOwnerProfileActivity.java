@@ -21,6 +21,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -295,6 +296,17 @@ public class PublicOwnerProfileActivity extends AppCompatActivity
             return true;
  */
         }
+        else if (id == R.id.nav_logout) {
+
+            mAuth.signOut();
+            if(mAuth.getCurrentUser() == null){
+                Toast.makeText(this , "تم تسجيل الخروج بنجاح" , Toast.LENGTH_SHORT).show();
+                startActivity(new Intent (this , publicOnerLogIn.class));
+                DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+                drawer.closeDrawer(GravityCompat.START);
+                return true;
+
+            }}
         return false;
     }
 

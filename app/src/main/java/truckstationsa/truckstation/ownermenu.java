@@ -1,5 +1,6 @@
 package truckstationsa.truckstation;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -177,8 +178,8 @@ public class ownermenu extends AppCompatActivity {
         buttonDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                deleteCategory(artistId,mid);
+                AlertDialog diaBox = AskOption(artistId,mid);
+                diaBox.show();
                 b.dismiss();
 
             }
@@ -226,6 +227,38 @@ public class ownermenu extends AppCompatActivity {
         String tid =myRef.push().getKey();
         Item t= new Item ("vegan pizza" ,"https://www.cicis.com/media/1176/pizza_trad_pepperonibeef.png" ,"this is pizza for vegan" , 33  ,"-L5iy2Lnxk-3j5BtRKZY" , tid );
         myRef.child("Item").child(id).child("-L5iy2Lnxk-3j5BtRKZY").child(tid).setValue(t);
+    }
+    private AlertDialog AskOption(final String artistId,final String mid)
+    {
+        AlertDialog myQuittingDialogBox =new AlertDialog.Builder(this)
+                //set message, title, and icon
+                .setTitle("حذف فئة")
+                .setMessage("هل تريد حذف الفئة")
+                .setIcon(R.drawable.ic_delete)
+
+                .setPositiveButton("حذف", new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        //your deleting code
+                        deleteCategory(artistId,mid);
+
+                        dialog.dismiss();
+                    }
+
+                })
+
+
+
+                .setNegativeButton("إالغاء", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        dialog.dismiss();
+
+                    }
+                })
+                .create();
+        return myQuittingDialogBox;
+
     }
 }
 /*<Button

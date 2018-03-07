@@ -12,11 +12,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.*;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.app.Activity;
 import android.view.MenuItem;
 import android.view.View;
+
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -66,18 +69,20 @@ public class publicTab1profile extends Fragment {
                 int phonnum = dataSnapshot.child(user1).child("fponeNoumber").getValue(int.class);
                 String email = dataSnapshot.child(user1).child("femail").getValue(String.class);
                 String cc = dataSnapshot.child(user1).child("qusins").getValue(String.class);
-                String wh=dataSnapshot.child(user1).child("fworkingHours").getValue(String.class);
-
+               // String wh=dataSnapshot.child(user1).child("fworkingHours").getValue(String.class);
+                String logo = dataSnapshot.child(user1).child("url").getValue(String.class);
+                ImageView mg= (ImageView) rootView.findViewById(R.id.mg);
+               // Glide.with(getActivity()).load(logo).override(45, 72).into(mg);
                 username = (TextView) rootView.findViewById(R.id.type);
                 username.setText(" " + cc);
                 TextView profilename = (TextView) rootView.findViewById(R.id.user);
                 profilename.setText(name);
-                wwh= (TextView) rootView.findViewById(R.id.wh);
-                wwh.setText(" " + wh);
+             //   wwh= (TextView) rootView.findViewById(R.id.wh);
+             //   wwh.setText(" " + wh);
                 mail = (TextView) rootView.findViewById(R.id.email);
                 mail.setText(" " + email);
-                phone = (TextView) rootView.findViewById(R.id.phone);
-                phone.setText(" " + phonnum + " ");
+               phone = (TextView) rootView.findViewById(R.id.phone);
+               phone.setText(" " + phonnum + " ");
             }
 
             @Override

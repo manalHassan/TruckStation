@@ -9,12 +9,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.ArrayList;
 
 public class ListPuplic extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener  {
     FirebaseAuth auth ;
@@ -24,6 +28,7 @@ public class ListPuplic extends AppCompatActivity implements NavigationView.OnNa
     ListView listView;
     FirebaseClient firebaseClient;
     DrawerLayout drawer;
+    ArrayList<PublicFoodTruckOwner> dogies= new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,8 +36,11 @@ public class ListPuplic extends AppCompatActivity implements NavigationView.OnNa
         setContentView(R.layout.listview_drawer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
 ///////////////////////////////////////////
         listView = (ListView) findViewById(R.id.listview);
+
+
         firebaseClient = new FirebaseClient(this, DB_URL, listView);
         //  firebaseClient.refreshdata();
         firebaseClient.savedata("pu");
@@ -41,7 +49,29 @@ public class ListPuplic extends AppCompatActivity implements NavigationView.OnNa
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
-        toggle.syncState();}//crest
+        toggle.syncState();
+        dogies= firebaseClient.array1();
+
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
+                PublicFoodTruckOwner artist = dogies.get(position);
+// set Fragmentclass Arguments
+               // publicTab1profileforcustmer fragobj = new  publicTab1profileforcustmer();
+              //  fragobj.setArguments(b);
+
+                Intent intent = new Intent(ListPuplic.this, Publicownerforcustmer.class);
+                 Bundle b=new Bundle();
+                 b.putString("id",artist.getUid());
+                intent.putExtras(b);
+                 startActivity(intent);
+
+
+
+            }
+        });
+    }
 
 
     @Override

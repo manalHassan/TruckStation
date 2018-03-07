@@ -46,6 +46,7 @@ public class editprofile extends AppCompatActivity {
     EditText thus;
     EditText fri;
     EditText sat;
+    String logo;
     private String address;
     //static double xx = 12.32;
   //  static double yy = 12.32;
@@ -96,6 +97,7 @@ public class editprofile extends AppCompatActivity {
                 String email = dataSnapshot.child("femail").getValue(String.class);
                 String password = dataSnapshot.child("fpassword").getValue(String.class);
                 String cusin = dataSnapshot.child("qusins").getValue(String.class);
+                logo = dataSnapshot.child("url").getValue(String.class);
                // String whh = dataSnapshot.child("fworkingHours").getValue(String.class);
                 // xx = dataSnapshot.child("xflication").getValue(Double.class);
                 // yy = dataSnapshot.child("yflication").getValue(Double.class);
@@ -211,6 +213,8 @@ public class editprofile extends AppCompatActivity {
             owner.setXFLication(x);
             owner.setYFLocation(y);
             owner.setQusins(qusin);
+            owner.setUid(id);
+            owner.setUrl(logo);
             databaseref.setValue(owner);
             //wh
             wh = FirebaseDatabase.getInstance().getReference("PrivateOwnerDate").child(id);

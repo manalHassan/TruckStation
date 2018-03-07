@@ -29,13 +29,42 @@
                 android:background="@drawable/gradientbackground"
                 android:orientation="vertical">
 
+                <Button
+                    android:id="@+id/Reserve"
+                    style="@style/TextAppearance.AppCompat.Body1"
+                    android:layout_width="104dp"
+                    android:layout_height="33dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/background_signup"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:onClick="goreserve"
+                    android:text="الحجـــز"
+                    android:textAllCaps="false"
+                    android:textColor="#fff" />
+
+                <Button
+                    android:id="@+id/rating"
+                    style="@style/TextAppearance.AppCompat.Body1"
+                    android:layout_width="104dp"
+                    android:layout_height="32dp"
+                    android:layout_gravity="top|start"
+                    android:layout_weight="1"
+                    android:background="@drawable/background_signup"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:onClick="gorating"
+                    android:text="التقييم"
+                    android:textAllCaps="false"
+                    android:textColor="#fff" />
+
                 <ImageView
-                    android:layout_width="101dp"
-                    android:layout_height="72dp"
+                    android:id="@+id/mg"
+                    android:layout_width="81dp"
+                    android:layout_height="55dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="45dp"
-                    android:src="@drawable/profile_pictures_con"
-                    />
+                    android:src="@drawable/profile_pictures_con" />
 
                 <TextView
                     android:id="@+id/user"
@@ -43,6 +72,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="10dp"
+                    android:gravity="top"
                     android:text="username"
                     android:textColor="#fff"
                     android:textSize="21sp"
