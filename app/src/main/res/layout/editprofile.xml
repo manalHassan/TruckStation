@@ -36,12 +36,7 @@
                     android:orientation="horizontal"
                     android:paddingLeft="25dp">
 
-                    <ImageView
-                        android:layout_width="41dp"
-                        android:layout_height="45dp"
-                        android:layout_gravity="start"
-                        android:layout_marginTop="45dp"
-                        android:src="@drawable/logo" />
+
 
                     <EditText
                         android:id="@+id/name"
@@ -59,6 +54,20 @@
                         android:maxLines="1"
                         android:padding="8dp"
                         android:textDirection="rtl" />
+
+
+                    <TextView
+                        android:id="@+id/location"
+                        android:layout_width="60dp"
+                        android:layout_height="45dp"
+                        android:layout_gravity="start"
+                        android:layout_marginTop="45dp"
+                        android:focusable="true"
+                        android:gravity="center"
+                        android:onClick="goToVisitorHomePage"
+                        android:text="حدد موقعك"
+                        android:textAllCaps="false"
+                        android:textColor="#000" />
             </LinearLayout>
                 <View
                     android:layout_width="match_parent"
@@ -189,6 +198,11 @@
                     android:layout_height="1dp"
                     />
 
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    />
                 <TextView
                     android:id="@+id/ddd"
                     android:layout_width="match_parent"
@@ -322,17 +336,6 @@
                         android:layout_height="36dp"
                         android:src="@drawable/ic_location_on_black_24dp" />
 
-                    <TextView
-                        android:id="@+id/location"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:focusable="true"
-                        android:gravity="center"
-                        android:onClick="goToVisitorHomePage"
-                        android:text="حدد موقعك"
-                        android:textAllCaps="false"
-                        android:textColor="#000" />
 
 
                 </LinearLayout>

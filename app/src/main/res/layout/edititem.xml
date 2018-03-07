@@ -21,7 +21,7 @@
                 android:orientation="vertical">
 
                 <EditText
-                    android:id="@+id/username"
+                    android:id="@+id/name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="40dp"
@@ -42,7 +42,7 @@
                     android:background="#fff" />
 
                 <EditText
-                    android:id="@+id/pass"
+                    android:id="@+id/des"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
@@ -66,7 +66,7 @@
                     android:background="#fff" />
 
                 <EditText
-                    android:id="@+id/phone"
+                    android:id="@+id/price"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
@@ -152,7 +152,7 @@
 
 
                 <Button
-                    android:id="@+id/singup"
+                    android:id="@+id/additem"
                     style="@style/TextAppearance.AppCompat.Body1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -161,6 +161,7 @@
                     android:clickable="true"
                     android:focusable="true"
 
+                    android:onClick="additem"
                     android:padding="16dp"
                     android:text="إضافة صنف"
                     android:textAllCaps="false"
