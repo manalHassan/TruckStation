@@ -212,7 +212,7 @@ public class PublicOwnerRegistration extends AppCompatActivity {
 
         if ( !TextUtils.isEmpty(emailp) && !TextUtils.isEmpty(pass) && !TextUtils.isEmpty(phoneN) && !TextUtils.isEmpty(qusin)  && !TextUtils.isEmpty(username) &&
                 FilePathUri != null) {
-
+            if (pass.matches("^(?=.*\\d)(?=.*[$@$!%*#?&])[A-Za-z\\d$@$!%*#?&]{8,10}$")) {
             mProgress.setMessage("انتظر من فضلك....");
             mProgress.show();
             StorageReference storageReference2nd = storageReference.child(Storage_Path + System.currentTimeMillis() + "." + GetFileExtension(FilePathUri));
@@ -259,7 +259,7 @@ public class PublicOwnerRegistration extends AppCompatActivity {
                                                      // startActivity(intent);
                                                      finish();
                                                  } else
-                                                     Toast.makeText(PublicOwnerRegistration.this, "البريد الالكتروني  غير صحيح ", Toast.LENGTH_SHORT).show();
+                                                     Toast.makeText(PublicOwnerRegistration.this, "البريد الالكتروني  غير صحيح او مستخدم مسبقا ", Toast.LENGTH_SHORT).show();
                                              }catch (Exception e){ Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();}
 
                                         }
@@ -333,8 +333,11 @@ public class PublicOwnerRegistration extends AppCompatActivity {
 
 
 
-
-        }//second if
+            }
+            else
+            {      Toast.makeText(PublicOwnerRegistration.this, "الرقم السري يجب ان يحتوي على رقم واحد على الاقل و حرف خاص واحد على الاقل وطوله ثمانية حروف ", Toast.LENGTH_SHORT).show();
+            }}else {   Toast.makeText(PublicOwnerRegistration.this, "تأكد من تعبئة جميع الحقول", Toast.LENGTH_SHORT).show();
+        }
 
     }
 }

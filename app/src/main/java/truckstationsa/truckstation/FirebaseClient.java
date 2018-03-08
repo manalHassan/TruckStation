@@ -180,6 +180,11 @@ public class FirebaseClient extends AppCompatActivity  {
         return super.onCreateOptionsMenu(menu);
     }
 
+    public  ArrayList<PublicFoodTruckOwner> array1(){
+
+        return dogies;
+    }
+
     //////////////////////
 
 }

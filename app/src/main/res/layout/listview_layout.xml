@@ -6,6 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
     android:orientation="horizontal"
+    android:descendantFocusability="blocksDescendants"
     app:ignore="NamespaceTypo"
     card_view:cardBackgroundColor="@color/cardview_light_background"
     card_view:cardCornerRadius="10dp"

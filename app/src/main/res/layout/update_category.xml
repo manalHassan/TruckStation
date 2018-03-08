@@ -15,26 +15,24 @@
         android:layout_marginTop="24dp"
         android:backgroundTint="@color/cardview_dark_background"
         android:ems="10"
-        android:hint="ادخل اسم الفئة الجديد"
+        android:hint="ادخل اسم الفئة"
         android:inputType="textPersonName"
-        android:text="ادخل اسم الفئة الجديد"
+        android:text="اسم الفئة الجديد"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <Button
         android:id="@+id/category"
-        android:layout_width="182dp"
-        android:layout_height="43dp"
+        android:layout_width="45dp"
+        android:layout_height="30dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="20dp"
-        android:background="@drawable/buttonstayle"
-        android:onClick="addcategory"
-        android:text="تحديث الفئة"
-
+        android:background="@drawable/ic_edit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.529"
@@ -45,21 +43,16 @@
 
     <Button
         android:id="@+id/delete"
-        android:layout_width="183dp"
-        android:layout_height="44dp"
+        android:layout_width="54dp"
+        android:layout_height="33dp"
+        android:layout_gravity="bottom"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:background="@drawable/buttonstayle"
-        android:onClick="addcategory"
-        android:text="حذف الفئة"
+        android:background="@drawable/ic_delete"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.535"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/category" />
-
-
-
-
 
 </android.support.constraint.ConstraintLayout>

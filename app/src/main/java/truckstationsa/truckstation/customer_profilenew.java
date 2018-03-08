@@ -71,7 +71,7 @@ public class customer_profilenew extends AppCompatActivity implements Navigation
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        firebaseAuth =  FirebaseAuth.getInstance() ;
         context = this;
         setContentView(R.layout.activity_customer);
 
@@ -348,7 +348,7 @@ public class customer_profilenew extends AppCompatActivity implements Navigation
             firebaseAuth.signOut();
             if(firebaseAuth.getCurrentUser() == null){
                 Toast.makeText(this , "تم تسجيل الدخول بنجاح" , Toast.LENGTH_SHORT).show();
-                startActivity(new Intent (this , CustomerLogInPage.class));
+                startActivity(new Intent (this , MainActivity.class));
                 DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
                 drawer.closeDrawer(GravityCompat.START);
                 return true;

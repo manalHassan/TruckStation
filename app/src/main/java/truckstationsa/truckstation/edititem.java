@@ -30,8 +30,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -86,98 +89,87 @@ import java.io.IOException;
 
 public class edititem extends AppCompatActivity {
 
-
+String mid="";
     Context context;
-    EditText password, phone, email, userName;
-    private FirebaseAuth mAuth;
-    Button rigister;
-    DatabaseReference fdb;
-    DatabaseReference fdb2;
-    private ProgressDialog mProgress;
-    //for imge
-    private DatabaseReference mDatabase2;
-    private EditText PName;
-    private Button Upload_image, AddP;
-    Uri FilePathUri;
-    StorageReference storageReference;
-    DatabaseReference databaseReference;
-    int Image_Request_Code = 7;
-    ProgressDialog progressDialog;
-
-    // Folder path for Firebase Storage.
-    String Storage_Path = "Trucks Images/";
+    EditText name,des;
+    EditText price;
+    String cid="";
+    //private FirebaseAuth mAuth;
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference myRef = database.getReference();
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edititem);
-        context = this;
-        mAuth = FirebaseAuth.getInstance();
+        Bundle b = getIntent().getExtras();
+        cid = b.getString("cid");
+        name = (EditText) findViewById(R.id.name);
+        price = (EditText) findViewById(R.id.price);
+        des = (EditText) findViewById(R.id.des);
 
-        password = (EditText) findViewById(R.id.pass);
-        phone = (EditText) findViewById(R.id.phone);
-        email = (EditText) findViewById(R.id.email);
-        userName = (EditText) findViewById(R.id.username);
-        rigister = (Button) findViewById(R.id.singup);
+
+        
+
         //Start Image code
-        storageReference = FirebaseStorage.getInstance().getReference();
-        databaseReference = FirebaseDatabase.getInstance().getReference().child("PublicFoodTruckOwner");
-        Upload_image = (Button) findViewById(R.id.Pimage);
-        //Pimage = (ImageView) view.findViewById(R.id.imageView);
 
-        //////////////
-        // Adding click listener to Choose image button.
-        Upload_image.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {// هذي تختار من الصور الي بالجهاز
+}
 
-                Intent intent = new Intent();
+    public void additem(View view) {
+        final String p=price.getText().toString().trim();
+        final double pr;
+        try{
+             pr = Double.parseDouble(p);}
+        catch (Exception e){
+            Toast.makeText(this, "الرجاء ادخال السعر بشكل صحيح ", Toast.LENGTH_LONG).show();
+            return;
+        }
+        final String d = des.getText().toString().trim();
+        final String n = name.getText().toString().trim();
 
-                // Setting intent type as image to select image from phone storage.
-                intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(intent, "Please Select Image"), Image_Request_Code);
-            }
-        });
-        //////////////////
+        if (!TextUtils.isEmpty(n) && !TextUtils.isEmpty(p) && !TextUtils.isEmpty(d)) {
+           //1 get menu id
+            FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
+            String id = user.getUid();//customer id is the same as rating id to make it easy to refer
+            myRef.child("Menu").child(id).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    mid = dataSnapshot.child("mid").getValue(String.class);
+                    //2 add item
+                    String tid =myRef.push().getKey();
+                    Item t=new Item();
+                    t.setCatID(cid);
+                    t.setIdescription(d);
+                    t.setIName(n);
+                    t.setIPicture("here url");
+                    t.setIPrice(pr);
+                    t.setItemID(tid);
 
-    }
+                    myRef.child("Item").child(mid).child(cid).child(tid).setValue(t);;
+                }
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
 
+                }
+            });
+            //3 back to items list
+            Toast.makeText(this, "تمت اللإضافة", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(this, itemlist.class);
+            Bundle b=new Bundle();
+            b.putString("cid",cid);
+            intent.putExtras(b);
+            startActivity(intent);
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) { //هذي تاكد من الصوره
+        }
+          else {
+            Toast.makeText(this, "الرجاء تعبئة جميع الحقول ", Toast.LENGTH_LONG).show();
+            return;
 
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == Image_Request_Code && resultCode == RESULT_OK && data != null && data.getData() != null) {
-
-            FilePathUri = data.getData();
-
-            try {
-                // Getting selected image into Bitmap.
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), FilePathUri);
-                // Setting up bitmap selected image into ImageView.
-                //Pimage.setImageBitmap(bitmap);
-                // After selecting image change choose button above text.
-                Upload_image.setText("Image Selected");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
 
+}
 
-    }
 
-    ////
-
-    // Creating Method to get the selected image file Extension from File Path URI.
-    public String GetFileExtension(Uri uri) {
-        ContentResolver contentResolver = this.getContentResolver();
-        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
-        // Returning the file Extension.
-        return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
-
-    }
 
 }
