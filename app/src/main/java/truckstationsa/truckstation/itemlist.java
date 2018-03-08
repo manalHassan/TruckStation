@@ -1,10 +1,15 @@
 package truckstationsa.truckstation;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -30,17 +35,18 @@ public class itemlist extends AppCompatActivity {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference();
     String id = "";
-   String cid="";
-    String mid="";
+    String cid = "";
+    String mid = "";
     ListView listViewArtists;
     List<Item> artists;
     FirebaseAuth firebaseAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.items_list);
 
-       Bundle b = getIntent().getExtras();
+        Bundle b = getIntent().getExtras();
         cid = b.getString("cid");
         //TextView view =(TextView) findViewById(R.id.foodmenu);
         //view.setText(cid);
@@ -52,32 +58,52 @@ public class itemlist extends AppCompatActivity {
         listViewArtists.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Item artist = artists.get(i);
-                //   String
+                // Item artist = artists.get(i);
+               /*    String
                 Intent intent = new Intent(itemlist.this, edititem.class);
                 Bundle b=new Bundle();
                 b.putString("tid",artist.getItemID());
                 intent.putExtras(b);
                 startActivity(intent);
-           return true;
+                */
+                return true;
             }
         });
 
     }
 
-    public void additem(View view) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
+        LayoutInflater inflater = getLayoutInflater();
+        View row = inflater.inflate(R.layout.layout_itemlist, parent, false);
+        Button delete = (Button) row.findViewById(R.id.deleteitem);
+        delete.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Item tem= artists.get(position);
+                AlertDialog diaBox = AskOption(tem.getItemID());
+                diaBox.show();
+            }
+        });
+        return row;
+    }
 
-        String tid =myRef.push().getKey();
+
+    public void additem(View view) {
+        Intent intent = new Intent(this, edititem.class);
+        Bundle b = new Bundle();
+        b.putString("cid", cid);
+        intent.putExtras(b);
+        startActivity(intent);
+        /*String tid =myRef.push().getKey();
         Item t1= new Item ("برجر لحم" ,"http://www.overcaffeinated.org/sites/default/files/styles/large/public/products/tazo_black_shaken_iced_tea.jpg?itok=u6CezagO" ,"مثجلجات بنكهة الشاي" , 23  ,cid , tid );
         myRef.child("Item").child(mid).child(cid).child(tid).setValue(t1);
-        Toast.makeText(itemlist.this, "تمت اللإضافة", Toast.LENGTH_LONG).show();
+        Toast.makeText(itemlist.this, "تمت اللإضافة", Toast.LENGTH_LONG).show();*/
     }
 
     @Override
     protected void onStart() {
         super.onStart();
         //attaching value event listener
-        FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String id = user.getUid();//customer id is the same as rating id to make it easy to refer
         myRef.child("Menu").child(id).addValueEventListener(new ValueEventListener() {
             @Override
@@ -90,7 +116,7 @@ public class itemlist extends AppCompatActivity {
                         artists.clear();
 
                         for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                           Item artist =new Item(ds.getValue(Item.class));
+                            Item artist = new Item(ds.getValue(Item.class));
                             artists.add(artist);
                         }
 
@@ -108,6 +134,7 @@ public class itemlist extends AppCompatActivity {
                 });
 
             }
+
             @Override
             public void onCancelled(DatabaseError error) {
                 // Failed to read value
@@ -117,10 +144,44 @@ public class itemlist extends AppCompatActivity {
     }
 
 
+    private AlertDialog AskOption(final String item) {
+        AlertDialog myQuittingDialogBox = new AlertDialog.Builder(this)
+                //set message, title, and icon
+                .setTitle("حذف صنف")
+                .setMessage("هل تريد حذف الصنف")
+                .setIcon(R.drawable.ic_delete)
+
+                .setPositiveButton("حذف", new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        //your deleting code
+                        deleteitem(item);
+
+                        dialog.dismiss();
+                    }
+
+                })
 
 
+                .setNegativeButton("إالغاء", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
 
+                        dialog.dismiss();
 
+                    }
+                })
+                .create();
+        return myQuittingDialogBox;
+
+    }
+
+    private void deleteitem(String item) {
+    //getting the specified artist reference
+    DatabaseReference dR = FirebaseDatabase.getInstance().getReference("Item").child(mid).child(cid).child(item);
+    //removing artist
+        dR.removeValue();
+        Toast.makeText(this,"تم الحـــذف",Toast.LENGTH_LONG).show();
+}
 
 }
         //start
