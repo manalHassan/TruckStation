@@ -9,7 +9,6 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
-
     <include
         layout="@layout/activity_list_puplic"
         android:layout_width="match_parent"
@@ -24,5 +23,4 @@
         app:headerLayout="@layout/nav_header_main"
         app:itemIconTint="@color/startblue"
         app:menu="@menu/customer_menu" />
-
 </android.support.v4.widget.DrawerLayout>

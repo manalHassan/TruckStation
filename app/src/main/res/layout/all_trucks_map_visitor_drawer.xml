@@ -23,6 +23,6 @@
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_main"
         app:itemIconTint="@color/startblue"
-        app:menu="@menu/customer_menu" />
+        app:menu="@menu/visiter_menu" />
 
 </android.support.v4.widget.DrawerLayout>

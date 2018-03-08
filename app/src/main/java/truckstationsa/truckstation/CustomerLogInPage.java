@@ -150,27 +150,27 @@ public class CustomerLogInPage extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 // verfy if he/she a customer
                                 String id=mAuth.getCurrentUser().getUid();
-                                appUse.child(id).child("type").addListenerForSingleValueEvent(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(DataSnapshot dataSnapshot) {
+                              //  appUse.child(id).child("type").addListenerForSingleValueEvent(new ValueEventListener() {
+                                   // @Override
+                                   // public void onDataChange(DataSnapshot dataSnapshot) {
                                         //data snapchat is the whole database
-                                        type=dataSnapshot.getValue(String.class).toString().trim();
+                                        //type=dataSnapshot.getValue(String.class).toString().trim();
 
-                                        if(type.equals("Customer")){
+                                       // if(type.equals("Customer")){
                                             Toast.makeText(CustomerLogInPage.this, "تم تسجيل الدخول بنجاح", Toast.LENGTH_SHORT).show();
                                             Intent intent = new Intent(CustomerLogInPage.this,ListPuplic.class);
-                                            startActivity(intent);}
-                                        else{
-                                            Toast.makeText(CustomerLogInPage.this, "الرجاء التأكد من نوع الدخول", Toast.LENGTH_SHORT).show();
+                                            startActivity(intent);//}
+                                      //  else{
+                                          //  Toast.makeText(CustomerLogInPage.this, "الرجاء التأكد من نوع الدخول", Toast.LENGTH_SHORT).show();
 
-                                        }
-                                    }
+                                       // }
+                                //    }
 
-                                    @Override
-                                    public void onCancelled(DatabaseError databaseError) {
+                                  //  @Override
+                                  //  public void onCancelled(DatabaseError databaseError) {
 
-                                    }
-                                });
+                                  //  }
+                             //   });
 
 
 

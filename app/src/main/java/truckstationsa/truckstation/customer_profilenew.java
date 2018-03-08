@@ -71,7 +71,7 @@ public class customer_profilenew extends AppCompatActivity implements Navigation
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        firebaseAuth =  FirebaseAuth.getInstance() ;
         context = this;
         setContentView(R.layout.activity_customer);
 

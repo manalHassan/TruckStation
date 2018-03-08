@@ -11,7 +11,7 @@
     tools:openDrawer="start">
 
     <include
-        layout="@layout/visitor_home_page"
+        layout="@layout/activity_list_private"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
@@ -23,6 +23,6 @@
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_main"
         app:itemIconTint="@color/startblue"
-        app:menu="@menu/customer_menu" />
+        app:menu="@menu/visiter_menu" />
 
 </android.support.v4.widget.DrawerLayout>
