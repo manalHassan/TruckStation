@@ -55,19 +55,20 @@ public class ReserveTruck extends AppCompatActivity implements NavigationView.On
     double x =0 , y =0;
 FirebaseAuth auth ;
     String date=" ";
-
+    String notes="لايوجد ملاحظات";
+private  EditText Notes;
 // for date :
     private static final String TAG = "ReserveTruck";
     private TextView mDisplayDate;
     private DatePickerDialog.OnDateSetListener mdateSetListener;
-
-
+   private Calendar cal;
+ private DatePickerDialog dialog;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.reserv_drawer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+Notes=(EditText)findViewById(R.id.Notes);
         location = (TextView) findViewById(R.id.location);
         context = this;
         auth = FirebaseAuth.getInstance() ;
@@ -143,12 +144,12 @@ String ownerID="yEeRopjhMTYTwPyujM6p694A40j1";
         mDisplayDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Calendar cal=Calendar.getInstance();
+                cal=Calendar.getInstance();
                 int year=cal.get(Calendar.YEAR);
                 int month=cal.get(Calendar.MONTH);
                 int day=cal.get(Calendar.DAY_OF_MONTH);
 
-                DatePickerDialog dialog= new DatePickerDialog(
+                 dialog= new DatePickerDialog(
                         ReserveTruck.this,
                         android.R.style.Theme_Holo_Light_Dialog_MinWidth,
                         mdateSetListener,
@@ -164,6 +165,7 @@ String ownerID="yEeRopjhMTYTwPyujM6p694A40j1";
                 Log.d(TAG,"onDateSet: mm/dd/yyy"+month+"/"+day+"/"+year);
                 date=month+"/"+day+"/"+year;
                 mDisplayDate.setText(date);
+                dialog.getDatePicker().setMinDate(cal.getTimeInMillis());
             }
         };
     }
@@ -173,6 +175,9 @@ String ownerID="yEeRopjhMTYTwPyujM6p694A40j1";
         // get selected value from dropdoenlist(spinner)
         final String TIME=DateTimeSpinner.getSelectedItem().toString().trim();
         final String DT=TIME+"  "+date;
+        if(!TextUtils.isEmpty(notes)){
+         notes=Notes.getText().toString().trim();}
+
 if(!TextUtils.isEmpty(TIME)){
     if(date.equals(" ")){
 
@@ -195,7 +200,8 @@ if(!TextUtils.isEmpty(TIME)){
                     Toast.makeText(ReserveTruck.this, "الرجاء ادخال الموقع المراد حضور العربة له ", Toast.LENGTH_SHORT).show();
                 } else if (!TextUtils.isEmpty(FID) && !TextUtils.isEmpty(CID) && !TextUtils.isEmpty(RID)) {
 
-                    Request request = new Request(CID, FID, RID, DT, x, y);
+
+                    Request request = new Request(CID, FID, RID, DT, x, y,notes);
 
                     reserveRef.child(RID).setValue(request);
                     Toast.makeText(ReserveTruck.this, "تم الحجز,بانتظار موافقة صاحب حافلة الطعام", Toast.LENGTH_SHORT).show();
