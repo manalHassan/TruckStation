@@ -51,6 +51,9 @@ public class NearByTrucksVisitors  extends AppCompatActivity implements OnMapRea
         setContentView(R.layout.near_vistor_drawer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getLocationPermission();
+        firebaseAuth = FirebaseAuth.getInstance();
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -58,11 +61,7 @@ public class NearByTrucksVisitors  extends AppCompatActivity implements OnMapRea
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-        getLocationPermission();
-        firebaseAuth = FirebaseAuth.getInstance();
-
- }
+        navigationView.setNavigationItemSelectedListener(this);  }
     @Override
     public void onMapReady(GoogleMap googleMap) {
         Toast.makeText(this, "Map is Ready", Toast.LENGTH_SHORT).show();
@@ -241,7 +240,7 @@ public class NearByTrucksVisitors  extends AppCompatActivity implements OnMapRea
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_publiclist) {
+        if (id == R.id.nav_publiclist1) {
             Intent intent = new Intent(this, publicListVistor.class);
             Bundle b=new Bundle();
             // b.putString("id",user);
@@ -252,7 +251,7 @@ public class NearByTrucksVisitors  extends AppCompatActivity implements OnMapRea
             return true;
 
         }
-        else if (id == R.id.nav_privatelist) {
+        else if (id == R.id.nav_privatelist1) {
             Intent intent = new Intent(this, PravitListVistor.class);
             Bundle b=new Bundle();
             // b.putString("id",user);
@@ -263,7 +262,7 @@ public class NearByTrucksVisitors  extends AppCompatActivity implements OnMapRea
             return true;
 
         }
-        else if (id == R.id.nav_map) {
+        else if (id == R.id.nav_map1) {
             Intent intent = new Intent(this, VsitorAllTrucks.class);
             Bundle b=new Bundle();
             //  b.putString("id",user);
@@ -275,7 +274,7 @@ public class NearByTrucksVisitors  extends AppCompatActivity implements OnMapRea
 
         }
 
-        else if (id == R.id.nav_nearmap) {
+        else if (id == R.id.nav_nearmap1) {
             Intent intent = new Intent(this, NearByTrucksVisitors.class);
             Bundle b=new Bundle();
             //  b.putString("id",user);
@@ -288,7 +287,7 @@ public class NearByTrucksVisitors  extends AppCompatActivity implements OnMapRea
         }
 
 
-        else if (id == R.id.nav_app) {
+        else if (id == R.id.nav_app1) {
 
             Intent intent = new Intent(this, ChartVisitor.class);
             Bundle b=new Bundle();

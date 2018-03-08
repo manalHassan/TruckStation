@@ -26,3 +26,4 @@
         app:menu="@menu/visiter_menu" />
 
 </android.support.v4.widget.DrawerLayout>
+
