@@ -115,43 +115,48 @@ public  void chickInfo(View view ){
 
 
     if ( !TextUtils.isEmpty(emailc) && !TextUtils.isEmpty(pass) && !TextUtils.isEmpty(phoneN)) {
+        if (pass.matches("^(?=.*\\d)(?=.*[$@$!%*#?&])[A-Za-z\\d$@$!%*#?&]{8,10}$")) {
 
-        mProgress.setMessage("انتضر من فضلك....");
-        mProgress.show();
+            mProgress.setMessage("انتضر من فضلك....");
+            mProgress.show();
 
-        mAuth.createUserWithEmailAndPassword(emailc, pass)  // This method is inside firebaseauth class
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() { // to tell me if the method create.. is done
-                    // onComplete will be called when create method fineshed
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
+            mAuth.createUserWithEmailAndPassword(emailc, pass)  // This method is inside firebaseauth class
+                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() { // to tell me if the method create.. is done
+                        // onComplete will be called when create method fineshed
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
 
-                        mProgress.dismiss();  //End showing msg
+                            mProgress.dismiss();  //End showing msg
 
-                        if (task.isSuccessful()) { // If we registerd the user
+                            if (task.isSuccessful()) { // If we registerd the user
 ///<<<<<<< Updated upstream
-                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                            String uid = user.getUid();
-                           // String id = fdb.push().getKey();
-                            Customer customer = new Customer(pass, emailc, fname, lname, Integer.parseInt(phoneN), x, y  , uid);
-                            fdb.child(uid).setValue(customer);
+                                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                                String uid = user.getUid();
+                                // String id = fdb.push().getKey();
+                                Customer customer = new Customer(pass, emailc, fname, lname, Integer.parseInt(phoneN), x, y, uid);
+                                fdb.child(uid).setValue(customer);
 
-                            //to know the type of the user
-                            String type="Customer";
-                            APPUsers user1=new APPUsers(type);
-                            UDB.child(uid).setValue(user1);
-                            //Customer customer = new Customer(pass, emailc, fname, lname, Integer.parseInt(phoneN), x, y);
-                            //fdb.setValue(customer);
+                                //to know the type of the user
+                                String type = "Customer";
+                                APPUsers user1 = new APPUsers(type);
+                                UDB.child(uid).setValue(user1);
+                                //Customer customer = new Customer(pass, emailc, fname, lname, Integer.parseInt(phoneN), x, y);
+                                //fdb.setValue(customer);
 
-                            Toast.makeText(GoTOCustomerRegisterPage.this, "تم التسجل بنجاح!!", Toast.LENGTH_SHORT).show();
-                            // Intent intent = new Intent(GoTOCustomerRegisterPage.this, .class);
-                            // startActivity(intent);
-                            finish();
-                        } else
-                            Toast.makeText(GoTOCustomerRegisterPage.this, "البريد الالكتروني مستخدم مسبقا", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(GoTOCustomerRegisterPage.this, "تم التسجل بنجاح!!", Toast.LENGTH_SHORT).show();
+                                // Intent intent = new Intent(GoTOCustomerRegisterPage.this, .class);
+                                // startActivity(intent);
+                                finish();
+                            } else
+                                Toast.makeText(GoTOCustomerRegisterPage.this, "البريد الالكتروني  غير صحيح او مستخدم مسبقا", Toast.LENGTH_SHORT).show();
 
-                    }
-                });
+                        }
+                    });
 
+        }
+    else
+        {      Toast.makeText(GoTOCustomerRegisterPage.this, "الرقم السري يجب ان يحتوي على رقم واحد على الاقل و حرف خاص واحد على الاقل وطوله ثمانية حروف ", Toast.LENGTH_SHORT).show();
+        }}else {   Toast.makeText(GoTOCustomerRegisterPage.this, "تأكد من تعبئة جميع الحقول", Toast.LENGTH_SHORT).show();
     }
 
                 }
