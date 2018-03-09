@@ -41,27 +41,6 @@ public class PublicFoodTruckOwner  {
 
 
 
-    public PublicFoodTruckOwner (String url, String FUsername  ,String FPassword ,String FEmail ,  int FPoneNoumber , double XFLication , double YFLocation ,String  qusins , String uid   ){
-        this.setUrl(url);
-
-        this.setFEmail(FEmail);
-
-        this.setFPassword(FPassword);
-
-        this.setFPoneNoumber(FPoneNoumber);
-
-        this.setFUsername(FUsername);
-
-
-        this.setXFLication(XFLication);
-
-        this.setYFLocation(YFLocation);
-
-        this.setQusins(qusins);
-        this.setUid(uid);
-
-
-    }
 
     public void setQusins(String qusins) {
         this.qusins = qusins;

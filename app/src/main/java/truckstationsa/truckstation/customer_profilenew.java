@@ -129,17 +129,7 @@ public class customer_profilenew extends AppCompatActivity implements Navigation
                 // ft.commit();
             }
         });
-        findViewById(R.id.button3).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //   Fragment fr = new ListCategories();
-                // FragmentManager fm = getFragmentManager();
-                // FragmentTransaction ft = fm.beginTransaction();
 
-                // ft.replace(R.id.content_frame, fr);
-                // ft.commit();
-            }
-        });
 
         location.setOnClickListener(new View.OnClickListener() {
             @Override

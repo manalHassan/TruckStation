@@ -67,11 +67,11 @@ public class PublicOwnerRegistration extends AppCompatActivity {
     Uri FilePathUri;
     StorageReference storageReference;
     DatabaseReference databaseReference;
-    int Image_Request_Code = 7;
+
     ProgressDialog progressDialog ;
     DatabaseReference UDB;
     // Folder path for Firebase Storage.
-    String Storage_Path = "Trucks Images/";
+
 
     //////
     @Override
@@ -95,23 +95,12 @@ public class PublicOwnerRegistration extends AppCompatActivity {
         UDB=FirebaseDatabase.getInstance().getReference("APPUsers");
         //////////////
         // Adding click listener to Choose image button.
-        Upload_image.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {// هذي تختار من الصور الي بالجهاز
 
-                Intent intent = new Intent();
-
-                // Setting intent type as image to select image from phone storage.
-                intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(intent, "Please Select Image"), Image_Request_Code);
-            }
-        });
         //////////////////
 
         mProgress = new ProgressDialog(this);
-       // fdb = FirebaseDatabase.getInstance().getReference("PublicFoodTruckOwner");
-       // fdb2=FirebaseDatabase.getInstance().getReference("truck");
+        // fdb = FirebaseDatabase.getInstance().getReference("PublicFoodTruckOwner");
+        // fdb2=FirebaseDatabase.getInstance().getReference("truck");
 
         location.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -146,48 +135,10 @@ public class PublicOwnerRegistration extends AppCompatActivity {
 
 
     /////
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) { //هذي تاكد من الصوره
-
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == Image_Request_Code && resultCode == RESULT_OK && data != null && data.getData() != null) {
-
-            FilePathUri = data.getData();
-
-            try {
-                // Getting selected image into Bitmap.
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), FilePathUri);
-                // Setting up bitmap selected image into ImageView.
-                //Pimage.setImageBitmap(bitmap);
-                // After selecting image change choose button above text.
-                Upload_image.setText("Image Selected");
-            } catch (IOException e) {e.printStackTrace(); }
-        }
-        if (requestCode == PLACE_PICKER_REQUEST) {
-            if (resultCode == RESULT_OK) {
-                Place place = PlacePicker.getPlace(data, this);
-
-                x = place.getLatLng().latitude;
-                y = place.getLatLng().longitude;
-
-
-            }
-        }
-    }
 
     ////
 
-    // Creating Method to get the selected image file Extension from File Path URI.
-    public String GetFileExtension(Uri uri) {
-        ContentResolver contentResolver = this.getContentResolver();
-        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
-        // Returning the file Extension.
-        return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri)) ;
 
-    }
-
-    /*   هذي شلتها عشان تتعارض نع وحدة اذا مالها داعي خلاص ماعرفت هي ايش له
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == PLACE_PICKER_REQUEST) {
             if (resultCode == RESULT_OK) {
@@ -199,7 +150,7 @@ public class PublicOwnerRegistration extends AppCompatActivity {
 
             }
         }
-    }*/
+    }
     public  void chickInfo(View view ){
 
         final String  pass =    password.getText().toString().trim();
@@ -210,134 +161,57 @@ public class PublicOwnerRegistration extends AppCompatActivity {
 
 
 
-        if ( !TextUtils.isEmpty(emailp) && !TextUtils.isEmpty(pass) && !TextUtils.isEmpty(phoneN) && !TextUtils.isEmpty(qusin)  && !TextUtils.isEmpty(username) &&
-                FilePathUri != null) {
+        if ( !TextUtils.isEmpty(emailp) && !TextUtils.isEmpty(pass) && !TextUtils.isEmpty(phoneN) && !TextUtils.isEmpty(qusin)  && !TextUtils.isEmpty(username)) {
             if (pass.matches("^(?=.*\\d)(?=.*[$@$!%*#?&])[A-Za-z\\d$@$!%*#?&]{8,10}$")) {
-            mProgress.setMessage("انتظر من فضلك....");
-            mProgress.show();
-            StorageReference storageReference2nd = storageReference.child(Storage_Path + System.currentTimeMillis() + "." + GetFileExtension(FilePathUri));
+                mProgress.setMessage("انتظر من فضلك....");
+                mProgress.show();
 
-// Adding addOnSuccessListener to second StorageReference.
-            storageReference2nd.putFile(FilePathUri)
 
-                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                             String url="";
-                             if(! taskSnapshot.getDownloadUrl().toString().equals(null))
-                            url=taskSnapshot.getDownloadUrl().toString();
 
-                            final String finalUrl = url;
-                            mAuth.createUserWithEmailAndPassword(emailp , pass)  // This method is inside firebaseauth class
-                                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() { // to tell me if the method create.. is done
-                                        // onComplete will be called when create method fineshed
-                                        @Override
-                                        public void onComplete(@NonNull Task<AuthResult> task) {
+                mAuth.createUserWithEmailAndPassword(emailp , pass)  // This method is inside firebaseauth class
+                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() { // to tell me if the method create.. is done
+                            // onComplete will be called when create method fineshed
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
 
-                                            mProgress.dismiss();  //End showing msg
-                                             try {
-                                                 if (task.isSuccessful()) { // If we registerd the user
-                                                     //Add
-                                                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                                                     String uid = user.getUid();
+                                mProgress.dismiss();  //End showing msg
+                                try {
+                                    if (task.isSuccessful()) { // If we registerd the user
+                                        //Add
+                                        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                                        String uid = user.getUid();
 
-                                                     try {
-                                                         // truck t=new truck(username, finalUrl);
-                                                         PublicFoodTruckOwner owner = new PublicFoodTruckOwner(finalUrl, username, pass, emailp, Integer.parseInt(phoneN), x, y, qusin, uid);
-                                                         databaseReference.child(uid).setValue(owner);
-                                                         // fdb2.child(t.getTruckname()).setValue(t);
+                                        try {
+                                            // truck t=new truck(username, finalUrl);
+                                            PublicFoodTruckOwner owner = new PublicFoodTruckOwner(username, pass, emailp, Integer.parseInt(phoneN), x, y, qusin, uid,true);
+                                            databaseReference.child(uid).setValue(owner);
+                                            // fdb2.child(t.getTruckname()).setValue(t);
 
-                                                         //to know the type of the user
-                                                         String type="Customer";
-                                                         APPUsers user1=new APPUsers(type);
-                                                         UDB.child(uid).setValue(user1);
-                                                     } catch (Exception e) {
-                                                         e.printStackTrace();
-                                                     }
-                                                     Toast.makeText(PublicOwnerRegistration.this, "تم التسجل بنجاح!!", Toast.LENGTH_SHORT).show();
-                                                     // Intent intent = new Intent(GoTOCustomerRegisterPage.this, .class);
-                                                     // startActivity(intent);
-                                                     finish();
-                                                 } else
-                                                     Toast.makeText(PublicOwnerRegistration.this, "البريد الالكتروني  غير صحيح او مستخدم مسبقا ", Toast.LENGTH_SHORT).show();
-                                             }catch (Exception e){ Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();}
-
+                                            //to know the type of the user
+                                            String type="Customer";
+                                            APPUsers user1=new APPUsers(type);
+                                            UDB.child(uid).setValue(user1);
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
                                         }
-                                    });
-                        }
-                    })
-                    // If something goes wrong .
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception exception) {
+                                        Toast.makeText(PublicOwnerRegistration.this, "تم التسجل بنجاح!!", Toast.LENGTH_SHORT).show();
+                                        // Intent intent = new Intent(GoTOCustomerRegisterPage.this, .class);
+                                        // startActivity(intent);
+                                        finish();
+                                    } else
+                                        Toast.makeText(PublicOwnerRegistration.this, "البريد الالكتروني  غير صحيح او مستخدم مسبقا ", Toast.LENGTH_SHORT).show();
+                                }catch (Exception e){ Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();}
 
-                            // Hiding the progressDialog.
-                            mProgress.dismiss();
+                            }
+                        });
 
-                            // Showing exception erro message.
-                            /////////////////////////////
-                             Toast.makeText(PublicOwnerRegistration.this , exception.getMessage(), Toast.LENGTH_LONG).show();
-                        }
-                    })
-
-                    // On progress change upload time.
-                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-
-                        @Override
-                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                            // Setting progressDialog Title.
-
-                        }
-                    });
-
-
-        }else if (!TextUtils.isEmpty(emailp) && !TextUtils.isEmpty(pass) && !TextUtils.isEmpty(phoneN) && !TextUtils.isEmpty(qusin)  && !TextUtils.isEmpty(username) &&
-                FilePathUri == null){
-
-            mProgress.setMessage("انتضر من فضلك....");
-            mProgress.show();
-
-            mAuth.createUserWithEmailAndPassword(emailp , pass)  // This method is inside firebaseauth class
-                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() { // to tell me if the method create.. is done
-                        // onComplete will be called when create method fineshed
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-
-                            mProgress.dismiss();  //End showing msg
-
-                            if (task.isSuccessful()) { // If we registerd the user
-                                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                                String uid = user.getUid();
-//<<<<<<< Updated upstream
-                              //  String id = databaseReference.push().getKey();        _____________>------------->  ،لااعرف مافايده هذا السطر &&&&&&&&&&&&
-                                PublicFoodTruckOwner owner = new PublicFoodTruckOwner("" , username, pass, emailp,Integer.parseInt(phoneN) ,  x, y , qusin , uid);
-                                databaseReference.child(uid).setValue(owner);
-//======
-                             //   PublicFoodTruckOwner owner = new PublicFoodTruckOwner("", username, pass, emailp, Integer.parseInt(phoneN), x, y, qusin);
-                              //  databaseReference.child(uid).setValue(owner);
-//>>>>>>> Stashed changes
-                                Toast.makeText(PublicOwnerRegistration.this, "تم التسجل بنجاح!!", Toast.LENGTH_SHORT).show();
-                                // Intent intent = new Intent(GoTOCustomerRegisterPage.this, .class);
-                                // startActivity(intent);
-                                finish();
-                            } else
-                                Toast.makeText(PublicOwnerRegistration.this, "البريد الالكتروني مستخدم مسبقا", Toast.LENGTH_SHORT).show();
-
-                        }
-                    });
+                // If something goes wrong .
 
 
 
-
-
-
-
-
-            }
-            else
+            } else
             {      Toast.makeText(PublicOwnerRegistration.this, "الرقم السري يجب ان يحتوي على رقم واحد على الاقل و حرف خاص واحد على الاقل وطوله ثمانية حروف ", Toast.LENGTH_SHORT).show();
             }}else {   Toast.makeText(PublicOwnerRegistration.this, "تأكد من تعبئة جميع الحقول", Toast.LENGTH_SHORT).show();
         }
-
-    }
+    }//m
 }

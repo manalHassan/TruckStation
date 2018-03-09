@@ -164,20 +164,7 @@
             android:background="@drawable/buttonstayle"
             android:text="تعديل" />
 
-        <Button
-            android:id="@+id/button3"
-            android:layout_width="wrap_content"
 
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/button2"
-            android:layout_alignBottom="@+id/button2"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginEnd="50dp"
-            android:layout_marginRight="40dp"
-            android:background="@drawable/buttonstayle"
-            android:text="إالغاء" />
 
     </RelativeLayout>
 

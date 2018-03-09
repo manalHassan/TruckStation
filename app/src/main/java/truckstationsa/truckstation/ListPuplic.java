@@ -1,5 +1,6 @@
 package truckstationsa.truckstation;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -17,6 +18,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
 
 import java.util.ArrayList;
 
@@ -29,6 +31,9 @@ public class ListPuplic extends AppCompatActivity implements NavigationView.OnNa
     FirebaseClient firebaseClient;
     DrawerLayout drawer;
     ArrayList<PublicFoodTruckOwner> dogies= new ArrayList<>();
+    CustomAdapter customAdapter;
+    DatabaseReference f;
+    Context c;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +44,6 @@ public class ListPuplic extends AppCompatActivity implements NavigationView.OnNa
 auth = FirebaseAuth.getInstance() ;
 ///////////////////////////////////////////
         listView = (ListView) findViewById(R.id.listview);
-
 
         firebaseClient = new FirebaseClient(this, DB_URL, listView);
         //  firebaseClient.refreshdata();
@@ -52,7 +56,19 @@ auth = FirebaseAuth.getInstance() ;
         toggle.syncState();
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        dogies= firebaseClient.array1();
+
+
+
+       listView= firebaseClient.reListView();
+        dogies=firebaseClient.getDogies();
+        customAdapter=firebaseClient.customPublic();
+        c=firebaseClient.contes();
+
+        if(dogies.equals(null))
+            Toast.makeText(ListPuplic.this, "null dogies", Toast.LENGTH_SHORT).show();
+
+        if(listView.equals(null))
+            Toast.makeText(ListPuplic.this, "null listview", Toast.LENGTH_SHORT).show();
 
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

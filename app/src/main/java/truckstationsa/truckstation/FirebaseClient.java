@@ -144,46 +144,16 @@ public class FirebaseClient extends AppCompatActivity  {
 
         }//if private
     }
-//////////sherch/////////
-    @Override
-    public  boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater =getMenuInflater();
-        inflater.inflate(R.menu.main, menu);
-
-        MenuItem searchIem =menu.findItem(R.id.action_search);
-        SearchView searchView =(SearchView)MenuItemCompat.getActionView(searchIem);
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                ArrayList<PrivateFoodTruckOwner> templist = new ArrayList<>();
-                for (PrivateFoodTruckOwner temp : dogies1){
-                    if(temp.getFUsername().toLowerCase().contains(newText.toLowerCase())){
-
-                        templist.add(temp);
-                    }
-                    customAdapter1 = new CustomAdapterPrivate(c, templist);
-                    listView.setAdapter((ListAdapter) customAdapter1);
-
-                }
 
 
-                return true;
-            }
-        });
+    public ListView reListView(){return  listView;}
 
+    public ArrayList<PrivateFoodTruckOwner> getDogies1(){return  dogies1;}
+    public CustomAdapterPrivate custom(){return  customAdapter1;}
+    public ArrayList<PublicFoodTruckOwner> getDogies(){return  dogies;}
+    public CustomAdapter customPublic(){return  customAdapter;}
+    public Context contes(){return  c;}
 
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    public  ArrayList<PublicFoodTruckOwner> array1(){
-
-        return dogies;
-    }
 
     //////////////////////
 
