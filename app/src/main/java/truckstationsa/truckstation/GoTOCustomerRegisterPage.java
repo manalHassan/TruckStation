@@ -117,7 +117,7 @@ public  void chickInfo(View view ){
     if ( !TextUtils.isEmpty(emailc) && !TextUtils.isEmpty(pass) && !TextUtils.isEmpty(phoneN)&& !TextUtils.isEmpty(fname) && !TextUtils.isEmpty(lname) ) {
         if (pass.matches("^(?=.*\\d)(?=.*[$@$!%*#?&])[A-Za-z\\d$@$!%*#?&]{8,10}$")) {
 
-            mProgress.setMessage("انتضر من فضلك....");
+            mProgress.setMessage("انتظر من فضلك....");
             mProgress.show();
 
             mAuth.createUserWithEmailAndPassword(emailc, pass)  // This method is inside firebaseauth class

@@ -148,7 +148,7 @@ public class GoTOPrivatRegisterPage  extends AppCompatActivity {
 
         if ( !TextUtils.isEmpty(emailp) && !TextUtils.isEmpty(pass) && !TextUtils.isEmpty(phoneN) && !TextUtils.isEmpty(qusin)  && !TextUtils.isEmpty(username)&&FilePathUri != null ) {
             if (pass.matches("^(?=.*\\d)(?=.*[$@$!%*#?&])[A-Za-z\\d$@$!%*#?&]{8,10}$")) {
-            mProgress.setMessage("انتضر من فضلك....");
+            mProgress.setMessage("انتظر من فضلك....");
             mProgress.show();
             StorageReference storageReference2nd = storageReference.child(Storage_Path + System.currentTimeMillis() + "." + GetFileExtension(FilePathUri));
 
