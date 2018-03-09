@@ -145,7 +145,7 @@ public class FirebaseClient extends AppCompatActivity  {
         }//if private
     }
 
-
+/////////////////
     public ListView reListView(){return  listView;}
 
     public ArrayList<PrivateFoodTruckOwner> getDogies1(){return  dogies1;}

@@ -67,7 +67,7 @@ public class customer_profilenew extends AppCompatActivity implements Navigation
     private FirebaseAuth mAuth;
     private FirebaseUser user;
 
-
+/////////
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

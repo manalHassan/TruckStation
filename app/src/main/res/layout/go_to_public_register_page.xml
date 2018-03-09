@@ -153,7 +153,7 @@
                 android:orientation="horizontal"
                 android:paddingLeft="25dp">
 
-                <ImageView
+            <ImageView
                     android:id="@+id/location1"
                     android:layout_width="36dp"
                     android:layout_height="36dp"

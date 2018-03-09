@@ -67,7 +67,7 @@ public class PublicOwnerRegistration extends AppCompatActivity {
     Uri FilePathUri;
     StorageReference storageReference;
     DatabaseReference databaseReference;
-
+////////////
     ProgressDialog progressDialog ;
     DatabaseReference UDB;
     // Folder path for Firebase Storage.

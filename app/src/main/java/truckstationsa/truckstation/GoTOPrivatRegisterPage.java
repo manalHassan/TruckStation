@@ -44,7 +44,7 @@ import java.io.IOException;
  */
 
 public class GoTOPrivatRegisterPage  extends AppCompatActivity {
-    //new
+    //new////////
     EditText password , phone , email , userName , Qusen ;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;

@@ -143,24 +143,6 @@
         android:layout_alignRight="@id/imageView2"
         app:ignore="NotSibling">
 
-        <Button
-            android:id="@+id/button4"
-            style="@style/TextAppearance.AppCompat.Body1"
-            android:layout_width="wrap_content"
-            android:layout_height="33dp"
-            android:layout_above="@+id/ratingBar"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/background_signup"
-            android:clickable="true"
-            android:focusable="true"
-            android:text="@string/fllow"
-            android:textAllCaps="false"
-            android:textColor="#fff" />
 
       </LinearLayout>
 
