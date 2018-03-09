@@ -85,9 +85,21 @@
                 android:text="حدد موقعك"
                 android:textAllCaps="false"
                 android:textColor="#000"
-                android:layout_marginBottom="60dp"/>
+                android:layout_marginBottom="5dp"/>
 
-
+            <EditText
+                android:id="@+id/Notes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:background="@android:color/transparent"
+                android:drawablePadding="12dp"
+                android:ems="10"
+                android:hint="اكتب ملاحظاتك هنا"
+                android:maxLines="4"
+                android:lines="4"
+                android:padding="8dp"
+                android:textColorHint="#000" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
