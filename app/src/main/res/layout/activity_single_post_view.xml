@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_margin="20dp"
+        tools:context="truckstationsa.truckstation.SinglePostView">
+ <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="10dp">
+        <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:id="@+id/single_post_image"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Post Title"
+                android:layout_margin="5dp"
+                android:id="@+id/single_imageTitle"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Post Desc"
+                android:layout_margin="5dp"
+                android:id="@+id/single_imageDesc"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="username"
+                android:layout_margin="5dp"
+                android:id="@+id/single_userName"/>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:layout_marginTop="16dp">
+
+    <Button
+        android:id="@+id/removePostButton"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/remove_post_background"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="10dp"
+        android:text="حذف الصورة"
+        android:textColor="#fff"
+        android:textStyle="bold"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/editPost"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/background_upload"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="10dp"
+        android:text=" تعديل"
+        android:textColor="#fff"
+        android:textStyle="bold"
+        android:visibility="invisible" />
+        </LinearLayout>
+        </LinearLayout>
+
+</android.support.v7.widget.CardView>
