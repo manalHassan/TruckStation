@@ -31,14 +31,22 @@ public class Publicownerforcustmer extends AppCompatActivity {
          * The {@link ViewPager} that will host the section contents.
          */
         private ViewPager mViewPager;
-        private FirebaseAuth mAuth;
-        private FirebaseAuth.AuthStateListener mAuthListener;
-
+       // private FirebaseAuth mAuth;
+       // private FirebaseAuth.AuthStateListener mAuthListener;
+        private String user1="jVmYjqfu5leLTx4gkFPQiQ9E3g83";
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            setContentView(R.layout.testmenu);
+           //Bundle b = getIntent().getExtras();
+          // user1 = b.getString("id");
+            //Bundle bundle = new Bundle();
+            //bundle.putString("id", user1);
+           // set Fragmentclass Arguments
+         // publicTab1profileforcustmer fragobj = new publicTab1profileforcustmer();
+          //  fragobj.setArguments(bundle);
+            //
+            setContentView(R.layout.activity_public_ownerforcustomer);
 
             Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
@@ -63,9 +71,9 @@ public class Publicownerforcustmer extends AppCompatActivity {
             mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
             tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
             contextOfApplication = getApplicationContext();
-            mAuth = FirebaseAuth.getInstance();
+           // mAuth = FirebaseAuth.getInstance();
 
-            mAuthListener = new FirebaseAuth.AuthStateListener() {
+            /*mAuthListener = new FirebaseAuth.AuthStateListener() {
                 @Override
                 public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                     if (firebaseAuth.getCurrentUser() == null) {
@@ -74,18 +82,18 @@ public class Publicownerforcustmer extends AppCompatActivity {
                         startActivity(loginIntent);
                     }
                 }
-            };
+            };*/
 
         }
 
 
 
-        @Override
-        protected void onStart() {
-            super.onStart();
-            mAuth.addAuthStateListener(mAuthListener);
+       // @Override
+       // protected void onStart() {
+         //   super.onStart();
+        //    mAuth.addAuthStateListener(mAuthListener);
 
-        }
+      //  }
 
         public static Context contextOfApplication;
         public static Context getContextOfApplication()
@@ -100,29 +108,9 @@ public class Publicownerforcustmer extends AppCompatActivity {
                 return true;
             }
         */
-        @Override
-        public boolean onOptionsItemSelected(MenuItem item) {
-            // Handle action bar item clicks here. The action bar will
-            // automatically handle clicks on the Home/Up button, so long
-            // as you specify a parent activity in AndroidManifest.xml.
-            int id = item.getItemId();
-
-            //noinspection SimplifiableIfStatement
-            if (id == R.id.action_settings) {
-                return true;
-            }
-            else if (id == R.id.addIcon){
-                Intent intent = new Intent(truckstationsa.truckstation.Publicownerforcustmer.this, postActivityPublic.class);
-                startActivity(intent);
-            }
-            else if (id == R.id.logout){
-                mAuth.signOut();
-            }
 
 
 
-            return super.onOptionsItemSelected(item);
-        }
 
         /**
          * A placeholder fragment containing a simple view.
@@ -141,8 +129,8 @@ public class Publicownerforcustmer extends AppCompatActivity {
              * Returns a new instance of this fragment for the given section
              * number.
              */
-            public static truckstationsa.truckstation.PublicOwnerProfileActivity.PlaceholderFragment newInstance(int sectionNumber) {
-                truckstationsa.truckstation.PublicOwnerProfileActivity.PlaceholderFragment fragment = new truckstationsa.truckstation.PublicOwnerProfileActivity.PlaceholderFragment();
+            public static PlaceholderFragment newInstance(int sectionNumber) {
+                PlaceholderFragment fragment = new PlaceholderFragment();
                 Bundle args = new Bundle();
                 args.putInt(ARG_SECTION_NUMBER, sectionNumber);
                 fragment.setArguments(args);
@@ -152,7 +140,9 @@ public class Publicownerforcustmer extends AppCompatActivity {
             @Override
             public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                      Bundle savedInstanceState) {
-                View rootView = inflater.inflate(R.layout.public_tab1_profile, container, false);
+               // user1 = getArguments().getString("id");
+               // String user1 = getArguments().getString("id");
+                View rootView = inflater.inflate(R.layout.public_tab1_profileforcustomer, container, false);
                 TextView textView = (TextView) rootView.findViewById(R.id.section_label_public);
                 textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
                 return rootView;
@@ -209,5 +199,7 @@ public class Publicownerforcustmer extends AppCompatActivity {
                 return null;
             }
         }
-
+    public String getuser1() {
+        return user1;
+         }
     }

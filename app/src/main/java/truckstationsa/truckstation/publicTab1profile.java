@@ -66,7 +66,7 @@ public class publicTab1profile extends Fragment {
                 String user1 = user.getUid();//customer id is the same as rating id to make it easy to refer
 
                 String name = dataSnapshot.child(user1).child("fusername").getValue(String.class);
-                int phonnum = dataSnapshot.child(user1).child("fponeNoumber").getValue(int.class);
+            //    int phonnum = dataSnapshot.child(user1).child("fponeNoumber").getValue(int.class);
                 String email = dataSnapshot.child(user1).child("femail").getValue(String.class);
                 String cc = dataSnapshot.child(user1).child("qusins").getValue(String.class);
                // String wh=dataSnapshot.child(user1).child("fworkingHours").getValue(String.class);
@@ -82,7 +82,7 @@ public class publicTab1profile extends Fragment {
                 mail = (TextView) rootView.findViewById(R.id.email);
                 mail.setText(" " + email);
                phone = (TextView) rootView.findViewById(R.id.phone);
-               phone.setText(" " + phonnum + " ");
+            //   phone.setText(" " + phonnum + " ");
             }
 
             @Override

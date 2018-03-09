@@ -60,12 +60,14 @@ public class publicTab3menuforcustomer extends Fragment {
     EditText editTextName;
     String mid1="";
     FirebaseAuth firebaseAuth;
-
+    String id1="jVmYjqfu5leLTx4gkFPQiQ9E3g83";
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.public_tab3_menu, container, false);
+        View rootView = inflater.inflate(R.layout.public_tab3_menuitemforcustomer, container, false);
+        //Bundle b = getActivity().getIntent().getExtras();
+       // id1 = b.getString("id");
         artists = new ArrayList<>();
         //getting views
         listViewArtists = (ListView) rootView.findViewById(R.id.listViewTracks);
@@ -77,10 +79,11 @@ public class publicTab3menuforcustomer extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Category artist = artists.get(position);
                 //   String
-                Intent intent = new Intent(getActivity(), tab3_itemlist.class);
-                Bundle b = new Bundle();
-                b.putString("cid", artist.getCatID());
-                intent.putExtras(b);
+                Intent intent = new Intent(getActivity(), tab3_itemlistforcustomer.class);
+                Bundle c = new Bundle();
+                c.putString("id",id1);
+                c.putString("cid", artist.getCatID());
+                intent.putExtras(c);
                 startActivity(intent);
             }
         });
@@ -91,9 +94,9 @@ public class publicTab3menuforcustomer extends Fragment {
     public void onStart() {
         super.onStart();
         //attaching value event listener
-        FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
-        String id = user.getUid();//customer id is the same as rating id to make it easy to refer
-        myRef.child("Menu").child(id).addValueEventListener(new ValueEventListener() {
+      //  FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
+       // String id = user.getUid();//customer id is the same as rating id to make it easy to refer
+        myRef.child("Menu").child(id1).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 mid1 = dataSnapshot.child("mid").getValue(String.class);

@@ -74,18 +74,20 @@ auth = FirebaseAuth.getInstance() ;
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
+
                 PublicFoodTruckOwner artist = dogies.get(position);
-// set Fragmentclass Arguments
+                Toast.makeText(ListPuplic.this, "ID="+artist.getUid()+"." ,Toast.LENGTH_SHORT).show();
+                // set Fragmentclass Arguments
                // publicTab1profileforcustmer fragobj = new  publicTab1profileforcustmer();
               //  fragobj.setArguments(b);
-
-                Intent intent = new Intent(ListPuplic.this, Publicownerforcustmer.class);
+/*
+                Intent intent = new Intent(ListPuplic.this, publicTab1profileforcustmer.class);
                  Bundle b=new Bundle();
                  b.putString("id",artist.getUid());
                 intent.putExtras(b);
                  startActivity(intent);
 
-
+*/
 
             }
         });

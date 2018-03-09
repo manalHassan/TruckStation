@@ -47,20 +47,22 @@ public class publicTab2postsforcustomer extends Fragment {
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private Query mQueryCurrentOwner;
+    String currentUID="jVmYjqfu5leLTx4gkFPQiQ9E3g83";
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View rootView= inflater.inflate(R.layout.public_tab2_postsforcustomer, container, false);
         mPostList= rootView.findViewById(R.id.insta_list);
-
+      //  Bundle b = getActivity().getIntent().getExtras();
+       // currentUID = b.getString("id");
         mPostList.setHasFixedSize(true);
         LinearLayoutManager layoutManager=new LinearLayoutManager(getActivity());
         layoutManager.setReverseLayout(true);
         layoutManager.setStackFromEnd(true);
         mPostList.setLayoutManager(layoutManager);
 
-        mAuth = FirebaseAuth.getInstance();
-        String currentUID= mAuth.getCurrentUser().getUid();
+        //mAuth = FirebaseAuth.getInstance();
+       // String currentUID= mAuth.getCurrentUser().getUid();
         databaseReference = FirebaseDatabase.getInstance().getReference().child("postsTest3");
         mQueryCurrentOwner = databaseReference.orderByChild("uid").equalTo(currentUID);
         return rootView;

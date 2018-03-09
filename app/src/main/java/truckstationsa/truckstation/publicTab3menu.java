@@ -57,7 +57,7 @@ public class publicTab3menu extends Fragment {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Category artist = artists.get(i);
-                showUpdateDeleteDialog(mid1,artist.getCatID() );
+                showUpdateDeleteDialog(mid1,artist.getCatID(),artist.getCatName() );
                 return true;
             }
         });
@@ -156,7 +156,7 @@ public class publicTab3menu extends Fragment {
 
 
 
-    private void showUpdateDeleteDialog(final String mid ,final String artistId) {
+    private void showUpdateDeleteDialog(final String mid ,final String artistId,final String n) {
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getLayoutInflater();
@@ -164,6 +164,7 @@ public class publicTab3menu extends Fragment {
         dialogBuilder.setView(dialogView);
 
         final EditText editTextName = (EditText) dialogView.findViewById(R.id.cat);
+        editTextName.setText(n);
         final Button buttonUpdate = (Button) dialogView.findViewById(R.id.category);
         final Button buttonDelete = (Button) dialogView.findViewById(R.id.delete);
 

@@ -7,8 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -51,42 +54,39 @@ public class publicTab1profileforcustmer  extends Fragment {
     TextView mail;
     TextView phone;
     TextView wwh;
-    FirebaseAuth firebaseAuth;
+  //  FirebaseAuth firebaseAuth;
     private TextView location;
-
+    String user1="";
     String address;
+    //String user1="jVmYjqfu5leLTx4gkFPQiQ9E3g83";
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+       //  user1 = getArguments().getString("id");
+        Bundle b = getActivity().getIntent().getExtras();
+        user1 = b.getString("id");
         final View rootView= inflater.inflate(R.layout.public_tab1_profileforcustomer, container, false);
-//
 
-        // Toolbar toolbar = (Toolbar) rootView.findViewById(R.id.toolbar);
-        // ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
+
         setHasOptionsMenu(true);//Make sure you have this line of code
         databaseref = FirebaseDatabase.getInstance().getReference();
-
-        // Read from the database
         databaseref.child("PublicFoodTruckOwner").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
-                String user1 = user.getUid();//customer id is the same as rating id to make it easy to refer
-
                 String name = dataSnapshot.child(user1).child("fusername").getValue(String.class);
-                int phonnum = dataSnapshot.child(user1).child("fponeNoumber").getValue(int.class);
+               int phonnum = dataSnapshot.child(user1).child("fponeNoumber").getValue(int.class);
                 String email = dataSnapshot.child(user1).child("femail").getValue(String.class);
                 String cc = dataSnapshot.child(user1).child("qusins").getValue(String.class);
-                String wh=dataSnapshot.child(user1).child("fworkingHours").getValue(String.class);
+
+
+                //String wh=dataSnapshot.child(user1).child("fworkingHours").getValue(String.class);
 
                 username = (TextView) rootView.findViewById(R.id.type);
                 username.setText(" " + cc);
                 TextView profilename = (TextView) rootView.findViewById(R.id.user);
                 profilename.setText(name);
-                wwh= (TextView) rootView.findViewById(R.id.wh);
-                wwh.setText(" " + wh);
+               // wwh= (TextView) rootView.findViewById(R.id.wh);
+              //  wwh.setText(" " + wh);
                 mail = (TextView) rootView.findViewById(R.id.email);
                 mail.setText(" " + email);
                 phone = (TextView) rootView.findViewById(R.id.phone);
@@ -104,11 +104,26 @@ public class publicTab1profileforcustmer  extends Fragment {
 
 
 
-
         //
         return rootView;
     }
+    public void gorating(View view){
+         Intent intent = new Intent(getActivity(), Rating.class);
+            Bundle b=new Bundle();
+            b.putString("id",user1);
+            intent.putExtras(b);
+            startActivity(intent);
 
+    }
+
+    public void goreserve(View view){
+        Intent intent = new Intent(getActivity(), ReserveTruck.class);
+        Bundle b=new Bundle();
+        b.putString("id",user1);
+        intent.putExtras(b);
+        startActivity(intent);
+
+    }
 
 }
 
