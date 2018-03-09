@@ -78,6 +78,7 @@ public class FirebaseClient extends AppCompatActivity  {
 
                     for (com.google.firebase.database.DataSnapshot ds : dataSnapshot.getChildren()) {
                         PublicFoodTruckOwner d = new PublicFoodTruckOwner();
+                        d.setUid(""+(ds.getValue(PublicFoodTruckOwner.class).getUid()));
                         d.setFUsername(""+(ds.getValue(PublicFoodTruckOwner.class).getFUsername()));
                         d.setUrl(ds.getValue(PublicFoodTruckOwner.class).getUrl());
                         d.setQusins(ds.getValue(PublicFoodTruckOwner.class).getQusins());
@@ -118,6 +119,7 @@ public class FirebaseClient extends AppCompatActivity  {
 
                     for (com.google.firebase.database.DataSnapshot ds : dataSnapshot.getChildren()) {
                         PrivateFoodTruckOwner d= new PrivateFoodTruckOwner();
+                        d.setUid(""+(ds.getValue(PrivateFoodTruckOwner.class).getUid()));
                         d.setFUsername(ds.getValue(PrivateFoodTruckOwner.class).getFUsername());
                         d.setUrl(ds.getValue(PrivateFoodTruckOwner.class).getUrl());
                         d.setQusins(ds.getValue(PrivateFoodTruckOwner.class).getQusins());
