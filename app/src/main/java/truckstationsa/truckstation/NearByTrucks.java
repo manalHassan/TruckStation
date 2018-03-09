@@ -27,6 +27,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -103,23 +104,19 @@ public class NearByTrucks extends AppCompatActivity implements OnMapReadyCallbac
         try{
             if(mLocationPermissionsGranted){
 
-                final Task location = mFusedLocationProviderClient.getLastLocation();
-                location.addOnCompleteListener(new OnCompleteListener() {
-                    @Override
-                    public void onComplete(@NonNull Task task) {
-                        if(task.isSuccessful()){
-                            Log.d(TAG, "onComplete: found location!");
-                            Location currentLocation = (Location) task.getResult();
-
-                            moveCamera(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()),
-                                    DEFAULT_ZOOM);
-
-                        }else{
-                            Log.d(TAG, "onComplete: current location is null");
-                            Toast.makeText(NearByTrucks.this, "unable to get current location", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+              mFusedLocationProviderClient.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                  @Override
+                  public void onSuccess(Location location) {
+                      // Got last known location. In some rare situations this can be null.
+                      if (location != null) {
+                          // Logic to handle location object
+                          moveCamera(new LatLng(location.getLatitude(), location.getLongitude()),
+                                  DEFAULT_ZOOM);
+                      }
+                      else {  moveCamera(new LatLng(24.723129, 46.636892),
+                              DEFAULT_ZOOM);}
+                  }
+              });
             }
         }catch (SecurityException e){
             Log.e(TAG, "getDeviceLocation: SecurityException: " + e.getMessage() );
@@ -343,7 +340,7 @@ public class NearByTrucks extends AppCompatActivity implements OnMapReadyCallbac
             firebaseAuth.signOut();
             if(firebaseAuth.getCurrentUser() == null){
                 Toast.makeText(this , "تم تسجيل الدخول بنجاح" , Toast.LENGTH_SHORT).show();
-                startActivity(new Intent (this , CustomerLogInPage.class));
+                startActivity(new Intent (this , MainActivity.class));
                 DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
                 drawer.closeDrawer(GravityCompat.START);
                 return true;

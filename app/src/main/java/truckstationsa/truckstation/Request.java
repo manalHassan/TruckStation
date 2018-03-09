@@ -16,9 +16,10 @@ public class Request {
     private String CID , FID , RStatus , RDate ;
     private DateTimeFormatter dtf ;
     private double x,y;
+    private String notes;
 
      @RequiresApi(api = Build.VERSION_CODES.O)
-     public Request (String CID , String FID  ,String  RID,String RDate,double x,double y){
+     public Request (String CID , String FID  ,String  RID,String RDate,double x,double y,String notes){
          //dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
          //LocalDateTime now = LocalDateTime.now();
         // System.out.println(dtf.format(now));
@@ -29,12 +30,18 @@ public class Request {
          this.setRStatus("wait");
          this.setX(x);
          this.setY(y);
+         this.setNotes(notes);
      }
     public void setX(double x) {
         this.x = x;
     }
+
     public void setY(double y) {
         this.y = y;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
     }
 
     public void setFID(String FID) {
@@ -77,5 +84,7 @@ public class Request {
     public String getRStatus() {
         return RStatus;
     }
+
+    public String getNotes(){return notes;}
 }
 

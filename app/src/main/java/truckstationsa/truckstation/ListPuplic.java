@@ -36,7 +36,7 @@ public class ListPuplic extends AppCompatActivity implements NavigationView.OnNa
         setContentView(R.layout.listview_drawer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+auth = FirebaseAuth.getInstance() ;
 ///////////////////////////////////////////
         listView = (ListView) findViewById(R.id.listview);
 
@@ -50,6 +50,8 @@ public class ListPuplic extends AppCompatActivity implements NavigationView.OnNa
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
         dogies= firebaseClient.array1();
 
 
@@ -196,7 +198,7 @@ public class ListPuplic extends AppCompatActivity implements NavigationView.OnNa
             auth.signOut();
             if(auth.getCurrentUser() == null){
                 Toast.makeText(this , "تم تسجيل الدخول بنجاح" , Toast.LENGTH_SHORT).show();
-                startActivity(new Intent (this , CustomerLogInPage.class));
+                startActivity(new Intent (this , MainActivity.class));
                 DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
                 drawer.closeDrawer(GravityCompat.START);
                 return true;

@@ -1,21 +1,16 @@
 package truckstationsa.truckstation;
 
-
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.*;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.PieChart;
@@ -26,11 +21,17 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
-import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
-public class Chart extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+/**
+ * Created by manal on 3/5/2018.
+ */
+
+public class ChartVisitor extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     private long   NoOfPublic =0;
     private long  NoOfPrivate =0;
     private long NoOfCustoemrs = 0 ;
@@ -44,11 +45,11 @@ public class Chart extends AppCompatActivity implements NavigationView.OnNavigat
     static float[] yData = { 2f , 3f  ,12f};
     private String[] xData = {"عملاء", "عربات حفلات خاصه" , "عربات عامه"};
     PieChart pieChart;
-FirebaseAuth auth ;
+    FirebaseAuth auth ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.chart_drawer);
+        setContentView(R.layout.vister_chart_drawer);
         Log.d(TAG, "onCreate: starting to create chart");
         pieChart = (PieChart) findViewById(R.id.chart);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -128,44 +129,44 @@ FirebaseAuth auth ;
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-     setUpTheChart();
+        setUpTheChart();
 
     }
-public void setUpTheChart(){
-    //  pieChart.setDescription(Sales by employee (In Thousands $));
-    pieChart.setRotationEnabled(true);
-    //pieChart.setUsePercentValues(true);
-    //pieChart.setHoleColor(Color.BLUE);
-    //pieChart.setCenterTextColor(Color.BLACK);
-    pieChart.setHoleRadius(25f);
-    pieChart.setTransparentCircleAlpha(0);
-    pieChart.setCenterText("احصائيه مستخدمي التطبيق");
-    pieChart.setCenterTextSize(10);
-    pieChart.animateY(2000);
-    //pieChart.setDrawEntryLabels(true);
-    //pieChart.setEntryLabelTextSize(20);
-    //More options just check out the documentation!
+    public void setUpTheChart(){
+        //  pieChart.setDescription(Sales by employee (In Thousands $));
+        pieChart.setRotationEnabled(true);
+        //pieChart.setUsePercentValues(true);
+        //pieChart.setHoleColor(Color.BLUE);
+        //pieChart.setCenterTextColor(Color.BLACK);
+        pieChart.setHoleRadius(25f);
+        pieChart.setTransparentCircleAlpha(0);
+        pieChart.setCenterText("احصائيه مستخدمي التطبيق");
+        pieChart.setCenterTextSize(10);
+        pieChart.animateY(2000);
+        //pieChart.setDrawEntryLabels(true);
+        //pieChart.setEntryLabelTextSize(20);
+        //More options just check out the documentation!
 
-    addDataSet();
+        addDataSet();
 
-    pieChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
-        @Override
-        public void onValueSelected(Entry e, Highlight h) {
-            Log.d(TAG, "onValueSelected: Value select from chart.");
-            Log.d(TAG, "onValueSelected: " + e.toString());
-            Log.d(TAG, "onValueSelected: " + h.toString());
+        pieChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
+            @Override
+            public void onValueSelected(Entry e, Highlight h) {
+                Log.d(TAG, "onValueSelected: Value select from chart.");
+                Log.d(TAG, "onValueSelected: " + e.toString());
+                Log.d(TAG, "onValueSelected: " + h.toString());
 
-            int pos1 = e.toString().indexOf("(sum): ");
-            String sales = e.toString().substring(pos1 + 7);
-        }
+                int pos1 = e.toString().indexOf("(sum): ");
+                String sales = e.toString().substring(pos1 + 7);
+            }
 
-        @Override
-        public void onNothingSelected() {
+            @Override
+            public void onNothingSelected() {
 
-        }
-    });
+            }
+        });
 
-}
+    }
     private void addDataSet() {
         Log.d(TAG, "addDataSet started");
         ArrayList<PieEntry> yEntrys = new ArrayList<>();
@@ -230,18 +231,8 @@ public void setUpTheChart(){
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_profile) {
-            Intent intent = new Intent(this, customer_profilenew.class);
-            Bundle b=new Bundle();
-            //b.putString("id",user);
-            //intent.putExtras(b);
-            startActivity(intent);
-            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-            drawer.closeDrawer(GravityCompat.START);
-            return true;
-
-        } else if (id == R.id.nav_publiclist) {
-            Intent intent = new Intent(this, ListPuplic.class);
+        if (id == R.id.nav_publiclist1) {
+            Intent intent = new Intent(this, publicListVistor.class);
             Bundle b=new Bundle();
             // b.putString("id",user);
             // intent.putExtras(b);
@@ -251,8 +242,8 @@ public void setUpTheChart(){
             return true;
 
         }
-        else if (id == R.id.nav_privatelist) {
-            Intent intent = new Intent(this, ListPrivate.class);
+        else if (id == R.id.nav_privatelist1) {
+            Intent intent = new Intent(this, PravitListVistor.class);
             Bundle b=new Bundle();
             // b.putString("id",user);
             // intent.putExtras(b);
@@ -262,8 +253,8 @@ public void setUpTheChart(){
             return true;
 
         }
-        else if (id == R.id.nav_map) {
-            Intent intent = new Intent(this, VisitorHomePage.class);
+        else if (id == R.id.nav_map1) {
+            Intent intent = new Intent(this, VsitorAllTrucks.class);
             Bundle b=new Bundle();
             //  b.putString("id",user);
             // intent.putExtras(b);
@@ -274,8 +265,8 @@ public void setUpTheChart(){
 
         }
 
-        else if (id == R.id.nav_nearmap) {
-            Intent intent = new Intent(this, NearByTrucks.class);
+        else if (id == R.id.nav_nearmap1) {
+            Intent intent = new Intent(this, NearByTrucksVisitors.class);
             Bundle b=new Bundle();
             //  b.putString("id",user);
             // intent.putExtras(b);
@@ -286,35 +277,10 @@ public void setUpTheChart(){
 
         }
 
-        else if (id == R.id.nav_pre_request) {
-/*
-            Intent intent = new Intent(this, ownermenu.class);
-            Bundle b=new Bundle();
-            b.putString("id",user);
-            intent.putExtras(b);
-            startActivity(intent);
-            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-            drawer.closeDrawer(GravityCompat.START);
-            return true;
-            */
-        }
 
+        else if (id == R.id.nav_app1) {
 
-        else if (id == R.id.nav_pre_preorder) {
-/*
-  Intent intent = new Intent(this, editprofile.class);
-            Bundle b=new Bundle();
-            b.putString("id",user);
-            intent.putExtras(b);
-            startActivity(intent);
-            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-            drawer.closeDrawer(GravityCompat.START);
-            return true;
- */
-        }
-        else if (id == R.id.nav_app) {
-
-            Intent intent = new Intent(this, Chart.class);
+            Intent intent = new Intent(this, ChartVisitor.class);
             Bundle b=new Bundle();
             //  b.putString("id",user);
             //  intent.putExtras(b);
@@ -324,19 +290,8 @@ public void setUpTheChart(){
             return true;
 
         }
-        else if (id == R.id.nav_logout) {
 
-            auth.signOut();
-            if(auth.getCurrentUser() == null){
-                Toast.makeText(this , "تم تسجيل الدخول بنجاح" , Toast.LENGTH_SHORT).show();
-                startActivity(new Intent (this , MainActivity.class));
-                DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-                drawer.closeDrawer(GravityCompat.START);
-                return true;
-
-            }}
 
         return false;
     }
-
 }

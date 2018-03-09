@@ -11,7 +11,8 @@
         android:background="#ffffff"
         android:orientation="vertical"
         xmlns:tools="http://schemas.android.com/tools"
-        tools:context=".postActivityPublic">
+        tools:context=".postActivityPublic"
+    >
 
 
         <ImageButton
