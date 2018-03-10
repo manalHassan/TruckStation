@@ -23,7 +23,7 @@ public class PicassoClient {
         }else
         {
             Picasso.with(c).load(R.mipmap.ic_launcher_round).into(img);
-            Toast.makeText(c, "can not imag", Toast.LENGTH_SHORT).show();
+
         }
     }
 
