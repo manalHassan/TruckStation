@@ -131,6 +131,7 @@
             android:label="@string/title_activity_private_owner_profile"
             android:theme="@style/AppTheme" />
         <activity android:name=".postActivityPrivate"></activity>
+        <activity android:name=".SinglePostView"></activity>
     </application>
 
 </manifest>

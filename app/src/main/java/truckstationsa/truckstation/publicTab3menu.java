@@ -50,6 +50,13 @@ public class publicTab3menu extends Fragment {
 
         //getting views
         editTextName = (EditText) rootView.findViewById(R.id.editTextName);
+        Button b= rootView.findViewById(R.id.category);
+        b.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               addcategory();
+            }
+        });
         listViewArtists = (ListView) rootView.findViewById(R.id.listViewTracks);
         //list to store artists
         artists = new ArrayList<>();
@@ -122,7 +129,7 @@ public class publicTab3menu extends Fragment {
 
 
 
-    public void addcategory(View view) {
+    public void addcategory() {
         FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
         String id = user.getUid();//customer id is the same as rating id to make it easy to refer
         myRef.child("Menu").child(id).addValueEventListener(new ValueEventListener() {
