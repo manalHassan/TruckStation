@@ -37,10 +37,10 @@ public class Rating extends AppCompatActivity implements NavigationView.OnNaviga
     EditText mFeedback;
     Button mSendFeedback;
     FirebaseAuth firebaseAuth;
-
+    private FirebaseAuth mAuth;
     // DATABASE
     DatabaseReference RatingRef;
-    DatabaseReference CommentRef;
+    DatabaseReference CustomerRef;
     FirebaseDatabase database;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +57,10 @@ public class Rating extends AppCompatActivity implements NavigationView.OnNaviga
          //object in firebase
         database= FirebaseDatabase.getInstance();
         RatingRef = database.getReference("Rate"); // make sure its identical to the table name in the database
-        CommentRef= database.getReference("Comment");
+        CustomerRef= database.getReference("Customer");
+        mAuth = FirebaseAuth.getInstance();
+
+
 
         mRatingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
@@ -96,18 +99,42 @@ public class Rating extends AppCompatActivity implements NavigationView.OnNaviga
         navigationView.setNavigationItemSelectedListener(this);
     }
 
-
-
     public  void DoRating(View view ){
 
-        RatingRef.addValueEventListener(new ValueEventListener() {
+        // verfy if  a customer do rating or not
+        String id=mAuth.getCurrentUser().getUid();
+        CustomerRef.child(id).child("Rating").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                //data snapchat is the whole database
+                String rating=dataSnapshot.getValue(String.class).toString().trim();
+
+                if(rating.equals("false")){
+                   DoRealRating();
+                }
+                else{
+                    Toast.makeText(Rating.this, "لقد قمت بتقييم هذي العربة مسبقًا", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public  void DoRealRating(){
+
+        RatingRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
-                String id = user.getUid();//customer id is the same as rating id to make it easy to refer
+                String id = user.getUid();//customer id
 
-                final String FID="FIDtst";
+                final String FID="FIDtst";//food truck id is the same as rating id to make it easy to refer
                 final String CID=id;
                 final double ratingValue=(double)mRatingBar.getRating();
                 final String strRate= String.valueOf(ratingValue).toString().trim();
@@ -116,11 +143,17 @@ public class Rating extends AppCompatActivity implements NavigationView.OnNaviga
 
                 Rate rate= new Rate(CID,FID,ratingValue);
 
-                RatingRef.child(id).setValue(rate);
+                RatingRef.child(FID).setValue(rate);
+
+                    try {
+                        CustomerRef.child(id).child("Rating").setValue("true");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 Toast.makeText(Rating.this, "شكرًا لمشاركتنا رأيك", Toast.LENGTH_SHORT).show();
                 // Intent intent = new Intent(GoTOCustomerRegisterPage.this, .class);
                 // startActivity(intent);
-                //finish();
+                finish();
                 }
 
             }
