@@ -16,10 +16,4 @@
         android:title="@string/add"
         />
 
-    <item
-        android:id="@+id/logout"
-        android:orderInCategory="100"
-        android:title="logout"
-        app:showAsAction="always"
-        />
 </menu>

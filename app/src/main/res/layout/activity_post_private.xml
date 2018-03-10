@@ -25,7 +25,7 @@
 
     <EditText
         android:id="@+id/editNamePrivate"
-        android:hint="Enter name for Image"
+        android:hint="ادخل اسم الصورة"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -38,7 +38,7 @@
 
     <EditText
         android:id="@+id/editDescPrivate"
-        android:hint="Enter description"
+        android:hint="ادخل تعليق للصورة"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -52,7 +52,7 @@
         android:id="@+id/buttonUpload"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Upload"
+        android:text="انشر الصورة"
         android:background="@drawable/background_upload"
         android:textColor="#ffffff"
         android:textAllCaps="false"
