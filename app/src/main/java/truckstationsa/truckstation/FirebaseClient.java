@@ -19,6 +19,7 @@ import android.view.Menu;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.RatingBar;
 import android.widget.Toast;
 
 import com.firebase.client.ChildEventListener;
@@ -44,6 +45,8 @@ public class FirebaseClient extends AppCompatActivity  {
     ArrayList<PrivateFoodTruckOwner> dogies1= new ArrayList<>();
     CustomAdapterPrivate customAdapter1;
     DatabaseReference f;
+    DatabaseReference rate;
+    PublicFoodTruckOwner d;
 
 
     public  FirebaseClient(Context c, String DB_URL,ListView listView)
@@ -61,8 +64,8 @@ public class FirebaseClient extends AppCompatActivity  {
         // d.setName(name);
         //d.setUrl(url);
 
-        // f.child("dog").push().setValue(d);
         if (name.equals("pu")) {
+
             f = FirebaseDatabase.getInstance().getReference().child("PublicFoodTruckOwner");
 
             ValueEventListener eventListener = new ValueEventListener() {
@@ -77,18 +80,62 @@ public class FirebaseClient extends AppCompatActivity  {
                     dogies.clear();
 
                     for (com.google.firebase.database.DataSnapshot ds : dataSnapshot.getChildren()) {
-                        PublicFoodTruckOwner d = new PublicFoodTruckOwner();
-                        d.setUid(""+(ds.getValue(PublicFoodTruckOwner.class).getUid()));
-                        d.setFUsername(""+(ds.getValue(PublicFoodTruckOwner.class).getFUsername()));
+
+                        d = new PublicFoodTruckOwner();
+                        d.setFUsername(ds.getValue(PublicFoodTruckOwner.class).getFUsername());
                         d.setUrl(ds.getValue(PublicFoodTruckOwner.class).getUrl());
                         d.setQusins(ds.getValue(PublicFoodTruckOwner.class).getQusins());
+                        d.setUid(ds.getValue(PublicFoodTruckOwner.class).getUid());
+
+                        //////___________rate/
+                        rate= FirebaseDatabase.getInstance().getReference().child("Rate").child("5iKorQstPQMXt8Qp17RGm04TfE52").child("sum");
+                        ValueEventListener eventListener = new ValueEventListener() {
+                            @Override
+                            public void onDataChange(com.google.firebase.database.DataSnapshot dataSnapshot) {
+                                if (dataSnapshot.getChildren() == null) {
+                                    Toast.makeText(c, "no rating", Toast.LENGTH_SHORT).show();
+
+                                    //Toast.makeText(this, "hi", Toast.LENGTH_SHORT).show();
+                                    //startActivity(new Intent(getActivity(), AdminHome2.class));
+                                }
+
+                                sumRate rate = new sumRate();
+                                rate.setSum(dataSnapshot.getValue(sumRate.class).getSum());
+                                rate.setNumCus(dataSnapshot.getValue(sumRate.class).getNumCus());
+                                int a = rate.getSum();
+                                int b = rate.getNumCus();
+                                Toast.makeText(c, a+"" ,Toast.LENGTH_SHORT).show();
+                                d.setNumCus(b);
+                                d.setSumRate(a);
+
+
+
+
+
+
+
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+                                Toast.makeText(c, "cancelled", Toast.LENGTH_SHORT).show();
+                            }
+                        };
+                        rate.addListenerForSingleValueEvent(eventListener);
+
+
+                        ///___________rate
 
                         dogies.add(d);
+
 
                     }
                     if (dogies.size() > 0) {
                         customAdapter = new CustomAdapter(c, dogies);
                         listView.setAdapter((ListAdapter) customAdapter);
+
+
+
                     } else {
                         Toast.makeText(c, "No data", Toast.LENGTH_SHORT).show();
                     }
@@ -102,6 +149,11 @@ public class FirebaseClient extends AppCompatActivity  {
                 }
             };
             f.addListenerForSingleValueEvent(eventListener);
+            ////////rate///////////
+
+            /////////rate//////////
+
+            //  _________________________pravet__________________________________
 
         }else if (name.equals("pr")) {
             f = FirebaseDatabase.getInstance().getReference().child("PrivateFoodTruckOwner");
