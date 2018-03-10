@@ -154,16 +154,7 @@ public class publictruckownerprofile extends AppCompatActivity
             */
         }
 
-        else if (id == R.id.nav_menu) {
 
-  Intent intent = new Intent(publictruckownerprofile.this, ownermenu.class);
-            Bundle b=new Bundle();
-
-            startActivity(intent);
-            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-            drawer.closeDrawer(GravityCompat.START);
-            return true;
-        }
 
 
         else if (id == R.id.nav_request) {
