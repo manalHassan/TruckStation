@@ -77,11 +77,11 @@ public class itemlist extends AppCompatActivity {
         });
 
     }
-
+/*
     public View getView(final int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = getLayoutInflater();
         View row = inflater.inflate(R.layout.layout_itemlist, parent, false);
-        Button delete = (Button) row.findViewById(R.id.deleteitem);
+      Button delete = (Button) row.findViewById(R.id.deleteitem);
         delete.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Item tem= artists.get(position);
@@ -91,7 +91,7 @@ public class itemlist extends AppCompatActivity {
         });
         return row;
     }
-
+*/
     private void showUpdateDeleteDialog(final String cId,final String itemid,final String n ,final String desc, final String p) {
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
