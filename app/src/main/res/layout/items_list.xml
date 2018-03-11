@@ -26,15 +26,15 @@
 
     <Button
         android:id="@+id/category"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
 
-        android:layout_alignParentStart="true"
         android:layout_below="@+id/foodmenu"
-        android:background="@drawable/buttonstayle"
-        android:onClick="additem"
-        android:text="إضافة "
-        android:layout_alignParentLeft="true" />
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/ic_add"
+        android:gravity="center_vertical|center_horizontal|center"
+        android:onClick="additem" />
+
     <ListView
         android:id="@+id/listViewTracks"
         android:layout_width="match_parent"
