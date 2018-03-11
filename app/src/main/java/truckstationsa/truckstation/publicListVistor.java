@@ -34,7 +34,7 @@ public class publicListVistor extends AppCompatActivity implements NavigationVie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.listview_drawer3);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+//        setSupportActionBar(toolbar);
 
 ///////////////////////////////////////////
         listView = (ListView) findViewById(R.id.listview);

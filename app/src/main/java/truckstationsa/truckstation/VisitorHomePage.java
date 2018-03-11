@@ -40,7 +40,7 @@ import com.google.firebase.database.ValueEventListener;
  * Created by manal on 2/23/2018.
  */
 
-public class VisitorHomePage extends AppCompatActivity implements OnMapReadyCallback  , NavigationView.OnNavigationItemSelectedListener  {
+public class VisitorHomePage extends AppCompatActivity implements OnMapReadyCallback  ,NavigationView.OnNavigationItemSelectedListener {
     private FirebaseDatabase db = FirebaseDatabase.getInstance();
     private DatabaseReference dbRef = db.getReference();
     double x = 0;
@@ -52,40 +52,9 @@ public class VisitorHomePage extends AppCompatActivity implements OnMapReadyCall
         setContentView(R.layout.visitor_drawer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        firebaseAuth = FirebaseAuth.getInstance();
         getLocationPermission();
-        dbRef.child("PublicFoodTruckOwner").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
-                    PublicFoodTruckOwner pOwner;
-                    pOwner = postSnapshot.getValue(PublicFoodTruckOwner.class);
-                    if (pOwner == null)
-                        Toast.makeText(VisitorHomePage.this, "فاضي !!!!!!!!", Toast.LENGTH_SHORT).show();
-                    try {
-                        if (pOwner != null) {
-                            x = pOwner.getXFLication();
-                            y = pOwner.getYFLocation();
-                            //   Toast.makeText(VisitorHomePage.this, "يتم تحديد المواقع الان....", Toast.LENGTH_SHORT).show();
-                            // mMap.clear();
-                            LatLng location = new LatLng(x, y);
-                            mMap.addMarker(new MarkerOptions()
-                                    .position(location)
-                                    .title(pOwner.getFUsername()));
-                            //.icon(BitmapDescriptorFactory.fromBitmap(bmp))
-                        }
-                    } catch (Exception e) {
-                        Toast.makeText(VisitorHomePage.this, "حدث خطاء ما !!", Toast.LENGTH_SHORT).show();
-                    }
+        firebaseAuth = FirebaseAuth.getInstance();
 
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -93,7 +62,7 @@ public class VisitorHomePage extends AppCompatActivity implements OnMapReadyCall
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this); }
+        navigationView.setNavigationItemSelectedListener(this);  }
     @Override
     public void onMapReady(GoogleMap googleMap) {
         Toast.makeText(this, "Map is Ready", Toast.LENGTH_SHORT).show();
@@ -131,31 +100,66 @@ public class VisitorHomePage extends AppCompatActivity implements OnMapReadyCall
         Log.d(TAG, "getDeviceLocation: getting the devices current location");
 
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+
         try{
             if(mLocationPermissionsGranted){
 
-        mFusedLocationProviderClient.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<Location>() {
-            @Override
-            public void onSuccess(Location location) {
-                // Got last known location. In some rare situations this can be null.
-                if (location != null) {
-                    // Logic to handle location object
-                    moveCamera(new LatLng(location.getLatitude(), location.getLongitude()),
-                            DEFAULT_ZOOM);
-                }
-                else {  moveCamera(new LatLng(24.723129, 46.636892),
-                        DEFAULT_ZOOM);}
-            }
-        });
+                mFusedLocationProviderClient.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                    @Override
+                    public void onSuccess(Location location) {
+                        // Got last known location. In some rare situations this can be null.
+                        if (location != null) {
+                            // Logic to handle location object
+                            moveCamera(new LatLng(location.getLatitude(), location.getLongitude()),
+                                    DEFAULT_ZOOM);
+                        }
+                        else {  moveCamera(new LatLng(24.723129, 46.636892),
+                                DEFAULT_ZOOM);}
+                    }
+                });
             }
         }catch (SecurityException e){
             Log.e(TAG, "getDeviceLocation: SecurityException: " + e.getMessage() );
         }
     }
 
-    private void moveCamera(LatLng latLng, float zoom){
+    private void moveCamera(final LatLng latLng, float zoom){
         Log.d(TAG, "moveCamera: moving the camera to: lat: " + latLng.latitude + ", lng: " + latLng.longitude );
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng ,  zoom));
+
+        dbRef.child("PublicFoodTruckOwner").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
+                    PublicFoodTruckOwner pOwner;
+                    pOwner = postSnapshot.getValue(PublicFoodTruckOwner.class);
+                    if (pOwner == null)
+                        Toast.makeText(VisitorHomePage.this, "فاضي !!!!!!!!", Toast.LENGTH_SHORT).show();
+                    try {
+                        if (pOwner != null) {
+                            x = pOwner.getXFLication();
+                            y = pOwner.getYFLocation();
+                            //   Toast.makeText(VisitorHomePage.this, "يتم تحديد المواقع الان....", Toast.LENGTH_SHORT).show();
+                            // mMap.clear();
+                            LatLng location = new LatLng(x, y);
+                                mMap.addMarker(new MarkerOptions()
+                                        .position(location)
+                                        .title(pOwner.getFUsername()));
+                                //.icon(BitmapDescriptorFactory.fromBitmap(bmp))
+                            }
+
+                    } catch (Exception e) {
+                        Toast.makeText(VisitorHomePage.this, "حدث خطاء ما !!", Toast.LENGTH_SHORT).show();
+                    }
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     private void initMap(){
@@ -211,6 +215,7 @@ public class VisitorHomePage extends AppCompatActivity implements OnMapReadyCall
             }
         }
     }
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

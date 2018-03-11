@@ -188,7 +188,7 @@ public class PublicOwnerRegistration extends AppCompatActivity {
                                             // fdb2.child(t.getTruckname()).setValue(t);
 
                                             //to know the type of the user
-                                            String type="Customer";
+                                            String type="PublicOwner";
                                             APPUsers user1=new APPUsers(type);
                                             UDB.child(uid).setValue(user1);
                                         } catch (Exception e) {
