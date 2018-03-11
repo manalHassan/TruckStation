@@ -5,11 +5,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -55,17 +57,21 @@ public class itemlist extends AppCompatActivity {
         //list to store artists
         artists = new ArrayList<>();
 
+        listViewArtists.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
+                Item artist = artists.get(position);
+                //   String
+                AlertDialog diaBox = AskOption(artist.getItemID());
+                diaBox.show();
+            }
+        });
         listViewArtists.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                // Item artist = artists.get(i);
-               /*    String
-                Intent intent = new Intent(itemlist.this, edititem.class);
-                Bundle b=new Bundle();
-                b.putString("tid",artist.getItemID());
-                intent.putExtras(b);
-                startActivity(intent);
-                */
+
+                Item artist = artists.get(i);
+                showUpdateDeleteDialog(artist.getCatID(),artist.getItemID(),artist.getIName(),artist.getIdescription(),""+artist.getIPrice());
                 return true;
             }
         });
@@ -86,6 +92,82 @@ public class itemlist extends AppCompatActivity {
         return row;
     }
 
+    private void showUpdateDeleteDialog(final String cId,final String itemid,final String n ,final String desc, final String p) {
+
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = getLayoutInflater();
+        final View dialogView = inflater.inflate(R.layout.update_item, null);
+        dialogBuilder.setView(dialogView);
+
+        final EditText editTextName = (EditText) dialogView.findViewById(R.id.name);
+        final EditText editTextdes = (EditText) dialogView.findViewById(R.id.des);
+        final EditText editTextprice = (EditText) dialogView.findViewById(R.id.price);
+        editTextName.setText(n);
+        editTextdes.setText(desc);
+        editTextprice.setText(p);
+
+        final Button buttonimage = (Button) dialogView.findViewById(R.id.Pimage);
+        final Button buttonUpdate = (Button) dialogView.findViewById(R.id.updatetem);
+
+        dialogBuilder.setTitle("تعديل الصنف");
+        final AlertDialog b = dialogBuilder.create();
+        b.show();
+
+        buttonUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String name = editTextName.getText().toString().trim();
+                String des = editTextdes.getText().toString().trim();
+                String price = editTextprice.getText().toString().trim();
+                if (!TextUtils.isEmpty(name)&& !TextUtils.isEmpty(des) && !TextUtils.isEmpty(price)) {
+                    updateItem(cid,itemid,name,des,price);
+                    b.dismiss();
+                }
+                else{
+                    b.dismiss();
+                    Toast.makeText(getApplicationContext(), "الرجاء تعبئة جميع الخانات ", Toast.LENGTH_LONG).show();
+
+                }
+            }
+        });
+
+    }
+
+    private void updateItem(final String cid,final String tid,final String n,final String d,final String price) {
+
+        final double pr;
+        try{
+            pr = Double.parseDouble(price);}
+        catch (Exception e){
+            Toast.makeText(this, "الرجاء ادخال السعر بشكل صحيح ", Toast.LENGTH_LONG).show();
+            return;
+        }
+            //1 get menu id
+            FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
+            String id = user.getUid();//customer id is the same as rating id to make it easy to refer
+            myRef.child("Menu").child(id).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    mid = dataSnapshot.child("mid").getValue(String.class);
+                    //2 add item
+                    Item t=new Item();
+                    t.setCatID(cid);
+                    t.setIdescription(d);
+                    t.setIName(n);
+                    t.setIPicture("here url");
+                    t.setIPrice(pr);
+                    t.setItemID(tid);
+
+                    myRef.child("Item").child(mid).child(cid).child(tid).setValue(t);;
+                }
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+
+
+    }
 
     public void additem(View view) {
         Intent intent = new Intent(this, edititem.class);
