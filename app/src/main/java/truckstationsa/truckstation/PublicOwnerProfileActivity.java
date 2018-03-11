@@ -125,9 +125,6 @@ public class PublicOwnerProfileActivity extends AppCompatActivity
             Intent intent = new Intent(PublicOwnerProfileActivity.this, postActivityPublic.class);
             startActivity(intent);
         }
-        else if (id == R.id.logout){
-           mAuth.signOut();
-        }
 
 
 
@@ -271,17 +268,6 @@ public class PublicOwnerProfileActivity extends AppCompatActivity
             drawer.closeDrawer(GravityCompat.START);
             return true;
             */
-        }
-
-        else if (id == R.id.nav_menu) {
-
-            Intent intent = new Intent(PublicOwnerProfileActivity.this, ownermenu.class);
-            Bundle b=new Bundle();
-
-            startActivity(intent);
-            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-            drawer.closeDrawer(GravityCompat.START);
-            return true;
         }
 
 

@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListAdapter;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,11 +26,15 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.Map;
 
 public class Rating extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     RatingBar mRatingBar;
@@ -37,11 +42,17 @@ public class Rating extends AppCompatActivity implements NavigationView.OnNaviga
     EditText mFeedback;
     Button mSendFeedback;
     FirebaseAuth firebaseAuth;
+    public static int numOFCustomer;
+    public static int sum;
+    ArrayList<Rate> dogies= new ArrayList<>();
 
     // DATABASE
+    DatabaseReference OwnerID;
+    DatabaseReference CustmID;
     DatabaseReference RatingRef;
     DatabaseReference CommentRef;
     FirebaseDatabase database;
+    sumRate sumrate;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,15 +60,16 @@ public class Rating extends AppCompatActivity implements NavigationView.OnNaviga
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-         mRatingBar = (RatingBar) findViewById(R.id.ratingBar);
-         mRatingScale = (TextView) findViewById(R.id.tvRatingScale);
-         mFeedback = (EditText) findViewById(R.id.etFeedback);
-         mSendFeedback = (Button) findViewById(R.id.btnSubmit);
+        mRatingBar = (RatingBar) findViewById(R.id.ratingBar);
+        mRatingScale = (TextView) findViewById(R.id.tvRatingScale);
+        mFeedback = (EditText) findViewById(R.id.etFeedback);
+        mSendFeedback = (Button) findViewById(R.id.btnSubmit);
         firebaseAuth = FirebaseAuth.getInstance();
-         //object in firebase
+        //object in firebase
         database= FirebaseDatabase.getInstance();
         RatingRef = database.getReference("Rate"); // make sure its identical to the table name in the database
         CommentRef= database.getReference("Comment");
+        OwnerID = FirebaseDatabase.getInstance().getReference().child("Rate").child("5iKorQstPQMXt8Qp17RGm04TfE52");
 
         mRatingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
@@ -107,20 +119,24 @@ public class Rating extends AppCompatActivity implements NavigationView.OnNaviga
                 FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
                 String id = user.getUid();//customer id is the same as rating id to make it easy to refer
 
-                final String FID="FIDtst";
+                final String FID="5iKorQstPQMXt8Qp17RGm04TfE52";
                 final String CID=id;
+
                 final double ratingValue=(double)mRatingBar.getRating();
+
+                // final double ratingValue=ratingValue+(double)mRatingBar.getRating()/5;
                 final String strRate= String.valueOf(ratingValue).toString().trim();
 
                 if ( !TextUtils.isEmpty(FID) && !TextUtils.isEmpty(CID) && !TextUtils.isEmpty(strRate)) {
 
-                Rate rate= new Rate(CID,FID,ratingValue);
+                    Rate rate= new Rate(CID,FID,ratingValue,0);
 
-                RatingRef.child(id).setValue(rate);
-                Toast.makeText(Rating.this, "شكرًا لمشاركتنا رأيك", Toast.LENGTH_SHORT).show();
-                // Intent intent = new Intent(GoTOCustomerRegisterPage.this, .class);
-                // startActivity(intent);
-                //finish();
+                    RatingRef.child(FID).child(CID).setValue(rate);
+                    //Toast.makeText(Rating.this, ""+ratingValue+"شكرًا لمشاركتنا رأيك", Toast.LENGTH_SHORT).show();
+
+                    // Intent intent = new Intent(GoTOCustomerRegisterPage.this, .class);
+                    // startActivity(intent);
+                    //finish();
                 }
 
             }
@@ -129,57 +145,102 @@ public class Rating extends AppCompatActivity implements NavigationView.OnNaviga
             public void onCancelled(DatabaseError databaseError) {}
         });
 
+/////////////
+        sum=0;
+        OwnerID.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
 
-        //add comment
-       /* final String Comment=mFeedback.getText().toString();
+                if (dataSnapshot.getChildren() == null) {
+                    Toast.makeText(Rating.this, "no sum of rating", Toast.LENGTH_SHORT).show();
 
-if(!TextUtils.isEmpty(Comment)) {
+                    //Toast.makeText(this, "hi", Toast.LENGTH_SHORT).show();
+                    //startActivity(new Intent(getActivity(), AdminHome2.class));
+                }
+                dogies.clear();
 
-    CommentRef.addValueEventListener(new ValueEventListener() {
+                for (com.google.firebase.database.DataSnapshot ds : dataSnapshot.getChildren()) {
+                    Rate d = new Rate();
+                    d.setRatingValue(ds.getValue(Rate.class).getRatingValue());
+                    dogies.add(d);
 
-        @RequiresApi(api = Build.VERSION_CODES.O)
-        @Override
-        public void onDataChange(DataSnapshot dataSnapshot) {
 
-            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-            String id = user.getUid();//customer id is the same as comment id to make it easy to refer
+                }
+                if (dogies.size() > 0) {
+                    int a;
+                    int size = dogies.size();
+                    for (int i = 0; i < dogies.size(); i++) {
+                        Toast.makeText(Rating.this, "Index: " + i + " - Item: " + dogies.get(i).getRatingValue(), Toast.LENGTH_SHORT).show();
 
-            final String FID = "FIDtst";
-            final String CID = id;
-            if (!TextUtils.isEmpty(FID) && !TextUtils.isEmpty(CID)) {
 
-              Comment commentObject= new Comment(CID ,FID ,Comment);
 
-                CommentRef.child(id).setValue(commentObject);
-                //Toast.makeText(Rating.this,  "شكرًا لمشاركتنا رأيك", Toast.LENGTH_SHORT).show();
-                // Intent intent = new Intent(GoTOCustomerRegisterPage.this, .class);
-                // startActivity(intent);
-                //finish();
+                        a=(int) dogies.get(i).getRatingValue();
+                        sum=sum+a;
+
+                    }
+                    //  Toast.makeText(Rating.this, " size"+size+"", Toast.LENGTH_SHORT).show();
+
+                    sumrate=new sumRate((sum/dogies.size()-1)%5,dogies.size()-1);
+
+                    sum=0;
+                    OwnerID.child("sum").setValue(sumrate);
+
+                } else {
+                    Toast.makeText(Rating.this, "No data", Toast.LENGTH_SHORT).show();
+                }
             }
 
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                //  Toast.makeText(c, "cancelled", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+
+
+
+        //add comment
+        final String Comment=mFeedback.getText().toString();
+
+        if(!TextUtils.isEmpty(Comment)) {
+
+            CommentRef.addValueEventListener(new ValueEventListener() {
+
+                @RequiresApi(api = Build.VERSION_CODES.O)
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+
+                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                    String id = user.getUid();//customer id is the same as comment id to make it easy to refer
+
+                    final String FID = "-L5hPscXmLNDYe8_3KNL";
+                    final String CID=id;
+                    if (!TextUtils.isEmpty(FID) && !TextUtils.isEmpty(CID)) {
+
+                        Comment commentObject= new Comment(CID ,FID ,Comment);
+
+                        CommentRef.child(FID).setValue(commentObject);
+                        //Toast.makeText(Rating.this,  "شكرًا لمشاركتنا رأيك", Toast.LENGTH_SHORT).show();
+                        // Intent intent = new Intent(GoTOCustomerRegisterPage.this, .class);
+                        // startActivity(intent);
+                        //finish();
+                    }
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                }
+            });
         }
 
-        @Override
-        public void onCancelled(DatabaseError databaseError) {
-        }
-    });
-}
+
+
+    }//do
 
 
 
-
-*/
-
-    }
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }
 
     @Override
     public boolean onCreateOptionsMenu(android.view.Menu menu) {

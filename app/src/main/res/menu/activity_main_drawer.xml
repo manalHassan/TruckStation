@@ -10,10 +10,6 @@
             android:icon="@drawable/ic_action_name"
             android:title="تعديل المعلومات الشخصية " />
         <item
-        android:id="@+id/nav_menu"
-        android:icon="@drawable/ic_action_menu"
-        android:title="قائمة الطعام" />
-        <item
             android:id="@+id/nav_request"
             android:icon="@drawable/ic_action_request"
             android:title="الحجــوزات " />

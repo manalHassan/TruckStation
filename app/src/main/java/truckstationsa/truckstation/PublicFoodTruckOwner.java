@@ -16,6 +16,23 @@ public class PublicFoodTruckOwner  {
     private double YFLocation;
     private String url;
     private boolean canBePrivate ;
+    private int sumRate;
+    private int numCus;
+    public int getSumRate() {
+        return sumRate;
+    }
+
+    public void setSumRate(int sumRate) {
+        this.sumRate = sumRate;
+    }
+
+    public int getNumCus() {
+        return numCus;
+    }
+
+    public void setNumCus(int numCus) {
+        this.numCus = numCus;
+    }
 
     public String getUrl() {
         return url;
@@ -27,7 +44,8 @@ public class PublicFoodTruckOwner  {
 
     public PublicFoodTruckOwner (){}
 
-    public PublicFoodTruckOwner ( String FUsername  ,String FPassword ,String FEmail ,  int FPoneNoumber,double XFLication , double YFLocation,String  qusins ,String FWorkingHours ,boolean  canBePrivte ){
+    public PublicFoodTruckOwner(String FUsername, String FPassword, String FEmail, int FPoneNoumber, double XFLication,
+                                double YFLocation, String qusins, String FWorkingHours, boolean canBePrivte){
         this.setFEmail(FEmail);
         this.setFPassword(FPassword);
         this.setFPoneNoumber(FPoneNoumber);
@@ -37,6 +55,8 @@ public class PublicFoodTruckOwner  {
         this.setQusins(qusins);
         this.setFWorkingHours(FWorkingHours);
         this.setCanBePrivate(canBePrivte);
+        this.setNumCus(numCus);
+        this.setSumRate(sumRate);
     }
 
 

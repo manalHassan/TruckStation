@@ -26,7 +26,7 @@ TextView viseter ;
     }
 
     public void goToVisitorHomePage (View view){
-      Intent intent = new Intent(MainActivity.this , publicListVistor.class);
+      Intent intent = new Intent(MainActivity.this , ListPuplic.class);
 
        startActivity(intent);
 

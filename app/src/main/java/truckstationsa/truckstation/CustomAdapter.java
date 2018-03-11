@@ -11,12 +11,15 @@ import java.util.ArrayList;
 public class CustomAdapter extends BaseAdapter {
     Context c;
     ArrayList<PublicFoodTruckOwner> dogies;
+
+
     LayoutInflater inflater;
 
 
     public CustomAdapter(Context c, ArrayList<PublicFoodTruckOwner> dogies) {
         this.c = c;
         this.dogies = dogies;
+
     }
 
 
@@ -26,6 +29,7 @@ public class CustomAdapter extends BaseAdapter {
     @Override
     public int getCount() {
         return dogies.size();
+
     }
 
     @Override
@@ -49,10 +53,13 @@ public class CustomAdapter extends BaseAdapter {
             convertview= inflater.inflate(R.layout.listview_layout,viewGroup,false);
 
         }
-
+        String a;
         MyHolder holder= new MyHolder(convertview);
         holder.nameTxt.setText(dogies.get(i).getFUsername());
         holder.cusin.setText(dogies.get(i).getQusins());
+        holder.ratingBar.setRating(dogies.get(i).getSumRate());
+        a= Integer.toString(dogies.get(i).getNumCus());
+        holder.numofrate.setText(a);
         PicassoClient.downloadimg(c,dogies.get(i).getUrl(),holder.img);
 
 

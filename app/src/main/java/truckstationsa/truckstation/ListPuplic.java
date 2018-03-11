@@ -64,11 +64,7 @@ auth = FirebaseAuth.getInstance() ;
         customAdapter=firebaseClient.customPublic();
         c=firebaseClient.contes();
 
-        if(dogies.equals(null))
-            Toast.makeText(ListPuplic.this, "null dogies", Toast.LENGTH_SHORT).show();
 
-        if(listView.equals(null))
-            Toast.makeText(ListPuplic.this, "null listview", Toast.LENGTH_SHORT).show();
 
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

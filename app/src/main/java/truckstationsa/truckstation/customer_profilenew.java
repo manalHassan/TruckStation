@@ -200,7 +200,7 @@ public class customer_profilenew extends AppCompatActivity implements Navigation
         databaseReference.setValue(c);
         user.updateEmail(email);
         //user.updatePassword(password);
-        Toast.makeText(this, "information saved...", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "تم حفظ المعلومات ...", Toast.LENGTH_LONG).show();
         //startActivity(new Intent(getActivity(), AdminHome2.class));
     }//edit
 

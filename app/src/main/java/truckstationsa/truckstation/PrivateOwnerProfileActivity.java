@@ -108,9 +108,6 @@ public class PrivateOwnerProfileActivity extends AppCompatActivity {
             Intent intent = new Intent(PrivateOwnerProfileActivity.this, postActivityPrivate.class);
             startActivity(intent);
         }
-        else if (id == R.id.logout){
-            mAuth.signOut();
-        }
 
 
 
