@@ -140,7 +140,7 @@ public class publicOnerLogIn extends AppCompatActivity {
         }
 
         if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)) {
-            progressDialog.setMessage("Loging in , please wait");
+            progressDialog.setMessage("انتظر من فضلك");
             progressDialog.show();
             mAuth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(new OnCompleteListener<AuthResult>() {

@@ -203,17 +203,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
                     />
-                <TextView
-                    android:id="@+id/location"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:focusable="true"
-                    android:gravity="center"
-                    android:onClick="goToVisitorHomePage"
-                    android:text="حدد موقعك"
-                    android:textAllCaps="false"
-                    android:textColor="#000" />
+
                 <TextView
                     android:id="@+id/ddd"
                     android:layout_width="match_parent"
