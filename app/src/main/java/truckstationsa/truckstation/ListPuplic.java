@@ -72,7 +72,7 @@ auth = FirebaseAuth.getInstance() ;
             public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
 
                 PublicFoodTruckOwner artist = dogies.get(position);
-                Toast.makeText(ListPuplic.this, "ID="+artist.getUid()+"." ,Toast.LENGTH_SHORT).show();
+               // Toast.makeText(ListPuplic.this, "ID="+artist.getUid()+"." ,Toast.LENGTH_SHORT).show();
                 // set Fragmentclass Arguments
                // publicTab1profileforcustmer fragobj = new  publicTab1profileforcustmer();
               //  fragobj.setArguments(b);
