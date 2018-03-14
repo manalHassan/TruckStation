@@ -104,7 +104,7 @@ public class FirebaseClient extends AppCompatActivity  {
                                 rate.setNumCus(dataSnapshot.getValue(sumRate.class).getNumCus());
                                 int a = rate.getSum();
                                 int b = rate.getNumCus();
-                                Toast.makeText(c, a+"" ,Toast.LENGTH_SHORT).show();
+                               // Toast.makeText(c, a+"" ,Toast.LENGTH_SHORT).show();
                                 d.setNumCus(b);
                                 d.setSumRate(a);
 

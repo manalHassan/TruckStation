@@ -71,7 +71,7 @@ auth = FirebaseAuth.getInstance() ;
             @Override
             public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
 
-                PublicFoodTruckOwner artist = dogies.get(position);
+            //    PublicFoodTruckOwner artist = dogies.get(position);
                // Toast.makeText(ListPuplic.this, "ID="+artist.getUid()+"." ,Toast.LENGTH_SHORT).show();
                 // set Fragmentclass Arguments
                // publicTab1profileforcustmer fragobj = new  publicTab1profileforcustmer();
@@ -211,7 +211,7 @@ auth = FirebaseAuth.getInstance() ;
 
             auth.signOut();
             if(auth.getCurrentUser() == null){
-                Toast.makeText(this , "تم تسجيل الدخول بنجاح" , Toast.LENGTH_SHORT).show();
+                Toast.makeText(this , "تم تسجيل الخروج بنجاح" , Toast.LENGTH_SHORT).show();
                 startActivity(new Intent (this , MainActivity.class));
                 DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
                 drawer.closeDrawer(GravityCompat.START);

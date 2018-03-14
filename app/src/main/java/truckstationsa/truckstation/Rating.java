@@ -170,7 +170,7 @@ public class Rating extends AppCompatActivity implements NavigationView.OnNaviga
                     int a;
                     int size = dogies.size();
                     for (int i = 0; i < dogies.size(); i++) {
-                        Toast.makeText(Rating.this, "Index: " + i + " - Item: " + dogies.get(i).getRatingValue(), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(Rating.this, "Index: " + i + " - Item: " + dogies.get(i).getRatingValue(), Toast.LENGTH_SHORT).show();
 
 
 

@@ -24,7 +24,7 @@
                 android:padding="16dp"
                 android:layout_marginTop="48dp"
                 android:layout_marginBottom="10dp"
-                android:src="@drawable/truck5" android:contentDescription="@string/todo" />
+                android:src="@drawable/station" android:contentDescription="@string/todo" />
 
             <EditText
                 android:id="@+id/edit_mail"

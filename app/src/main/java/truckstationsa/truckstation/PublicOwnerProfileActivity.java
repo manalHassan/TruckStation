@@ -70,7 +70,7 @@ public class PublicOwnerProfileActivity extends AppCompatActivity
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 if(firebaseAuth.getCurrentUser()==null){
-                    Intent loginIntent= new Intent(PublicOwnerProfileActivity.this, publicOnerLogIn.class);
+                    Intent loginIntent= new Intent(PublicOwnerProfileActivity.this, MainActivity.class);
                     loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(loginIntent);
                 }
@@ -288,7 +288,7 @@ public class PublicOwnerProfileActivity extends AppCompatActivity
             mAuth.signOut();
             if(mAuth.getCurrentUser() == null){
                 Toast.makeText(this , "تم تسجيل الخروج بنجاح" , Toast.LENGTH_SHORT).show();
-                startActivity(new Intent (this , publicOnerLogIn.class));
+                startActivity(new Intent (this , MainActivity.class));
                 DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
                 drawer.closeDrawer(GravityCompat.START);
                 return true;

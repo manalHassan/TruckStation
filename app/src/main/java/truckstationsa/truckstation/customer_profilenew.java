@@ -89,22 +89,22 @@ public class customer_profilenew extends AppCompatActivity implements Navigation
          user=FirebaseAuth.getInstance().getCurrentUser();
         String id = user.getUid();//
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Customer").child(id);
-        Toast.makeText(this, databaseReference.toString(), Toast.LENGTH_SHORT).show();
+       // Toast.makeText(this, databaseReference.toString(), Toast.LENGTH_SHORT).show();
 
         ValueEventListener EventListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Toast.makeText(getApplicationContext(),"hdfhdsg", Toast.LENGTH_SHORT).show();
+             //   Toast.makeText(getApplicationContext(),"hdfhdsg", Toast.LENGTH_SHORT).show();
                 // c=new Customer();
-                try {
+            //    try {
                     c = dataSnapshot.getValue(Customer.class);
                     Textmain.setText(c.getCFirstName()+c.getCLastName());
                     TextName.setText(c.getCFirstName());
                     TextPhone.setText(String.format("%d", c.getCPoneNoumber()));
 
-                } catch (Exception e){
-                    e.getMessage();
-                }
+              //  } catch (Exception e){
+                   // e.getMessage();
+               //
             }
 
             @Override
@@ -144,9 +144,9 @@ public class customer_profilenew extends AppCompatActivity implements Navigation
                     startActivityForResult(intent,PLACE_PICKER_REQUEST);
 
                 } catch (GooglePlayServicesRepairableException e) {
-                    e.printStackTrace();
+                  e.printStackTrace();
                 } catch (GooglePlayServicesNotAvailableException e) {
-                    e.printStackTrace();
+                   e.printStackTrace();
                 }
 
             }
@@ -337,7 +337,7 @@ public class customer_profilenew extends AppCompatActivity implements Navigation
 
             firebaseAuth.signOut();
             if(firebaseAuth.getCurrentUser() == null){
-                Toast.makeText(this , "تم تسجيل الدخول بنجاح" , Toast.LENGTH_SHORT).show();
+                Toast.makeText(this , "تم تسجيل الخروج بنجاح" , Toast.LENGTH_SHORT).show();
                 startActivity(new Intent (this , MainActivity.class));
                 DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
                 drawer.closeDrawer(GravityCompat.START);

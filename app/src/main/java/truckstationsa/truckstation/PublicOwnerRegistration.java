@@ -67,6 +67,8 @@ public class PublicOwnerRegistration extends AppCompatActivity {
     Uri FilePathUri;
     StorageReference storageReference;
     DatabaseReference databaseReference;
+    DatabaseReference databaser;
+    DatabaseReference databas;
 ////////////
     ProgressDialog progressDialog ;
     DatabaseReference UDB;
@@ -90,10 +92,13 @@ public class PublicOwnerRegistration extends AppCompatActivity {
         //Start Image code
         storageReference = FirebaseStorage.getInstance().getReference();
         databaseReference = FirebaseDatabase.getInstance().getReference().child("PublicFoodTruckOwner");
+        databaser = FirebaseDatabase.getInstance().getReference().child("Menu");
+        databas = FirebaseDatabase.getInstance().getReference().child("Category");
+
         Upload_image = (Button) findViewById(R.id.Pimage);
         //Pimage = (ImageView) view.findViewById(R.id.imageView);
         UDB=FirebaseDatabase.getInstance().getReference("APPUsers");
-        //////////////
+        ////////////////
         // Adding click listener to Choose image button.
 
         //////////////////
@@ -186,7 +191,6 @@ public class PublicOwnerRegistration extends AppCompatActivity {
                                             PublicFoodTruckOwner owner = new PublicFoodTruckOwner(username, pass, emailp, Integer.parseInt(phoneN), x, y, qusin, uid,true);
                                             databaseReference.child(uid).setValue(owner);
                                             // fdb2.child(t.getTruckname()).setValue(t);
-
                                             //to know the type of the user
                                             String type="PublicOwner";
                                             APPUsers user1=new APPUsers(type);
@@ -194,7 +198,20 @@ public class PublicOwnerRegistration extends AppCompatActivity {
                                         } catch (Exception e) {
                                             e.printStackTrace();
                                         }
+                                        //add menu plz don't delete it
+                                        String mid =databaser.push().getKey();
+                                        Menu menu =new Menu(uid,mid);
+                                        databaser.child(uid).setValue(menu);
+                                        //add menu plz don't delete it
+
+                                     //   String cid =databas.push().getKey();
+                                     //   Category c=  new Category ("test_cat", mid , cid);
+                                     //   databas.child(mid).child(cid).setValue(c);
+
+                                        //add menu plz don't delete it
                                         Toast.makeText(PublicOwnerRegistration.this, "تم التسجل بنجاح!!", Toast.LENGTH_SHORT).show();
+
+
                                         // Intent intent = new Intent(GoTOCustomerRegisterPage.this, .class);
                                         // startActivity(intent);
                                         finish();
