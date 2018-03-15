@@ -30,6 +30,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -39,6 +41,7 @@ import com.google.firebase.database.ValueEventListener;
 public class publicTab1profile extends Fragment {
     Button button;
     DatabaseReference databaseref;
+    DatabaseReference databaseReferences;
     TextView username;
     TextView mail;
     TextView phone;
@@ -47,12 +50,13 @@ public class publicTab1profile extends Fragment {
     private TextView location;
     DatabaseReference database;
     String address;
+    List<Post> artists;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         final View rootView= inflater.inflate(R.layout.public_tab1_profile, container, false);
        // databaseref = FirebaseDatabase.getInstance().getReference("");
-
+        artists = new ArrayList<>();
 
 /*
         databaseref.addChildEventListener(new ChildEventListener() {
@@ -114,8 +118,10 @@ public class publicTab1profile extends Fragment {
                 mail.setText(" " + email);
                phone = (TextView) rootView.findViewById(R.id.phone);
                phone.setText(" " + phonnum + " ");
-            }
 
+
+
+            }
             @Override
             public void onCancelled(DatabaseError error) {
                 // Failed to read value
@@ -123,9 +129,33 @@ public class publicTab1profile extends Fragment {
             }
         });
 
+        databaseReferences = FirebaseDatabase.getInstance().getReference();
+       // databaseReferences.orderByChild("uid").equalTo(user1);
+        FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
+        String user1 = user.getUid();//customer id is the same as rating id to make it easy to refer
+        databaseReferences.child("postsTest3").orderByChild("uid").equalTo(user1).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                artists.clear();
+
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    Post artist =new Post(ds.getValue(Post.class));
+                    artists.add(artist);
+                }
 
 
+                //creating adapter
+             int posts= artists.size();
+                TextView t=rootView.findViewById(R.id.pp);
+                t.setText(posts+" ");
+            }
 
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
 
         //

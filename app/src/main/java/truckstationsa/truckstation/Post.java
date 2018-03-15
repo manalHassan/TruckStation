@@ -43,6 +43,9 @@ public class Post {
 
     }
 
+    public Post(Post value) {
+
+    }
 
 
     public void setImage(String image) {
