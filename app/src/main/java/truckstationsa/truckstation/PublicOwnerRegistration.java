@@ -188,7 +188,8 @@ public class PublicOwnerRegistration extends AppCompatActivity {
 
                                         try {
                                             // truck t=new truck(username, finalUrl);
-                                            PublicFoodTruckOwner owner = new PublicFoodTruckOwner(username, pass, emailp, Integer.parseInt(phoneN), x, y, qusin, uid,true);
+                                            PublicFoodTruckOwner owner = new PublicFoodTruckOwner(username, pass,
+                                                    emailp, Integer.parseInt(phoneN), x, y, qusin, uid,true,0,0);
                                             databaseReference.child(uid).setValue(owner);
                                             // fdb2.child(t.getTruckname()).setValue(t);
                                             //to know the type of the user

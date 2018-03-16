@@ -1,5 +1,6 @@
 package truckstationsa.truckstation;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -15,6 +16,9 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+
+import java.util.ArrayList;
 
 /**
  * Created by manal on 3/5/2018.
@@ -28,6 +32,10 @@ public class publicListVistor extends AppCompatActivity implements NavigationVie
     ListView listView;
     FirebaseClient firebaseClient;
     DrawerLayout drawer;
+    ArrayList<PublicFoodTruckOwner> dogies= new ArrayList<>();
+    CustomAdapter customAdapter;
+    DatabaseReference f;
+    Context c;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +49,9 @@ public class publicListVistor extends AppCompatActivity implements NavigationVie
         firebaseClient = new FirebaseClient(this, DB_URL, listView);
         //  firebaseClient.refreshdata();
         firebaseClient.savedata("pu");
+
+
+
         // Toast.makeText(this, "you hear", Toast.LENGTH_LONG).show();
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(

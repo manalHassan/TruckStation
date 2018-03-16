@@ -126,7 +126,8 @@ public class GoTOPrivatRegisterPage  extends AppCompatActivity {
                                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                                     String uid = user.getUid();
                                     //  String id = fdb.push().getKey();
-                                    PrivateFoodTruckOwner owner = new PrivateFoodTruckOwner(username, pass, emailp, Integer.parseInt(phoneN), qusin, uid, "");
+                                    PrivateFoodTruckOwner owner = new PrivateFoodTruckOwner(username, pass,
+                                            emailp, Integer.parseInt(phoneN), qusin, uid, "",0,0);
                                     fdb.child(uid).setValue(owner);
                                     //to know the type of the user
                                     String type = "PrivateOwner";

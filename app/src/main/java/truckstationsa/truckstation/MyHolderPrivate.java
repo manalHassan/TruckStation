@@ -2,6 +2,7 @@ package truckstationsa.truckstation;
 
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 /**
@@ -11,6 +12,8 @@ import android.widget.TextView;
 public class MyHolderPrivate {
     TextView nameTxt;
     TextView cusin ;
+    RatingBar ratingBar;
+    TextView numofrate;
 
     ImageView img;
     public MyHolderPrivate(View itemView) {
@@ -20,6 +23,8 @@ public class MyHolderPrivate {
         cusin =(TextView) itemView.findViewById(R.id.cusin);
         img=(ImageView) itemView.findViewById(R.id.dogimage);
 
+        numofrate=(TextView) itemView.findViewById(R.id.numrating);
+        ratingBar=(RatingBar)itemView.findViewById(R.id.ratingBar);
 
 
     }
