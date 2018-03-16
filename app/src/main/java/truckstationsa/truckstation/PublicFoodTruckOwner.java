@@ -7,7 +7,7 @@ import java.util.EmptyStackException;
 /**
  * Created by manal on 2/8/2018.
  */
-////////////
+///////////////
 public class PublicFoodTruckOwner  {
 
     private  String FUsername  , FPassword , FEmail  , FPreOrderStatuse , FWorkingHours , Fstatus , qusins , uid;
