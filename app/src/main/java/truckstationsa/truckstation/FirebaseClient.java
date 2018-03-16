@@ -178,7 +178,7 @@ public class FirebaseClient extends AppCompatActivity  {
                         r.setUrl(ds.getValue(PrivateFoodTruckOwner.class).getUrl());
                         r.setQusins(ds.getValue(PrivateFoodTruckOwner.class).getQusins());
 
-                        //////___________rate/
+                        //////___________rate////
                         rate= FirebaseDatabase.getInstance().getReference().child("Rate").child("5iKorQstPQMXt8Qp17RGm04TfE52").child("sum");
                         ValueEventListener eventListener = new ValueEventListener() {
                             @Override

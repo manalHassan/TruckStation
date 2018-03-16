@@ -45,7 +45,7 @@ import java.io.IOException;
 /**
  * Created by manal on 2/10/2018.
  */
-
+///
 public class PublicOwnerRegistration extends AppCompatActivity {
     //new
     String address ;

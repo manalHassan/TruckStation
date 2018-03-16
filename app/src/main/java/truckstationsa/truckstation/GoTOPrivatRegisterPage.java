@@ -114,7 +114,7 @@ public class GoTOPrivatRegisterPage  extends AppCompatActivity {
                     mProgress.show();
 
 
-                    mAuth.createUserWithEmailAndPassword(emailp, pass)  // This method is inside firebaseauth class
+                    mAuth.createUserWithEmailAndPassword(emailp, pass)  // This method is inside firebaseauth class///
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() { // to tell me if the method create.. is done
                             // onComplete will be called when create method fineshed
                             @Override

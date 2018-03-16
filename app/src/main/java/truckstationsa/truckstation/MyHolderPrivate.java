@@ -8,7 +8,7 @@ import android.widget.TextView;
 /**
  * Created by amerah on 2/26/2018 AD.
  */
-////////////////////////
+/////////////////////////////
 public class MyHolderPrivate {
     TextView nameTxt;
     TextView cusin ;
