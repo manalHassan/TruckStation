@@ -25,7 +25,7 @@ public class Itemarray extends ArrayAdapter<Item> {
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();
         View listViewItem = inflater.inflate(R.layout.layout_itemlist, null, true);
-        TextView itemName = (TextView) listViewItem.findViewById(R.id.itemname);
+        TextView itemName = (TextView) listViewItem.findViewById(R.id.name);
         TextView itemprice = (TextView) listViewItem.findViewById(R.id.itemprice);
 
         Item artist = artists.get(position);

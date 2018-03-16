@@ -272,16 +272,11 @@ public class PublicOwnerProfileActivity extends AppCompatActivity
 
 
         else if (id == R.id.nav_request) {
-/*
-  Intent intent = new Intent(MainActivity.this, editprofile.class);
-            Bundle b=new Bundle();
-            b.putString("id",user);
-            intent.putExtras(b);
+            Intent intent = new Intent(PublicOwnerProfileActivity.this, bookingrequest.class);
             startActivity(intent);
             DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
             drawer.closeDrawer(GravityCompat.START);
             return true;
- */
         }
         else if (id == R.id.nav_logout) {
 

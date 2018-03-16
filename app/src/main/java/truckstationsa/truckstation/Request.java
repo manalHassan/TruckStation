@@ -32,6 +32,20 @@ public class Request {
          this.setY(y);
          this.setNotes(notes);
      }
+    public Request() {
+
+    }
+    public Request(Request r) {
+        this.setRDate(r.RDate);
+        this.setCID(r.CID);
+        this.setFID(r.FID);
+        this.setRID(r.RID);
+        this.setRStatus("wait");
+        this.setX(r.x);
+        this.setY(r.y);
+        this.setNotes(r.notes);
+    }
+
     public void setX(double x) {
         this.x = x;
     }
