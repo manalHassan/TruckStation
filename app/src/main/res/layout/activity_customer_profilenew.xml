@@ -89,6 +89,12 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:paddingLeft="20dp" />
+            <EditText
+                android:id="@+id/editlastname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="20dp" />
 
 
         </LinearLayout>
@@ -149,7 +155,6 @@
                 android:src="@drawable/ic_location_on_black_24dp"
                 android:id="@+id/location1"
                 />
-
             <TextView
                 android:id="@+id/editlocation"
                 android:layout_width="wrap_content"

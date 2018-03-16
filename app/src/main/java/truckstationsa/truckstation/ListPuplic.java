@@ -41,7 +41,7 @@ public class ListPuplic extends AppCompatActivity implements NavigationView.OnNa
         setContentView(R.layout.listview_drawer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-auth = FirebaseAuth.getInstance() ;
+         auth = FirebaseAuth.getInstance() ;
 ///////////////////////////////////////////
         listView = (ListView) findViewById(R.id.listview);
 

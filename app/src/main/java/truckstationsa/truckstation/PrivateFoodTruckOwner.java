@@ -3,6 +3,7 @@ package truckstationsa.truckstation;
 /**
  * Created by manal on 2/10/2018.
  */
+//
 
 public class PrivateFoodTruckOwner  {
 
@@ -16,11 +17,30 @@ public class PrivateFoodTruckOwner  {
     private String url;
     private  int FPoneNoumber ;
 
+    public int getSumRate() {
+        return sumRate;
+    }
+
+    public void setSumRate(int sumRate) {
+        this.sumRate = sumRate;
+    }
+
+    public int getNumCus() {
+        return numCus;
+    }
+
+    public void setNumCus(int numCus) {
+        this.numCus = numCus;
+    }
+
+    private int sumRate;
+    private int numCus;
 
     public PrivateFoodTruckOwner(){}
 
 
-    public PrivateFoodTruckOwner ( String FUsername  ,String FPassword ,String FEmail ,  int FPoneNoumber  ,String  qusins , String uid ,String url){
+    public PrivateFoodTruckOwner ( String FUsername  ,String FPassword ,String FEmail ,  int FPoneNoumber
+            ,String  qusins , String uid ,String url,int sumRate,int numCus){
         this.setFEmail(FEmail);
 
         this.setFPassword(FPassword);
@@ -33,6 +53,9 @@ public class PrivateFoodTruckOwner  {
 
         this.setUid(uid);
         this.setUrl(url);
+        this.setSumRate(sumRate);
+        this.setNumCus(numCus);
+
 
     }
     public String getUrl() {

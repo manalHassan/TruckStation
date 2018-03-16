@@ -47,6 +47,7 @@ public class FirebaseClient extends AppCompatActivity  {
     DatabaseReference f;
     DatabaseReference rate;
     PublicFoodTruckOwner d;
+    PrivateFoodTruckOwner r;
 
 
     public  FirebaseClient(Context c, String DB_URL,ListView listView)
@@ -170,12 +171,50 @@ public class FirebaseClient extends AppCompatActivity  {
                     dogies1.clear();
 
                     for (com.google.firebase.database.DataSnapshot ds : dataSnapshot.getChildren()) {
-                        PrivateFoodTruckOwner d= new PrivateFoodTruckOwner();
-                        d.setUid(""+(ds.getValue(PrivateFoodTruckOwner.class).getUid()));
-                        d.setFUsername(ds.getValue(PrivateFoodTruckOwner.class).getFUsername());
-                        d.setUrl(ds.getValue(PrivateFoodTruckOwner.class).getUrl());
-                        d.setQusins(ds.getValue(PrivateFoodTruckOwner.class).getQusins());
-                        dogies1.add(d);
+                        r= new PrivateFoodTruckOwner();
+
+                        r.setUid(ds.getValue(PrivateFoodTruckOwner.class).getUid());
+                        r.setFUsername(ds.getValue(PrivateFoodTruckOwner.class).getFUsername());
+                        r.setUrl(ds.getValue(PrivateFoodTruckOwner.class).getUrl());
+                        r.setQusins(ds.getValue(PrivateFoodTruckOwner.class).getQusins());
+
+                        //////___________rate////
+                        rate= FirebaseDatabase.getInstance().getReference().child("Rate").child("5iKorQstPQMXt8Qp17RGm04TfE52").child("sum");
+                        ValueEventListener eventListener = new ValueEventListener() {
+                            @Override
+                            public void onDataChange(com.google.firebase.database.DataSnapshot dataSnapshot) {
+                                if (dataSnapshot.getChildren() == null) {
+                                    Toast.makeText(c, "no rating", Toast.LENGTH_SHORT).show();
+
+                                    //Toast.makeText(this, "hi", Toast.LENGTH_SHORT).show();
+                                    //startActivity(new Intent(getActivity(), AdminHome2.class));
+                                }
+
+                                sumRate rate = new sumRate();
+                                rate.setSum(dataSnapshot.getValue(sumRate.class).getSum());
+                                rate.setNumCus(dataSnapshot.getValue(sumRate.class).getNumCus());
+                                int a = rate.getSum();
+                                int b = rate.getNumCus();
+                                // Toast.makeText(c, a+"" ,Toast.LENGTH_SHORT).show();
+                                r.setNumCus(b);
+                                r.setSumRate(a);
+
+
+
+
+
+
+
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+                                Toast.makeText(c, "cancelled", Toast.LENGTH_SHORT).show();
+                            }
+                        };
+                        rate.addListenerForSingleValueEvent(eventListener);
+
+                        dogies1.add(r);
 
                     }
                     if (dogies1.size() > 0) {

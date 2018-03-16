@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -54,11 +55,12 @@ public class customer_profilenew extends AppCompatActivity implements Navigation
     private EditText TextEmail;
     private EditText TextPhone;
     private TextView Textmain;
-    private TextView location;
-
+    private ImageView location;
+    private TextView TextLastNme;
 
 
     private String username;
+    private String lastname;
     private String email;
     private String phone;
     private String locationx;
@@ -81,9 +83,10 @@ public class customer_profilenew extends AppCompatActivity implements Navigation
 
         Textmain=(TextView)findViewById(R.id.name);
         TextName = (EditText) findViewById(R.id.editname);
+        TextLastNme=(EditText) findViewById(R.id.editlastname);
         TextEmail = (EditText) findViewById(R.id.editemail);
         TextPhone = (EditText) findViewById(R.id.editphone);
-        location = (TextView) findViewById(R.id.editlocation);
+        location = (ImageView) findViewById(R.id.location1);
 
 
          user=FirebaseAuth.getInstance().getCurrentUser();
@@ -100,11 +103,12 @@ public class customer_profilenew extends AppCompatActivity implements Navigation
                     c = dataSnapshot.getValue(Customer.class);
                     Textmain.setText(c.getCFirstName()+c.getCLastName());
                     TextName.setText(c.getCFirstName());
+                    TextLastNme.setText(c.getCLastName());
                     TextPhone.setText(String.format("%d", c.getCPoneNoumber()));
 
               //  } catch (Exception e){
                    // e.getMessage();
-               //
+               //////
             }
 
             @Override
@@ -168,9 +172,14 @@ public class customer_profilenew extends AppCompatActivity implements Navigation
         username = TextName.getText().toString().trim();
         email = TextEmail.getText().toString().trim();
         phone = TextPhone.getText().toString().trim();
+        lastname=TextLastNme.getText().toString().trim();
         //empty feild
         if(TextUtils.isEmpty(email)){
             Toast.makeText(this,"Please enter email",Toast.LENGTH_LONG).show();
+            return;
+        }
+        if(TextUtils.isEmpty(lastname)){
+            Toast.makeText(this,"Please enter lastname",Toast.LENGTH_LONG).show();
             return;
         }
         if(TextUtils.isEmpty(username)){
@@ -179,7 +188,6 @@ public class customer_profilenew extends AppCompatActivity implements Navigation
         }
 
         if(TextUtils.isEmpty(phone)){
-            Toast.makeText(this,"Please enter phone",Toast.LENGTH_LONG).show();
             Toast.makeText(this,"Please enter phone",Toast.LENGTH_LONG).show();
             return;
         }
@@ -195,6 +203,7 @@ public class customer_profilenew extends AppCompatActivity implements Navigation
         c.setCEmail(email);
         c.setCFirstName(username);
         c.setCPoneNoumber(Integer.parseInt(phone));
+        c.setCLastName(lastname);
 
 
         databaseReference.setValue(c);

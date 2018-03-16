@@ -114,7 +114,7 @@ public class GoTOPrivatRegisterPage  extends AppCompatActivity {
                     mProgress.show();
 
 
-                    mAuth.createUserWithEmailAndPassword(emailp, pass)  // This method is inside firebaseauth class
+                    mAuth.createUserWithEmailAndPassword(emailp, pass)  // This method is inside firebaseauth class///
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() { // to tell me if the method create.. is done
                             // onComplete will be called when create method fineshed
                             @Override
@@ -126,7 +126,8 @@ public class GoTOPrivatRegisterPage  extends AppCompatActivity {
                                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                                     String uid = user.getUid();
                                     //  String id = fdb.push().getKey();
-                                    PrivateFoodTruckOwner owner = new PrivateFoodTruckOwner(username, pass, emailp, Integer.parseInt(phoneN), qusin, uid, "");
+                                    PrivateFoodTruckOwner owner = new PrivateFoodTruckOwner(username, pass,
+                                            emailp, Integer.parseInt(phoneN), qusin, uid, "",0,0);
                                     fdb.child(uid).setValue(owner);
                                     //to know the type of the user
                                     String type = "PrivateOwner";
