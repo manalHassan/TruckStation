@@ -29,34 +29,38 @@
                 android:background="@drawable/gradientbackground"
                 android:orientation="vertical">
 
-                <Button
-                    android:id="@+id/Reserve"
-                    style="@style/TextAppearance.AppCompat.Body1"
-                    android:layout_width="104dp"
-                    android:layout_height="33dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/background_signup"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:onClick="goreserve"
-                    android:text="الحجـــز"
-                    android:textAllCaps="false"
-                    android:textColor="#fff" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="34dp"
+                    android:orientation="horizontal">
 
-                <Button
-                    android:id="@+id/rating"
-                    style="@style/TextAppearance.AppCompat.Body1"
-                    android:layout_width="104dp"
-                    android:layout_height="32dp"
-                    android:layout_gravity="top|start"
-                    android:layout_weight="1"
-                    android:background="@drawable/background_signup"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:onClick="gorating"
-                    android:text="التقييم"
-                    android:textAllCaps="false"
-                    android:textColor="#fff" />
+                    <TextView
+                        android:id="@+id/Reserve"
+                        style="@style/TextAppearance.AppCompat.Body1"
+                        android:layout_width="104dp"
+                        android:layout_height="33dp"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:onClick="goreserve"
+                        android:text="الحجـــز"
+                        android:textAllCaps="false"
+                        android:textColor="#fff" />
+
+                    <TextView
+                        android:id="@+id/rating"
+                        style="@style/TextAppearance.AppCompat.Body1"
+                        android:layout_width="104dp"
+                        android:layout_height="32dp"
+                        android:layout_gravity="top|start"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:onClick="gorating"
+                        android:text="التقييم"
+                        android:textAllCaps="false"
+                        android:textColor="#fff" />
+                </LinearLayout>
 
                 <ImageView
                     android:id="@+id/mg"

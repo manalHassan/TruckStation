@@ -60,7 +60,7 @@ public class publicTab3menuforcustomer extends Fragment {
     EditText editTextName;
     String mid1="";
     FirebaseAuth firebaseAuth;
-    String id1="jVmYjqfu5leLTx4gkFPQiQ9E3g83";
+    String id1="";
 
     @Nullable
     @Override
@@ -68,6 +68,7 @@ public class publicTab3menuforcustomer extends Fragment {
         View rootView = inflater.inflate(R.layout.public_tab3_menuitemforcustomer, container, false);
         //Bundle b = getActivity().getIntent().getExtras();
        // id1 = b.getString("id");
+        id1=((Publicownerforcustmer)getActivity()).getuser1();
         artists = new ArrayList<>();
         //getting views
         listViewArtists = (ListView) rootView.findViewById(R.id.listViewTracks);

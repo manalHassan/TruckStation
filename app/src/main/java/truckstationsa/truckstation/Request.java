@@ -27,7 +27,7 @@ public class Request {
          this.setCID(CID);
          this.setFID(FID);
          this.setRID(RID);
-         this.setRStatus("wait");
+         this.setRStatus("في الإنتظار");
          this.setX(x);
          this.setY(y);
          this.setNotes(notes);
@@ -40,7 +40,7 @@ public class Request {
         this.setCID(r.CID);
         this.setFID(r.FID);
         this.setRID(r.RID);
-        this.setRStatus("wait");
+        this.setRStatus("في الإنتظار");
         this.setX(r.x);
         this.setY(r.y);
         this.setNotes(r.notes);

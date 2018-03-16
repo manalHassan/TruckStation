@@ -119,6 +119,7 @@
             android:label="صفحتي الشخصيه" />
         <activity android:name=".Homepage" />
         <activity android:name=".postActivityPublic" />
+        <activity android:name=".ReserveTruck" />
         <activity android:name=".PublicOwnerProfileActivity" />
          <activity android:name=".tab3_itemlist"/>
         <activity android:name=".tab3_itemlistforcustomer"/>

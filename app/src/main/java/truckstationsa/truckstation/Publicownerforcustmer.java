@@ -17,6 +17,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.*;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -33,13 +34,14 @@ public class Publicownerforcustmer extends AppCompatActivity {
         private ViewPager mViewPager;
        // private FirebaseAuth mAuth;
        // private FirebaseAuth.AuthStateListener mAuthListener;
-        private String user1="jVmYjqfu5leLTx4gkFPQiQ9E3g83";
+     public static String user1="";
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-           //Bundle b = getIntent().getExtras();
-          // user1 = b.getString("id");
+           Bundle b = getIntent().getExtras();
+            user1 = b.getString("id");
+            Toast.makeText(this, "ID="+user1 ,Toast.LENGTH_SHORT).show();
             //Bundle bundle = new Bundle();
             //bundle.putString("id", user1);
            // set Fragmentclass Arguments
@@ -133,6 +135,7 @@ public class Publicownerforcustmer extends AppCompatActivity {
                 PlaceholderFragment fragment = new PlaceholderFragment();
                 Bundle args = new Bundle();
                 args.putInt(ARG_SECTION_NUMBER, sectionNumber);
+                args.putString("id",user1);
                 fragment.setArguments(args);
                 return fragment;
             }

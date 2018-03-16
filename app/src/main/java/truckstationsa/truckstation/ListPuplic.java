@@ -71,22 +71,28 @@ auth = FirebaseAuth.getInstance() ;
             @Override
             public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
 
-            //    PublicFoodTruckOwner artist = dogies.get(position);
-               // Toast.makeText(ListPuplic.this, "ID="+artist.getUid()+"." ,Toast.LENGTH_SHORT).show();
-                // set Fragmentclass Arguments
-               // publicTab1profileforcustmer fragobj = new  publicTab1profileforcustmer();
-              //  fragobj.setArguments(b);
-/*
-                Intent intent = new Intent(ListPuplic.this, publicTab1profileforcustmer.class);
-                 Bundle b=new Bundle();
-                 b.putString("id",artist.getUid());
-                intent.putExtras(b);
-                 startActivity(intent);
+             PublicFoodTruckOwner artist = dogies.get(position);
+              //  Toast.makeText(ListPuplic.this, "ID="+artist.getUid()+"." ,Toast.LENGTH_SHORT).show();
 
-*/
+        gotoowner(artist.getUid());
 
             }
         });
+    }
+
+    private void gotoowner(String uid) {
+
+        Toast.makeText(ListPuplic.this, "IDlist="+uid+"." ,Toast.LENGTH_SHORT).show();
+        // set Fragmentclass Arguments
+        // publicTab1profileforcustmer fragobj = new  publicTab1profileforcustmer();
+        //  fragobj.setArguments(b);
+        //String w=artist.getUid();
+        Intent intent = new Intent(ListPuplic.this, Publicownerforcustmer.class);
+        Bundle b=new Bundle();
+        b.putString("id",uid);
+        intent.putExtras(b);
+        startActivity(intent);
+
     }
 
 

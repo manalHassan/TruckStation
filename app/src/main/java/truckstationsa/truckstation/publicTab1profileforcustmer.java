@@ -62,13 +62,16 @@ public class publicTab1profileforcustmer  extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-       //  user1 = getArguments().getString("id");
-        Bundle b = getActivity().getIntent().getExtras();
-        user1 = b.getString("id");
+      //  user1 = getArguments().getString("id");
+        //Bundle b = getActivity().getIntent().getExtras();
+       // user1 = b.getString("id");
         final View rootView= inflater.inflate(R.layout.public_tab1_profileforcustomer, container, false);
 
 
-        setHasOptionsMenu(true);//Make sure you have this line of code
+        setHasOptionsMenu(true);//Make sure you have this line of codeActivity act=getActivity();
+
+        user1=((Publicownerforcustmer)getActivity()).getuser1();
+
         databaseref = FirebaseDatabase.getInstance().getReference();
         databaseref.child("PublicFoodTruckOwner").addValueEventListener(new ValueEventListener() {
             @Override
@@ -102,12 +105,27 @@ public class publicTab1profileforcustmer  extends Fragment {
 
 
 
+TextView res=rootView.findViewById(R.id.Reserve);
 
+        res.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               goreserve();
+            }
+        });
 
+        TextView rate=rootView.findViewById(R.id.rating);
+
+        rate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                gorating();
+            }
+        });
         //
         return rootView;
     }
-    public void gorating(View view){
+    public void gorating( ){
          Intent intent = new Intent(getActivity(), Rating.class);
             Bundle b=new Bundle();
             b.putString("id",user1);
@@ -116,7 +134,7 @@ public class publicTab1profileforcustmer  extends Fragment {
 
     }
 
-    public void goreserve(View view){
+    public void goreserve( ){
         Intent intent = new Intent(getActivity(), ReserveTruck.class);
         Bundle b=new Bundle();
         b.putString("id",user1);
