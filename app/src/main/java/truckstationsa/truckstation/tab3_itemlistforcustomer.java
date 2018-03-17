@@ -33,7 +33,7 @@ public class tab3_itemlistforcustomer extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.public_tab3_menuitemforcustomer);
+        setContentView(R.layout.public_tab3_menuitemforcustomeritem);
         Bundle b = getIntent().getExtras();
         cid = b.getString("cid");
         id = b.getString("id");
