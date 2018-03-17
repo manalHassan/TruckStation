@@ -71,7 +71,7 @@ public class tab3_itemlistforcustomer extends AppCompatActivity {
 
 
                         //creating adapter
-                        Itemarray artistAdapter = new Itemarray(tab3_itemlistforcustomer.this, artists);
+                        Itemarrayforcustomer artistAdapter = new Itemarrayforcustomer(tab3_itemlistforcustomer.this, artists);
                         //attaching adapter to the listview
                         listViewArtists.setAdapter(artistAdapter);
                     }
