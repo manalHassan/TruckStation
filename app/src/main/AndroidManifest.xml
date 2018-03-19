@@ -125,7 +125,7 @@
         <activity android:name=".tab3_itemlistforcustomer"/>
         <activity android:name=".Publicownerforcustmer"/>
         <activity android:name=".bookingrequest" />
-
+        <activity android:name=".viewCart" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyC_PwVA-gJQ24JZbhZYJINoK9XLC3KdGrg" />

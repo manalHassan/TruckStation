@@ -61,7 +61,6 @@ public class publicTab3menuforcustomer extends Fragment {
     String mid1="";
     FirebaseAuth firebaseAuth;
     String id1="";
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {

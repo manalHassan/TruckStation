@@ -175,6 +175,19 @@ public class ListPrivate extends AppCompatActivity implements NavigationView.OnN
                 return true;
 
             }}
+        else if (id == R.id.cart) {
+
+             /* Intent intent = new Intent(this, editprofile.class);
+            Bundle b=new Bundle();
+            b.putString("id",user);
+            intent.putExtras(b);
+            startActivity(intent);
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
+            return true;
+ */
+
+        }
 
         return false;
     }
