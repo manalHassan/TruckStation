@@ -4,7 +4,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -21,6 +23,7 @@ import java.util.List;
  */
 
 public class viewCart extends AppCompatActivity {
+    ////////////////
 
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -29,7 +32,7 @@ public class viewCart extends AppCompatActivity {
     String cid = "";
     String mid = "";
     ListView listViewArtists;
-    List<Item> artists;
+    ArrayList<Item> artists;
     FirebaseAuth firebaseAuth;
     String id="";
     cart car ;
@@ -41,7 +44,7 @@ public class viewCart extends AppCompatActivity {
         cartRef = database.getReference("cart");
         //TextView view =(TextView) findViewById(R.id.foodmenu);
         //view.setText(cid);
-        listViewArtists = (ListView) findViewById(R.id.listViewTracks);
+        listViewArtists = (ListView) findViewById(R.id.listviewtracks);
         //list to store artists
         artists = new ArrayList<Item>();
         listViewArtists.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -91,10 +94,16 @@ public class viewCart extends AppCompatActivity {
                         }
 
 
-                        //creating adapter
-                        Itemarrayforcustomer artistAdapter = new Itemarrayforcustomer(viewCart.this, artists);
-                        //attaching adapter to the listview
-                        listViewArtists.setAdapter(artistAdapter);
+                        if (artists.size() > 0) {
+                            Itemarrayforcustomer artistAdapter = new Itemarrayforcustomer(viewCart.this, artists);
+                            listViewArtists.setAdapter((ListAdapter)artistAdapter);
+
+
+
+                        } else {
+                            Toast.makeText(viewCart.this, "No data", Toast.LENGTH_SHORT).show();
+                        }
+
                     }
 
                     @Override
