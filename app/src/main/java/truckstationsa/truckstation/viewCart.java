@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -29,7 +30,7 @@ public class viewCart extends AppCompatActivity {
     String cid = "";
     String mid = "";
     ListView listViewArtists;
-    List<Item> artists;
+    ArrayList<Item> artists;
     FirebaseAuth firebaseAuth;
     String id="";
     cart car ;
@@ -90,12 +91,14 @@ public class viewCart extends AppCompatActivity {
                             Item artist = new Item(ds.getValue(Item.class));
                             artists.add(artist);
                         }
+                       if(artists.size()>0) {
 
-
-                        //creating adapter
-                        Itemarrayforcustomer artistAdapter = new Itemarrayforcustomer(viewCart.this, (ArrayList<Item>) artists);
-                        //attaching adapter to the listview
-                        listViewArtists.setAdapter(artistAdapter);
+                           //creating adapter
+                           Itemarrayforcustomer artistAdapter = new Itemarrayforcustomer(viewCart.this, artists);
+                           //attaching adapter to the listview
+                           listViewArtists.setAdapter(artistAdapter);
+                       }
+                       else {  Toast.makeText(viewCart.this, "no data!!!", Toast.LENGTH_SHORT).show();}
                     }
 
                     @Override
