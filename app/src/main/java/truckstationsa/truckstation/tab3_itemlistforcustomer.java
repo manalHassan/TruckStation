@@ -116,7 +116,7 @@ public class tab3_itemlistforcustomer extends AppCompatActivity implements Navig
 
 
                         //creating adapter
-                        Itemarrayforcustomer artistAdapter = new Itemarrayforcustomer(tab3_itemlistforcustomer.this, artists);
+                        Itemarrayforcustomer artistAdapter = new Itemarrayforcustomer(tab3_itemlistforcustomer.this, (ArrayList<Item>) artists);
                         //attaching adapter to the listview
                         listViewArtists.setAdapter(artistAdapter);
                     }

@@ -114,7 +114,7 @@ public class tab3_itemlistforvisitor extends AppCompatActivity implements Naviga
 
 
                         //creating adapter
-                        Itemarrayforcustomer artistAdapter = new Itemarrayforcustomer(tab3_itemlistforvisitor.this, artists);
+                        Itemarrayforcustomer artistAdapter = new Itemarrayforcustomer(tab3_itemlistforvisitor.this, (ArrayList<Item>) artists);
                         //attaching adapter to the listview
                         listViewArtists.setAdapter(artistAdapter);
                     }

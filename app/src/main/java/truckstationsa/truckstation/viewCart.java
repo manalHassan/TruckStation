@@ -38,18 +38,19 @@ public class viewCart extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.public_tab3_menuitemforcustomeritem);
-        cartRef = database.getReference("cart");
+        cartRef = database.getReference("Cart");
         //TextView view =(TextView) findViewById(R.id.foodmenu);
         //view.setText(cid);
-        listViewArtists = (ListView) findViewById(R.id.listViewTracks);
+        listViewArtists = (ListView) findViewById(R.id.listviewtracks);
         //list to store artists
         artists = new ArrayList<Item>();
+        firebaseAuth = FirebaseAuth.getInstance();
         listViewArtists.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 Item artist = artists.get(position);
-                firebaseAuth = FirebaseAuth.getInstance();
+
                 //  Toast.makeText(ListPuplic.this, "ID="+artist.getUid()+"." ,Toast.LENGTH_SHORT).show();
                 //   if (car == null){
                 //car = new cart ();
@@ -77,7 +78,7 @@ public class viewCart extends AppCompatActivity {
         myRef.child("Menu").child(id).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                mid = dataSnapshot.child("cart").getValue(String.class);
+                mid = dataSnapshot.child("Cart").getValue(String.class);
                 firebaseAuth = FirebaseAuth.getInstance();
                 myRef.child(firebaseAuth.getUid()).child("item").addValueEventListener(new ValueEventListener() {
                     @Override
@@ -92,7 +93,7 @@ public class viewCart extends AppCompatActivity {
 
 
                         //creating adapter
-                        Itemarrayforcustomer artistAdapter = new Itemarrayforcustomer(viewCart.this, artists);
+                        Itemarrayforcustomer artistAdapter = new Itemarrayforcustomer(viewCart.this, (ArrayList<Item>) artists);
                         //attaching adapter to the listview
                         listViewArtists.setAdapter(artistAdapter);
                     }
