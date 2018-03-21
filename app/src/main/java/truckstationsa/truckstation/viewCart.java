@@ -75,12 +75,12 @@ public class viewCart extends AppCompatActivity {
         //attaching value event listener
         //FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         // String id = user.getUid();//customer id is the same as rating id to make it easy to refer
-        myRef.child("Menu").child(id).addValueEventListener(new ValueEventListener() {
+        myRef.child("Cart").child(id).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                mid = dataSnapshot.child("Cart").getValue(String.class);
+             //   mid = dataSnapshot.child("Cart").getValue(String.class);
                 firebaseAuth = FirebaseAuth.getInstance();
-                myRef.child(firebaseAuth.getUid()).child("item").addValueEventListener(new ValueEventListener() {
+                myRef.child("Cart").child(firebaseAuth.getUid()).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
 

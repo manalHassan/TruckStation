@@ -53,7 +53,7 @@ public class Itemarrayforcustomer extends BaseAdapter {
         }
 
         itemHolder holder= new itemHolder(convertview);
-        holder.nameprice.setText((int) artists.get(i).getIPrice());
+//        holder.nameprice.setText((int) artists.get(i).getIPrice());
         holder.nameitem.setText(artists.get(i).getIName());
 
 

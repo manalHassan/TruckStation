@@ -158,7 +158,7 @@ public class CustomerLogInPage extends AppCompatActivity {
 
                                        if(type.equals("Customer")){
                                             Toast.makeText(CustomerLogInPage.this, "تم تسجيل الدخول بنجاح", Toast.LENGTH_SHORT).show();
-                                            Intent intent = new Intent(CustomerLogInPage.this,ListPuplic.class);
+                                            Intent intent = new Intent(CustomerLogInPage.this,viewCart.class);
                                             startActivity(intent);}
                                         else{
                                            Toast.makeText(CustomerLogInPage.this, "الرجاء التأكد من نوع الدخول", Toast.LENGTH_SHORT).show();
