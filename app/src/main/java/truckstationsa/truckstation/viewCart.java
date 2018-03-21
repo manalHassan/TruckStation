@@ -92,7 +92,7 @@ public class viewCart extends AppCompatActivity {
                         }
 
 
-                        //creating adapter
+                        ////creating adapter
                         Itemarrayforcustomer artistAdapter = new Itemarrayforcustomer(viewCart.this, (ArrayList<Item>) artists);
                         //attaching adapter to the listview
                         listViewArtists.setAdapter(artistAdapter);
