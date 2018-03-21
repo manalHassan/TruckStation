@@ -5,8 +5,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,11 +31,12 @@ public class viewCart extends AppCompatActivity {
     String cid = "";
     String mid = "";
     ListView listViewArtists;
-    List<Item> artists;
+    List<cartItem> artists;
     FirebaseAuth firebaseAuth;
     String id="";
     cart car ;
     private int i = 0 ;
+    Itemarrayforcustomer artistAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,15 +44,17 @@ public class viewCart extends AppCompatActivity {
         cartRef = database.getReference("Cart");
         //TextView view =(TextView) findViewById(R.id.foodmenu);
         //view.setText(cid);
-        listViewArtists = (ListView) findViewById(R.id.listviewtracks);
+        listViewArtists = (ListView) findViewById(R.id.listviewtracksNew);
         //list to store artists
-        artists = new ArrayList<Item>();
+        artists = new ArrayList<cartItem>();
         firebaseAuth = FirebaseAuth.getInstance();
+
+
         listViewArtists.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                Item artist = artists.get(position);
+                cartItem artist = artists.get(position);
 
                 //  Toast.makeText(ListPuplic.this, "ID="+artist.getUid()+"." ,Toast.LENGTH_SHORT).show();
                 //   if (car == null){
@@ -72,37 +77,43 @@ public class viewCart extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        firebaseAuth = FirebaseAuth.getInstance();
         //attaching value event listener
         //FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         // String id = user.getUid();//customer id is the same as rating id to make it easy to refer
-        myRef.child("Cart").child(id).addValueEventListener(new ValueEventListener() {
+        FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
+        String id = user.getUid();
+        myRef.child("Cart").child("oHJ9qq70EXdGxvdq1o46rzFpsyQ2").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
              //   mid = dataSnapshot.child("Cart").getValue(String.class);
-                firebaseAuth = FirebaseAuth.getInstance();
-                myRef.child("Cart").child(firebaseAuth.getUid()).addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
+               // firebaseAuth = FirebaseAuth.getInstance();
+              //  myRef.child("Cart").child(firebaseAuth.getUid()).addValueEventListener(new ValueEventListener() {
+                 //   @Override
+                  //  public void onDataChange(DataSnapshot dataSnapshot) {
 
                         artists.clear();
 
                         for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                            Item artist = new Item(ds.getValue(Item.class));
+                            cartItem artist = new cartItem();//ds.getValue(Item.class)
+                            artist.setCatItem(ds.getValue(cartItem.class).getCatItem());
+                            artist.setPrice1(ds.getValue(cartItem.class).getPrice1());
                             artists.add(artist);
                         }
 
-
+                       if(artists.size()==0)
+                           Toast.makeText(viewCart.this,"اضيف لسلتك" ,Toast.LENGTH_SHORT).show();
                         ////creating adapter
-                        Itemarrayforcustomer artistAdapter = new Itemarrayforcustomer(viewCart.this, (ArrayList<Item>) artists);
+                        artistAdapter = new Itemarrayforcustomer(viewCart.this, (ArrayList<cartItem>) artists);
                         //attaching adapter to the listview
                         listViewArtists.setAdapter(artistAdapter);
-                    }
+                  //  }
 
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
+                   // @Override
+                   // public void onCancelled(DatabaseError databaseError) {
 
-                    }
-                });
+                   // }
+             //   });
 
             }
 

@@ -7,6 +7,10 @@ package truckstationsa.truckstation;
 public class cartItem {
    private String  catItem , Fid ;
    private double price1 ;
+
+
+   public cartItem(){}
+
    public cartItem (String c , double price , String Fid){
        catItem = c ;
        price1 = price ;

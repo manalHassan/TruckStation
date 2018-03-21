@@ -16,11 +16,11 @@ import java.util.List;
 /////////////
 public class Itemarrayforcustomer extends BaseAdapter {
     Context c;
-    ArrayList<Item> artists;
+    ArrayList<cartItem> artists;
     LayoutInflater inflater;
 
 
-    public Itemarrayforcustomer(Context c, ArrayList<Item> artists) {
+    public Itemarrayforcustomer(Context c, ArrayList<cartItem> artists) {
         this.c = c;
         this.artists = artists;
     }
@@ -53,8 +53,8 @@ public class Itemarrayforcustomer extends BaseAdapter {
         }
 
         itemHolder holder= new itemHolder(convertview);
-//        holder.nameprice.setText((int) artists.get(i).getIPrice());
-        holder.nameitem.setText(artists.get(i).getIName());
+        holder.nameprice.setText((int) artists.get(i).getPrice1()+"");////لازم سترنق***********
+        holder.nameitem.setText(artists.get(i).getCatItem()+"");//
 
 
 
