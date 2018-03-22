@@ -10,5 +10,4 @@
         android:layout_below="@+id/foodmenu"
         android:layout_marginTop="62dp"
         android:layout_alignParentLeft="true"></ListView>
-
 </android.support.constraint.ConstraintLayout>

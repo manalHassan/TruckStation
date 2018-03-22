@@ -10,47 +10,22 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
+
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
-import android.text.TextUtils;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.Toast;
-
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by wafaa7maD on 05/03/18.
+ * Created by manal on 3/19/2018.
  */
 
-public class publicTab3menuforcustomer extends Fragment {
+public class publicTab3menuforvisitor  extends Fragment {
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference();
@@ -66,8 +41,8 @@ public class publicTab3menuforcustomer extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.public_tab3_menuitemforcustomer, container, false);
         //Bundle b = getActivity().getIntent().getExtras();
-       // id1 = b.getString("id");
-        id1=((Publicownerforcustmer)getActivity()).getuser1();
+        // id1 = b.getString("id");
+        id1=((Publicownerforvisitor)getActivity()).getuser1();
         artists = new ArrayList<>();
         //getting views
         listViewArtists = (ListView) rootView.findViewById(R.id.listViewTracks);
@@ -79,7 +54,7 @@ public class publicTab3menuforcustomer extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Category artist = artists.get(position);
                 //   String
-                Intent intent = new Intent(getActivity(), tab3_itemlistforcustomer.class);
+                Intent intent = new Intent(getActivity(), tab3_itemlistforvisitor.class);
                 Bundle c = new Bundle();
                 c.putString("id",id1);
                 c.putString("cid", artist.getCatID());
@@ -94,8 +69,8 @@ public class publicTab3menuforcustomer extends Fragment {
     public void onStart() {
         super.onStart();
         //attaching value event listener
-      //  FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
-       // String id = user.getUid();//customer id is the same as rating id to make it easy to refer
+        //  FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
+        // String id = user.getUid();//customer id is the same as rating id to make it easy to refer
         myRef.child("Menu").child(id1).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

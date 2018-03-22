@@ -14,9 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.google.android.gms.wallet.Cart;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,10 +25,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by wafaa7maD on 06/03/18.
+ * Created by manal on 3/19/2018.
  */
 
-public class tab3_itemlistforcustomer extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class tab3_itemlistforvisitor extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -51,7 +49,7 @@ public class tab3_itemlistforcustomer extends AppCompatActivity implements Navig
         setContentView(R.layout.drawer_for_item_list_customer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-         b = getIntent().getExtras();
+        b = getIntent().getExtras();
         cid = b.getString("cid");
         id = b.getString("id");
         Toast.makeText(this, "ID from manal = "+id ,Toast.LENGTH_SHORT).show();
@@ -61,27 +59,27 @@ public class tab3_itemlistforcustomer extends AppCompatActivity implements Navig
         listViewArtists = (ListView) findViewById(R.id.listViewTracks);
         //list to store artists
         artists = new ArrayList<>();
-        listViewArtists.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+      //  listViewArtists.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            //@Override
+           // public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                Item artist = artists.get(position);
-                firebaseAuth = FirebaseAuth.getInstance();
+               // Item artist = artists.get(position);
+              //  firebaseAuth = FirebaseAuth.getInstance();
                 //  Toast.makeText(ListPuplic.this, "ID="+artist.getUid()+"." ,Toast.LENGTH_SHORT).show();
-             //   if (car == null){
+                //   if (car == null){
                 //car = new cart ();
-                cartItem cartitem = new cartItem(artist.getIName() , artist.getIPrice() , b.getString("id"));
-                String cid = cartRef.push().getKey();
-                    cartRef.child(firebaseAuth.getUid()).child(cid).setValue(cartitem);
-                    Toast.makeText(tab3_itemlistforcustomer.this,artist.getIName()+"اضيف لسلتك" ,Toast.LENGTH_SHORT).show();
+             //   cartItem cartitem = new cartItem(artist.getIName() , artist.getIPrice() , b.getString("id"));
+               // String cid = cartRef.push().getKey();
+              //  cartRef.child(firebaseAuth.getUid()).child(cid).setValue(cartitem);
+              //  Toast.makeText(tab3_itemlistforvisitor.this,artist.getIName()+"اضيف لسلتك" ,Toast.LENGTH_SHORT).show();
                 //    String s =  artist.getIName();
-              //  }
-              //  else {
-                   // car.setQuntity(1);
-                  //  cartRef.child("cart").updateChildren(car);
-              //  }Toast.makeText(tab3_itemlistforcustomer.this,artist.getIName()+"اخر اضيف لسلتك" ,Toast.LENGTH_SHORT).show();
-           }
-        });
+                //  }
+                //  else {
+                // car.setQuntity(1);
+                //  cartRef.child("cart").updateChildren(car);
+                //  }Toast.makeText(tab3_itemlistforcustomer.this,artist.getIName()+"اخر اضيف لسلتك" ,Toast.LENGTH_SHORT).show();
+           // }
+       // });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -98,7 +96,7 @@ public class tab3_itemlistforcustomer extends AppCompatActivity implements Navig
         super.onStart();
         //attaching value event listener
         //FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-       // String id = user.getUid();//customer id is the same as rating id to make it easy to refer
+        // String id = user.getUid();//customer id is the same as rating id to make it easy to refer
         myRef.child("Menu").child(id).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -116,9 +114,9 @@ public class tab3_itemlistforcustomer extends AppCompatActivity implements Navig
 
 
                         //creating adapter
-                    //    Itemarrayforcustomer artistAdapter = new Itemarrayforcustomer(tab3_itemlistforcustomer.this, (ArrayList<Item>) artists);
+                     //   Itemarrayforcustomer artistAdapter = new Itemarrayforcustomer(tab3_itemlistforvisitor.this, (ArrayList<Item>) artists);
                         //attaching adapter to the listview
-                       // listViewArtists.setAdapter(artistAdapter);
+                      //  listViewArtists.setAdapter(artistAdapter);
                     }
 
                     @Override
@@ -136,7 +134,6 @@ public class tab3_itemlistforcustomer extends AppCompatActivity implements Navig
             }
         });
     }
-    @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
@@ -159,18 +156,8 @@ public class tab3_itemlistforcustomer extends AppCompatActivity implements Navig
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_profile) {
-            Intent intent = new Intent(this, customer_profilenew.class);
-            Bundle b=new Bundle();
-            //b.putString("id",user);
-            //intent.putExtras(b);
-            startActivity(intent);
-            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-            drawer.closeDrawer(GravityCompat.START);
-            return true;
-
-        } else if (id == R.id.nav_publiclist) {
-            Intent intent = new Intent(this, ListPuplic.class);
+        if (id == R.id.nav_publiclist1) {
+            Intent intent = new Intent(this, publicListVistor.class);
             Bundle b=new Bundle();
             // b.putString("id",user);
             // intent.putExtras(b);
@@ -180,8 +167,8 @@ public class tab3_itemlistforcustomer extends AppCompatActivity implements Navig
             return true;
 
         }
-        else if (id == R.id.nav_privatelist) {
-            Intent intent = new Intent(this, ListPrivate.class);
+        else if (id == R.id.nav_privatelist1) {
+            Intent intent = new Intent(this, PravitListVistor.class);
             Bundle b=new Bundle();
             // b.putString("id",user);
             // intent.putExtras(b);
@@ -191,8 +178,8 @@ public class tab3_itemlistforcustomer extends AppCompatActivity implements Navig
             return true;
 
         }
-        else if (id == R.id.nav_map) {
-            Intent intent = new Intent(this, VisitorHomePage.class);
+        else if (id == R.id.nav_map1) {
+            Intent intent = new Intent(this, VsitorAllTrucks.class);
             Bundle b=new Bundle();
             //  b.putString("id",user);
             // intent.putExtras(b);
@@ -203,8 +190,8 @@ public class tab3_itemlistforcustomer extends AppCompatActivity implements Navig
 
         }
 
-        else if (id == R.id.nav_nearmap) {
-            Intent intent = new Intent(this, NearByTrucks.class);
+        else if (id == R.id.nav_nearmap1) {
+            Intent intent = new Intent(this, NearByTrucksVisitors.class);
             Bundle b=new Bundle();
             //  b.putString("id",user);
             // intent.putExtras(b);
@@ -215,35 +202,10 @@ public class tab3_itemlistforcustomer extends AppCompatActivity implements Navig
 
         }
 
-        else if (id == R.id.nav_pre_request) {
-/*
-            Intent intent = new Intent(this, ownermenu.class);
-            Bundle b=new Bundle();
-            b.putString("id",user);
-            intent.putExtras(b);
-            startActivity(intent);
-            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-            drawer.closeDrawer(GravityCompat.START);
-            return true;
-            */
-        }
 
+        else if (id == R.id.nav_app1) {
 
-        else if (id == R.id.nav_pre_preorder) {
-/*
-  Intent intent = new Intent(this, editprofile.class);
-            Bundle b=new Bundle();
-            b.putString("id",user);
-            intent.putExtras(b);
-            startActivity(intent);
-            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-            drawer.closeDrawer(GravityCompat.START);
-            return true;
- */
-        }
-        else if (id == R.id.nav_app) {
-
-            Intent intent = new Intent(this, Chart.class);
+            Intent intent = new Intent(this, ChartVisitor.class);
             Bundle b=new Bundle();
             //  b.putString("id",user);
             //  intent.putExtras(b);
@@ -253,34 +215,10 @@ public class tab3_itemlistforcustomer extends AppCompatActivity implements Navig
             return true;
 
         }
-        else if (id == R.id.nav_logout) {
 
-            firebaseAuth.signOut();
-            if(firebaseAuth.getCurrentUser() == null){
-                Toast.makeText(this , "تم تسجيل الخروج بنجاح" , Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(this , MainActivity.class));
-                DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-                drawer.closeDrawer(GravityCompat.START);
-                return true;
-
-            }}
-        else if (id == R.id.cart) {
-
-           /* Intent intent = new Intent(this, editprofile.class);
-            Bundle b=new Bundle();
-            b.putString("id",user);
-            intent.putExtras(b);
-            startActivity(intent);
-            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-            drawer.closeDrawer(GravityCompat.START);
-            return true;
- */
-
-            }
 
         return false;
-
-}
+    }
 
 }
 

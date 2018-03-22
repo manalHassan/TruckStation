@@ -41,6 +41,17 @@
         android:textStyle="bold"
         android:layout_marginBottom="40dp"/>
 
+    <EditText
+        android:id="@+id/etFeedback"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="top"
+        android:layout_marginTop="10dp"
+        android:hint="اخبرنا ماذا أحببت "
+        android:inputType="textMultiLine"
+        android:lines="5" />
+
+
 
 
 

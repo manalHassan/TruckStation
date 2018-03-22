@@ -28,7 +28,10 @@
             android:id="@+id/nav_pre_preorder"
             android:icon="@drawable/ic_record_voice_over_black_24dp"
             android:title="الطلبات السابقة" />
-
+        <item
+            android:id="@+id/cart"
+            android:icon="@drawable/ic_record_voice_over_black_24dp"
+            android:title="السلة" />
 
     </group>
     <group android:checkableBehavior="single" android:visible="true" android:id="@+id/icon_group">

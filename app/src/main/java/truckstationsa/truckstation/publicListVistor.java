@@ -10,6 +10,8 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -50,7 +52,17 @@ public class publicListVistor extends AppCompatActivity implements NavigationVie
         //  firebaseClient.refreshdata();
         firebaseClient.savedata("pu");
 
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+                PublicFoodTruckOwner artist = dogies.get(position);
+                //  Toast.makeText(ListPuplic.this, "ID="+artist.getUid()+"." ,Toast.LENGTH_SHORT).show();
+
+                gotoowner(artist.getUid());
+
+            }
+        });
 
         // Toast.makeText(this, "you hear", Toast.LENGTH_LONG).show();
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -61,6 +73,20 @@ public class publicListVistor extends AppCompatActivity implements NavigationVie
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);}//crest
 
+    private void gotoowner(String uid) {
+
+        //Toast.makeText(publicListVistor.this, "IDlist="+uid+"." ,Toast.LENGTH_SHORT).show();
+        // set Fragmentclass Arguments
+        // publicTab1profileforcustmer fragobj = new  publicTab1profileforcustmer();
+        //  fragobj.setArguments(b);
+        //String w=artist.getUid();
+        Intent intent = new Intent(publicListVistor.this, Publicownerforcustmer.class);
+        Bundle b=new Bundle();
+        b.putString("id",uid);
+        intent.putExtras(b);
+        startActivity(intent);
+
+    }
 
     @Override
     public void onBackPressed() {
@@ -75,7 +101,7 @@ public class publicListVistor extends AppCompatActivity implements NavigationVie
     @Override
     public boolean onCreateOptionsMenu(android.view.Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu, menu);
+        getMenuInflater().inflate(R.menu.menu_with_search, menu);
         return true;
     }
 

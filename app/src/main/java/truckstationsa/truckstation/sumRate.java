@@ -8,7 +8,10 @@ package truckstationsa.truckstation;
 public class sumRate {
     int sum;
 
-    public sumRate(){}
+    public sumRate(){
+
+
+    }
 
     public sumRate(int sum, int numCus) {
         this.sum = sum;

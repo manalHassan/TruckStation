@@ -109,7 +109,7 @@ public class ListPuplic extends AppCompatActivity implements NavigationView.OnNa
     @Override
     public boolean onCreateOptionsMenu(android.view.Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.menu_with_search, menu);
         return true;
     }
 
@@ -224,6 +224,21 @@ public class ListPuplic extends AppCompatActivity implements NavigationView.OnNa
                 return true;
 
             }}
+        else if (id == R.id.cart) {
+
+            Intent intent = new Intent(this, viewCart.class);
+            Bundle b=new Bundle();
+            //  b.putString("id",user);
+            //  intent.putExtras(b);
+            startActivity(intent);
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
+            return true;
+
+
+            }
+
+
 
         return false;
     }
