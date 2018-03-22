@@ -99,7 +99,7 @@ public class FirebaseClient extends AppCompatActivity  {
                                     //Toast.makeText(this, "hi", Toast.LENGTH_SHORT).show();
                                     //startActivity(new Intent(getActivity(), AdminHome2.class));
                                 }
-
+/*
                                 sumRate rate = new sumRate();
                                 rate.setSum(dataSnapshot.getValue(sumRate.class).getSum());
                                 rate.setNumCus(dataSnapshot.getValue(sumRate.class).getNumCus());
@@ -108,7 +108,7 @@ public class FirebaseClient extends AppCompatActivity  {
                                // Toast.makeText(c, a+"" ,Toast.LENGTH_SHORT).show();
                                 d.setNumCus(b);
                                 d.setSumRate(a);
-
+*/
 
 
 

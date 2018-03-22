@@ -21,7 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 
 import java.util.ArrayList;
-//////////////
+///////////////
 public class ListPuplic extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener  {
     FirebaseAuth auth ;
     final static String DB_URL = "https://truckstation-3c3eb.firebaseio.com/";
