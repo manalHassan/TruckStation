@@ -14,51 +14,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 /////////////
-public class Itemarrayforcustomer extends BaseAdapter {
-    Context c;
-    ArrayList<cartItem> artists;
-    LayoutInflater inflater;
+public class Itemarrayforcustomer extends ArrayAdapter<Item> {
+    private Activity context;
+    List<Item> artists;
 
-
-    public Itemarrayforcustomer(Context c, ArrayList<cartItem> artists) {
-        this.c = c;
+    public Itemarrayforcustomer(Activity context, List<Item> artists) {
+        super(context, R.layout.layout_itemlist, artists);
+        this.context = context;
         this.artists = artists;
     }
-    @Override
-    public int getCount() {
-        return artists.size();
-
-    }
 
     @Override
-    public Object getItem(int i) {
-        return artists.get(i);
-    }
+    public View getView(int position, View convertView, ViewGroup parent) {
+        LayoutInflater inflater = context.getLayoutInflater();
+        View listViewItem = inflater.inflate(R.layout.layout_itemlist, null, true);
+        TextView itemName = (TextView) listViewItem.findViewById(R.id.name);
+        TextView itemprice = (TextView) listViewItem.findViewById(R.id.itemprice);
 
-    @Override
-    public long getItemId(int i) {
-        return i;
-    }
+        Item artist = artists.get(position);
+        itemName.setText(artist.getIName());
+        itemprice.setText(""+artist.getIPrice());
 
-    @Override
-    public View getView(int i, View convertview, ViewGroup viewGroup) {
-
-        if (inflater== null)
-        {
-            inflater=(LayoutInflater)c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        } if(convertview==null)
-        {
-            convertview= inflater.inflate(R.layout.listviewtracks_layout,viewGroup,false);
-
-        }
-
-        itemHolder holder= new itemHolder(convertview);
-        holder.nameprice.setText((int) artists.get(i).getPrice1()+"");////لازم سترنق***********
-        holder.nameitem.setText(artists.get(i).getCatItem()+"");//
-
-
-
-        return convertview;
+        return listViewItem;
     }
 
 }

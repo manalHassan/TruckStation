@@ -215,6 +215,18 @@ public class tab3_itemlistforvisitor extends AppCompatActivity implements Naviga
             return true;
 
         }
+        else if (id == R.id.home) {
+
+            Intent intent = new Intent(this, MainActivity.class);
+            Bundle b=new Bundle();
+            //  b.putString("id",user);
+            //  intent.putExtras(b);
+            startActivity(intent);
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
+            return true;
+
+        }
 
 
         return false;

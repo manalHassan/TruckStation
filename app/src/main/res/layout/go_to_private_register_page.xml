@@ -77,7 +77,8 @@
                 android:padding="8dp"
                 android:textColorHint="#fff"
                 android:textStyle="bold"
-                tools:targetApi="jelly_bean_mr1" />
+                tools:targetApi="jelly_bean_mr1"
+                android:maxLength="10"/>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"

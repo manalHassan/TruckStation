@@ -40,7 +40,7 @@ public class tab3_itemlistforcustomer extends AppCompatActivity implements Navig
     String mid = "";
     ListView listViewArtists;
     List<Item> artists;
-    FirebaseAuth firebaseAuth;
+    FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     String id="";
     Bundle b ;
     cart car ;
@@ -58,13 +58,13 @@ public class tab3_itemlistforcustomer extends AppCompatActivity implements Navig
         cartRef = database.getReference("Cart");
         //TextView view =(TextView) findViewById(R.id.foodmenu);
         //view.setText(cid);
-        listViewArtists = (ListView) findViewById(R.id.listViewTracks);
+        listViewArtists = (ListView) findViewById(R.id.listviewtracksNew);
         //list to store artists
         artists = new ArrayList<>();
+        if (listViewArtists!=null){
         listViewArtists.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
                 Item artist = artists.get(position);
                 firebaseAuth = FirebaseAuth.getInstance();
                 //  Toast.makeText(ListPuplic.this, "ID="+artist.getUid()+"." ,Toast.LENGTH_SHORT).show();
@@ -81,7 +81,7 @@ public class tab3_itemlistforcustomer extends AppCompatActivity implements Navig
                   //  cartRef.child("cart").updateChildren(car);
               //  }Toast.makeText(tab3_itemlistforcustomer.this,artist.getIName()+"اخر اضيف لسلتك" ,Toast.LENGTH_SHORT).show();
            }
-        });
+        });}
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -109,18 +109,18 @@ public class tab3_itemlistforcustomer extends AppCompatActivity implements Navig
 
                         artists.clear();
 
-                        for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                            Item artist = new Item(ds.getValue(Item.class));
+                        for (com.google.firebase.database.DataSnapshot ds : dataSnapshot.getChildren()) {
+                            Item artist =new Item(ds.getValue(Item.class));
+                            Toast.makeText(tab3_itemlistforcustomer.this,artist.getIName(),Toast.LENGTH_SHORT).show();
                             artists.add(artist);
                         }
 
 
                         //creating adapter
-                    //    Itemarrayforcustomer artistAdapter = new Itemarrayforcustomer(tab3_itemlistforcustomer.this, (ArrayList<Item>) artists);
+                        Itemarrayforcustomer  artistAdapter = new Itemarrayforcustomer (tab3_itemlistforcustomer.this, artists);
                         //attaching adapter to the listview
-                       // listViewArtists.setAdapter(artistAdapter);
+                        listViewArtists.setAdapter(artistAdapter);
                     }
-
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
 
@@ -266,15 +266,14 @@ public class tab3_itemlistforcustomer extends AppCompatActivity implements Navig
             }}
         else if (id == R.id.cart) {
 
-           /* Intent intent = new Intent(this, editprofile.class);
+            Intent intent = new Intent(this, viewCart.class);
             Bundle b=new Bundle();
-            b.putString("id",user);
-            intent.putExtras(b);
+            //  b.putString("id",user);
+            //  intent.putExtras(b);
             startActivity(intent);
             DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
             drawer.closeDrawer(GravityCompat.START);
             return true;
- */
 
             }
 
