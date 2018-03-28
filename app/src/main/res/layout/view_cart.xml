@@ -56,7 +56,8 @@
             android:padding="16dp"
             android:text="ارسال الطلب"
             android:textAllCaps="false"
-            android:textColor="#fff" />
+            android:textColor="#fff"
+            android:layout_alignParentBottom="true"/>
 
     </LinearLayout>
 

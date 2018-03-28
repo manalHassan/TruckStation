@@ -1,16 +1,22 @@
 package truckstationsa.truckstation;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -58,24 +64,12 @@ public class viewCart extends AppCompatActivity  implements NavigationView.OnNav
         firebaseAuth = FirebaseAuth.getInstance();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        listViewArtists.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listViewArtists.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                cartItem artist = artists.get(position);
-
-                //  Toast.makeText(ListPuplic.this, "ID="+artist.getUid()+"." ,Toast.LENGTH_SHORT).show();
-                //   if (car == null){
-                //car = new cart ();
-              //  cartItem cartitem = new cartItem(artist.getIName() , artist.getIPrice() );
-               /// cartRef.child(firebaseAuth.getUid()).child("item").child((i++)+"").setValue(cartitem);
-                //Toast.makeText(tab3_itemlistforcustomer.this,artist.getIName()+"اضيف لسلتك" ,Toast.LENGTH_SHORT).show();
-                //    String s =  artist.getIName();
-                //  }
-                //  else {
-                // car.setQuntity(1);
-                //  cartRef.child("cart").updateChildren(car);
-                //  }Toast.makeText(tab3_itemlistforcustomer.this,artist.getIName()+"اخر اضيف لسلتك" ,Toast.LENGTH_SHORT).show();
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                cartItem artist = artists.get(i);
+                showUpdateDeleteDialog(artist.getcIId() ,artist.getCatItem() );
+                return true;
             }
         });
 
@@ -87,6 +81,83 @@ public class viewCart extends AppCompatActivity  implements NavigationView.OnNav
 //
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);   }
+
+    private void showUpdateDeleteDialog(final String ciid , final String item) {
+
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = getLayoutInflater();
+        final View dialogView = inflater.inflate(R.layout.dalete_item, null);
+        dialogBuilder.setView(dialogView);
+
+     //   final EditText editTextName = (EditText) dialogView.findViewById(R.id.cat);
+//        editTextName.setText(item);
+        final Button buttonDelete = (Button) dialogView.findViewById(R.id.delete);
+
+        dialogBuilder.setTitle("حذف الطبق");
+        final AlertDialog b = dialogBuilder.create();
+        b.show();
+
+        buttonDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog diaBox = AskOption(ciid);
+                diaBox.show();
+                b.dismiss();
+
+            }
+        });
+    }
+
+    private AlertDialog AskOption(final String artistId)
+    {
+        AlertDialog myQuittingDialogBox =new AlertDialog.Builder(this)
+                //set message, title, and icon
+                .setTitle("حذف الطبق")
+                .setMessage("هل تريد حذف الطبق؟")
+                .setIcon(R.drawable.ic_delete)
+
+                .setPositiveButton("حذف", new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        //your deleting code
+                        deleteitem(artistId);
+
+                        dialog.dismiss();
+                    }
+
+                })
+
+
+
+                .setNegativeButton("إالغاء", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        dialog.dismiss();
+
+                    }
+                })
+                .create();
+        return myQuittingDialogBox;
+
+    }
+
+
+    private void  deleteitem(String cid) {
+
+
+        //getting the specified artist reference
+        DatabaseReference dR = FirebaseDatabase.getInstance().getReference("Cart").child(firebaseAuth.getUid()).child(cid);
+
+        //removing artist
+        dR.removeValue();
+
+        //getting the tracks reference for the specified artist
+       /// DatabaseReference drTracks = FirebaseDatabase.getInstance().getReference("Item").child(mid).child(cid);
+        //removing all tracks
+       // drTracks.removeValue();
+        Toast.makeText(this, "تم الحـــذف", Toast.LENGTH_LONG).show();
+
+    }
 
 
     @Override
@@ -114,6 +185,7 @@ public class viewCart extends AppCompatActivity  implements NavigationView.OnNav
                             artist.setCatItem(ds.getValue(cartItem.class).getCatItem());
                             artist.setPrice1(ds.getValue(cartItem.class).getPrice1());
                             artist.setFid(ds.getValue(cartItem.class).getFid());
+                            artist.setcIId(ds.getValue(cartItem.class).getcIId());
                             artists.add(artist);
                         }
 
