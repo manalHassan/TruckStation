@@ -258,16 +258,21 @@ public class PublicOwnerProfileActivity extends AppCompatActivity
             return true;
             */
         }
+        else if (id == R.id.chat) {
+            Intent intent = new Intent(PublicOwnerProfileActivity.this, ownerchatlist.class);
+            startActivity(intent);
+
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
+            return true;
+
+        }
         else if (id == R.id.nav_booking) {
-            /*Intent intent = new Intent(MainActivity.this, postActivity.class);
-            Bundle b=new Bundle();
-            b.putString("id",user);
-            intent.putExtras(b);
+            Intent intent = new Intent(PublicOwnerProfileActivity.this, bookingschulde.class);
             startActivity(intent);
             DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
             drawer.closeDrawer(GravityCompat.START);
             return true;
-            */
         }
 
 

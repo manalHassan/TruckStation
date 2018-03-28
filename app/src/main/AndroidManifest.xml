@@ -118,6 +118,7 @@
             android:name=".publictruckownerprofile"
             android:label="صفحتي الشخصيه" />
         <activity android:name=".Homepage" />
+        <activity android:name=".bookingschulde" />
         <activity android:name=".postActivityPublic" />
         <activity android:name=".ReserveTruck" />
         <activity android:name=".PublicOwnerProfileActivity" />
@@ -125,6 +126,8 @@
         <activity android:name=".tab3_itemlistforcustomer"/>
         <activity android:name=".Publicownerforcustmer"/>
         <activity android:name=".bookingrequest" />
+        <activity android:name=".chatting" />
+        <activity android:name=".ownerchatlist"/>
         <activity android:name=".viewCart" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"

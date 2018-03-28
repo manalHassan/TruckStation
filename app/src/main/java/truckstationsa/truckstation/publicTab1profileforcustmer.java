@@ -50,11 +50,13 @@ import com.google.firebase.database.ValueEventListener;
 public class publicTab1profileforcustmer  extends Fragment {
     Button button;
     DatabaseReference databaseref;
+    DatabaseReference chatre;
+    DatabaseReference chatref;
     TextView username;
     TextView mail;
     TextView phone;
     TextView wwh;
-  //  FirebaseAuth firebaseAuth;
+    FirebaseAuth mAuth;
     private TextView location;
     String user1="";
     String address;
@@ -122,9 +124,68 @@ TextView res=rootView.findViewById(R.id.Reserve);
                 gorating();
             }
         });
+
+        TextView chat=rootView.findViewById(R.id.chat);
+
+        chat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                gochat();
+            }
+        });
         //
         return rootView;
     }
+
+    private void gochat() {
+        mAuth = FirebaseAuth.getInstance();
+        final String user2=mAuth.getCurrentUser().getUid();
+
+
+       // Toast.makeText(getActivity(),user1+"_"+user2, Toast.LENGTH_LONG).show();
+        chatref= FirebaseDatabase.getInstance().getReference();
+        chatref.child("Chatroom").child(user1+"_"+user2).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                String room = dataSnapshot.child("room").getValue(String.class);
+                if(room!=null){
+               // Toast.makeText(getActivity(), room+"room", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(getActivity(), chatting.class);
+                Bundle b=new Bundle();
+                b.putString("room",room);
+               intent.putExtras(b);
+               startActivity(intent);
+            }
+            else{
+                    chatre= FirebaseDatabase.getInstance().getReference();
+             Chatroom r =new Chatroom();
+             r.setCID(user2);
+             r.setFID(user1);
+             String room2=user1+"_"+user2;
+             r.setroom(room2);
+                    chatre.child("Chatroom").child(user1+"_"+user2).setValue(r);
+
+                    Intent intent = new Intent(getActivity(), chatting.class);
+                    Bundle b=new Bundle();
+                    b.putString("room",room2);
+                    intent.putExtras(b);
+                    startActivity(intent);
+
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Toast.makeText(getActivity(), "لايوجد اتصال بالانترنت", Toast.LENGTH_LONG).show();
+            }
+        });
+
+    }
+
     public void gorating( ){
          Intent intent = new Intent(getActivity(), Rating.class);
             Bundle b=new Bundle();
