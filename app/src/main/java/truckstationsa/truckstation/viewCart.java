@@ -49,6 +49,7 @@ public class viewCart extends AppCompatActivity  implements NavigationView.OnNav
     FirebaseAuth firebaseAuth;
     String id="";
     cart car ;
+    private double total = 0 ;
     private int i = 0 ;
     cartArray artistAdapter;
     @Override
@@ -186,6 +187,7 @@ public class viewCart extends AppCompatActivity  implements NavigationView.OnNav
                             artist.setPrice1(ds.getValue(cartItem.class).getPrice1());
                             artist.setFid(ds.getValue(cartItem.class).getFid());
                             artist.setcIId(ds.getValue(cartItem.class).getcIId());
+                            total = total + artist.getPrice1();
                             artists.add(artist);
                         }
 
@@ -195,6 +197,8 @@ public class viewCart extends AppCompatActivity  implements NavigationView.OnNav
                         artistAdapter = new cartArray(viewCart.this, (ArrayList<cartItem>) artists);
                         //attaching adapter to the listview
                         listViewArtists.setAdapter(artistAdapter);
+                        Button order = (Button) findViewById(R.id.pre_order);
+                        order.setText("اجمالي المبلغ: "+total);
                   //  }
 
                    // @Override

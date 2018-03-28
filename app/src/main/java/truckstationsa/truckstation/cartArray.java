@@ -53,7 +53,7 @@ public class cartArray extends BaseAdapter {
         }
 
         itemHolder holder= new itemHolder(convertview);
-        holder.nameprice.setText((int) artists.get(i).getPrice1()+"");////لازم سترنق***********
+        holder.nameprice.setText((int) artists.get(i).getPrice1()+"رس");////لازم سترنق***********
         holder.nameitem.setText(artists.get(i).getCatItem()+"");//
 
 
