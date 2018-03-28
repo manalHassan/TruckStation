@@ -190,14 +190,14 @@ public class FirebaseClient extends AppCompatActivity  {
                                     //startActivity(new Intent(getActivity(), AdminHome2.class));
                                 }
 
-                                sumRate rate = new sumRate();
-                                rate.setSum(dataSnapshot.getValue(sumRate.class).getSum());
-                                rate.setNumCus(dataSnapshot.getValue(sumRate.class).getNumCus());
-                                int a = rate.getSum();
-                                int b = rate.getNumCus();
+                               // sumRate rate = new sumRate();
+                              //  rate.setSum(dataSnapshot.getValue(sumRate.class).getSum());
+                              //  rate.setNumCus(dataSnapshot.getValue(sumRate.class).getNumCus());
+                              //  int a = rate.getSum();
+                              //  int b = rate.getNumCus();
                                 // Toast.makeText(c, a+"" ,Toast.LENGTH_SHORT).show();
-                                r.setNumCus(b);
-                                r.setSumRate(a);
+                              //  r.setNumCus(b);
+                               // r.setSumRate(a);
 
 
 

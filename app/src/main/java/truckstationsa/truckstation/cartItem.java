@@ -5,16 +5,18 @@ package truckstationsa.truckstation;
  */
 
 public class cartItem {
-   private String  catItem , Fid ;
+   private String  catItem , Fid , cIId;
    private double price1 ;
+
 
 
    public cartItem(){}
 
-   public cartItem (String c , double price , String Fid){
+   public cartItem (String c , double price , String Fid , String cIId){
        catItem = c ;
        price1 = price ;
        this.Fid = Fid ;
+       this.cIId = cIId ;
 
    }
 
@@ -40,5 +42,13 @@ public class cartItem {
 
     public String getFid() {
         return Fid;
+    }
+
+    public void setcIId(String cIId) {
+        this.cIId = cIId;
+    }
+
+    public String getcIId() {
+        return cIId;
     }
 }

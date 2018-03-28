@@ -1,7 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
@@ -27,24 +24,42 @@
                 android:background="?attr/colorPrimary"
                 app:layout_scrollFlags="scroll|enterAlways"
                 app:popupTheme="@style/AppTheme.PopupOverlay"
-                app:title="الاطباق"
+                app:title="سلتي"
                 >
 
             </android.support.v7.widget.Toolbar>
         </android.support.design.widget.AppBarLayout>
+        <RelativeLayout android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
+            <Button
+                android:id="@+id/pre-order"
+                style="@style/TextAppearance.AppCompat.Body1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/background_signup"
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="preorder"
+                android:padding="16dp"
+                android:text="ارسال الطلب"
+                android:textAllCaps="false"
+                android:textColor="#fff"
+                android:layout_alignParentBottom="true"/>
 
             <ListView
-                android:id="@+id/listviewtracksNew"
+                android:id="@+id/listviewtracksNew1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:layout_editor_absoluteX="0dp"
-                tools:layout_editor_absoluteY="53dp"
-                tools:ignore="MissingConstraints"
-                />
+               android:layout_marginBottom="56dp" />
+        </RelativeLayout>
+
+
+
 
     </LinearLayout>
 
 
 
-</android.support.constraint.ConstraintLayout>
+

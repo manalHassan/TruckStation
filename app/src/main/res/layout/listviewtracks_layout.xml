@@ -1,38 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <RelativeLayout
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
 
         <TextView
             android:id="@+id/nameitem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/nameprice"
+            android:layout_alignBottom="@+id/nameprice"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/nameprice"
-            android:layout_marginTop="18dp"
-            android:hint="dfbbfdhsbgh"
             android:text="TextView"
-            android:textSize="18sp" />
-
+            android:textSize="25sp" />
         <TextView
             android:id="@+id/nameprice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/nameTxt"
-            android:layout_marginTop="13dp"
             android:text="TextView"
-            android:hint="dfbbf$$$$dhsbgh"
-            android:textSize="18sp" />
+            android:textSize="15sp" />
+
+    </LinearLayout>
 
 
-    </RelativeLayout>
-
-
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>
