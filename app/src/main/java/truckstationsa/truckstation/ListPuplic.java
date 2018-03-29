@@ -4,21 +4,31 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 ///////////////
@@ -32,8 +42,10 @@ public class ListPuplic extends AppCompatActivity implements NavigationView.OnNa
     DrawerLayout drawer;
     ArrayList<PublicFoodTruckOwner> dogies= new ArrayList<>();
     CustomAdapter customAdapter;
-    DatabaseReference f;
+    DatabaseReference f,mDatabase2;
     Context c;
+    Spinner spinner1;
+    ArrayList<String> categories = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,6 +101,7 @@ public class ListPuplic extends AppCompatActivity implements NavigationView.OnNa
         //String w=artist.getUid();
         Intent intent = new Intent(ListPuplic.this, Publicownerforcustmer.class);
         Bundle b=new Bundle();
+        Toast.makeText(ListPuplic.this, uid ,Toast.LENGTH_SHORT).show();
         b.putString("id",uid);
         intent.putExtras(b);
         startActivity(intent);
@@ -108,9 +121,108 @@ public class ListPuplic extends AppCompatActivity implements NavigationView.OnNa
 
     @Override
     public boolean onCreateOptionsMenu(android.view.Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_with_search, menu);
-        return true;
+
+
+        MenuInflater inflater =getMenuInflater();
+        inflater.inflate(R.menu.menu_with_search, (android.view.Menu) menu);
+
+        MenuItem searchIem =((android.view.Menu) menu).findItem(R.id.action_search);
+        SearchView searchView =(SearchView) MenuItemCompat.getActionView(searchIem);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+
+                ArrayList<PublicFoodTruckOwner> templist = new ArrayList<>();
+                for (PublicFoodTruckOwner temp : dogies){
+                    if(temp.getFUsername().toLowerCase().contains(newText.toLowerCase())){
+
+                        templist.add(temp);
+                    }
+
+                    customAdapter = new CustomAdapter(ListPuplic.this, templist);
+                    listView.setAdapter((ListAdapter) customAdapter);
+                    customAdapter.notifyDataSetChanged();
+
+
+                }
+
+
+                return true;
+            }
+        });
+
+
+        /////spinner code
+
+
+        MenuItem item =((android.view.Menu) menu).findItem(R.id.spinner);
+        spinner1 = (Spinner)item.getActionView(); // get the spinner
+        categories = new ArrayList<String>();
+        mDatabase2 = FirebaseDatabase.getInstance().getReference().child("PublicFoodTruckOwner");
+        ValueEventListener eventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot ds : dataSnapshot.getChildren() ) {
+                    PublicFoodTruckOwner category = ds.getValue(PublicFoodTruckOwner.class);
+                    categories.add(category.getQusins());
+                    final ArrayAdapter<String> arrayadap;
+                    arrayadap = new ArrayAdapter<String>(ListPuplic.this, android.R.layout.simple_list_item_1, categories);
+                    spinner1.setAdapter(arrayadap);
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {}
+        };
+
+        mDatabase2.addListenerForSingleValueEvent(eventListener);
+
+        spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> adapter, View v,
+                                       int position, long id) {
+                // On selecting a spinner item
+                String item = adapter.getItemAtPosition(position).toString();
+
+                // Showing selected spinner item
+                Toast.makeText(getApplicationContext(), "Selected  : " + item,
+                        Toast.LENGTH_LONG).show();
+
+                ArrayList<PublicFoodTruckOwner> templist = new ArrayList<>();
+                for (PublicFoodTruckOwner temp : dogies){
+                    if(temp.getQusins().toLowerCase().contains(item.toLowerCase())){
+
+                        templist.add(temp);
+                    }
+
+                    customAdapter = new CustomAdapter(ListPuplic.this, templist);
+                    listView.setAdapter((ListAdapter) customAdapter);
+                    customAdapter.notifyDataSetChanged();
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+                // TODO Auto-generated method stub
+
+
+            }
+        });
+
+
+
+//End Spinner code
+
+
+
+        return super.onCreateOptionsMenu((android.view.Menu) menu);
+
     }
 
 

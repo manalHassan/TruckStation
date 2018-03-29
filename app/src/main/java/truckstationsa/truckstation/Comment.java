@@ -21,12 +21,12 @@ public class Comment {
 ///System.out.println(dtf.format(localDate)); //2016/11/16
 
    public Comment (String CID ,String FID ,String Comment){
-       this.setCID(CID);
+       //this.setCID(CID);
        dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
        LocalDate now = LocalDate.now();
        this.setCoDate(dtf.format(now));
 
-       this.setFID(FID);
+     //  this.setFID(FID);
        this.setComment(Comment);
    }
 

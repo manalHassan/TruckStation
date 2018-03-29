@@ -33,6 +33,9 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+import static truckstationsa.truckstation.Rating.sumRatesarray;
+
+
 //////////////////////////////////
 public class FirebaseClient extends AppCompatActivity  {
 
@@ -47,8 +50,6 @@ public class FirebaseClient extends AppCompatActivity  {
     DatabaseReference f;
     DatabaseReference rate;
     PublicFoodTruckOwner d;
-    PrivateFoodTruckOwner r;
-
 
     public  FirebaseClient(Context c, String DB_URL,ListView listView)
     {
@@ -79,7 +80,7 @@ public class FirebaseClient extends AppCompatActivity  {
                         //startActivity(new Intent(getActivity(), AdminHome2.class));
                     }
                     dogies.clear();
-
+                   // customAdapter.notifyDataSetChanged();
                     for (com.google.firebase.database.DataSnapshot ds : dataSnapshot.getChildren()) {
 
                         d = new PublicFoodTruckOwner();
@@ -87,69 +88,126 @@ public class FirebaseClient extends AppCompatActivity  {
                         d.setUrl(ds.getValue(PublicFoodTruckOwner.class).getUrl());
                         d.setQusins(ds.getValue(PublicFoodTruckOwner.class).getQusins());
                         d.setUid(ds.getValue(PublicFoodTruckOwner.class).getUid());
+                        d.setSumRate(ds.getValue(PublicFoodTruckOwner.class).getSumRate());
+                        d.setNumCus(ds.getValue(PublicFoodTruckOwner.class).getNumCus());
+                        //Toast.makeText(c, d.getUid(), Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(c, sumRatesarray.size() + "size ", Toast.LENGTH_SHORT).show();
+                      //  Toast.makeText(c,d.getQusins(), Toast.LENGTH_SHORT).show();
+                      //  Toast.makeText(c,d.getUid(), Toast.LENGTH_SHORT).show();
+                      //  if (d.getUid() == null) {
 
-                        //////___________rate/
-                        rate= FirebaseDatabase.getInstance().getReference().child("Rate").child("5iKorQstPQMXt8Qp17RGm04TfE52").child("sum");
-                        ValueEventListener eventListener = new ValueEventListener() {
-                            @Override
-                            public void onDataChange(com.google.firebase.database.DataSnapshot dataSnapshot) {
-                                if (dataSnapshot.getChildren() == null) {
-                                    Toast.makeText(c, "no rating", Toast.LENGTH_SHORT).show();
+                        // Toast.makeText(c,"hi", Toast.LENGTH_SHORT).show();
+/*
+                            for (int h=0;h<sumRatesarray.size();h++) {
+                              if(sumRatesarray.get(h).getFID().equals(d.getUid())) {
 
-                                    //Toast.makeText(this, "hi", Toast.LENGTH_SHORT).show();
-                                    //startActivity(new Intent(getActivity(), AdminHome2.class));
+                                  Toast.makeText(c, sumRatesarray.get(h).getNumCus() + "num of cus", Toast.LENGTH_SHORT).show();
+                              }
+                            }
+                            /*
+                        //////___________rate//*
+                        rate = FirebaseDatabase.getInstance().getReference().child("Rate").child(d.getUid()).child("sum");
+
+                            ValueEventListener eventListener2 = new ValueEventListener() {
+                                @Override
+                                public void onDataChange(com.google.firebase.database.DataSnapshot dataSnapshot) {
+                                    if (dataSnapshot.getChildren() == null) {
+                                        Toast.makeText(c, "no rating", Toast.LENGTH_SHORT).show();
+
+                                        //Toast.makeText(this, "hi", Toast.LENGTH_SHORT).show();
+                                        //startActivity(new Intent(getActivity(), AdminHome2.class));
+                                    }
+
+                                    sumRate rate = new sumRate();
+                                    rate.setSum(dataSnapshot.getValue(sumRate.class).getSum());
+                                    rate.setNumCus(dataSnapshot.getValue(sumRate.class).getNumCus());
+                                    int a = rate.getSum();
+                                    int b = rate.getNumCus();
+                                    Toast.makeText(c, a + "", Toast.LENGTH_SHORT).show();
+                                    d.setNumCus(2);
+                                    d.setSumRate(2);
+
+
                                 }
 
-                             //   sumRate rate = new sumRate();
-                               // rate.setSum(dataSnapshot.getValue(sumRate.class).getSum());
-                                //rate.setNumCus(dataSnapshot.getValue(sumRate.class).getNumCus());
-                                //int a = rate.getSum();
-                                ///int b = rate.getNumCus();
-                               // Toast.makeText(c, a+"" ,Toast.LENGTH_SHORT).show();
-                                //d.setNumCus(b);
-                                ///d.setSumRate(a);
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+                                    Toast.makeText(c, "cancelled", Toast.LENGTH_SHORT).show();
+                                }
+                            };
+                            rate.addListenerForSingleValueEvent(eventListener2);
+
+                            */
+
+                       // }//end if
+
+
+                            ///___________rate
 
 
 
 
+                            dogies.add(d);
 
 
+                        }
+                        if (dogies.size() > 0) {
 
-                            }
+                            customAdapter = new CustomAdapter(c, dogies);
+                            listView.setAdapter((ListAdapter) customAdapter);
+                            customAdapter.notifyDataSetChanged();
 
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
-                                Toast.makeText(c, "cancelled", Toast.LENGTH_SHORT).show();
-                            }
-                        };
-                        rate.addListenerForSingleValueEvent(eventListener);
-
-
-                        ///___________rate
-
-                        dogies.add(d);
+                        } else {
+                            Toast.makeText(c, "No data", Toast.LENGTH_SHORT).show();
+                        }
 
 
                     }
-                    if (dogies.size() > 0) {
-                        customAdapter = new CustomAdapter(c, dogies);
-                        listView.setAdapter((ListAdapter) customAdapter);
 
-
-
-                    } else {
-                        Toast.makeText(c, "No data", Toast.LENGTH_SHORT).show();
+                    @Override
+                    public void onCancelled (DatabaseError databaseError){
+                        Toast.makeText(c, "cancelled", Toast.LENGTH_SHORT).show();
                     }
+                }
 
+                ;
+            f.addListenerForSingleValueEvent(eventListener);
 
+            /////////update//////////
+            /*
+            f.addChildEventListener(new ChildEventListener() {
+
+                @Override
+                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                    dogies.add(dataSnapshot.getValue(String.class));
                 }
 
                 @Override
-                public void onCancelled(DatabaseError databaseError) {
-                    Toast.makeText(c, "cancelled", Toast.LENGTH_SHORT).show();
+                public void onChildChanged(DataSnapshot dataSnapshot, String s) {
                 }
-            };
-            f.addListenerForSingleValueEvent(eventListener);
+
+                @Override
+                public void onChildRemoved(DataSnapshot dataSnapshot) {
+                     dogies.add(dataSnapshot.getValue(PublicFoodTruckOwner.class));
+                   // customAdapter.notifyDataSetChanged();
+                }
+
+                @Override
+                public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+                }
+
+                @Override
+                public void onCancelled(FirebaseError firebaseError) {
+
+                }
+
+            });
+        }
+*/
+
+        ////////update////////////
+
+
             ////////rate///////////
 
             /////////rate//////////
@@ -171,50 +229,12 @@ public class FirebaseClient extends AppCompatActivity  {
                     dogies1.clear();
 
                     for (com.google.firebase.database.DataSnapshot ds : dataSnapshot.getChildren()) {
-                        r= new PrivateFoodTruckOwner();
-
-                        r.setUid(ds.getValue(PrivateFoodTruckOwner.class).getUid());
-                        r.setFUsername(ds.getValue(PrivateFoodTruckOwner.class).getFUsername());
-                        r.setUrl(ds.getValue(PrivateFoodTruckOwner.class).getUrl());
-                        r.setQusins(ds.getValue(PrivateFoodTruckOwner.class).getQusins());
-
-                        //////___________rate////
-                        rate= FirebaseDatabase.getInstance().getReference().child("Rate").child("5iKorQstPQMXt8Qp17RGm04TfE52").child("sum");
-                        ValueEventListener eventListener = new ValueEventListener() {
-                            @Override
-                            public void onDataChange(com.google.firebase.database.DataSnapshot dataSnapshot) {
-                                if (dataSnapshot.getChildren() == null) {
-                                    Toast.makeText(c, "no rating", Toast.LENGTH_SHORT).show();
-
-                                    //Toast.makeText(this, "hi", Toast.LENGTH_SHORT).show();
-                                    //startActivity(new Intent(getActivity(), AdminHome2.class));
-                                }
-
-                               // sumRate rate = new sumRate();
-                              //  rate.setSum(dataSnapshot.getValue(sumRate.class).getSum());
-                              //  rate.setNumCus(dataSnapshot.getValue(sumRate.class).getNumCus());
-                              //  int a = rate.getSum();
-                              //  int b = rate.getNumCus();
-                                // Toast.makeText(c, a+"" ,Toast.LENGTH_SHORT).show();
-                              //  r.setNumCus(b);
-                               // r.setSumRate(a);
-
-
-
-
-
-
-
-                            }
-
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
-                                Toast.makeText(c, "cancelled", Toast.LENGTH_SHORT).show();
-                            }
-                        };
-                        rate.addListenerForSingleValueEvent(eventListener);
-
-                        dogies1.add(r);
+                        PrivateFoodTruckOwner d= new PrivateFoodTruckOwner();
+                        d.setUid(""+(ds.getValue(PrivateFoodTruckOwner.class).getUid()));
+                        d.setFUsername(ds.getValue(PrivateFoodTruckOwner.class).getFUsername());
+                        d.setUrl(ds.getValue(PrivateFoodTruckOwner.class).getUrl());
+                        d.setQusins(ds.getValue(PrivateFoodTruckOwner.class).getQusins());
+                        dogies1.add(d);
 
                     }
                     if (dogies1.size() > 0) {
@@ -238,7 +258,7 @@ public class FirebaseClient extends AppCompatActivity  {
         }//if private
     }
 
-/////////////////
+    /////////////////
     public ListView reListView(){return  listView;}
 
     public ArrayList<PrivateFoodTruckOwner> getDogies1(){return  dogies1;}
@@ -251,3 +271,4 @@ public class FirebaseClient extends AppCompatActivity  {
     //////////////////////
 
 }
+

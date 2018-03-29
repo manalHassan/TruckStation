@@ -39,6 +39,7 @@
         <activity
             android:name=".publicOnerLogIn"
             android:label="تسجيل الدخول صاحب عربه" />
+
         <activity
             android:name=".PublicOrPrivat"
             android:label="TruckStation" />
@@ -78,7 +79,9 @@
             android:label="الملف الشخصي" />
         <activity
             android:name=".Rating"
-            android:label="تقييم العربه" />
+            android:label="تقييم العربه"
+            android:noHistory="true"
+            />
         <activity
             android:name=".NearByTrucks"
             android:label="العربات القريبه مني" />

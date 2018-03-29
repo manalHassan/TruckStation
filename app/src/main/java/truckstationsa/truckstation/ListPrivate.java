@@ -1,20 +1,36 @@
 package truckstationsa.truckstation;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class ListPrivate extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener  {
     final static String DB_URL = "https://truckstation-3c3eb.firebaseio.com/";
@@ -24,6 +40,14 @@ public class ListPrivate extends AppCompatActivity implements NavigationView.OnN
     FirebaseClient firebaseClient;
     DrawerLayout drawer;
     FirebaseAuth auth ;
+    ArrayList<PrivateFoodTruckOwner> dogies= new ArrayList<>();
+    CustomAdapterPrivate customAdapter;
+    DatabaseReference f,mDatabase2;
+    Context c;
+    private ArrayList<String> categories;
+    private Spinner spinner1;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +61,13 @@ public class ListPrivate extends AppCompatActivity implements NavigationView.OnN
         firebaseClient = new FirebaseClient(this, DB_URL, listView);
         //  firebaseClient.refreshdata();
         firebaseClient.savedata("pr");
+
+        listView= firebaseClient.reListView();
+        dogies=firebaseClient.getDogies1();
+        customAdapter=firebaseClient.custom();
+       // c=firebaseClient.contes();
+
+
        // Toast.makeText(this, "you hear", Toast.LENGTH_LONG).show();
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -59,9 +90,102 @@ public class ListPrivate extends AppCompatActivity implements NavigationView.OnN
 
     @Override
     public boolean onCreateOptionsMenu(android.view.Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_with_search, menu);
-        return true;
+
+        MenuInflater inflater =getMenuInflater();
+        inflater.inflate(R.menu.menu_with_search, (android.view.Menu) menu);
+
+        MenuItem searchIem =((android.view.Menu) menu).findItem(R.id.action_search);
+        SearchView searchView =(SearchView) MenuItemCompat.getActionView(searchIem);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+
+                ArrayList<PrivateFoodTruckOwner> templist = new ArrayList<>();
+                for (PrivateFoodTruckOwner temp : dogies){
+                    if(temp.getFUsername().toLowerCase().contains(newText.toLowerCase())){
+
+                        templist.add(temp);
+                    }
+                    customAdapter = new CustomAdapterPrivate(ListPrivate.this, templist);
+                    listView.setAdapter((ListAdapter) customAdapter);
+
+                }
+
+
+                return true;
+            }
+        });
+
+
+        /////spinner code
+
+
+        MenuItem item =((android.view.Menu) menu).findItem(R.id.spinner);
+        spinner1 = (Spinner)item.getActionView(); // get the spinner
+        categories = new ArrayList<String>();
+        mDatabase2 = FirebaseDatabase.getInstance().getReference().child("PrivateFoodTruckOwner");
+        ValueEventListener eventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot ds : dataSnapshot.getChildren() ) {
+                    PublicFoodTruckOwner category = ds.getValue(PublicFoodTruckOwner.class);
+                    categories.add(category.getQusins());
+                    final ArrayAdapter<String> arrayadap;
+                    arrayadap = new ArrayAdapter<String>(ListPrivate.this, android.R.layout.simple_list_item_1, categories);
+                    spinner1.setAdapter(arrayadap);
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {}
+        };
+
+        mDatabase2.addListenerForSingleValueEvent(eventListener);
+
+        spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> adapter, View v,
+                                       int position, long id) {
+                // On selecting a spinner item
+                String item = adapter.getItemAtPosition(position).toString();
+
+                // Showing selected spinner item
+                Toast.makeText(getApplicationContext(), "Selected  : " + item,
+                        Toast.LENGTH_LONG).show();
+
+                ArrayList<PrivateFoodTruckOwner> templist = new ArrayList<>();
+                for (PrivateFoodTruckOwner temp : dogies){
+                    if(temp.getQusins().toLowerCase().contains(item.toLowerCase())){
+
+                        templist.add(temp);
+                    }
+                    customAdapter = new CustomAdapterPrivate(ListPrivate.this, templist);
+                    listView.setAdapter((ListAdapter) customAdapter);
+
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+                // TODO Auto-generated method stub
+
+
+            }
+        });
+
+
+
+//End Spinner code
+
+
+
+        return super.onCreateOptionsMenu((android.view.Menu) menu);
     }
 
 

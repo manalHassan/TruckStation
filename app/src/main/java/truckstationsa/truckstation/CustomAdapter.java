@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -58,8 +59,10 @@ public class CustomAdapter extends BaseAdapter {
         holder.nameTxt.setText(dogies.get(i).getFUsername());
         holder.cusin.setText(dogies.get(i).getQusins());
         holder.ratingBar.setRating(dogies.get(i).getSumRate());
+        //Toast.makeText(c, dogies.get(i).getSumRate()+"No rating bar", Toast.LENGTH_SHORT).show();
         a= Integer.toString(dogies.get(i).getNumCus());
         holder.numofrate.setText(a);
+        //Toast.makeText(c, a, Toast.LENGTH_SHORT).show();
         PicassoClient.downloadimg(c,dogies.get(i).getUrl(),holder.img);
 
 

@@ -33,6 +33,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.Serializable;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -44,21 +46,43 @@ public class Rating extends AppCompatActivity implements NavigationView.OnNaviga
     FirebaseAuth firebaseAuth;
     public static int numOFCustomer;
     public static int sum;
+    public static int sumratefORcustomer;
+    public static int numForcustomer;
     ArrayList<Rate> dogies= new ArrayList<>();
+     public static final ArrayList<sumRateFID> sumRatesarray;
+
+    static {
+        sumRatesarray = new ArrayList<>();
+
+    }
+
 
     // DATABASE
     DatabaseReference OwnerID;
-    DatabaseReference CustmID;
+    DatabaseReference CustmID,dbO;
     DatabaseReference RatingRef;
     DatabaseReference CommentRef;
     FirebaseDatabase database;
-    sumRate sumrate;
+    sumRate sumrate=new sumRate();
+    sumRateFID sumRateFID=new sumRateFID();
+
+    FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
+    String id = user.getUid();//customer id is the same as rating id to make it easy to refer
+    final String CID=id;
+
+
+    String fid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.rating_drawer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        Bundle b = getIntent().getExtras();
+        fid = b.getString("id");
+
+
 
         mRatingBar = (RatingBar) findViewById(R.id.ratingBar);
         mRatingScale = (TextView) findViewById(R.id.tvRatingScale);
@@ -69,7 +93,8 @@ public class Rating extends AppCompatActivity implements NavigationView.OnNaviga
         database= FirebaseDatabase.getInstance();
         RatingRef = database.getReference("Rate"); // make sure its identical to the table name in the database
         CommentRef= database.getReference("Comment");
-        OwnerID = FirebaseDatabase.getInstance().getReference().child("Rate").child("5iKorQstPQMXt8Qp17RGm04TfE52");
+        dbO=database.getReference("PublicFoodTruckOwner").child(fid);
+        OwnerID = FirebaseDatabase.getInstance().getReference().child("Rate").child(fid);
 
         mRatingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
@@ -94,6 +119,13 @@ public class Rating extends AppCompatActivity implements NavigationView.OnNaviga
                     default:
                         mRatingScale.setText("");
                 }
+
+                for (int h=0;h<sumRatesarray.size();h++) {
+                    if(sumRatesarray.get(h).getFID().equals(fid)&& sumRatesarray.get(h).getUID().equals(CID)) {
+                        Toast.makeText(Rating.this, sumRatesarray.get(h).getNumCus() + "عذرا قد تم التقييم", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+                }
             }
         });
 
@@ -112,15 +144,12 @@ public class Rating extends AppCompatActivity implements NavigationView.OnNaviga
 
     public  void DoRating(View view ){
 
+
         RatingRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
-                String id = user.getUid();//customer id is the same as rating id to make it easy to refer
-
-                final String FID="5iKorQstPQMXt8Qp17RGm04TfE52";
-                final String CID=id;
+                final String FID=fid;
 
                 final double ratingValue=(double)mRatingBar.getRating();
 
@@ -157,12 +186,15 @@ public class Rating extends AppCompatActivity implements NavigationView.OnNaviga
                     //Toast.makeText(this, "hi", Toast.LENGTH_SHORT).show();
                     //startActivity(new Intent(getActivity(), AdminHome2.class));
                 }
+
+
                 dogies.clear();
 
                 for (com.google.firebase.database.DataSnapshot ds : dataSnapshot.getChildren()) {
                     Rate d = new Rate();
                     d.setRatingValue(ds.getValue(Rate.class).getRatingValue());
                     dogies.add(d);
+
 
 
                 }
@@ -180,13 +212,22 @@ public class Rating extends AppCompatActivity implements NavigationView.OnNaviga
                     }
                     //  Toast.makeText(Rating.this, " size"+size+"", Toast.LENGTH_SHORT).show();
 
-                    sumrate=new sumRate((sum/dogies.size()-1)%5,dogies.size()-1);
 
+                    sumrate=new sumRate((sum/dogies.size()-1)%5,dogies.size()-1);
+                    sumRateFID=new sumRateFID((sum/dogies.size()-1)%5,dogies.size()-1,fid,CID);
+                     sumratefORcustomer=(sum/dogies.size()-1)%5;
+                     numForcustomer=dogies.size()-1;
                     sum=0;
                     OwnerID.child("sum").setValue(sumrate);
+                    sumRatesarray.add(sumRateFID);
+
+                    dbO.child("sumRate").setValue(sumratefORcustomer);
+                    dbO.child("numCus").setValue(numForcustomer);
+                    Toast.makeText(Rating.this, "sumratefORcustomer"+sumratefORcustomer, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Rating.this, "numForcustomer"+numForcustomer, Toast.LENGTH_SHORT).show();
 
                 } else {
-                    Toast.makeText(Rating.this, "No data", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(Rating.this, "No data in class rating", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -199,8 +240,79 @@ public class Rating extends AppCompatActivity implements NavigationView.OnNaviga
 
 
 
+       // Intent i = new Intent(Rating.this,ListPuplic.class);//
+       // startActivity(i);
+        /*
+///////////////
+
+        f.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot ds) {
+
+                //for (com.google.firebase.database.DataSnapshot ds : dataSnapshot.getChildren()) {
+
+                      PublicFoodTruckOwner d = ds.getValue(PublicFoodTruckOwner.class);
+                      String name = ds.child("uid").getValue(String.class);
+                      Toast.makeText(Rating.this, name , Toast.LENGTH_SHORT).show();
+                      d.setUid(name);
+                    //
+
+
+                    d.setCanBePrivate(ds.getValue(PublicFoodTruckOwner.class).getCanBePrivate());
+                    d.setUid(ds.getValue(PublicFoodTruckOwner.class).getUid());
+                   // if (fid.equals(d.getUid())) {
+                        Toast.makeText(Rating.this, "@@@@@@@@ " , Toast.LENGTH_SHORT).show();
+                        d.setFUsername(ds.getValue(PublicFoodTruckOwner.class).getFUsername());
+                        d.setUrl(ds.getValue(PublicFoodTruckOwner.class).getUrl());
+                        d.setQusins(ds.getValue(PublicFoodTruckOwner.class).getQusins());
+                        d.setSumRate(ds.getValue(PublicFoodTruckOwner.class).getSumRate());
+                        d.setNumCus(ds.getValue(PublicFoodTruckOwner.class).getNumCus());
+                        d.setCanBePrivate(ds.getValue(PublicFoodTruckOwner.class).getCanBePrivate());
+                        d.setFEmail(ds.getValue(PublicFoodTruckOwner.class).getFEmail());
+                        d.setFPoneNoumber(ds.getValue(PublicFoodTruckOwner.class).getFPoneNoumber());
+                        d.setFPassword(ds.getValue(PublicFoodTruckOwner.class).getFPassword());
+                        d.setFPreOrderStatuse(ds.getValue(PublicFoodTruckOwner.class).getFPreOrderStatuse());
+                        d.setXFLication(ds.getValue(PublicFoodTruckOwner.class).getXFLication());
+                        d.setYFLocation(ds.getValue(PublicFoodTruckOwner.class).getYFLocation());
+                        d.setFstatus(ds.getValue(PublicFoodTruckOwner.class).getFstatus());
+                        d.setFWorkingHours(ds.getValue(PublicFoodTruckOwner.class).getFWorkingHours());
+                        //Toast.makeText(Rating.this, "size"+sumRatesarray.size(), Toast.LENGTH_SHORT).show();
+
+                       // for (int h = 0; h < sumRatesarray.size(); h++) {
+                                Toast.makeText(Rating.this, "in  out", Toast.LENGTH_SHORT).show();
+                                d.setSumRate(sumratefORcustomer);
+                                d.setNumCus(numForcustomer);
+                                f1.child(fid).removeValue();
+                                f1.child(fid).setValue(d);
+                                Toast.makeText(Rating.this, "go out", Toast.LENGTH_SHORT).show();
+                                Intent i = new Intent(Rating.this,ListPuplic.class);//
+                                startActivity(i);
+                                finish();
+
+
+
+
+
+                      //  }
+
+                  //  }//if
+               // }
+
+            }
+
+
+
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+        ////////////rating///////
+*/
+
 
         //add comment
+
         final String Comment=mFeedback.getText().toString();
 
         if(!TextUtils.isEmpty(Comment)) {
@@ -214,14 +326,14 @@ public class Rating extends AppCompatActivity implements NavigationView.OnNaviga
                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                     String id = user.getUid();//customer id is the same as comment id to make it easy to refer
 
-                    final String FID = "-L5hPscXmLNDYe8_3KNL";
+                    final String FID = fid;
                     final String CID=id;
                     if (!TextUtils.isEmpty(FID) && !TextUtils.isEmpty(CID)) {
 
-                        Comment commentObject= new Comment(CID ,FID ,Comment);
+                        Comment commentObject= new Comment(CID,FID,Comment);//**********
 
-                        CommentRef.child(FID).setValue(commentObject);
-                        //Toast.makeText(Rating.this,  "شكرًا لمشاركتنا رأيك", Toast.LENGTH_SHORT).show();
+                        CommentRef.child(FID).child(CID).setValue(commentObject);
+                        Toast.makeText(Rating.this,  "شكرًا لمشاركتنا رأيك", Toast.LENGTH_SHORT).show();
                         // Intent intent = new Intent(GoTOCustomerRegisterPage.this, .class);
                         // startActivity(intent);
                         //finish();
@@ -234,6 +346,9 @@ public class Rating extends AppCompatActivity implements NavigationView.OnNaviga
                 }
             });
         }
+
+        ////////////rating///////////
+
 
 
 

@@ -16,6 +16,8 @@ public class PrivateFoodTruckOwner  {
     private String uid;
     private String url;
     private  int FPoneNoumber ;
+    private int sumRate;
+    private int numCus;
 
     public int getSumRate() {
         return sumRate;
@@ -33,10 +35,11 @@ public class PrivateFoodTruckOwner  {
         this.numCus = numCus;
     }
 
-    private int sumRate;
-    private int numCus;
+
 
     public PrivateFoodTruckOwner(){}
+
+
 
 
     public PrivateFoodTruckOwner ( String FUsername  ,String FPassword ,String FEmail ,  int FPoneNoumber

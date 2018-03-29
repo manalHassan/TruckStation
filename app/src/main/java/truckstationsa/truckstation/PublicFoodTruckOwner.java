@@ -18,6 +18,7 @@ public class PublicFoodTruckOwner  {
     private boolean canBePrivate ;
     private int sumRate;
     private int numCus;
+
     public int getSumRate() {
         return sumRate;
     }
@@ -44,8 +45,10 @@ public class PublicFoodTruckOwner  {
 
     public PublicFoodTruckOwner (){}
 
-    public PublicFoodTruckOwner(String FUsername, String FPassword, String FEmail, int FPoneNoumber, double XFLication,
-                                double YFLocation, String qusins, String FWorkingHours, boolean canBePrivte,int sumRate,int numCus){
+    public PublicFoodTruckOwner(String FUsername, String FPassword, String FEmail,
+                                int FPoneNoumber, double XFLication,
+                                double YFLocation, String qusins, String FWorkingHours,
+                                boolean canBePrivte,String uid,int sumRate,int numCus){
         this.setFEmail(FEmail);
         this.setFPassword(FPassword);
         this.setFPoneNoumber(FPoneNoumber);
@@ -57,6 +60,7 @@ public class PublicFoodTruckOwner  {
         this.setCanBePrivate(canBePrivte);
         this.setNumCus(numCus);
         this.setSumRate(sumRate);
+        this.setUid(uid);
     }
 
 

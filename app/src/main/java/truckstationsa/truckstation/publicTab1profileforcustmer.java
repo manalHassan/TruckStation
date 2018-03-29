@@ -79,7 +79,7 @@ public class publicTab1profileforcustmer  extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String name = dataSnapshot.child(user1).child("fusername").getValue(String.class);
-               int phonnum = dataSnapshot.child(user1).child("fponeNoumber").getValue(int.class);
+              //  int phonnum = dataSnapshot.child(user1).child("fponeNoumber").getValue(int.class);
                 String email = dataSnapshot.child(user1).child("femail").getValue(String.class);
                 String cc = dataSnapshot.child(user1).child("qusins").getValue(String.class);
 
@@ -95,7 +95,7 @@ public class publicTab1profileforcustmer  extends Fragment {
                 mail = (TextView) rootView.findViewById(R.id.email);
                 mail.setText(" " + email);
                 phone = (TextView) rootView.findViewById(R.id.phone);
-                phone.setText(" " + phonnum + " ");
+               // phone.setText(" " + phonnum + " ");
             }
 
             @Override

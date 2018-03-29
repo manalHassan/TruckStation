@@ -11,6 +11,11 @@
 
     </style>
 
+    <style name="spinnerItemStyle" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
+        <item name="android:textColor">#ffffffff</item>
+    </style>
+
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>

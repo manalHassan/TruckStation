@@ -51,24 +51,28 @@ public class Publicownerforcustmer extends AppCompatActivity implements Navigati
             setContentView(R.layout.drawer_public_onewr_customer);
            Bundle b = getIntent().getExtras();
             user1 = b.getString("id");
-            databaseReference = FirebaseDatabase.getInstance().getReference().child("PublicFoodTruckOwner").child(user1);
-            ValueEventListener EventListener = new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    //   Toast.makeText(getApplicationContext(),"hdfhdsg", Toast.LENGTH_SHORT).show();
-                    // c=new Customer();
-                    //    try {
-                   p = dataSnapshot.getValue(PublicFoodTruckOwner.class);
 
-                    //  } catch (Exception e){
-                    // e.getMessage();
-                    //////
-                }
+                databaseReference = FirebaseDatabase.getInstance().getReference().child("PublicFoodTruckOwner").child(user1);
+                ValueEventListener EventListener = new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        //   Toast.makeText(getApplicationContext(),"hdfhdsg", Toast.LENGTH_SHORT).show();
+                        // c=new Customer();
+                        //    try {
+                        p = dataSnapshot.getValue(PublicFoodTruckOwner.class);
 
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
+                        //  } catch (Exception e){
+                        // e.getMessage();
+                        //////
+                    }
 
-                }};
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                };
+
+
 
 
 

@@ -38,7 +38,7 @@ public class publicListVistor extends AppCompatActivity implements NavigationVie
     CustomAdapter customAdapter;
     DatabaseReference f;
     Context c;
-
+    Intent intent = getIntent();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
