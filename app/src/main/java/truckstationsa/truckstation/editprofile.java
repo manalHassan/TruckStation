@@ -197,8 +197,8 @@ public class editprofile extends AppCompatActivity {
         final String usern = username.getText().toString().trim();
         final String qusin = cusine.getText().toString().trim();
 
-        final double x = 12.321;
-        final double y = 13.1;
+       // final double x = 12.321;
+      //  final double y = 13.1;
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String id = user.getUid();//customer id is the same as rating id to make it easy to refer
         if (!TextUtils.isEmpty(emailp) && !TextUtils.isEmpty(pass) && !TextUtils.isEmpty(phoneN) && !TextUtils.isEmpty(qusin) && !TextUtils.isEmpty(usern) ) {

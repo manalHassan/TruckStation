@@ -39,7 +39,6 @@
         <activity
             android:name=".publicOnerLogIn"
             android:label="تسجيل الدخول صاحب عربه" />
-
         <activity
             android:name=".PublicOrPrivat"
             android:label="TruckStation" />
@@ -80,8 +79,7 @@
         <activity
             android:name=".Rating"
             android:label="تقييم العربه"
-            android:noHistory="true"
-            />
+            android:noHistory="true" />
         <activity
             android:name=".NearByTrucks"
             android:label="العربات القريبه مني" />
@@ -105,18 +103,9 @@
         <activity
             android:name=".edititem"
             android:label="تعديل الصنف" />
-        <activity
-            android:name=".Logout1"
-            >
-        </activity>
-        <activity
-            android:name=".testMap"
-            >
-        </activity>
-        <activity
-            android:name=".MyMain"
-            >
-        </activity>
+        <activity android:name=".Logout1" />
+        <activity android:name=".testMap" />
+        <activity android:name=".MyMain" />
         <activity
             android:name=".publictruckownerprofile"
             android:label="صفحتي الشخصيه" />
@@ -125,22 +114,30 @@
         <activity android:name=".postActivityPublic" />
         <activity android:name=".ReserveTruck" />
         <activity android:name=".PublicOwnerProfileActivity" />
-         <activity android:name=".tab3_itemlist"/>
-        <activity android:name=".tab3_itemlistforcustomer"/>
-        <activity android:name=".Publicownerforcustmer"/>
+        <activity android:name=".tab3_itemlist" />
+        <activity android:name=".tab3_itemlistforcustomer" />
+        <activity android:name=".Publicownerforcustmer" />
         <activity android:name=".bookingrequest" />
         <activity android:name=".chatting" />
-        <activity android:name=".ownerchatlist"/>
+        <activity android:name=".ownerchatlist" />
         <activity android:name=".viewCart" />
+        <activity android:name=".SinglePostCustomer" />
+        <activity android:name=".Main2Activity" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyC_PwVA-gJQ24JZbhZYJINoK9XLC3KdGrg" />
+
         <activity
             android:name=".PrivateOwnerProfileActivity"
             android:label="@string/title_activity_private_owner_profile"
             android:theme="@style/AppTheme" />
-        <activity android:name=".postActivityPrivate"></activity>
-        <activity android:name=".SinglePostView"></activity>
+        <activity android:name=".postActivityPrivate" />
+        <activity android:name=".SinglePostView" />
+        <activity
+            android:name=".reservedTruckActivity"
+            android:label="@string/title_activity_reserved_truck_fragment"
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>

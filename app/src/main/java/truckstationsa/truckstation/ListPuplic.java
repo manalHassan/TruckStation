@@ -101,7 +101,7 @@ public class ListPuplic extends AppCompatActivity implements NavigationView.OnNa
         //String w=artist.getUid();
         Intent intent = new Intent(ListPuplic.this, Publicownerforcustmer.class);
         Bundle b=new Bundle();
-        Toast.makeText(ListPuplic.this, uid ,Toast.LENGTH_SHORT).show();
+       // Toast.makeText(ListPuplic.this, uid ,Toast.LENGTH_SHORT).show();
         b.putString("id",uid);
         intent.putExtras(b);
         startActivity(intent);

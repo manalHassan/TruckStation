@@ -63,7 +63,7 @@ public class postActivityPublic extends AppCompatActivity {
 
 
         storageReference = FirebaseStorage.getInstance().getReference();
-        databaseReference = database.getInstance().getReference().child("postsTest3");
+        databaseReference = database.getInstance().getReference().child("postsTest6");
         mAuth= FirebaseAuth.getInstance();
         CurrentOwner=mAuth.getCurrentUser();
 

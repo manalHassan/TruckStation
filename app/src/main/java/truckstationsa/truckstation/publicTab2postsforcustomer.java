@@ -1,6 +1,7 @@
 package truckstationsa.truckstation;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -64,7 +65,7 @@ public class publicTab2postsforcustomer extends Fragment {
 
         //mAuth = FirebaseAuth.getInstance();
        // String currentUID= mAuth.getCurrentUser().getUid();
-        databaseReference = FirebaseDatabase.getInstance().getReference().child("postsTest3");
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("postsTest6");
         mQueryCurrentOwner = databaseReference.orderByChild("uid").equalTo(currentUID);
         return rootView;
     }
@@ -81,10 +82,21 @@ public class publicTab2postsforcustomer extends Fragment {
         ) {
             @Override
             protected void populateViewHolder(PostHolder viewHolder, Post model, int position) {
+                final String postID=getRef(position).getKey();
                 viewHolder.setName(model.getName());
                 viewHolder.setDesc(model.getDesc());
                 viewHolder.setUserName(model.getUsername());
                 viewHolder.setImage(getActivity().getApplicationContext(), model.getImage());
+
+                viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent =new Intent(getActivity(),SinglePostCustomer.class);
+                        intent.putExtra("post_id",postID);
+                        startActivity(intent);
+                    }
+                });
+
 
             }
         };

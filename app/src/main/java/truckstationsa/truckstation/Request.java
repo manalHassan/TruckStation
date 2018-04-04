@@ -13,8 +13,8 @@ import java.time.format.DateTimeFormatter;
 
 public class Request {
     private String  RID;
-    private String CID , FID , RStatus , RDate ;
-    private DateTimeFormatter dtf ;
+    private String CID , FID , RStatus , RDate;
+   // private DateTimeFormatter dtf ;
     private double x,y;
     private String notes;
 
@@ -27,25 +27,11 @@ public class Request {
          this.setCID(CID);
          this.setFID(FID);
          this.setRID(RID);
-         this.setRStatus("في الإنتظار");
+         this.setRStatus("في الانتظــار");
          this.setX(x);
          this.setY(y);
          this.setNotes(notes);
      }
-    public Request() {
-
-    }
-    public Request(Request r) {
-        this.setRDate(r.RDate);
-        this.setCID(r.CID);
-        this.setFID(r.FID);
-        this.setRID(r.RID);
-        this.setRStatus("في الإنتظار");
-        this.setX(r.x);
-        this.setY(r.y);
-        this.setNotes(r.notes);
-    }
-
     public void setX(double x) {
         this.x = x;
     }
@@ -53,7 +39,18 @@ public class Request {
     public void setY(double y) {
         this.y = y;
     }
+public Request(){}
+public Request(Request r){
+    this.setRDate(r.RDate);
+    this.setCID(r.CID);
+    this.setFID(r.FID);
+    this.setRID(r.RID);
+    this.setRStatus(r.getRStatus());
+    this.setX(r.x);
+    this.setY(r.y);
+    this.setNotes(r.notes);
 
+}
     public void setNotes(String notes) {
         this.notes = notes;
     }
@@ -77,6 +74,8 @@ public class Request {
     public void setRStatus(String RStatus) {
         this.RStatus = RStatus;
     }
+
+
 
     public String getFID() {
         return FID;

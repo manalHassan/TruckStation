@@ -18,7 +18,7 @@ public class Post {
     private String desc  ;
     private String name ;
     private String username;
-    private String user_id;
+    private String uid;
     //private String post_id;
     //private DateTimeFormatter dtf ;
     //private String PDate , Time ;//
@@ -29,12 +29,12 @@ public class Post {
     }
     @RequiresApi(api = Build.VERSION_CODES.O)
 
-    public Post(String image , String desc   , String name , String username ,String user_id){
+    public Post(String image , String desc   , String name , String username ,String uid){
     this.image=image;
     this.desc=desc;
     this.name=name;
     this.username=username;
-    this.user_id=user_id;
+    this.uid=uid;
        // dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
         //LocalDateTime now = LocalDateTime.now();
         // System.out.println(dtf.format(now)); //2016/11/16 12:08:43
@@ -72,7 +72,7 @@ public class Post {
         this.username = username;
     }
 
-    public void setUser_id(String user_id) { this.user_id=user_id; }
+    public void setUid(String uid) { this.uid=uid; }
     //public String getPDate() {
       //  return PDate;
    // }
@@ -94,7 +94,7 @@ public class Post {
         return username;
     }
 
-    public String getUser_id() {return user_id; }
+    public String getUid() {return uid; }
 
 }
 

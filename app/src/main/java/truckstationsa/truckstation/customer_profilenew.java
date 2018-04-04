@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -57,7 +58,7 @@ public class customer_profilenew extends AppCompatActivity implements Navigation
     private TextView Textmain;
     private ImageView location;
     private TextView TextLastNme;
-
+    private Button followedList;
 
     private String username;
     private String lastname;
@@ -87,9 +88,19 @@ public class customer_profilenew extends AppCompatActivity implements Navigation
         TextEmail = (EditText) findViewById(R.id.editemail);
         TextPhone = (EditText) findViewById(R.id.editphone);
         location = (ImageView) findViewById(R.id.location1);
+        followedList= (Button) findViewById(R.id.followedTrucks);
+
+        followedList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(customer_profilenew.this, Main2Activity.class);
+                startActivity(intent);
+            }
+        });
 
 
-         user=FirebaseAuth.getInstance().getCurrentUser();
+
+        user=FirebaseAuth.getInstance().getCurrentUser();
         String id = user.getUid();//
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Customer").child(id);
        // Toast.makeText(this, databaseReference.toString(), Toast.LENGTH_SHORT).show();

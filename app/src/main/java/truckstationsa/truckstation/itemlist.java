@@ -260,7 +260,7 @@ public class itemlist extends AppCompatActivity
                 })
 
 
-                .setNegativeButton("إالغاء", new DialogInterface.OnClickListener() {
+                .setNegativeButton("إلغاء", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
 
                         dialog.dismiss();

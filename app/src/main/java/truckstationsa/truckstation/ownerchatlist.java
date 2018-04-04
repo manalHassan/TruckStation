@@ -28,7 +28,7 @@ public class ownerchatlist extends AppCompatActivity {
     ListView listViewArtists;
     List<Chatroom> artists;
     FirebaseAuth firebaseAuth;
-
+    DatabaseReference name;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ownerchatlist);
@@ -42,13 +42,33 @@ public class ownerchatlist extends AppCompatActivity {
         listViewArtists.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Chatroom artist = artists.get(position);
+                FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
+               final String id1 = user.getUid();//customer id is the
+                final int pos=position;
+                name = FirebaseDatabase.getInstance().getReference();
+                name.child("PublicFoodTruckOwner").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        String name = dataSnapshot.child(id1).child("fusername").getValue(String.class);
+                        Intent intent = new Intent(ownerchatlist.this, chatting.class);
+                        Chatroom artist = artists.get(pos);
+                        Bundle b=new Bundle();
+                        b.putString("room",artist.getroom());
+                        b.putString("me",name);
+                        intent.putExtras(b);
+                        startActivity(intent);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError error) {
+                        // Failed to read value
+
+                    }
+                });
+
                 //   String
-                Intent intent = new Intent(ownerchatlist.this, chatting.class);
-                Bundle b=new Bundle();
-                b.putString("room",artist.getroom());
-                intent.putExtras(b);
-                startActivity(intent);
+
+
             }
         });
 

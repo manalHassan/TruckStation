@@ -1,12 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:ignore="UselessParent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-
-
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
@@ -15,7 +8,7 @@
         android:layout_height="match_parent"
         android:background="@color/cardview_light_background"
         android:orientation="vertical"
-       >
+        >
 
 
         <RelativeLayout
@@ -25,7 +18,7 @@
             <LinearLayout
                 android:id="@+id/linearLayout"
                 android:layout_width="match_parent"
-                android:layout_height="225dp"
+                android:layout_height="wrap_content"
                 android:background="@drawable/gradientbackground"
                 android:orientation="vertical">
 
@@ -86,7 +79,7 @@
                     android:layout_width="81dp"
                     android:layout_height="55dp"
                     android:layout_gravity="center"
-                    android:layout_marginTop="45dp"
+                    android:layout_marginTop="30dp"
                     android:src="@drawable/profile_pictures_con" />
 
                 <TextView
@@ -94,12 +87,23 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:gravity="top"
                     android:text="username"
                     android:textColor="#fff"
-                    android:textSize="21sp"
+                    android:textSize="18dp"
                     android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/followUnfollowBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="15dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:textAllCaps="false" />
             </LinearLayout>
 
 
@@ -134,10 +138,12 @@
                         android:textSize="20sp" />
 
                     <TextView
+
+                        android:id="@+id/pp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingTop="10dp"
-                        android:text="7"
+                        android:text="0"
                         android:textColor="@color/startblue"
                         android:textSize="20sp"
                         android:textStyle="bold" />
@@ -163,7 +169,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingTop="10dp"
-                        android:text="20"
+                        android:text="0"
                         android:textColor="@color/startblue"
                         android:textSize="20sp"
                         android:textStyle="bold" />
@@ -184,10 +190,11 @@
                         android:textSize="20sp" />
 
                     <TextView
+                        android:id="@+id/r"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingTop="10dp"
-                        android:text="4.5"
+                        android:text="0"
                         android:textColor="@color/startblue"
                         android:textSize="20sp"
                         android:textStyle="bold" />
@@ -203,10 +210,12 @@
             android:layout_height="47dp"
             android:orientation="horizontal"
             android:paddingLeft="25dp">
+
             <ImageView
                 android:layout_width="36dp"
                 android:layout_height="36dp"
                 android:src="@drawable/ic_action_typefood" />
+
             <TextView
                 android:id="@+id/type"
                 android:layout_width="286dp"
@@ -228,11 +237,13 @@
             android:layout_marginTop="25dp"
             android:orientation="horizontal"
             android:paddingLeft="25dp">
+
             <ImageView
                 android:layout_width="36dp"
                 android:layout_height="36dp"
                 android:src="@drawable/ic_email_black_24dp"
                 />
+
             <TextView
                 android:id="@+id/email"
 
@@ -250,32 +261,7 @@
         </LinearLayout>
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginTop="25dp"
-            android:orientation="horizontal"
-            android:paddingLeft="25dp">
 
-            <ImageView
-                android:layout_width="35dp"
-                android:layout_height="36dp"
-                android:src="@drawable/ic_action_wh"
-                />
-            <TextView
-                android:id="@+id/wh"
-                android:layout_width="287dp"
-                android:layout_height="29dp"
-                android:layout_gravity="center_vertical"
-                android:layoutDirection="rtl"
-                android:paddingLeft="20dp"
-                android:text="ساعـات العمل"
-                android:textDirection="rtl"
-                android:lines="5"
-                android:textStyle="bold" />
-
-
-        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="40dp"
@@ -288,12 +274,14 @@
                 android:layout_height="36dp"
                 android:src="@drawable/ic_phone_black_24dp"
                 />
+
             <TextView
                 android:id="@+id/phone"
 
                 android:layout_width="287dp"
                 android:layout_height="29dp"
                 android:layout_gravity="center_vertical"
+
                 android:layoutDirection="rtl"
                 android:paddingLeft="20dp"
                 android:text="رقم الهاتف"
@@ -304,4 +292,3 @@
         </LinearLayout>
 
     </LinearLayout>
-</ScrollView>

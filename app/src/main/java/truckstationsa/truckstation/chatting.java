@@ -37,12 +37,15 @@ String typ="";
     DatabaseReference type;
     FirebaseAuth mAuth;
     String name="  ";
+    String me="me";
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.chatting);
         Bundle b = getIntent().getExtras();
         room = b.getString("room");
+        me = b.getString("me");
+        Toast.makeText(getApplicationContext(),me, Toast.LENGTH_LONG).show();
         if (room == null) {
        return;
         }
@@ -97,9 +100,24 @@ Button send=findViewById(R.id.send);
         final String ms;
          EditText msg=findViewById(R.id.txt);
            ms = msg.getText().toString();
+           if(TextUtils.isEmpty(ms))
+               return;
+           Toast.makeText(this, " "+me+" meeee", Toast.LENGTH_LONG).show();
         mAuth = FirebaseAuth.getInstance();
         final String user2=mAuth.getCurrentUser().getUid();
 
+        chat= FirebaseDatabase.getInstance().getReference("Chat");
+        String tid =chat.push().getKey();
+        Chat ch =new Chat();
+        ch.setName(me);
+        ch.setMsg(ms);
+        ch.setUser(user2);
+        Long tsLong = System.currentTimeMillis()/1000;
+        String ts = tsLong.toString();
+        ch.setDate(ts);
+        chat.child(room).child(tid).setValue(ch);
+
+/*
         //to get the type and name
         type= FirebaseDatabase.getInstance().getReference("APPUsers");
         type.child(user2).addValueEventListener(new ValueEventListener() {
@@ -116,6 +134,8 @@ Button send=findViewById(R.id.send);
             }
         });
         DatabaseReference d=FirebaseDatabase.getInstance().getReference();
+        DatabaseReference d1=FirebaseDatabase.getInstance().getReference();
+        DatabaseReference d2=FirebaseDatabase.getInstance().getReference();
         if(typ.equalsIgnoreCase("Customer")){
             d.child("Customer").child(user2).addValueEventListener(new ValueEventListener() {
                 @Override
@@ -131,7 +151,7 @@ Button send=findViewById(R.id.send);
                     ch.setDate(ts);
                     ch.setName(n);
                     chat.child(room).child(tid).setValue(ch);
-                    chat.child(room).child(tid).setValue(ch);}
+                  }
                 @Override
                 public void onCancelled(DatabaseError error) {
                     // Failed to read value
@@ -140,8 +160,9 @@ Button send=findViewById(R.id.send);
             });
         }
         else
+
         if(typ.equalsIgnoreCase("PrivateOwner")){
-            d.child("PrivateFoodTruckOwner").child(user2).addValueEventListener(new ValueEventListener() {
+            d1.child("PrivateFoodTruckOwner").child(user2).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -167,7 +188,7 @@ Button send=findViewById(R.id.send);
         }
         else
         if(typ.equalsIgnoreCase("PublicOwner")){
-            d.child("PublicFoodTruckOwner").child(user2).addValueEventListener(new ValueEventListener() {
+            d2.child("PublicFoodTruckOwner").child(user2).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -192,6 +213,7 @@ Button send=findViewById(R.id.send);
             });
         }
         //to get the type and name
+        */
         msg.setText("");
 
 

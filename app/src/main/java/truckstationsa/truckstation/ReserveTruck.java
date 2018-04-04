@@ -25,6 +25,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,17 +47,22 @@ import java.util.Calendar;
 import java.util.List;
 
 public class ReserveTruck extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
-    private DatabaseReference spinnerRef ,reserveRef;
+
+    String TruckName;
+    String pic=" ";
+    private DatabaseReference spinnerRef ,reserveRef,previousRef;
     Spinner DateTimeSpinner;
     String address;
     Context context;
     int PLACE_PICKER_REQUEST = 1;
-    TextView location ;
+
     double x =0 , y =0;
 FirebaseAuth auth ;
     String date=" ";
     String notes="لايوجد ملاحظات";
 private  EditText Notes;
+private ImageView Picker;
+    private ImageView LocatImg;
 // for date :
     private static final String TAG = "ReserveTruck";
     private TextView mDisplayDate;
@@ -68,12 +74,18 @@ private  EditText Notes;
         setContentView(R.layout.reserv_drawer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+String user =finduser();
+
+
+
+        Picker=(ImageView)findViewById(R.id.picker);
+        LocatImg=(ImageView)findViewById(R.id.Location);
 Notes=(EditText)findViewById(R.id.Notes);
-        location = (TextView) findViewById(R.id.location);
+
         context = this;
         auth = FirebaseAuth.getInstance() ;
         spinnerRef = FirebaseDatabase.getInstance().getReference("PrivateOwnerDate");
-        location.setOnClickListener(new View.OnClickListener() {
+        LocatImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -95,12 +107,13 @@ Notes=(EditText)findViewById(R.id.Notes);
         });
         //request =reserve
         reserveRef = FirebaseDatabase.getInstance().getReference("Request"); // make sure its identical to the table name in the database
+        previousRef=FirebaseDatabase.getInstance().getReference("PreviousReservedTrucks");
 
 
 
+// spinner
 
-
-String ownerID="yEeRopjhMTYTwPyujM6p694A40j1";
+String ownerID=finduser();
         spinnerRef.child(ownerID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -141,7 +154,7 @@ String ownerID="yEeRopjhMTYTwPyujM6p694A40j1";
 
         mDisplayDate=(TextView)findViewById(R.id.tvDate);
 
-        mDisplayDate.setOnClickListener(new View.OnClickListener() {
+        Picker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 cal=Calendar.getInstance();
@@ -151,7 +164,7 @@ String ownerID="yEeRopjhMTYTwPyujM6p694A40j1";
 
                  dialog= new DatePickerDialog(
                         ReserveTruck.this,
-                        android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                        android.R.style.Theme_DeviceDefault_Dialog_NoActionBar,
                         mdateSetListener,
                         year,month,day);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -165,14 +178,66 @@ String ownerID="yEeRopjhMTYTwPyujM6p694A40j1";
                 Log.d(TAG,"onDateSet: mm/dd/yyy"+month+"/"+day+"/"+year);
                 date=month+"/"+day+"/"+year;
                 mDisplayDate.setText(date);
-                dialog.getDatePicker().setMinDate(cal.getTimeInMillis());
+               // dialog.getDatePicker().setMinDate(cal.getTimeInMillis());
             }
         };
     }
 
-    public void ReservationInfo(View view){
+    private String finduser() {
 
-        // get selected value from dropdoenlist(spinner)
+        Bundle b = getIntent().getExtras();
+        final String fid = b.getString("id");
+      return fid;
+    }
+
+    public void ReservationInfo(View view){
+        //get public truck name + pic b3deen   ,,,, private    problem how to know its pub or priv to go to
+        DatabaseReference appUse=FirebaseDatabase.getInstance().getReference("APPUsers");
+        final String id=finduser();
+        appUse.child(id).child("type").addListenerForSingleValueEvent(new ValueEventListener() {
+              @Override
+         public void onDataChange(DataSnapshot dataSnapshot) {
+                  //data snapchat is the whole database
+                  String type=dataSnapshot.getValue(String.class).toString().trim();
+
+                  if(type.equals("PublicOwner")){
+                      DatabaseReference PF=FirebaseDatabase.getInstance().getReference("PublicFoodTruckOwner");
+                        PF.child(id).child("fusername").addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                TruckName=dataSnapshot.getValue(String.class).toString().trim();
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
+                  }
+                  else if(type.equals("PrivateOwner")){
+                      DatabaseReference PF=FirebaseDatabase.getInstance().getReference("PrivateFoodTruckOwner");
+                      PF.child(id).child("fusername").addListenerForSingleValueEvent(new ValueEventListener() {
+                          @Override
+                          public void onDataChange(DataSnapshot dataSnapshot) {
+                              TruckName=dataSnapshot.getValue(String.class).toString().trim();
+                          }
+
+                          @Override
+                          public void onCancelled(DatabaseError databaseError) {
+
+                          }
+                      });
+                  }
+         }
+
+        @Override
+        public void onCancelled(DatabaseError databaseError) {
+
+        }
+        });
+
+
+                // get selected value from dropdoenlist(spinner)
         final String TIME=DateTimeSpinner.getSelectedItem().toString().trim();
         final String DT=TIME+"  "+date;
         if(!TextUtils.isEmpty(notes)){
@@ -191,8 +256,7 @@ if(!TextUtils.isEmpty(TIME)){
 
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 String id = user.getUid();//customer id is the same as rating id to make it easy to refer
-
-                final String FID = "FIDtst";
+                final String FID = finduser();
                 final String CID = id;
                 final String RID = reserveRef.push().getKey();  //random id for request  *malh da3i*
 
@@ -202,8 +266,10 @@ if(!TextUtils.isEmpty(TIME)){
 
 
                     Request request = new Request(CID, FID, RID, DT, x, y,notes);
+                    reserveRef.child(FID).child(RID).setValue(request);
 
-                    reserveRef.child(RID).setValue(request);
+                    PreviousReservedTrucks previousReservedTrucks=new PreviousReservedTrucks(pic,TruckName);
+                    previousRef.child(CID).child(FID).setValue(previousReservedTrucks);
                     Toast.makeText(ReserveTruck.this, "تم الحجز,بانتظار موافقة صاحب حافلة الطعام", Toast.LENGTH_SHORT).show();
                     finish();
                 }

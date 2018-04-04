@@ -54,10 +54,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:textColor="#fff"
                 android:textSize="21sp"
                 android:textStyle="bold" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_follow"
+                android:text="العربات المتابعة"
+                android:padding="5dp"
+                android:layout_marginBottom="1dp"
+                android:id="@+id/followedTrucks"
+                android:layout_marginTop="3dp"
+                android:layout_gravity="center"
+                />
+
         </LinearLayout>
 
     </RelativeLayout>

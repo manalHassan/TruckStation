@@ -96,6 +96,13 @@ public class Rating extends AppCompatActivity implements NavigationView.OnNaviga
         dbO=database.getReference("PublicFoodTruckOwner").child(fid);
         OwnerID = FirebaseDatabase.getInstance().getReference().child("Rate").child(fid);
 
+        for (int h=0;h<sumRatesarray.size();h++) {
+            if(sumRatesarray.get(h).getFID().equals(fid)&& sumRatesarray.get(h).getUID().equals(CID)) {
+                Toast.makeText(Rating.this, sumRatesarray.get(h).getNumCus() + "عذرا قد تم التقييم", Toast.LENGTH_SHORT).show();
+                finish();
+            }
+        }
+
         mRatingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
@@ -120,12 +127,7 @@ public class Rating extends AppCompatActivity implements NavigationView.OnNaviga
                         mRatingScale.setText("");
                 }
 
-                for (int h=0;h<sumRatesarray.size();h++) {
-                    if(sumRatesarray.get(h).getFID().equals(fid)&& sumRatesarray.get(h).getUID().equals(CID)) {
-                        Toast.makeText(Rating.this, sumRatesarray.get(h).getNumCus() + "عذرا قد تم التقييم", Toast.LENGTH_SHORT).show();
-                        finish();
-                    }
-                }
+
             }
         });
 
@@ -161,11 +163,7 @@ public class Rating extends AppCompatActivity implements NavigationView.OnNaviga
                     Rate rate= new Rate(CID,FID,ratingValue,0);
 
                     RatingRef.child(FID).child(CID).setValue(rate);
-                    //Toast.makeText(Rating.this, ""+ratingValue+"شكرًا لمشاركتنا رأيك", Toast.LENGTH_SHORT).show();
 
-                    // Intent intent = new Intent(GoTOCustomerRegisterPage.this, .class);
-                    // startActivity(intent);
-                    //finish();
                 }
 
             }
@@ -181,7 +179,7 @@ public class Rating extends AppCompatActivity implements NavigationView.OnNaviga
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 if (dataSnapshot.getChildren() == null) {
-                    Toast.makeText(Rating.this, "no sum of rating", Toast.LENGTH_SHORT).show();
+                  //  Toast.makeText(Rating.this, "no sum of rating", Toast.LENGTH_SHORT).show();
 
                     //Toast.makeText(this, "hi", Toast.LENGTH_SHORT).show();
                     //startActivity(new Intent(getActivity(), AdminHome2.class));
@@ -223,8 +221,8 @@ public class Rating extends AppCompatActivity implements NavigationView.OnNaviga
 
                     dbO.child("sumRate").setValue(sumratefORcustomer);
                     dbO.child("numCus").setValue(numForcustomer);
-                    Toast.makeText(Rating.this, "sumratefORcustomer"+sumratefORcustomer, Toast.LENGTH_SHORT).show();
-                    Toast.makeText(Rating.this, "numForcustomer"+numForcustomer, Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(Rating.this, "sumratefORcustomer"+sumratefORcustomer, Toast.LENGTH_SHORT).show();
+                  //  Toast.makeText(Rating.this, "numForcustomer"+numForcustomer, Toast.LENGTH_SHORT).show();
 
                 } else {
                    // Toast.makeText(Rating.this, "No data in class rating", Toast.LENGTH_SHORT).show();
@@ -235,6 +233,8 @@ public class Rating extends AppCompatActivity implements NavigationView.OnNaviga
             public void onCancelled(DatabaseError databaseError) {
                 //  Toast.makeText(c, "cancelled", Toast.LENGTH_SHORT).show();
             }
+
+
         });
 
 
@@ -312,7 +312,7 @@ public class Rating extends AppCompatActivity implements NavigationView.OnNaviga
 
 
         //add comment
-
+/*
         final String Comment=mFeedback.getText().toString();
 
         if(!TextUtils.isEmpty(Comment)) {
@@ -346,10 +346,14 @@ public class Rating extends AppCompatActivity implements NavigationView.OnNaviga
                 }
             });
         }
-
+*/
         ////////////rating///////////
 
+        Toast.makeText(Rating.this, "شكرًا لمشاركتنا رأيك", Toast.LENGTH_SHORT).show();
 
+        // Intent intent = new Intent(GoTOCustomerRegisterPage.this, .class);
+        // startActivity(intent);
+        finish();
 
 
     }//do

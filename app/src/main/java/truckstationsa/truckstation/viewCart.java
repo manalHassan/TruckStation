@@ -34,7 +34,6 @@ import java.util.List;
 /**
  * Created by manal on 3/18/2018.
  */
-
 public class viewCart extends AppCompatActivity  implements NavigationView.OnNavigationItemSelectedListener  {
 
 
@@ -49,13 +48,15 @@ public class viewCart extends AppCompatActivity  implements NavigationView.OnNav
     FirebaseAuth firebaseAuth;
     String id="";
     cart car ;
+    double   newPrice ;
     private double total = 0 ;
-    private int i = 0 ;
     cartArray artistAdapter;
+    Button order ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_cart_drawer);
+        order = (Button) findViewById(R.id.pre_order);
         cartRef = database.getReference("Cart");
         //TextView view =(TextView) findViewById(R.id.foodmenu);
         //view.setText(cid);
@@ -69,7 +70,7 @@ public class viewCart extends AppCompatActivity  implements NavigationView.OnNav
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
                 cartItem artist = artists.get(i);
-                showUpdateDeleteDialog(artist.getcIId() ,artist.getCatItem() );
+                showUpdateDeleteDialog(artist.getcIId() ,artist.getCatItem() , artist.getPrice1() );
                 return true;
             }
         });
@@ -83,14 +84,14 @@ public class viewCart extends AppCompatActivity  implements NavigationView.OnNav
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);   }
 
-    private void showUpdateDeleteDialog(final String ciid , final String item) {
+    private void showUpdateDeleteDialog(final String ciid , final String item , final double price) {
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
         final View dialogView = inflater.inflate(R.layout.dalete_item, null);
         dialogBuilder.setView(dialogView);
 
-     //   final EditText editTextName = (EditText) dialogView.findViewById(R.id.cat);
+        //   final EditText editTextName = (EditText) dialogView.findViewById(R.id.cat);
 //        editTextName.setText(item);
         final Button buttonDelete = (Button) dialogView.findViewById(R.id.delete);
 
@@ -101,7 +102,7 @@ public class viewCart extends AppCompatActivity  implements NavigationView.OnNav
         buttonDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog diaBox = AskOption(ciid);
+                AlertDialog diaBox = AskOption(ciid , price);
                 diaBox.show();
                 b.dismiss();
 
@@ -109,7 +110,7 @@ public class viewCart extends AppCompatActivity  implements NavigationView.OnNav
         });
     }
 
-    private AlertDialog AskOption(final String artistId)
+    private AlertDialog AskOption(final String artistId , final double price)
     {
         AlertDialog myQuittingDialogBox =new AlertDialog.Builder(this)
                 //set message, title, and icon
@@ -121,7 +122,7 @@ public class viewCart extends AppCompatActivity  implements NavigationView.OnNav
 
                     public void onClick(DialogInterface dialog, int whichButton) {
                         //your deleting code
-                        deleteitem(artistId);
+                        deleteitem(artistId , price);
 
                         dialog.dismiss();
                     }
@@ -130,7 +131,7 @@ public class viewCart extends AppCompatActivity  implements NavigationView.OnNav
 
 
 
-                .setNegativeButton("إالغاء", new DialogInterface.OnClickListener() {
+                .setNegativeButton("إلغاء", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
 
                         dialog.dismiss();
@@ -143,7 +144,7 @@ public class viewCart extends AppCompatActivity  implements NavigationView.OnNav
     }
 
 
-    private void  deleteitem(String cid) {
+    private void  deleteitem(String cid , double price) {
 
 
         //getting the specified artist reference
@@ -151,11 +152,10 @@ public class viewCart extends AppCompatActivity  implements NavigationView.OnNav
 
         //removing artist
         dR.removeValue();
-
         //getting the tracks reference for the specified artist
-       /// DatabaseReference drTracks = FirebaseDatabase.getInstance().getReference("Item").child(mid).child(cid);
+        /// DatabaseReference drTracks = FirebaseDatabase.getInstance().getReference("Item").child(mid).child(cid);
         //removing all tracks
-       // drTracks.removeValue();
+        // drTracks.removeValue();
         Toast.makeText(this, "تم الحـــذف", Toast.LENGTH_LONG).show();
 
     }
@@ -173,39 +173,42 @@ public class viewCart extends AppCompatActivity  implements NavigationView.OnNav
         myRef.child("Cart").child(firebaseAuth.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-             //   mid = dataSnapshot.child("Cart").getValue(String.class);
-               // firebaseAuth = FirebaseAuth.getInstance();
-              //  myRef.child("Cart").child(firebaseAuth.getUid()).addValueEventListener(new ValueEventListener() {
-                 //   @Override
-                  //  public void onDataChange(DataSnapshot dataSnapshot) {
+                //   mid = dataSnapshot.child("Cart").getValue(String.class);
+                // firebaseAuth = FirebaseAuth.getInstance();
+                //  myRef.child("Cart").child(firebaseAuth.getUid()).addValueEventListener(new ValueEventListener() {
+                //   @Override
+                //  public void onDataChange(DataSnapshot dataSnapshot) {
 
-                        artists.clear();
+                artists.clear();
+                total =0 ;
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    cartItem artist = new cartItem();//ds.getValue(Item.class)
+                    artist.setCatItem(ds.getValue(cartItem.class).getCatItem());
+                    artist.setPrice1(ds.getValue(cartItem.class).getPrice1());
+                    artist.setFid(ds.getValue(cartItem.class).getFid());
+                    artist.setcIId(ds.getValue(cartItem.class).getcIId());
+                    total = total + artist.getPrice1();
+                    artists.add(artist);
+                }
 
-                        for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                            cartItem artist = new cartItem();//ds.getValue(Item.class)
-                            artist.setCatItem(ds.getValue(cartItem.class).getCatItem());
-                            artist.setPrice1(ds.getValue(cartItem.class).getPrice1());
-                            artist.setFid(ds.getValue(cartItem.class).getFid());
-                            artist.setcIId(ds.getValue(cartItem.class).getcIId());
-                            total = total + artist.getPrice1();
-                            artists.add(artist);
-                        }
+                if(artists.size()==0)
+                    Toast.makeText(viewCart.this,"اضيف لسلتك" ,Toast.LENGTH_SHORT).show();
+                ////creating adapter
+                artistAdapter = new cartArray(viewCart.this, (ArrayList<cartItem>) artists);
+                //attaching adapter to the listview
+                listViewArtists.setAdapter(artistAdapter);
+                    order.setText("اجمالي المبلغ: "+total);
 
-                       if(artists.size()==0)
-                           Toast.makeText(viewCart.this,"اضيف لسلتك" ,Toast.LENGTH_SHORT).show();
-                        ////creating adapter
-                        artistAdapter = new cartArray(viewCart.this, (ArrayList<cartItem>) artists);
-                        //attaching adapter to the listview
-                        listViewArtists.setAdapter(artistAdapter);
-                        Button order = (Button) findViewById(R.id.pre_order);
-                        order.setText("اجمالي المبلغ: "+total);
-                  //  }
 
-                   // @Override
-                   // public void onCancelled(DatabaseError databaseError) {
 
-                   // }
-             //   });
+
+                //  }
+
+                // @Override
+                // public void onCancelled(DatabaseError databaseError) {
+
+                // }
+                //   });
 
             }
 
@@ -220,7 +223,7 @@ public class viewCart extends AppCompatActivity  implements NavigationView.OnNav
         for (int i =0 ; i<artists.size() ; i ++){
             cartItem item = artists.get(i);
             String itemId = myRef2.push().getKey();
-           myRef2.child(firebaseAuth.getUid()).child(item.getFid()).child(itemId).setValue(item.getCatItem());
+            myRef2.child(""+firebaseAuth.getUid()).child(item.getFid()).child(itemId).setValue(item.getCatItem());
             Toast.makeText(viewCart.this, "تم ارسال طلبك:)",Toast.LENGTH_SHORT).show();
             myRef.child("Cart").child(firebaseAuth.getUid()).removeValue();
         }

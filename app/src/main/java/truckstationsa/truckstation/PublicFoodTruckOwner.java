@@ -18,6 +18,8 @@ public class PublicFoodTruckOwner  {
     private boolean canBePrivate ;
     private int sumRate;
     private int numCus;
+    private boolean available;
+    private boolean allow;
 
     public int getSumRate() {
         return sumRate;
@@ -48,7 +50,7 @@ public class PublicFoodTruckOwner  {
     public PublicFoodTruckOwner(String FUsername, String FPassword, String FEmail,
                                 int FPoneNoumber, double XFLication,
                                 double YFLocation, String qusins, String FWorkingHours,
-                                boolean canBePrivte,String uid,int sumRate,int numCus){
+                                boolean canBePrivte,String uid,int sumRate,int numCus, boolean allow, boolean available){
         this.setFEmail(FEmail);
         this.setFPassword(FPassword);
         this.setFPoneNoumber(FPoneNoumber);
@@ -61,6 +63,8 @@ public class PublicFoodTruckOwner  {
         this.setNumCus(numCus);
         this.setSumRate(sumRate);
         this.setUid(uid);
+        this.setAllow(allow);
+        this.setAvailable(available);
     }
 
 
@@ -161,5 +165,18 @@ public class PublicFoodTruckOwner  {
 
     public String getUid() {
         return uid;
+    }
+
+    public boolean isAvailable(){ return available;}
+
+    public boolean isAllow(){ return allow;
+    }
+
+    public void setAvailable(boolean available){
+        this.available=available;
+    }
+
+    public void setAllow(boolean allow){
+        this.allow=allow;
     }
 }

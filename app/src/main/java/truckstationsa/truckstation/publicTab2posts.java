@@ -46,7 +46,7 @@ public class publicTab2posts extends Fragment {
 
         mAuth = FirebaseAuth.getInstance();
         String currentUID= mAuth.getCurrentUser().getUid();
-        databaseReference = FirebaseDatabase.getInstance().getReference().child("postsTest3");
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("postsTest6");
         mQueryCurrentOwner = databaseReference.orderByChild("uid").equalTo(currentUID);
         return rootView;
     }

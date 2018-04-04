@@ -13,7 +13,9 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.*;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.app.Activity;
@@ -46,6 +48,8 @@ public class publicTab1profile extends Fragment {
     TextView mail;
     TextView phone;
     TextView wwh;
+    Switch allow;
+    Switch available;
     FirebaseAuth firebaseAuth;
     private TextView location;
     DatabaseReference database;
@@ -57,6 +61,8 @@ public class publicTab1profile extends Fragment {
         final View rootView= inflater.inflate(R.layout.public_tab1_profile, container, false);
        // databaseref = FirebaseDatabase.getInstance().getReference("");
         artists = new ArrayList<>();
+        allow =(Switch) rootView.findViewById(R.id.allowdisallow);
+        available =(Switch) rootView.findViewById(R.id.available);
 
 /*
         databaseref.addChildEventListener(new ChildEventListener() {
@@ -85,6 +91,7 @@ public class publicTab1profile extends Fragment {
     }
 });
 */
+
 
        // Toolbar toolbar = (Toolbar) rootView.findViewById(R.id.toolbar);
        // ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
@@ -118,8 +125,17 @@ public class publicTab1profile extends Fragment {
                 mail.setText(" " + email);
                phone = (TextView) rootView.findViewById(R.id.phone);
                phone.setText(" " + phonnum + " ");
+                boolean getAllo=  dataSnapshot.child(user1).child("allow").getValue(boolean.class);
+
+                boolean getAv=dataSnapshot.child(user1).child("available").getValue(boolean.class);
+                allow.setOnCheckedChangeListener (null);
+                allow.setChecked(getAllo);
+                allow.setOnCheckedChangeListener ((CompoundButton.OnCheckedChangeListener) getActivity());
 
 
+                available.setOnCheckedChangeListener (null);
+                available.setChecked(getAv);
+                available.setOnCheckedChangeListener ((CompoundButton.OnCheckedChangeListener) getActivity());
 
             }
             @Override
@@ -157,6 +173,69 @@ public class publicTab1profile extends Fragment {
             }
         });
 
+
+
+
+        allow.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) {
+                    // The toggle is enabled
+                    databaseref = FirebaseDatabase.getInstance().getReference();
+                    FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
+                    String user1 = user.getUid();//customer id is the same as rating id to make it easy to refer
+
+                    DatabaseReference owner= databaseref.child("PublicFoodTruckOwner").child(user1);
+                    owner.child("allow").setValue(false);
+                    // Read from the database
+                    /*databaseref.child("PublicFoodTruckOwner").child(user1).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            dataSnapshot.child("allow").
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });*/
+
+                } else {
+                    // The toggle is disabled
+                    databaseref = FirebaseDatabase.getInstance().getReference();
+                    FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
+                    String user1 = user.getUid();//customer id is the same as rating id to make it easy to refer
+
+                    DatabaseReference owner= databaseref.child("PublicFoodTruckOwner").child(user1);
+                    owner.child("allow").setValue(true);
+                }
+            }
+
+        });
+
+        available.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) {
+                    // The toggle is enabled
+                    databaseref = FirebaseDatabase.getInstance().getReference();
+                    FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
+                    String user1 = user.getUid();//customer id is the same as rating id to make it easy to refer
+
+                    DatabaseReference owner= databaseref.child("PublicFoodTruckOwner").child(user1);
+                    owner.child("available").setValue(false);
+
+                } else {
+                    // The toggle is disabled
+                    databaseref = FirebaseDatabase.getInstance().getReference();
+                    FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
+                    String user1 = user.getUid();//customer id is the same as rating id to make it easy to refer
+
+                    DatabaseReference owner= databaseref.child("PublicFoodTruckOwner").child(user1);
+                    owner.child("available").setValue(true);
+                }
+            }
+        });
 
         //
         return rootView;
